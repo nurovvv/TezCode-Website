@@ -465,7 +465,7 @@ export default function ChallengePage() {
     const [selectedChallenge, setSelectedChallenge] = useState(null);
     const [completed, setCompleted] = useState(() => {
         try {
-            const saved = localStorage.getItem('ziyobook_challenges');
+            const saved = localStorage.getItem('tezcode_challenges');
             return saved ? new Set(JSON.parse(saved)) : new Set();
         } catch { return new Set(); }
     });
@@ -474,7 +474,7 @@ export default function ChallengePage() {
         setCompleted(prev => {
             const next = new Set(prev);
             next.add(id);
-            localStorage.setItem('ziyobook_challenges', JSON.stringify([...next]));
+            localStorage.setItem('tezcode_challenges', JSON.stringify([...next]));
             return next;
         });
     }, []);

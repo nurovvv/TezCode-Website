@@ -21,7 +21,7 @@ router.post('/', async (req, res) => {
 
     // Write code to a temp file
     const tmpDir = os.tmpdir();
-    const filename = `ziyobook_${Date.now()}_${Math.random().toString(36).slice(2)}.py`;
+    const filename = `tezcode_${Date.now()}_${Math.random().toString(36).slice(2)}.py`;
     const filepath = path.join(tmpDir, filename);
 
     try {

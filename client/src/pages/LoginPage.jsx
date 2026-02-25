@@ -62,7 +62,7 @@ export default function LoginPage() {
                 {/* Logo */}
                 <div style={{ textAlign: 'center', marginBottom: '32px' }}>
                     <Link to="/" style={{ fontSize: '24px', fontWeight: 800, color: '#1d1d1f', textDecoration: 'none' }}>
-                        ZiyoBook
+                        TezCode
                     </Link>
                 </div>
 

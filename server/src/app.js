@@ -49,7 +49,7 @@ async function start() {
         console.log('✅ SQLite database connected & synced');
 
         app.listen(config.port, () => {
-            console.log(`🚀 ZiyoBook server on http://localhost:${config.port}`);
+            console.log(`🚀 TezCode server on http://localhost:${config.port}`);
         });
     } catch (err) {
         console.error('❌ Failed to start server:', err);

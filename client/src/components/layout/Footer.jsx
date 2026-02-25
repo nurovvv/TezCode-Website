@@ -9,7 +9,7 @@ export default function Footer() {
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
                     {/* Brand */}
                     <div>
-                        <h3 className="text-white text-xl font-bold mb-3">ZiyoBook</h3>
+                        <h3 className="text-white text-xl font-bold mb-3">TezCode</h3>
                         <p className="text-sm leading-relaxed">{t('footer.description')}</p>
                     </div>
 

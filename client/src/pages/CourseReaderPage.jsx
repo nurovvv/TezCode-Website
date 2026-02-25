@@ -77,7 +77,7 @@ const COURSE = {
             id: 'getstarted', title: 'Python Getting Started',
             sections: [{
                 id: 'getstarted-all', title: 'Get Started With Python',
-                content: `<p>On ZiyoBook, you can try Python without installing anything.</p>
+                content: `<p>On TezCode, you can try Python without installing anything.</p>
 <p>Our online Python editor runs directly in your browser, and shows both the code and the result:</p>
 
 <h3>Python Install</h3>
@@ -117,7 +117,7 @@ Hello, World!</div>
 <p>Whenever you are done in the python command line, you can simply type the following to quit the python command line interface:</p>
 <div class="code-block-nonrun">exit()</div>
 
-<h3>On ZiyoBook, You Don't Need to Install Anything!</h3>
+<h3>On TezCode, You Don't Need to Install Anything!</h3>
 <p>The great news is that on this platform, you can write and run Python code <strong>directly in your browser</strong>. No installation needed!</p>
 <p>Just click <strong>"Try it Yourself »"</strong> on any example and start coding right away. The Python engine runs entirely in your browser using modern WebAssembly technology.</p>`,
                 examples: [
@@ -1092,7 +1092,7 @@ export default function CourseReaderPage() {
     const [sidebarOpen, setSidebarOpen] = useState(true);
     const [expandedChapters, setExpandedChapters] = useState(new Set());
     const [completed, setCompleted] = useState(() => {
-        try { const s = localStorage.getItem('ziyobook_sections'); return s ? new Set(JSON.parse(s)) : new Set(); }
+        try { const s = localStorage.getItem('tezcode_sections'); return s ? new Set(JSON.parse(s)) : new Set(); }
         catch { return new Set(); }
     });
 
@@ -1102,7 +1102,7 @@ export default function CourseReaderPage() {
     const markDone = (sid) => {
         setCompleted(prev => {
             const n = new Set(prev); n.add(sid);
-            localStorage.setItem('ziyobook_sections', JSON.stringify([...n]));
+            localStorage.setItem('tezcode_sections', JSON.stringify([...n]));
             return n;
         });
     };

@@ -9,12 +9,12 @@ const LanguageContext = createContext();
 
 export function LanguageProvider({ children }) {
     const [lang, setLang] = useState(() => {
-        return localStorage.getItem('ziyobook-lang') || 'en';
+        return localStorage.getItem('tezcode-lang') || 'en';
     });
 
     const switchLang = useCallback((newLang) => {
         setLang(newLang);
-        localStorage.setItem('ziyobook-lang', newLang);
+        localStorage.setItem('tezcode-lang', newLang);
     }, []);
 
     const t = useCallback((key) => {

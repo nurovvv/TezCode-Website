@@ -11,7 +11,7 @@
     },
     "hero": {
         "title": "Welcome to Interactive Learning",
-        "subtitle": "ZiyoBook is an interactive learning platform for students and instructors. Master concepts through hands-on activities, quizzes, and real-time progress tracking.",
+        "subtitle": "TezCode is an interactive learning platform for students and instructors. Master concepts through hands-on activities, quizzes, and real-time progress tracking.",
         "cta": "Get Started — Free"
     },
     "features": {
@@ -94,7 +94,7 @@
             {
                 "name": "Alex Nazarov",
                 "role": "Computer Science Student",
-                "text": "ZiyoBook helped me understand complex concepts through interactive activities. It's like having a personal tutor."
+                "text": "TezCode helped me understand complex concepts through interactive activities. It's like having a personal tutor."
             },
             {
                 "name": "Maria Karimova",
@@ -141,7 +141,7 @@
                 "Cookies"
             ]
         },
-        "copyright": "© 2026 ZiyoBook. All rights reserved."
+        "copyright": "© 2026 TezCode. All rights reserved."
     },
     "auth": {
         "loginTitle": "Sign In",

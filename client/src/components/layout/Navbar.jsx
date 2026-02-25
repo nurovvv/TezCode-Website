@@ -67,7 +67,7 @@ export default function Navbar() {
             }}>
                 {/* Logo */}
                 <Link to="/" style={{ fontSize: '20px', fontWeight: 800, color: '#1d1d1f', textDecoration: 'none', letterSpacing: '-0.01em' }}>
-                    ZiyoBook
+                    TezCode
                 </Link>
 
                 {/* Right Side */}

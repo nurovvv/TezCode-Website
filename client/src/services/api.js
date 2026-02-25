@@ -9,7 +9,7 @@ const api = axios.create({
 
 // Request interceptor to add auth token
 api.interceptors.request.use((config) => {
-    const token = localStorage.getItem('ziyobook-token');
+    const token = localStorage.getItem('tezcode-token');
     if (token) {
         config.headers.Authorization = `Bearer ${token}`;
     }
@@ -26,19 +26,19 @@ api.interceptors.response.use(
             originalRequest._retry = true;
 
             try {
-                const refreshToken = localStorage.getItem('ziyobook-refresh');
+                const refreshToken = localStorage.getItem('tezcode-refresh');
                 if (!refreshToken) throw new Error('No refresh token');
 
                 const res = await axios.post('/api/auth/refresh', { refreshToken });
                 const { accessToken } = res.data;
 
-                localStorage.setItem('ziyobook-token', accessToken);
+                localStorage.setItem('tezcode-token', accessToken);
                 originalRequest.headers.Authorization = `Bearer ${accessToken}`;
 
                 return api(originalRequest);
             } catch {
-                localStorage.removeItem('ziyobook-token');
-                localStorage.removeItem('ziyobook-refresh');
+                localStorage.removeItem('tezcode-token');
+                localStorage.removeItem('tezcode-refresh');
                 window.location.href = '/login';
             }
         }
