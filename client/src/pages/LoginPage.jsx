@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import { useAuth } from '../context/AuthContext';
+import tezcodeLogo from '../assets/tezcode-logo.png';
 
 export default function LoginPage() {
     const { t } = useLanguage();
@@ -59,10 +60,10 @@ export default function LoginPage() {
             fontFamily: "'Inter', -apple-system, sans-serif",
         }}>
             <div style={{ width: '100%', maxWidth: '420px' }}>
-                {/* Logo */}
                 <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-                    <Link to="/" style={{ fontSize: '24px', fontWeight: 800, color: '#1d1d1f', textDecoration: 'none' }}>
-                        TezCode
+                    <Link to="/" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', textDecoration: 'none' }}>
+                        <img src={tezcodeLogo} alt="TezCode" style={{ height: '28px', width: 'auto' }} />
+                        <span style={{ fontSize: '24px', fontWeight: 800, color: '#1d1d1f' }}>TezCode</span>
                     </Link>
                 </div>
 

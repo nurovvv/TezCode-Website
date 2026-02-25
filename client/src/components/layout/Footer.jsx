@@ -1,4 +1,5 @@
 import { useLanguage } from '../../context/LanguageContext';
+import tezcodeLogo from '../../assets/tezcode-logo.png';
 
 export default function Footer() {
     const { t } = useLanguage();
@@ -9,7 +10,10 @@ export default function Footer() {
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
                     {/* Brand */}
                     <div>
-                        <h3 className="text-white text-xl font-bold mb-3">TezCode</h3>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
+                            <img src={tezcodeLogo} alt="TezCode" style={{ height: '22px', width: 'auto', filter: 'invert(1)' }} />
+                            <span className="text-white text-xl font-bold">TezCode</span>
+                        </div>
                         <p className="text-sm leading-relaxed">{t('footer.description')}</p>
                     </div>
 

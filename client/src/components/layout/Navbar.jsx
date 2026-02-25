@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useLanguage } from '../../context/LanguageContext';
 import { useAuth } from '../../context/AuthContext';
+import tezcodeLogo from '../../assets/tezcode-logo.png';
 
 export default function Navbar() {
     const { language, setLanguage } = useLanguage();
@@ -66,8 +67,9 @@ export default function Navbar() {
                 justifyContent: 'space-between',
             }}>
                 {/* Logo */}
-                <Link to="/" style={{ fontSize: '20px', fontWeight: 800, color: '#1d1d1f', textDecoration: 'none', letterSpacing: '-0.01em' }}>
-                    TezCode
+                <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none' }}>
+                    <img src={tezcodeLogo} alt="TezCode" style={{ height: '24px', width: 'auto' }} />
+                    <span style={{ fontSize: '20px', fontWeight: 800, color: '#1d1d1f', letterSpacing: '-0.01em' }}>TezCode</span>
                 </Link>
 
                 {/* Right Side */}

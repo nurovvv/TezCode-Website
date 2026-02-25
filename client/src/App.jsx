@@ -1,6 +1,7 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { LanguageProvider } from './context/LanguageContext';
 import { AuthProvider } from './context/AuthContext';
+import tezcodeLogo from './assets/tezcode-logo.png';
 
 import MainLayout from './layouts/MainLayout';
 import DashboardLayout from './layouts/DashboardLayout';
@@ -50,12 +51,14 @@ function App() {
                   }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '30px' }}>
                       <a href="/" style={{
-                        color: 'white',
-                        fontSize: '22px',
-                        fontWeight: '800',
-                        textDecoration: 'none',
-                        letterSpacing: '-1px'
-                      }}>TezCode</a>
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '8px',
+                        textDecoration: 'none'
+                      }}>
+                        <img src={tezcodeLogo} alt="TezCode" style={{ height: '22px', width: 'auto', filter: 'invert(1)' }} />
+                        <span style={{ color: 'white', fontSize: '22px', fontWeight: '800', letterSpacing: '-1px' }}>TezCode</span>
+                      </a>
 
                       <div className="hidden md:flex" style={{ gap: '20px', fontSize: '15px', fontWeight: '500' }}>
                         <a href="/catalog" style={{ color: 'white', textDecoration: 'none' }}>Tutorials</a>
