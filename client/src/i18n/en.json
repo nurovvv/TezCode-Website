@@ -1,0 +1,224 @@
+{
+    "nav": {
+        "home": "Home",
+        "catalog": "Courses",
+        "dashboard": "Dashboard",
+        "login": "Sign In",
+        "register": "Sign Up",
+        "logout": "Sign Out",
+        "profile": "Profile",
+        "langLabel": "EN"
+    },
+    "hero": {
+        "title": "Welcome to Interactive Learning",
+        "subtitle": "ZiyoBook is an interactive learning platform for students and instructors. Master concepts through hands-on activities, quizzes, and real-time progress tracking.",
+        "cta": "Get Started — Free"
+    },
+    "features": {
+        "title": "Platform Features",
+        "reading": {
+            "title": "Interactive Reading",
+            "desc": "Educational content with embedded activities that reinforce your understanding as you read."
+        },
+        "challenges": {
+            "title": "Challenges & Quizzes",
+            "desc": "Various question types to test your knowledge and prepare for exams."
+        },
+        "progress": {
+            "title": "Progress Tracking",
+            "desc": "Track your progress with charts, XP points, and achievement badges."
+        },
+        "animations": {
+            "title": "Visual Animations",
+            "desc": "Interactive visual examples for better understanding of complex concepts."
+        }
+    },
+    "howItWorks": {
+        "title": "How It Works",
+        "step1": {
+            "title": "Create Account",
+            "desc": "Sign up and choose the courses that interest you."
+        },
+        "step2": {
+            "title": "Read & Practice",
+            "desc": "Read chapters and complete inline activities as you go."
+        },
+        "step3": {
+            "title": "Earn & Certify",
+            "desc": "Track your progress and earn certificates upon completion."
+        }
+    },
+    "pricing": {
+        "title": "Pricing",
+        "free": {
+            "name": "Free",
+            "price": "0",
+            "period": "/ month",
+            "features": [
+                "1 course",
+                "Basic activities",
+                "Limited progress tracking"
+            ],
+            "cta": "Get Started"
+        },
+        "standard": {
+            "name": "Standard",
+            "price": "49",
+            "period": "/ month",
+            "features": [
+                "5 courses",
+                "All activities",
+                "Full progress tracking",
+                "Technical support"
+            ],
+            "cta": "Choose Plan",
+            "popular": true
+        },
+        "premium": {
+            "name": "Premium",
+            "price": "99",
+            "period": "/ month",
+            "features": [
+                "Unlimited courses",
+                "All features",
+                "Certificates",
+                "Personal support",
+                "API access"
+            ],
+            "cta": "Choose Plan"
+        }
+    },
+    "testimonials": {
+        "title": "What Students Say",
+        "items": [
+            {
+                "name": "Alex Nazarov",
+                "role": "Computer Science Student",
+                "text": "ZiyoBook helped me understand complex concepts through interactive activities. It's like having a personal tutor."
+            },
+            {
+                "name": "Maria Karimova",
+                "role": "Mathematics Student",
+                "text": "Great platform! I use it every day and my understanding has improved significantly."
+            },
+            {
+                "name": "David Rahimov",
+                "role": "Instructor",
+                "text": "As an instructor, I can create interactive courses and track student progress in real time."
+            }
+        ]
+    },
+    "cta": {
+        "title": "Step Into the World of Interactive Learning",
+        "subtitle": "Sign up today and start with free courses. No credit card required.",
+        "button": "Start Now"
+    },
+    "footer": {
+        "description": "Interactive learning platform built for the modern student.",
+        "product": {
+            "title": "Product",
+            "links": [
+                "Courses",
+                "Pricing",
+                "For Instructors",
+                "API"
+            ]
+        },
+        "company": {
+            "title": "Company",
+            "links": [
+                "About Us",
+                "Blog",
+                "Careers",
+                "Contact"
+            ]
+        },
+        "legal": {
+            "title": "Legal",
+            "links": [
+                "Terms of Service",
+                "Privacy Policy",
+                "Cookies"
+            ]
+        },
+        "copyright": "© 2026 ZiyoBook. All rights reserved."
+    },
+    "auth": {
+        "loginTitle": "Sign In",
+        "registerTitle": "Create Account",
+        "email": "Email",
+        "password": "Password",
+        "confirmPassword": "Confirm Password",
+        "name": "Full Name",
+        "loginBtn": "Sign In",
+        "registerBtn": "Create Account",
+        "noAccount": "Don't have an account?",
+        "hasAccount": "Already have an account?",
+        "forgotPassword": "Forgot password?"
+    },
+    "dashboard": {
+        "welcome": "Welcome back",
+        "myCourses": "My Courses",
+        "progress": "Progress",
+        "xp": "Experience",
+        "level": "Level",
+        "streak": "Streak",
+        "achievements": "Achievements",
+        "leaderboard": "Leaderboard",
+        "activitiesCompleted": "activities completed",
+        "of": "of"
+    },
+    "course": {
+        "chapters": "Chapters",
+        "sections": "Sections",
+        "activities": "Activities",
+        "completed": "Completed",
+        "locked": "Locked",
+        "continue": "Continue",
+        "enroll": "Enroll",
+        "enrolled": "Enrolled",
+        "notes": "Notes",
+        "bookmarks": "Bookmarks",
+        "submitAnswer": "Submit",
+        "correct": "Correct!",
+        "incorrect": "Incorrect!",
+        "tryAgain": "Try Again",
+        "nextActivity": "Next Activity",
+        "runCode": "Run Code",
+        "sectionComplete": "Section Complete!",
+        "xpEarned": "XP earned"
+    },
+    "levels": {
+        "beginner": "Beginner",
+        "scholar": "Scholar",
+        "master": "Master"
+    },
+    "catalog": {
+        "title": "Available Courses",
+        "search": "Search courses...",
+        "all": "All",
+        "programming": "Programming",
+        "math": "Mathematics",
+        "science": "Science",
+        "language": "Languages",
+        "noResults": "No courses found"
+    },
+    "teacher": {
+        "dashboard": "Instructor Dashboard",
+        "createCourse": "New Course",
+        "editCourse": "Edit",
+        "analytics": "Analytics",
+        "students": "Students",
+        "addChapter": "New Chapter",
+        "addSection": "New Section",
+        "addActivity": "New Activity",
+        "activityTypes": {
+            "mcq": "Multiple Choice",
+            "trueFalse": "True/False",
+            "fillBlank": "Fill in the Blank",
+            "matching": "Matching",
+            "code": "Code",
+            "shortAnswer": "Short Answer"
+        }
+    }
+}
