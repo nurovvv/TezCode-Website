@@ -1,24 +1,29 @@
 import axios from 'axios';
 
-// Base URL for API requests. In dev we usually hit the Vite proxy at /api.
-// In production (GitHub Pages) this should be set via VITE_API_BASE_URL to your backend URL.
+// Base URL for backend.
 const VITE_API_URL = import.meta.env.VITE_API_BASE_URL;
 
 if (!VITE_API_URL && !import.meta.env.DEV) {
-    console.warn('[API] VITE_API_BASE_URL is not set! API calls will likely fail on static host.');
+    console.warn('[API] VITE_API_BASE_URL is not set! Using hardcoded fallback.');
 }
 
-const API_BASE_URL = VITE_API_URL || (import.meta.env.DEV ? '/api/' : 'https://tezcode-backend.onrender.com/api/');
+// Ensure the base URL is just the domain (no /api suffix) to avoid Axios path replacement bugs
+const API_BASE_URL = (VITE_API_URL || (import.meta.env.DEV ? '' : 'https://tezcode-backend.onrender.com')).replace(/\/+$/, '');
 
 const api = axios.create({
-    baseURL: API_BASE_URL,
+    baseURL: API_BASE_URL || undefined, // undefined uses local relative paths
     headers: {
         'Content-Type': 'application/json'
     }
 });
 
-// Request interceptor to add auth token
+// Request interceptor to add auth token and ensure /api prefix
 api.interceptors.request.use((config) => {
+    // Force /api prefix if missing (and not an absolute URL)
+    if (config.url && !config.url.startsWith('/api') && !config.url.startsWith('http')) {
+        config.url = `/api${config.url.startsWith('/') ? '' : '/'}${config.url}`;
+    }
+
     const token = localStorage.getItem('tezcode-token');
     if (token) {
         config.headers.Authorization = `Bearer ${token}`;
