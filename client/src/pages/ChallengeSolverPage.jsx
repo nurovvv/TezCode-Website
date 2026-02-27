@@ -312,9 +312,9 @@ export default function ChallengeSolverPage() {
                                                 const date = new Date(sub.createdAt);
                                                 const timeAgo = getTimeAgo(date);
                                                 const passed = sub.status === 'passed';
-                                                const isExpanded = expandedSubmission === sub.id;
+                                                const isExpanded = expandedSubmission == sub.id;
                                                 return (
-                                                    <div key={sub.id}>
+                                                    <motion.div key={sub.id} whileHover={{ background: 'rgba(255,255,255,0.02)' }} style={{ borderRadius: '8px' }}>
                                                         <div
                                                             onClick={() => setExpandedSubmission(isExpanded ? null : sub.id)}
                                                             style={{
@@ -353,8 +353,24 @@ export default function ChallengeSolverPage() {
                                                                 <span style={{ fontSize: '12px', color: '#666' }}>
                                                                     {timeAgo}
                                                                 </span>
-                                                                <i className={`fas fa-chevron-${isExpanded ? 'up' : 'down'}`}
-                                                                    style={{ fontSize: '10px', color: '#555' }} />
+                                                                <span style={{
+                                                                    fontSize: '11px',
+                                                                    color: '#00af9b',
+                                                                    fontWeight: '600',
+                                                                    textTransform: 'uppercase',
+                                                                    marginLeft: '8px'
+                                                                }}>
+                                                                    {isExpanded ? 'Close' : 'View Code'}
+                                                                </span>
+                                                                <span style={{
+                                                                    display: 'inline-block',
+                                                                    width: '0', height: '0',
+                                                                    borderLeft: '4px solid transparent',
+                                                                    borderRight: '4px solid transparent',
+                                                                    borderTop: isExpanded ? 'none' : '4px solid #555',
+                                                                    borderBottom: isExpanded ? '4px solid #555' : 'none',
+                                                                    marginLeft: '4px'
+                                                                }} />
                                                             </div>
                                                         </div>
                                                         {isExpanded && (
@@ -405,7 +421,7 @@ export default function ChallengeSolverPage() {
                                                                 </pre>
                                                             </div>
                                                         )}
-                                                    </div>
+                                                    </motion.div>
                                                 );
                                             })}
                                         </div>
