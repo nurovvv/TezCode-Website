@@ -5,6 +5,9 @@ const crypto = require('crypto');
 const config = require('../config/env');
 const { User, RefreshToken } = require('../models');
 const { authenticate } = require('../middleware/auth');
+const { OAuth2Client } = require('google-auth-library');
+const client = new OAuth2Client(config.google.clientId);
+const { Op } = require('sequelize');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
@@ -43,16 +46,26 @@ const upload = multer({
 // Register
 router.post('/register', async (req, res) => {
     try {
-        const { name, email, password, role } = req.body;
+        const { name, username, email, password, role } = req.body;
 
-        const existing = await User.findOne({ where: { email } });
-        if (existing) {
+        if (!username) {
+            return res.status(400).json({ message: 'Username is required' });
+        }
+
+        const existingEmail = await User.findOne({ where: { email } });
+        if (existingEmail) {
             return res.status(400).json({ message: 'Email already registered' });
+        }
+
+        const existingUsername = await User.findOne({ where: { username } });
+        if (existingUsername) {
+            return res.status(400).json({ message: 'Username already taken' });
         }
 
         const passwordHash = await bcrypt.hash(password, 12);
         const user = await User.create({
             name,
+            username,
             email,
             passwordHash,
             role: role || 'student',
@@ -80,6 +93,7 @@ router.post('/register', async (req, res) => {
             user: {
                 id: user.id,
                 name: user.name,
+                username: user.username,
                 email: user.email,
                 role: user.role,
                 avatarUrl: user.avatarUrl,
@@ -94,6 +108,83 @@ router.post('/register', async (req, res) => {
     } catch (err) {
         console.error('Registration error:', err);
         res.status(500).json({ message: 'Server error' });
+    }
+});
+
+// Google Login/Signup
+router.post('/google-auth', async (req, res) => {
+    try {
+        const { token } = req.body;
+        const ticket = await client.verifyIdToken({
+            idToken: token,
+            audience: config.google.clientId,
+        });
+        const { sub, email, name, picture } = ticket.getPayload();
+
+        let user = await User.findOne({
+            where: {
+                [Op.or]: [{ googleId: sub }, { email }]
+            }
+        });
+
+        if (!user) {
+            // Create new user
+            // Generate a temporary unique username from name or email
+            let baseUsername = name.toLowerCase().replace(/\s/g, '_') || email.split('@')[0];
+            let username = baseUsername;
+            let count = 1;
+            while (await User.findOne({ where: { username } })) {
+                username = `${baseUsername}${count++}`;
+            }
+
+            user = await User.create({
+                name,
+                username,
+                email,
+                googleId: sub,
+                avatarUrl: picture,
+                role: 'student',
+            });
+        } else if (!user.googleId) {
+            // Link existing account
+            user.googleId = sub;
+            if (picture && !user.avatarUrl) user.avatarUrl = picture;
+            await user.save();
+        }
+
+        const accessToken = jwt.sign(
+            { id: user.id, email: user.email, role: user.role },
+            config.jwt.secret,
+            { expiresIn: config.jwt.expiresIn }
+        );
+
+        const refreshToken = crypto.randomBytes(64).toString('hex');
+        const expiresAt = new Date();
+        expiresAt.setDate(expiresAt.getDate() + 7);
+
+        await RefreshToken.create({
+            user_id: user.id,
+            token: refreshToken,
+            expiresAt,
+        });
+
+        res.json({
+            accessToken,
+            refreshToken,
+            user: {
+                id: user.id,
+                name: user.name,
+                username: user.username,
+                email: user.email,
+                role: user.role,
+                avatarUrl: user.avatarUrl,
+                xp: user.xp,
+                level: user.level,
+            }
+        });
+    } catch (err) {
+        console.error('Google auth error:', err);
+        res.status(401).json({ message: 'Invalid Google token' });
     }
 });
 
@@ -134,6 +225,7 @@ router.post('/login', async (req, res) => {
             user: {
                 id: user.id,
                 name: user.name,
+                username: user.username,
                 email: user.email,
                 role: user.role,
                 avatarUrl: user.avatarUrl,
@@ -184,7 +276,7 @@ router.post('/refresh', async (req, res) => {
 router.get('/me', authenticate, async (req, res) => {
     try {
         const user = await User.findByPk(req.user.id, {
-            attributes: ['id', 'name', 'email', 'role', 'xp', 'level', 'avatarUrl', 'githubUrl', 'linkedinUrl', 'twitterUrl', 'instagramUrl', 'langPreference'],
+            attributes: ['id', 'name', 'username', 'email', 'role', 'xp', 'level', 'avatarUrl', 'githubUrl', 'linkedinUrl', 'twitterUrl', 'instagramUrl', 'langPreference'],
         });
 
         if (!user) {

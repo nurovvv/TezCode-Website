@@ -11,6 +11,11 @@ const User = sequelize.define('User', {
         type: DataTypes.STRING,
         allowNull: false,
     },
+    username: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+    },
     email: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -19,8 +24,14 @@ const User = sequelize.define('User', {
     },
     passwordHash: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
         field: 'password_hash',
+    },
+    googleId: {
+        type: DataTypes.STRING,
+        unique: true,
+        allowNull: true,
+        field: 'google_id',
     },
     role: {
         type: DataTypes.STRING,

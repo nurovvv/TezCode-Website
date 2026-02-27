@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import { useAuth } from '../context/AuthContext';
+import { GoogleLogin } from '@react-oauth/google';
 import tezcodeLogo from '../assets/tezcode-logo.png';
 
 export default function RegisterPage() {
@@ -9,6 +10,7 @@ export default function RegisterPage() {
     const { register } = useAuth();
     const navigate = useNavigate();
     const [name, setName] = useState('');
+    const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -24,7 +26,7 @@ export default function RegisterPage() {
         }
         setLoading(true);
         try {
-            await register(name, email, password);
+            await register(name, username, email, password);
             navigate('/dashboard');
         } catch (err) {
             setError(err.response?.data?.message || 'Registration failed');
@@ -112,6 +114,20 @@ export default function RegisterPage() {
                         </div>
 
                         <div style={{ marginBottom: '16px' }}>
+                            <label style={labelStyle}>Username</label>
+                            <input
+                                type="text"
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
+                                placeholder="johndoe123"
+                                required
+                                style={inputStyle}
+                                onFocus={(e) => e.target.style.borderColor = '#1d1d1f'}
+                                onBlur={(e) => e.target.style.borderColor = '#e5e5e5'}
+                            />
+                        </div>
+
+                        <div style={{ marginBottom: '16px' }}>
                             <label style={labelStyle}>Email</label>
                             <input
                                 type="email"
@@ -173,6 +189,27 @@ export default function RegisterPage() {
                             {loading ? '...' : 'Create Account'}
                         </button>
                     </form>
+
+                    <div style={{ margin: '24px 0', display: 'flex', alignItems: 'center', gap: '12px' }}>
+                        <div style={{ flex: 1, height: '1px', background: '#e5e5e5' }}></div>
+                        <span style={{ fontSize: '13px', color: '#86868b' }}>or</span>
+                        <div style={{ flex: 1, height: '1px', background: '#e5e5e5' }}></div>
+                    </div>
+
+                    <div style={{ display: 'flex', justifyContent: 'center' }}>
+                        <GoogleLogin
+                            onSuccess={credentialResponse => {
+                                loginWithGoogle(credentialResponse.credential)
+                                    .then(() => navigate('/dashboard'))
+                                    .catch(err => setError('Google sign up failed'));
+                            }}
+                            onError={() => setError('Google sign up failed')}
+                            useOneTap
+                            shape="pill"
+                            text="signup_with"
+                            width="100%"
+                        />
+                    </div>
 
                     <p style={{ marginTop: '24px', textAlign: 'center', fontSize: '13px', color: '#86868b' }}>
                         Already have an account?{' '}

@@ -40,8 +40,18 @@ export function AuthProvider({ children }) {
         return userData;
     }, []);
 
-    const register = useCallback(async (name, email, password, role = 'student') => {
-        const res = await api.post('/auth/register', { name, email, password, role });
+    const register = useCallback(async (name, username, email, password, role = 'student') => {
+        const res = await api.post('/auth/register', { name, username, email, password, role });
+        const { accessToken, refreshToken, user: userData } = res.data;
+        localStorage.setItem('tezcode-token', accessToken);
+        localStorage.setItem('tezcode-refresh', refreshToken);
+        api.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
+        setUser(userData);
+        return userData;
+    }, []);
+
+    const loginWithGoogle = useCallback(async (credential) => {
+        const res = await api.post('/auth/google-auth', { token: credential });
         const { accessToken, refreshToken, user: userData } = res.data;
         localStorage.setItem('tezcode-token', accessToken);
         localStorage.setItem('tezcode-refresh', refreshToken);
@@ -77,7 +87,7 @@ export function AuthProvider({ children }) {
     }, []);
 
     return (
-        <AuthContext.Provider value={{ user, loading, login, register, logout, refreshAccessToken, updateUser }}>
+        <AuthContext.Provider value={{ user, loading, login, register, logout, refreshAccessToken, updateUser, loginWithGoogle }}>
             {children}
         </AuthContext.Provider>
     );

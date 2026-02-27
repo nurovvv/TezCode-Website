@@ -16,4 +16,7 @@ module.exports = {
         expiresIn: process.env.JWT_EXPIRES_IN || '15m',
         refreshExpiresIn: process.env.JWT_REFRESH_EXPIRES_IN || '7d',
     },
+    google: {
+        clientId: process.env.GOOGLE_CLIENT_ID || '',
+    },
 };

@@ -2,11 +2,12 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import { useAuth } from '../context/AuthContext';
+import { GoogleLogin } from '@react-oauth/google';
 import tezcodeLogo from '../assets/tezcode-logo.png';
 
 export default function LoginPage() {
     const { t } = useLanguage();
-    const { login } = useAuth();
+    const { login, loginWithGoogle } = useAuth();
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -140,6 +141,29 @@ export default function LoginPage() {
                             {loading ? '...' : 'Sign In'}
                         </button>
                     </form>
+
+                    <div style={{ margin: '24px 0', display: 'flex', alignItems: 'center', gap: '12px' }}>
+                        <div style={{ flex: 1, height: '1px', background: '#e5e5e5' }}></div>
+                        <span style={{ fontSize: '13px', color: '#86868b' }}>or</span>
+                        <div style={{ flex: 1, height: '1px', background: '#e5e5e5' }}></div>
+                    </div>
+
+                    <div style={{ display: 'flex', justifyContent: 'center' }}>
+                        <GoogleLogin
+                            onSuccess={credentialResponse => {
+                                loginWithGoogle(credentialResponse.credential)
+                                    .then((user) => {
+                                        const role = user?.role || 'student';
+                                        navigate(role === 'admin' ? '/admin' : role === 'teacher' ? '/teacher' : '/dashboard');
+                                    })
+                                    .catch(err => setError('Google sign in failed'));
+                            }}
+                            onError={() => setError('Google sign in failed')}
+                            useOneTap
+                            shape="pill"
+                            width="100%"
+                        />
+                    </div>
 
                     <p style={{ marginTop: '24px', textAlign: 'center', fontSize: '13px', color: '#86868b' }}>
                         Don't have an account?{' '}
