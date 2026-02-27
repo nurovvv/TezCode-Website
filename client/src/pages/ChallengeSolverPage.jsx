@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import Confetti from 'react-confetti';
 import { useAuth } from '../context/AuthContext';
 import api from '../services/api';
 import { runPython } from '../services/pythonRunner';
@@ -38,6 +39,8 @@ export default function ChallengeSolverPage() {
     const [activeTestCase, setActiveTestCase] = useState(0);
     const [running, setRunning] = useState(false);
     const [results, setResults] = useState(null);
+    const [submitted, setSubmitted] = useState(false);
+    const [showSuccess, setShowSuccess] = useState(false);
 
     useEffect(() => {
         api.get(`challenges/${id}`)
@@ -79,16 +82,28 @@ export default function ChallengeSolverPage() {
                 }
             }
             setResults({ passed: passedAll, results: evaluationResults });
+            return passedAll;
         } catch (err) {
             console.error(err);
+            return false;
+        } finally {
+            setRunning(false);
         }
-        setRunning(false);
     }, [challenge, code, language]);
 
     const handleSubmit = async () => {
-        await handleRun();
-        if (user && challenge) {
-            await api.post(`challenges/${id}/submit`, { language, code });
+        setSubmitted(true);
+        const passedAll = await handleRun();
+        if (passedAll && user && challenge) {
+            try {
+                await api.post(`challenges/${id}/submit`, { language, code });
+                setShowSuccess(true);
+            } catch (err) {
+                console.error('Submit error:', err);
+            }
+        } else if (passedAll && !user) {
+            // Still show success even if not logged in
+            setShowSuccess(true);
         }
     };
 
@@ -96,6 +111,90 @@ export default function ChallengeSolverPage() {
 
     return (
         <div className="solver-page-container">
+            {/* Success Overlay */}
+            <AnimatePresence>
+                {showSuccess && (
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        style={{
+                            position: 'fixed',
+                            top: 0,
+                            left: 0,
+                            right: 0,
+                            bottom: 0,
+                            background: 'rgba(0, 0, 0, 0.85)',
+                            zIndex: 99999,
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center'
+                        }}
+                    >
+                        <Confetti
+                            width={window.innerWidth}
+                            height={window.innerHeight}
+                            recycle={false}
+                            numberOfPieces={300}
+                            gravity={0.15}
+                            colors={['#00af9b', '#ffa116', '#00b8d9', '#36b37e', '#ffab00', '#6554c0']}
+                        />
+                        <motion.div
+                            initial={{ scale: 0.5, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            transition={{ type: 'spring', stiffness: 200, damping: 15, delay: 0.2 }}
+                            style={{
+                                background: '#1e1e1e',
+                                borderRadius: '16px',
+                                padding: '48px',
+                                textAlign: 'center',
+                                maxWidth: '420px',
+                                width: '90%',
+                                border: '1px solid #333',
+                                boxShadow: '0 24px 80px rgba(0, 0, 0, 0.5)'
+                            }}
+                        >
+                            <div style={{ fontSize: '64px', marginBottom: '16px' }}>🎉</div>
+                            <h2 style={{ fontSize: '28px', fontWeight: '800', color: '#00af9b', marginBottom: '8px' }}>
+                                Challenge Completed!
+                            </h2>
+                            <p style={{ fontSize: '15px', color: '#8a8a8a', marginBottom: '8px' }}>
+                                You solved <strong style={{ color: '#eff1f6' }}>{challenge.title}</strong>
+                            </p>
+                            <div style={{
+                                display: 'inline-flex',
+                                alignItems: 'center',
+                                gap: '6px',
+                                background: 'rgba(0, 175, 155, 0.1)',
+                                color: '#00af9b',
+                                padding: '8px 20px',
+                                borderRadius: '999px',
+                                fontSize: '16px',
+                                fontWeight: '700',
+                                marginBottom: '32px'
+                            }}>
+                                +{challenge.xpReward} XP Earned
+                            </div>
+                            <div style={{ display: 'flex', gap: '12px', justifyContent: 'center' }}>
+                                <button
+                                    onClick={() => setShowSuccess(false)}
+                                    className="solver-btn btn-run"
+                                    style={{ height: '40px', padding: '0 24px', fontSize: '14px' }}
+                                >
+                                    Continue Coding
+                                </button>
+                                <Link
+                                    to="/challenges"
+                                    className="solver-btn btn-submit"
+                                    style={{ height: '40px', padding: '0 24px', fontSize: '14px', textDecoration: 'none', display: 'inline-flex', alignItems: 'center' }}
+                                >
+                                    Next Challenge
+                                </Link>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
             {/* Header */}
             <header className="solver-nav-header">
                 <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
