@@ -37,6 +37,9 @@ jobs:
         working-directory: client
         run: npm run build
 
+      - name: Copy index.html to 404.html for SPAs
+        run: cp client/dist/index.html client/dist/404.html
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
