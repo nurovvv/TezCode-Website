@@ -113,7 +113,44 @@ router.post('/:id/submit', authenticate, async (req, res) => {
                     const output = data.run.stdout ? data.run.stdout.trim() : "";
                     const stderr = data.run.stderr ? data.run.stderr.trim() : "";
                     const expected = tc.expectedOutput ? tc.expectedOutput.trim() : "";
-                    const passed = output === expected && data.run.code === 0 && !stderr;
+
+                    // Robust comparison logic (aligned with frontend)
+                    const normalizeLines = (str) => String(str).split('\n').map(l => l.trim()).filter(l => l.length > 0).join('\n');
+                    const normalizeForm = (val) => {
+                        let s = normalizeLines(val)
+                            .replace(/\s+/g, ' ')
+                            .replace(/\(\s*/g, '[')
+                            .replace(/\s*\)/g, ']')
+                            .replace(/,\s*/g, ', ')
+                            .replace(/\[\s+/g, '[')
+                            .replace(/\s+\]/g, ']')
+                            .replace(/'/g, '"')
+                            .replace(/\b(true|false|none|null)\b/gi, (m) => m.toLowerCase())
+                            .replace(/\bnull\b/g, 'none');
+                        return s.trim();
+                    };
+
+                    const normA = normalizeForm(output);
+                    const normE = normalizeForm(expected);
+
+                    let passed = normA === normE;
+
+                    // Numeric fallback
+                    if (!passed) {
+                        try {
+                            const numA = parseFloat(normA);
+                            const numE = parseFloat(normE);
+                            if (!isNaN(numA) && !isNaN(numE) && Math.abs(numA - numE) < 1e-6) {
+                                passed = true;
+                            }
+                        } catch (e) { }
+                    }
+
+                    if (!passed && normA.toLowerCase() === normE.toLowerCase() && ['true', 'false', 'none'].includes(normA.toLowerCase())) {
+                        passed = true;
+                    }
+
+                    passed = passed && data.run.code === 0 && !stderr;
 
                     results.push({
                         input: tc.input,

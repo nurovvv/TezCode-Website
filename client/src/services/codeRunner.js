@@ -51,32 +51,40 @@ async function runPython(code, stdin = "") {
     try {
         const py = await getPyodide();
 
-        // Setup pipes
+        // Setup pipes and clear global namespace for isolation
+        // We Use a dictionary for global namespace to avoid cluttering pyodide's globals
         py.runPython(`
 import sys, io
 sys.stdout = io.StringIO()
 sys.stderr = io.StringIO()
-sys.stdin = io.StringIO("""${(stdin || "").replace(/"""/g, '\\"\\"\\"')}""")
+sys.stdin = io.StringIO("""${(stdin || "").replace(/\\/g, '\\\\').replace(/"""/g, '\\"\\"\\"')}""")
+custom_globals = {}
         `);
 
         try {
-            py.runPython(code);
+            // Execute code within the custom_globals namespace
+            py.runPython(code, { globals: py.globals.get("custom_globals") });
+        } catch (e) {
+            // Even if it fails, we want to see what was printed before the crash
             const output = py.runPython('sys.stdout.getvalue()');
             const stderr = py.runPython('sys.stderr.getvalue()');
-
-            const isRealError = stderr && (
-                stderr.includes('Traceback') ||
-                stderr.includes('Error') ||
-                stderr.includes('Exception')
-            );
-
-            if (isRealError) {
-                return { success: false, output: output, error: stderr };
-            }
-            return { success: true, output: output, error: '' };
-        } catch (e) {
-            return { success: false, output: '', error: e.message || String(e) };
+            const errMessage = e.message || String(e);
+            return { success: false, output: output, error: stderr || errMessage };
         }
+
+        const output = py.runPython('sys.stdout.getvalue()');
+        const stderr = py.runPython('sys.stderr.getvalue()');
+
+        const isRealError = stderr && (
+            stderr.includes('Traceback') ||
+            stderr.includes('Error') ||
+            stderr.includes('Exception')
+        );
+
+        if (isRealError) {
+            return { success: false, output: output, error: stderr };
+        }
+        return { success: true, output: output, error: '' };
     } catch (err) {
         return { success: false, output: '', error: err.message };
     }

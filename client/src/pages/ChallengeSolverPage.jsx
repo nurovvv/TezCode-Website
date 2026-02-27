@@ -9,20 +9,61 @@ import CodeEditor from '../components/CodeEditor';
 import './ChallengeSolver.css';
 
 const outputsMatch = (actual, expected) => {
-    if (!actual && !expected) return true;
-    if (!actual || !expected) return false;
-    let a = actual.trim();
-    let e = expected.trim();
+    if (actual === expected) return true;
+    if (actual == null || expected == null) return actual === expected;
+
+    // Normalize and trim each line individually to handle trailing whitespace on lines
+    const normalizeLines = (str) => {
+        return String(str)
+            .split('\n')
+            .map(line => line.trim())
+            .filter(line => line.length > 0)
+            .join('\n');
+    };
+
+    let a = normalizeLines(actual);
+    let e = normalizeLines(expected);
+
     if (a === e) return true;
-    const normList = (s) => s
-        .replace(/\(/g, '[')
-        .replace(/\)/g, ']')
-        .replace(/\s*,\s*/g, ', ')
-        .replace(/\[\s+/g, '[')
-        .replace(/\s+\]/g, ']')
-        .replace(/'/g, '"');
-    if (normList(a) === normList(e)) return true;
+
+    // Normalize formatting for lists, tuples, and common literals
+    const normalizeForm = (val) => {
+        let s = val
+            .replace(/\s+/g, ' ')             // Collapse multi-spaces
+            .replace(/\(\s*/g, '[')           // (1, 2) -> [1, 2]
+            .replace(/\s*\)/g, ']')
+            .replace(/,\s*/g, ', ')           // Normalize comma spacing
+            .replace(/\[\s+/g, '[')           // [ 1, 2 ] -> [1, 2]
+            .replace(/\s+\]/g, ']')
+            .replace(/'/g, '"');              // 'string' -> "string"
+
+        // Normalize boolean/none/null tokens regardless of case
+        s = s.replace(/\b(true|false|none|null)\b/gi, (m) => m.toLowerCase())
+            .replace(/\bnull\b/g, 'none');
+
+        // Final trim of any remaining whitespace after normalization
+        return s.trim();
+    };
+
+    const normA = normalizeForm(a);
+    const normE = normalizeForm(e);
+
+    if (normA === normE) return true;
+
+    // Try numeric comparison if both are numbers or simple list of numbers
+    try {
+        const numA = parseFloat(normA);
+        const numE = parseFloat(normE);
+        if (!isNaN(numA) && !isNaN(numE) && Math.abs(numA - numE) < 1e-6) {
+            return true;
+        }
+    } catch (err) {
+        // Not numbers, ignore
+    }
+
+    // Final loose check for booleans if still not matching
     if (a.toLowerCase() === e.toLowerCase() && ['true', 'false', 'none'].includes(a.toLowerCase())) return true;
+
     return false;
 };
 
@@ -103,6 +144,8 @@ export default function ChallengeSolverPage() {
                     actualOutput: actualOutput || (res.error ? `Error: ${res.error}` : '(no output)'),
                     passed
                 });
+
+                console.log(`Test Case: Input="${tc.input}", Expected="${expected}", Actual="${actualOutput}", Passed=${passed}`);
                 if (!passed) passedAll = false;
             }
 

@@ -64,7 +64,7 @@ async function start() {
         // Import models to connect & sync
         const { sequelize, Challenge, Course } = require('./models');
         await sequelize.authenticate();
-        await sequelize.sync({ alter: true }); // Creates tables if they don't exist
+        await sequelize.sync(); // Creates tables if they don't exist
         console.log('✅ SQLite database connected & synced');
 
         // Automated production seeding
