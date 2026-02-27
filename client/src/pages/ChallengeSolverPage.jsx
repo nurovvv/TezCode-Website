@@ -270,27 +270,24 @@ export default function ChallengeSolverPage() {
                                     animate={{ opacity: 1, y: 0 }}
                                     exit={{ opacity: 0, y: -10 }}
                                 >
-                                    <h1 style={{ fontSize: '24px', fontWeight: '700', marginBottom: '16px' }}>{challenge.title}</h1>
-                                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px', marginBottom: '24px' }}>
-                                        <span className={`solver-badge badge-${challenge.difficulty || 'easy'}`}>
+                                    <h1 style={{ fontSize: '24px', fontWeight: '700', marginBottom: '16px', color: '#fff' }}>{challenge.title}</h1>
+                                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '32px' }}>
+                                        <span className={`solver-badge badge-${challenge.difficulty?.toLowerCase() || 'easy'}`} style={{ padding: '6px 14px', fontSize: '12px' }}>
                                             {challenge.difficulty}
                                         </span>
-                                        {challenge.topics?.map((topic, i) => (
-                                            <span key={i} className="solver-badge badge-tag" style={{ color: '#eff1f6', background: '#3e3e3e' }}>
-                                                {topic}
-                                            </span>
-                                        ))}
-                                        {challenge.tags?.map((tag, i) => (
-                                            <span key={i} className="solver-badge badge-tag">
-                                                {tag}
-                                            </span>
-                                        ))}
-                                        <span className="solver-badge badge-xp">
+                                        <button className="solver-badge badge-tag" style={{ border: 'none', cursor: 'pointer', background: 'rgba(255,255,255,0.07)', color: '#8a8a8a', padding: '6px 14px', fontSize: '12px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                            Topics <i className="fas fa-chevron-down" style={{ fontSize: '10px' }}></i>
+                                        </button>
+                                        <button className="solver-badge badge-tag" style={{ border: 'none', cursor: 'pointer', background: 'rgba(255,255,255,0.07)', color: '#8a8a8a', padding: '6px 14px', fontSize: '12px' }}>
+                                            Company Tags
+                                        </button>
+                                        <div style={{ flex: 1 }} />
+                                        <span className="solver-badge badge-xp" style={{ background: 'rgba(0, 175, 155, 0.1)', color: '#00af9b', padding: '6px 14px', fontSize: '12px', fontWeight: '700' }}>
                                             +{challenge.xpReward} XP
                                         </span>
                                     </div>
                                     <div
-                                        style={{ color: '#eff1f6', opacity: 0.9, lineHeight: '1.7', fontSize: '15px' }}
+                                        className="lc-description"
                                         dangerouslySetInnerHTML={{ __html: challenge.description }}
                                     />
                                 </motion.div>
