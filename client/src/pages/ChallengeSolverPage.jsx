@@ -26,6 +26,18 @@ const outputsMatch = (actual, expected) => {
     return false;
 };
 
+const getTimeAgo = (date) => {
+    const seconds = Math.floor((new Date() - date) / 1000);
+    if (seconds < 60) return 'just now';
+    const minutes = Math.floor(seconds / 60);
+    if (minutes < 60) return `${minutes}m ago`;
+    const hours = Math.floor(minutes / 60);
+    if (hours < 24) return `${hours}h ago`;
+    const days = Math.floor(hours / 24);
+    if (days < 30) return `${days}d ago`;
+    return date.toLocaleDateString();
+};
+
 export default function ChallengeSolverPage() {
     const { id } = useParams();
     const { user } = useAuth();
@@ -41,6 +53,8 @@ export default function ChallengeSolverPage() {
     const [results, setResults] = useState(null);
     const [submitted, setSubmitted] = useState(false);
     const [showSuccess, setShowSuccess] = useState(false);
+    const [submissions, setSubmissions] = useState([]);
+    const [loadingSubmissions, setLoadingSubmissions] = useState(false);
 
     useEffect(() => {
         api.get(`challenges/${id}`)
@@ -53,6 +67,17 @@ export default function ChallengeSolverPage() {
             })
             .catch(() => navigate('/challenges'));
     }, [id, navigate]);
+
+    // Fetch submissions when tab is switched to 'submissions'
+    useEffect(() => {
+        if (activeTab === 'submissions' && user) {
+            setLoadingSubmissions(true);
+            api.get(`challenges/${id}/submissions`)
+                .then(res => setSubmissions(res.data))
+                .catch(err => console.error('Failed to fetch submissions:', err))
+                .finally(() => setLoadingSubmissions(false));
+        }
+    }, [activeTab, id, user]);
 
     const handleRun = useCallback(async () => {
         if (!challenge) return;
@@ -273,7 +298,62 @@ export default function ChallengeSolverPage() {
                                 <motion.div key="solution" style={{ color: '#8a8a8a' }}>No solution available for this problem yet.</motion.div>
                             )}
                             {activeTab === 'submissions' && (
-                                <motion.div key="submissions" style={{ color: '#8a8a8a' }}>You have no submissions yet.</motion.div>
+                                <motion.div key="submissions">
+                                    {!user ? (
+                                        <p style={{ color: '#8a8a8a' }}>Log in to see your submissions.</p>
+                                    ) : loadingSubmissions ? (
+                                        <p style={{ color: '#8a8a8a' }}>Loading submissions...</p>
+                                    ) : submissions.length === 0 ? (
+                                        <p style={{ color: '#8a8a8a' }}>You have no submissions yet.</p>
+                                    ) : (
+                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                                            {submissions.map((sub) => {
+                                                const date = new Date(sub.createdAt);
+                                                const timeAgo = getTimeAgo(date);
+                                                const passed = sub.status === 'passed';
+                                                return (
+                                                    <div
+                                                        key={sub.id}
+                                                        style={{
+                                                            display: 'flex',
+                                                            alignItems: 'center',
+                                                            justifyContent: 'space-between',
+                                                            padding: '14px 16px',
+                                                            background: '#262626',
+                                                            borderRadius: '8px',
+                                                            border: '1px solid #333'
+                                                        }}
+                                                    >
+                                                        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                                                            <div style={{
+                                                                width: '8px', height: '8px', borderRadius: '50%',
+                                                                background: passed ? '#00af9b' : '#ff2d55'
+                                                            }} />
+                                                            <span style={{
+                                                                fontSize: '14px', fontWeight: '700',
+                                                                color: passed ? '#00af9b' : '#ff2d55'
+                                                            }}>
+                                                                {passed ? 'Accepted' : 'Wrong Answer'}
+                                                            </span>
+                                                        </div>
+                                                        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                                                            <span style={{
+                                                                fontSize: '12px', color: '#666',
+                                                                background: '#1e1e1e', padding: '4px 10px',
+                                                                borderRadius: '4px', fontWeight: '600', textTransform: 'capitalize'
+                                                            }}>
+                                                                {sub.language}
+                                                            </span>
+                                                            <span style={{ fontSize: '12px', color: '#666' }}>
+                                                                {timeAgo}
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
+                                    )}
+                                </motion.div>
                             )}
                         </AnimatePresence>
                     </div>

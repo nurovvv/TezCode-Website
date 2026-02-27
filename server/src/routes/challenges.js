@@ -168,4 +168,22 @@ router.post('/:id/submit', authenticate, async (req, res) => {
     }
 });
 
+// Get user's submissions for a specific challenge
+router.get('/:id/submissions', authenticate, async (req, res) => {
+    try {
+        const submissions = await ChallengeSubmission.findAll({
+            where: {
+                user_id: req.user.id,
+                challenge_id: req.params.id
+            },
+            attributes: ['id', 'language', 'status', 'completedAt', 'createdAt'],
+            order: [['createdAt', 'DESC']]
+        });
+        res.json(submissions);
+    } catch (err) {
+        console.error('Error fetching submissions:', err);
+        res.status(500).json({ message: 'Failed to fetch submissions' });
+    }
+});
+
 module.exports = router;
