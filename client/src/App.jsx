@@ -34,6 +34,8 @@ function App() {
               <Route path="/catalog" element={<CatalogPage />} />
               <Route path="/challenge" element={<ChallengePage />} />
               <Route path="/challenges" element={<ChallengesPage />} />
+              <Route path="/leaderboard" element={<LeaderboardPage />} />
+              <Route path="/profile" element={<ProfilePage />} />
             </Route>
             <Route path="/challenges/:id" element={<ChallengeSolverPage />} />
 

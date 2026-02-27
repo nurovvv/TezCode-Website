@@ -1,12 +1,34 @@
-import { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import axios from 'axios';
+import { useState, useEffect, useCallback } from 'react';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useAuth } from '../context/AuthContext';
+import api from '../services/api';
+import { runPython } from '../services/pythonRunner';
 import CodeEditor from '../components/CodeEditor';
 import './ChallengeSolver.css';
 
+const outputsMatch = (actual, expected) => {
+    if (!actual && !expected) return true;
+    if (!actual || !expected) return false;
+    let a = actual.trim();
+    let e = expected.trim();
+    if (a === e) return true;
+    const normList = (s) => s
+        .replace(/\(/g, '[')
+        .replace(/\)/g, ']')
+        .replace(/\s*,\s*/g, ', ')
+        .replace(/\[\s+/g, '[')
+        .replace(/\s+\]/g, ']')
+        .replace(/'/g, '"');
+    if (normList(a) === normList(e)) return true;
+    if (a.toLowerCase() === e.toLowerCase() && ['true', 'false', 'none'].includes(a.toLowerCase())) return true;
+    return false;
+};
+
 export default function ChallengeSolverPage() {
     const { id } = useParams();
+    const { user } = useAuth();
+    const navigate = useNavigate();
     const [challenge, setChallenge] = useState(null);
     const [code, setCode] = useState('');
     const [language, setLanguage] = useState('python');
@@ -18,53 +40,55 @@ export default function ChallengeSolverPage() {
     const [results, setResults] = useState(null);
 
     useEffect(() => {
-        const fetchChallenge = async () => {
-            try {
-                const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL || ''}/api/challenges/${id}`);
-                setChallenge(response.data);
-                setCode(response.data.starterCode || '');
-            } catch (error) {
-                console.error('Error fetching challenge:', error);
-            }
-        };
-        fetchChallenge();
-    }, [id]);
+        api.get(`challenges/${id}`)
+            .then(res => {
+                if (res.data.message) navigate('/challenges');
+                else {
+                    setChallenge(res.data);
+                    if (res.data.starterCode) setCode(res.data.starterCode);
+                }
+            })
+            .catch(() => navigate('/challenges'));
+    }, [id, navigate]);
 
-    const handleRun = async () => {
-        if (!code.trim()) return;
+    const handleRun = useCallback(async () => {
+        if (!challenge) return;
         setRunning(true);
         setConsoleOpen(true);
         setConsoleTab('result');
+
         try {
-            const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL || ''}/api/challenges/${id}/run`, {
-                code,
-                language
-            });
-            setResults(response.data);
-        } catch (error) {
-            console.error('Error running code:', error);
-            setResults({ error: 'Failed to execute code' });
-        } finally {
-            setRunning(false);
+            const evaluationResults = [];
+            let passedAll = true;
+
+            if (language === 'python') {
+                for (const tc of challenge.testCases || []) {
+                    const res = await runPython(code, tc.input);
+                    const actualOutput = res.output ? res.output.trim() : "";
+                    const expected = tc.expectedOutput ? tc.expectedOutput.trim() : "";
+                    const hasFatalError = !res.success && !actualOutput;
+                    const passed = !hasFatalError && outputsMatch(actualOutput, expected);
+
+                    evaluationResults.push({
+                        input: tc.input,
+                        expectedOutput: expected,
+                        actualOutput: actualOutput || (res.error ? `Error: ${res.error}` : '(no output)'),
+                        passed
+                    });
+                    if (!passed) passedAll = false;
+                }
+            }
+            setResults({ passed: passedAll, results: evaluationResults });
+        } catch (err) {
+            console.error(err);
         }
-    };
+        setRunning(false);
+    }, [challenge, code, language]);
 
     const handleSubmit = async () => {
-        if (!code.trim()) return;
-        setRunning(true);
-        setConsoleOpen(true);
-        setConsoleTab('result');
-        try {
-            const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL || ''}/api/challenges/${id}/submit`, {
-                code,
-                language
-            });
-            setResults(response.data);
-        } catch (error) {
-            console.error('Error submitting code:', error);
-            setResults({ error: 'Failed to submit' });
-        } finally {
-            setRunning(false);
+        await handleRun();
+        if (user && challenge) {
+            await api.post(`challenges/${id}/submit`, { language, code });
         }
     };
 
@@ -104,7 +128,7 @@ export default function ChallengeSolverPage() {
                         ))}
                     </div>
 
-                    <div className="solver-description-area thin-scrollbar">
+                    <div className="solver-description-area">
                         <AnimatePresence mode="wait">
                             {activeTab === 'question' && (
                                 <motion.div
@@ -171,14 +195,14 @@ export default function ChallengeSolverPage() {
                             <div style={{ display: 'flex', gap: '20px' }}>
                                 <span
                                     onClick={(e) => { e.stopPropagation(); setConsoleTab('testcase'); setConsoleOpen(true); }}
-                                    style={{ fontSize: '13px', fontWeight: '600', color: consoleTab === 'testcase' ? '#fff' : '#8a8a8a' }}
+                                    style={{ fontSize: '13px', fontWeight: '600', color: consoleTab === 'testcase' ? '#fff' : '#8a8a8a', cursor: 'pointer' }}
                                 >
                                     Console
                                 </span>
                                 {results && (
                                     <span
                                         onClick={(e) => { e.stopPropagation(); setConsoleTab('result'); setConsoleOpen(true); }}
-                                        style={{ fontSize: '13px', fontWeight: '600', color: consoleTab === 'result' ? '#fff' : '#8a8a8a' }}
+                                        style={{ fontSize: '13px', fontWeight: '600', color: consoleTab === 'result' ? '#fff' : '#8a8a8a', cursor: 'pointer' }}
                                     >
                                         Result
                                     </span>
@@ -188,7 +212,7 @@ export default function ChallengeSolverPage() {
                         </div>
 
                         {consoleOpen && (
-                            <div className="solver-console-body thin-scrollbar">
+                            <div className="solver-console-body">
                                 {consoleTab === 'testcase' ? (
                                     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                                         <div style={{ display: 'flex', gap: '8px' }}>
@@ -248,7 +272,7 @@ export default function ChallengeSolverPage() {
                         )}
 
                         <div className="solver-console-footer">
-                            <span style={{ fontSize: '12px', color: '#8a8a8a' }}>Console <i className="fas fa-chevron-up" style={{ fontSize: '8px' }}></i></span>
+                            <span style={{ fontSize: '12px', color: '#8a8a8a' }}>Console</span>
                             <div style={{ display: 'flex', gap: '8px' }}>
                                 <button onClick={handleRun} disabled={running} className="solver-btn btn-run">
                                     {running ? 'Running...' : 'Run'}
