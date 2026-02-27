@@ -81,11 +81,12 @@ export default function ChallengeSolverPage() {
                     if (!passed) passedAll = false;
                 }
             }
-            setResults({ passed: passedAll, results: evaluationResults });
-            return passedAll;
+            const runResults = { passed: passedAll, results: evaluationResults };
+            setResults(runResults);
+            return runResults;
         } catch (err) {
             console.error(err);
-            return false;
+            return { passed: false, results: [] };
         } finally {
             setRunning(false);
         }
@@ -93,16 +94,23 @@ export default function ChallengeSolverPage() {
 
     const handleSubmit = async () => {
         setSubmitted(true);
-        const passedAll = await handleRun();
-        if (passedAll && user && challenge) {
+        const runResults = await handleRun();
+        if (user && challenge) {
             try {
-                await api.post(`challenges/${id}/submit`, { language, code });
-                setShowSuccess(true);
+                // Send local results to the backend so it records the submission correctly
+                await api.post(`challenges/${id}/submit`, {
+                    language,
+                    code,
+                    localResults: runResults
+                });
+                if (runResults.passed) {
+                    setShowSuccess(true);
+                }
             } catch (err) {
                 console.error('Submit error:', err);
             }
-        } else if (passedAll && !user) {
-            // Still show success even if not logged in
+        } else if (runResults.passed && !user) {
+            // Show success even if not logged in (but not recorded)
             setShowSuccess(true);
         }
     };
