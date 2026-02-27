@@ -185,11 +185,24 @@ router.post('/:id/submit', authenticate, async (req, res) => {
         });
 
         if (passedAll) {
-            const user = await User.findByPk(req.user.id);
-            if (user) {
-                user.xp += challenge.xpReward;
-                await user.save();
-                console.log(`Awarded ${challenge.xpReward} XP to user ${user.name}`);
+            // Check if user already passed this challenge previously
+            const alreadyPassed = await ChallengeSubmission.findOne({
+                where: {
+                    user_id: req.user.id,
+                    challenge_id: challenge.id,
+                    status: 'passed'
+                }
+            });
+
+            if (!alreadyPassed) {
+                const user = await User.findByPk(req.user.id);
+                if (user) {
+                    user.xp += challenge.xpReward;
+                    await user.save();
+                    console.log(`Awarded ${challenge.xpReward} XP to user ${user.name}`);
+                }
+            } else {
+                console.log(`User ${req.user.id} already completed challenge ${challenge.id}, no XP awarded.`);
             }
         }
 
