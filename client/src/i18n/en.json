@@ -7,6 +7,8 @@
         "register": "Sign Up",
         "logout": "Sign Out",
         "profile": "Profile",
+        "challenges": "Challenges",
+        "leaderboard": "Leaderboard",
         "langLabel": "EN"
     },
     "hero": {
@@ -194,14 +196,55 @@
         "master": "Master"
     },
     "catalog": {
-        "title": "Available Courses",
-        "search": "Search courses...",
-        "all": "All",
-        "programming": "Programming",
-        "math": "Mathematics",
-        "science": "Science",
-        "language": "Languages",
-        "noResults": "No courses found"
+        "title": "Course Catalog",
+        "subtitle": "Start your programming journey",
+        "python": {
+            "title": "Introduction to Python",
+            "desc": "Learn Python from scratch — variables, control flow, functions, OOP, and more",
+            "category": "Programming",
+            "badge": "Free"
+        },
+        "labels": {
+            "chapters": "Chapters",
+            "sections": "Sections",
+            "activities": "Activities",
+            "instructor": "Instructor"
+        },
+        "startBtn": "Start Learning →",
+        "comingSoon": "More courses coming soon..."
+    },
+    "landing": {
+        "subjectOverview": "Learn Programming For Free",
+        "exploreSubtitle": "Explore chapters and practice problems.",
+        "cta": {
+            "buyLaunch": "Start Learning",
+            "discussion": "Start Discussion"
+        },
+        "features": {},
+        "chapters": {
+            "curriculumTitle": "Available Courses",
+            "curriculumSubtitle": "Explore our interactive computer science curriculum.",
+            "list": [
+                "Python (Available Now)",
+                "C++ (Coming Soon)",
+                "C (Coming Soon)",
+                "C# (Coming Soon)",
+                "Java (Coming Soon)",
+                "JavaScript (Coming Soon)"
+            ]
+        },
+        "footer": {
+            "chapters": "Chapters",
+            "reviews": "Reviews",
+            "faq": "FAQ",
+            "guides": "Guides",
+            "contact": "Contact",
+            "privacy": "Privacy Policy",
+            "about": "About",
+            "careers": "Careers",
+            "webapp": "Web App",
+            "education": "Education"
+        }
     },
     "teacher": {
         "dashboard": "Instructor Dashboard",

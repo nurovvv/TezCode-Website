@@ -1,0 +1,129 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id               String   @id @default(cuid())
+  email            String   @unique
+  name             String?
+  passwordHash     String?
+  role             Role     @default(STUDENT)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  enrollments      Enrollment[]
+  submissions      ActivitySubmission[]
+  progress         SectionProgress[]
+  instructorCourses Course[] @relation("InstructorCourses")
+}
+
+enum Role {
+  STUDENT
+  INSTRUCTOR
+  ADMIN
+}
+
+model Course {
+  id            String   @id @default(cuid())
+  title         String
+  description   String?
+  subject       String
+  slug          String   @unique
+  coverImage    String?
+  published     Boolean  @default(false)
+  instructorId  String
+  instructor    User     @relation("InstructorCourses", fields: [instructorId], references: [id])
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  chapters      Chapter[]
+  enrollments   Enrollment[]
+}
+
+model Chapter {
+  id         String   @id @default(cuid())
+  title      String
+  order      Int
+  courseId   String
+  course     Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  sections   Section[]
+}
+
+model Section {
+  id          String   @id @default(cuid())
+  title       String
+  order       Int
+  chapterId   String
+  chapter     Chapter  @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+  contentJson Json
+
+  activities  Activity[]
+  progress    SectionProgress[]
+}
+
+model Activity {
+  id            String       @id @default(cuid())
+  type          ActivityType
+  order         Int
+  sectionId     String
+  section       Section      @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+  configJson    Json
+  maxPoints     Int          @default(1)
+
+  submissions   ActivitySubmission[]
+}
+
+enum ActivityType {
+  MULTIPLE_CHOICE
+  SHORT_ANSWER
+  CODING
+  DRAG_AND_DROP
+  FILL_IN_BLANK
+  PARTICIPATION
+}
+
+model ActivitySubmission {
+  id           String   @id @default(cuid())
+  userId       String
+  activityId   String
+  user         User     @relation(fields: [userId], references: [id])
+  activity     Activity @relation(fields: [activityId], references: [id])
+  answerJson   Json
+  score        Float
+  maxScore     Float
+  attempt      Int      @default(1)
+  submittedAt  DateTime @default(now())
+
+  @@index([userId, activityId])
+}
+
+model SectionProgress {
+  id          String   @id @default(cuid())
+  userId      String
+  sectionId   String
+  user        User     @relation(fields: [userId], references: [id])
+  section     Section  @relation(fields: [sectionId], references: [id])
+  completed   Boolean  @default(false)
+  score       Float    @default(0)
+  lastViewed  DateTime @default(now())
+
+  @@unique([userId, sectionId])
+}
+
+model Enrollment {
+  id         String   @id @default(cuid())
+  userId     String
+  courseId   String
+  user       User     @relation(fields: [userId], references: [id])
+  course     Course   @relation(fields: [courseId], references: [id])
+  enrolledAt DateTime @default(now())
+  accessCode String?
+
+  @@unique([userId, courseId])
+}

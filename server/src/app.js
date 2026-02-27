@@ -10,6 +10,13 @@ const app = express();
 app.use(cors());
 app.use(express.json({ limit: '10mb' }));
 
+// Static files for uploads
+const uploadsDir = path.join(__dirname, '../public/uploads');
+if (!fs.existsSync(uploadsDir)) {
+    fs.mkdirSync(uploadsDir, { recursive: true });
+}
+app.use('/uploads', express.static(path.join(__dirname, '../public/uploads')));
+
 // Health check
 app.get('/api/health', (req, res) => {
     res.json({ status: 'ok', db: 'sqlite', timestamp: new Date().toISOString() });
@@ -26,6 +33,14 @@ app.use('/api/progress', (req, res, next) => {
     require('./routes/progress')(req, res, next);
 });
 app.use('/api/run-python', require('./routes/runPython'));
+
+app.use('/api/challenges', (req, res, next) => {
+    require('./routes/challenges')(req, res, next);
+});
+app.use('/api/leaderboard', (req, res, next) => {
+    require('./routes/leaderboard')(req, res, next);
+});
+app.use('/api/dashboard', require('./routes/dashboard'));
 
 // Error handler
 app.use((err, req, res, next) => {

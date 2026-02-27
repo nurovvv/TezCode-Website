@@ -7,6 +7,8 @@
     "register": "Бақайдгирӣ",
     "logout": "Баромадан",
     "profile": "Профил",
+    "challenges": "Санҷишҳо",
+    "leaderboard": "Рейтинг",
     "langLabel": "ТҶ"
   },
   "hero": {
@@ -194,14 +196,59 @@
     "master": "Устод"
   },
   "catalog": {
-    "title": "Курсҳои мавҷуда",
-    "search": "Ҷустуҷӯ...",
-    "all": "Ҳама",
-    "programming": "Барноманависӣ",
-    "math": "Математика",
-    "science": "Илмҳои табиӣ",
-    "language": "Забонҳо",
-    "noResults": "Курсе ёфт нашуд"
+    "title": "Каталоги курсҳо",
+    "subtitle": "Сафари худро дар барномасозӣ оғоз кунед",
+    "python": {
+      "title": "Муқаддима ба Python",
+      "desc": "Python-ро аз сифр омӯзед — тағйирёбандаҳо, идоракунии ҷараён, функсияҳо, OOP ва ғайра",
+      "category": "Барномасозӣ",
+      "badge": "Ройгон"
+    },
+    "labels": {
+      "chapters": "Бобҳо",
+      "sections": "Қисмҳо",
+      "activities": "Супоришҳо",
+      "instructor": "Омӯзгор"
+    },
+    "startBtn": "Оғози омӯзиш →",
+    "comingSoon": "Курсҳои нав ба наздикӣ..."
+  },
+  "landing": {
+    "subjectOverview": "Омӯзиши барномасозӣ ройгон",
+    "exploreSubtitle": "Бобҳоро омӯзед ва масъалаҳоро ҳал кунед.",
+    "cta": {
+      "buyLaunch": "Оғози омӯзиш",
+      "discussion": "Оғози муҳокима"
+    },
+    "features": {
+      "interactive": "Мундариҷаи интерактивӣ",
+      "problemSets": "Маҷмӯи масъалаҳо",
+      "trackResults": "Натиҷаҳо"
+    },
+    "chapters": {
+      "curriculumTitle": "Курсҳои дастрас",
+      "curriculumSubtitle": "Барномаи таълимии интерактивии моро омӯзед.",
+      "list": [
+        "Python (Ҳоло дастрас аст)",
+        "C++ (Ба наздикӣ)",
+        "C (Ба наздикӣ)",
+        "C# (Ба наздикӣ)",
+        "Java (Ба наздикӣ)",
+        "JavaScript (Ба наздикӣ)"
+      ]
+    },
+    "footer": {
+      "chapters": "Бобҳо",
+      "reviews": "Тақризҳо",
+      "faq": "FAQ",
+      "guides": "Дастурҳо",
+      "contact": "Тамос",
+      "privacy": "Сиёсати махфият",
+      "about": "Дар бораи мо",
+      "careers": "Вазифаҳо",
+      "webapp": "Барномаи веб",
+      "education": "Маориф"
+    }
   },
   "teacher": {
     "dashboard": "Панели омӯзгор",

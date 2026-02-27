@@ -9,7 +9,7 @@ const LanguageContext = createContext();
 
 export function LanguageProvider({ children }) {
     const [lang, setLang] = useState(() => {
-        return localStorage.getItem('tezcode-lang') || 'en';
+        return localStorage.getItem('tezcode-lang') || 'ru';
     });
 
     const switchLang = useCallback((newLang) => {
@@ -28,7 +28,7 @@ export function LanguageProvider({ children }) {
     }, [lang]);
 
     return (
-        <LanguageContext.Provider value={{ lang, setLang: switchLang, t }}>
+        <LanguageContext.Provider value={{ lang, setLang: switchLang, language: lang, setLanguage: switchLang, t }}>
             {children}
         </LanguageContext.Provider>
     );

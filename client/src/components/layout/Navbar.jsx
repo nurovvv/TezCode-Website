@@ -5,7 +5,7 @@ import { useAuth } from '../../context/AuthContext';
 import tezcodeLogo from '../../assets/tezcode-logo.png';
 
 export default function Navbar() {
-    const { language, setLanguage } = useLanguage();
+    const { language, setLanguage, t } = useLanguage();
     const { user, logout } = useAuth();
     const navigate = useNavigate();
     const [mobileOpen, setMobileOpen] = useState(false);
@@ -61,35 +61,38 @@ export default function Navbar() {
                 maxWidth: '1100px',
                 margin: '0 auto',
                 padding: '0 24px',
-                height: '56px',
+                height: '72px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
             }}>
                 {/* Logo */}
-                <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none' }}>
-                    <img src={tezcodeLogo} alt="TezCode" style={{ height: '24px', width: 'auto' }} />
-                    <span style={{ fontSize: '20px', fontWeight: 800, color: '#1d1d1f', letterSpacing: '-0.01em' }}>TezCode</span>
+                <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '16px', textDecoration: 'none' }}>
+                    <img src={tezcodeLogo} alt="TezCode" style={{ height: '44px', width: 'auto' }} />
+                    <span style={{ fontSize: '28px', fontWeight: 800, color: '#1d1d1f', letterSpacing: '-0.03em' }}>TezCode</span>
                 </Link>
 
                 {/* Right Side */}
                 <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-                    <Link to="/catalog" style={linkStyle}>Courses</Link>
+                    <Link to="/catalog" style={linkStyle}>{t('nav.catalog')}</Link>
+                    <Link to="/challenges" style={linkStyle}>{t('nav.challenges')}</Link>
+                    <Link to="/leaderboard" style={linkStyle}>{t('nav.leaderboard')}</Link>
 
                     {user ? (
                         <>
-                            <Link to="/dashboard" style={linkStyle}>Dashboard</Link>
+                            <Link to="/dashboard" style={linkStyle}>{t('nav.dashboard')}</Link>
+                            <Link to="/profile" style={linkStyle}>{t('nav.profile')}</Link>
                             <button
                                 onClick={handleLogout}
                                 style={{ ...linkStyle, background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'inherit', padding: 0 }}
                             >
-                                Sign Out
+                                {t('nav.logout')}
                             </button>
                         </>
                     ) : (
                         <>
-                            <Link to="/login" style={linkStyle}>Sign In</Link>
-                            <Link to="/register" style={signUpStyle}>Sign Up</Link>
+                            <Link to="/login" style={linkStyle}>{t('nav.login')}</Link>
+                            <Link to="/register" style={signUpStyle}>{t('nav.register')}</Link>
                         </>
                     )}
 

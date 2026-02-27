@@ -5,8 +5,40 @@ const crypto = require('crypto');
 const config = require('../config/env');
 const { User, RefreshToken } = require('../models');
 const { authenticate } = require('../middleware/auth');
+const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
 
 const router = express.Router();
+
+// Multer configuration
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        const dir = path.join(__dirname, '../../public/uploads');
+        if (!fs.existsSync(dir)) {
+            fs.mkdirSync(dir, { recursive: true });
+        }
+        cb(null, dir);
+    },
+    filename: (req, file, cb) => {
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+        cb(null, 'avatar-' + req.user.id + '-' + uniqueSuffix + path.extname(file.originalname));
+    }
+});
+
+const upload = multer({
+    storage: storage,
+    limits: { fileSize: 5 * 1024 * 1024 }, // 5MB
+    fileFilter: (req, file, cb) => {
+        const allowedTypes = /jpeg|jpg|png|webp/;
+        const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());
+        const mimetype = allowedTypes.test(file.mimetype);
+        if (extname && mimetype) {
+            return cb(null, true);
+        }
+        cb(new Error('Only JPEG, PNG and WebP images are allowed'));
+    }
+});
 
 // Register
 router.post('/register', async (req, res) => {
@@ -50,6 +82,11 @@ router.post('/register', async (req, res) => {
                 name: user.name,
                 email: user.email,
                 role: user.role,
+                avatarUrl: user.avatarUrl,
+                githubUrl: user.githubUrl,
+                linkedinUrl: user.linkedinUrl,
+                twitterUrl: user.twitterUrl,
+                instagramUrl: user.instagramUrl,
                 xp: user.xp,
                 level: user.level,
             },
@@ -99,6 +136,10 @@ router.post('/login', async (req, res) => {
                 name: user.name,
                 email: user.email,
                 role: user.role,
+                avatarUrl: user.avatarUrl,
+                githubUrl: user.githubUrl,
+                linkedinUrl: user.linkedinUrl,
+                twitterUrl: user.twitterUrl,
                 xp: user.xp,
                 level: user.level,
             },
@@ -143,7 +184,7 @@ router.post('/refresh', async (req, res) => {
 router.get('/me', authenticate, async (req, res) => {
     try {
         const user = await User.findByPk(req.user.id, {
-            attributes: ['id', 'name', 'email', 'role', 'xp', 'level', 'avatarUrl', 'langPreference'],
+            attributes: ['id', 'name', 'email', 'role', 'xp', 'level', 'avatarUrl', 'githubUrl', 'linkedinUrl', 'twitterUrl', 'instagramUrl', 'langPreference'],
         });
 
         if (!user) {
@@ -154,6 +195,74 @@ router.get('/me', authenticate, async (req, res) => {
     } catch (err) {
         console.error('Get user error:', err);
         res.status(500).json({ message: 'Server error' });
+    }
+});
+
+// Update profile
+router.put('/profile', authenticate, async (req, res) => {
+    try {
+        const { name, avatarUrl, githubUrl, linkedinUrl, twitterUrl, instagramUrl } = req.body;
+        const user = await User.findByPk(req.user.id);
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        if (name) user.name = name;
+        if (avatarUrl !== undefined) user.avatarUrl = avatarUrl;
+        if (githubUrl !== undefined) user.githubUrl = githubUrl;
+        if (linkedinUrl !== undefined) user.linkedinUrl = linkedinUrl;
+        if (twitterUrl !== undefined) user.twitterUrl = twitterUrl;
+        if (instagramUrl !== undefined) user.instagramUrl = instagramUrl;
+
+        await user.save();
+
+        res.json({
+            message: 'Profile updated successfully',
+            user: {
+                id: user.id,
+                name: user.name,
+                email: user.email,
+                avatarUrl: user.avatarUrl,
+                githubUrl: user.githubUrl,
+                linkedinUrl: user.linkedinUrl,
+                twitterUrl: user.twitterUrl,
+                xp: user.xp,
+                level: user.level,
+            }
+        });
+    } catch (err) {
+        console.error('Update profile error:', err);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
+// Upload avatar
+router.post('/upload-avatar', authenticate, upload.single('avatar'), async (req, res) => {
+    try {
+        if (!req.file) {
+            return res.status(400).json({ message: 'No file uploaded' });
+        }
+
+        const user = await User.findByPk(req.user.id);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        // Generate URL (assuming the server is running on a port and /uploads is static)
+        // In a real production app, you might use a cloud storage provider
+        const avatarUrl = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
+
+        user.avatarUrl = avatarUrl;
+        await user.save();
+
+        res.json({
+            message: 'Avatar uploaded successfully',
+            avatarUrl: avatarUrl
+        });
+    } catch (err) {
+        console.error('Avatar upload error:', err);
+        res.status(500).json({ message: err.message || 'Server error' });
     }
 });
 

@@ -19,7 +19,7 @@ export function AuthProvider({ children }) {
     const fetchUser = async (token) => {
         try {
             api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-            const res = await api.get('/api/auth/me');
+            const res = await api.get('/auth/me');
             setUser(res.data.user);
         } catch (err) {
             localStorage.removeItem('tezcode-token');
@@ -31,7 +31,7 @@ export function AuthProvider({ children }) {
     };
 
     const login = useCallback(async (email, password) => {
-        const res = await api.post('/api/auth/login', { email, password });
+        const res = await api.post('/auth/login', { email, password });
         const { accessToken, refreshToken, user: userData } = res.data;
         localStorage.setItem('tezcode-token', accessToken);
         localStorage.setItem('tezcode-refresh', refreshToken);
@@ -41,7 +41,7 @@ export function AuthProvider({ children }) {
     }, []);
 
     const register = useCallback(async (name, email, password, role = 'student') => {
-        const res = await api.post('/api/auth/register', { name, email, password, role });
+        const res = await api.post('/auth/register', { name, email, password, role });
         const { accessToken, refreshToken, user: userData } = res.data;
         localStorage.setItem('tezcode-token', accessToken);
         localStorage.setItem('tezcode-refresh', refreshToken);
@@ -61,7 +61,7 @@ export function AuthProvider({ children }) {
         try {
             const refreshToken = localStorage.getItem('tezcode-refresh');
             if (!refreshToken) throw new Error('No refresh token');
-            const res = await api.post('/api/auth/refresh', { refreshToken });
+            const res = await api.post('/auth/refresh', { refreshToken });
             const { accessToken } = res.data;
             localStorage.setItem('tezcode-token', accessToken);
             api.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
@@ -72,8 +72,12 @@ export function AuthProvider({ children }) {
         }
     }, [logout]);
 
+    const updateUser = useCallback((userData) => {
+        setUser(prev => ({ ...prev, ...userData }));
+    }, []);
+
     return (
-        <AuthContext.Provider value={{ user, loading, login, register, logout, refreshAccessToken }}>
+        <AuthContext.Provider value={{ user, loading, login, register, logout, refreshAccessToken, updateUser }}>
             {children}
         </AuthContext.Provider>
     );

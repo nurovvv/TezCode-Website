@@ -30,6 +30,22 @@ const User = sequelize.define('User', {
         type: DataTypes.STRING,
         field: 'avatar_url',
     },
+    githubUrl: {
+        type: DataTypes.STRING,
+        field: 'github_url',
+    },
+    linkedinUrl: {
+        type: DataTypes.STRING,
+        field: 'linkedin_url',
+    },
+    twitterUrl: {
+        type: DataTypes.STRING,
+        field: 'twitter_url',
+    },
+    instagramUrl: {
+        type: DataTypes.STRING,
+        field: 'instagram_url',
+    },
     xp: {
         type: DataTypes.INTEGER,
         defaultValue: 0,
@@ -42,6 +58,14 @@ const User = sequelize.define('User', {
         type: DataTypes.STRING,
         defaultValue: 'en',
         field: 'lang_preference',
+    },
+    streak: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0,
+    },
+    lastActivityAt: {
+        type: DataTypes.DATE,
+        field: 'last_activity_at',
     },
 }, {
     tableName: 'users',
@@ -109,6 +133,7 @@ const Activity = sequelize.define('Activity', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     type: { type: DataTypes.STRING },
     dataJson: { type: DataTypes.TEXT, field: 'data_json' },
+    slug: { type: DataTypes.STRING, unique: true },
     xpReward: { type: DataTypes.INTEGER, defaultValue: 10, field: 'xp_reward' },
     orderNum: { type: DataTypes.INTEGER, defaultValue: 0, field: 'order_num' },
 }, { tableName: 'activities', timestamps: true, underscored: true });
@@ -124,6 +149,25 @@ const Enrollment = sequelize.define('Enrollment', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     enrolledAt: { type: DataTypes.DATE, defaultValue: DataTypes.NOW, field: 'enrolled_at' },
 }, { tableName: 'enrollments', timestamps: true, underscored: true });
+
+// Challenge models
+const Challenge = sequelize.define('Challenge', {
+    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+    title: { type: DataTypes.STRING, allowNull: false },
+    description: { type: DataTypes.TEXT, allowNull: false },
+    difficulty: { type: DataTypes.STRING, defaultValue: 'easy' },
+    xpReward: { type: DataTypes.INTEGER, defaultValue: 10, field: 'xp_reward' },
+    testCases: { type: DataTypes.JSON, field: 'test_cases' },
+    starterCode: { type: DataTypes.TEXT, field: 'starter_code' },
+}, { tableName: 'challenges', timestamps: true, underscored: true });
+
+const ChallengeSubmission = sequelize.define('ChallengeSubmission', {
+    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+    language: { type: DataTypes.STRING, allowNull: false },
+    code: { type: DataTypes.TEXT, allowNull: false },
+    status: { type: DataTypes.STRING, defaultValue: 'failed' },
+    completedAt: { type: DataTypes.DATE, field: 'completed_at' },
+}, { tableName: 'challenge_submissions', timestamps: true, underscored: true });
 
 // Associations
 User.hasMany(RefreshToken, { foreignKey: 'user_id', onDelete: 'CASCADE' });
@@ -148,6 +192,16 @@ UserProgress.belongsTo(Activity, { foreignKey: 'activity_id' });
 
 User.belongsToMany(Course, { through: Enrollment, foreignKey: 'user_id' });
 Course.belongsToMany(User, { through: Enrollment, foreignKey: 'course_id' });
+Enrollment.belongsTo(User, { foreignKey: 'user_id' });
+Enrollment.belongsTo(Course, { foreignKey: 'course_id' });
+User.hasMany(Enrollment, { foreignKey: 'user_id' });
+Course.hasMany(Enrollment, { foreignKey: 'course_id' });
+
+User.hasMany(ChallengeSubmission, { foreignKey: 'user_id' });
+ChallengeSubmission.belongsTo(User, { foreignKey: 'user_id' });
+
+Challenge.hasMany(ChallengeSubmission, { foreignKey: 'challenge_id', onDelete: 'CASCADE' });
+ChallengeSubmission.belongsTo(Challenge, { foreignKey: 'challenge_id' });
 
 module.exports = {
     User,
@@ -158,5 +212,7 @@ module.exports = {
     Activity,
     UserProgress,
     Enrollment,
+    Challenge,
+    ChallengeSubmission,
     sequelize,
 };

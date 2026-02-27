@@ -15,6 +15,10 @@ import ChallengePage from './pages/ChallengePage';
 import StudentDashboard from './pages/StudentDashboard';
 import TeacherDashboard from './pages/TeacherDashboard';
 import AdminDashboard from './pages/AdminDashboard';
+import ChallengesPage from './pages/ChallengesPage';
+import ChallengeSolverPage from './pages/ChallengeSolverPage';
+import LeaderboardPage from './pages/LeaderboardPage';
+import ProfilePage from './pages/ProfilePage';
 
 import './index.css';
 
@@ -22,13 +26,17 @@ function App() {
   return (
     <LanguageProvider>
       <AuthProvider>
-        <BrowserRouter>
+        <BrowserRouter basename="/TezCode-Website/">
           <Routes>
             {/* Public routes with navbar + footer */}
             <Route element={<MainLayout />}>
               <Route path="/" element={<LandingPage />} />
               <Route path="/catalog" element={<CatalogPage />} />
               <Route path="/challenge" element={<ChallengePage />} />
+              <Route path="/challenges" element={<ChallengesPage />} />
+              <Route path="/challenges/:id" element={<ChallengeSolverPage />} />
+              <Route path="/leaderboard" element={<LeaderboardPage />} />
+              <Route path="/profile" element={<ProfilePage />} />
             </Route>
 
             {/* Auth pages (standalone) */}
@@ -61,10 +69,10 @@ function App() {
                       </a>
 
                       <div className="hidden md:flex" style={{ gap: '20px', fontSize: '15px', fontWeight: '500' }}>
-                        <a href="/catalog" style={{ color: 'white', textDecoration: 'none' }}>Tutorials</a>
-                        <a href="#" style={{ color: 'white', textDecoration: 'none' }}>Exercises</a>
-                        <a href="#" style={{ color: 'white', textDecoration: 'none' }}>Certificates</a>
-                        <a href="#" style={{ color: 'white', textDecoration: 'none' }}>Services</a>
+                        <Link to="/catalog" style={{ color: 'white', textDecoration: 'none' }}>Tutorials</Link>
+                        <Link to="/challenges" style={{ color: 'white', textDecoration: 'none' }}>Exercises</Link>
+                        <Link to="/leaderboard" style={{ color: 'white', textDecoration: 'none' }}>Leaderboard</Link>
+                        <Link to="#" style={{ color: 'white', textDecoration: 'none' }}>Certificates</Link>
                       </div>
                     </div>
 
