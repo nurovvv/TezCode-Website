@@ -55,6 +55,7 @@ export default function ChallengeSolverPage() {
     const [showSuccess, setShowSuccess] = useState(false);
     const [submissions, setSubmissions] = useState([]);
     const [loadingSubmissions, setLoadingSubmissions] = useState(false);
+    const [expandedSubmission, setExpandedSubmission] = useState(null);
 
     useEffect(() => {
         api.get(`challenges/${id}`)
@@ -311,43 +312,99 @@ export default function ChallengeSolverPage() {
                                                 const date = new Date(sub.createdAt);
                                                 const timeAgo = getTimeAgo(date);
                                                 const passed = sub.status === 'passed';
+                                                const isExpanded = expandedSubmission === sub.id;
                                                 return (
-                                                    <div
-                                                        key={sub.id}
-                                                        style={{
-                                                            display: 'flex',
-                                                            alignItems: 'center',
-                                                            justifyContent: 'space-between',
-                                                            padding: '14px 16px',
-                                                            background: '#262626',
-                                                            borderRadius: '8px',
-                                                            border: '1px solid #333'
-                                                        }}
-                                                    >
-                                                        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                                                    <div key={sub.id}>
+                                                        <div
+                                                            onClick={() => setExpandedSubmission(isExpanded ? null : sub.id)}
+                                                            style={{
+                                                                display: 'flex',
+                                                                alignItems: 'center',
+                                                                justifyContent: 'space-between',
+                                                                padding: '14px 16px',
+                                                                background: isExpanded ? '#2a2a2a' : '#262626',
+                                                                borderRadius: isExpanded ? '8px 8px 0 0' : '8px',
+                                                                border: '1px solid #333',
+                                                                borderBottom: isExpanded ? 'none' : '1px solid #333',
+                                                                cursor: 'pointer',
+                                                                transition: 'background 0.15s ease'
+                                                            }}
+                                                        >
+                                                            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                                                                <div style={{
+                                                                    width: '8px', height: '8px', borderRadius: '50%',
+                                                                    background: passed ? '#00af9b' : '#ff2d55'
+                                                                }} />
+                                                                <span style={{
+                                                                    fontSize: '14px', fontWeight: '700',
+                                                                    color: passed ? '#00af9b' : '#ff2d55'
+                                                                }}>
+                                                                    {passed ? 'Accepted' : 'Wrong Answer'}
+                                                                </span>
+                                                            </div>
+                                                            <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                                                                <span style={{
+                                                                    fontSize: '12px', color: '#666',
+                                                                    background: '#1e1e1e', padding: '4px 10px',
+                                                                    borderRadius: '4px', fontWeight: '600', textTransform: 'capitalize'
+                                                                }}>
+                                                                    {sub.language}
+                                                                </span>
+                                                                <span style={{ fontSize: '12px', color: '#666' }}>
+                                                                    {timeAgo}
+                                                                </span>
+                                                                <i className={`fas fa-chevron-${isExpanded ? 'up' : 'down'}`}
+                                                                    style={{ fontSize: '10px', color: '#555' }} />
+                                                            </div>
+                                                        </div>
+                                                        {isExpanded && (
                                                             <div style={{
-                                                                width: '8px', height: '8px', borderRadius: '50%',
-                                                                background: passed ? '#00af9b' : '#ff2d55'
-                                                            }} />
-                                                            <span style={{
-                                                                fontSize: '14px', fontWeight: '700',
-                                                                color: passed ? '#00af9b' : '#ff2d55'
+                                                                background: '#1a1a1a',
+                                                                border: '1px solid #333',
+                                                                borderTop: 'none',
+                                                                borderRadius: '0 0 8px 8px',
+                                                                padding: '16px'
                                                             }}>
-                                                                {passed ? 'Accepted' : 'Wrong Answer'}
-                                                            </span>
-                                                        </div>
-                                                        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-                                                            <span style={{
-                                                                fontSize: '12px', color: '#666',
-                                                                background: '#1e1e1e', padding: '4px 10px',
-                                                                borderRadius: '4px', fontWeight: '600', textTransform: 'capitalize'
-                                                            }}>
-                                                                {sub.language}
-                                                            </span>
-                                                            <span style={{ fontSize: '12px', color: '#666' }}>
-                                                                {timeAgo}
-                                                            </span>
-                                                        </div>
+                                                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                                                                    <span style={{ fontSize: '11px', fontWeight: '700', color: '#555', textTransform: 'uppercase' }}>Submitted Code</span>
+                                                                    <button
+                                                                        onClick={(e) => {
+                                                                            e.stopPropagation();
+                                                                            setCode(sub.code);
+                                                                            setLanguage(sub.language);
+                                                                            setActiveTab('question');
+                                                                        }}
+                                                                        style={{
+                                                                            background: '#04AA6D',
+                                                                            color: '#fff',
+                                                                            border: 'none',
+                                                                            padding: '6px 14px',
+                                                                            borderRadius: '6px',
+                                                                            fontSize: '12px',
+                                                                            fontWeight: '600',
+                                                                            cursor: 'pointer'
+                                                                        }}
+                                                                    >
+                                                                        Load this code
+                                                                    </button>
+                                                                </div>
+                                                                <pre style={{
+                                                                    background: '#0d0d0d',
+                                                                    padding: '16px',
+                                                                    borderRadius: '6px',
+                                                                    fontSize: '13px',
+                                                                    fontFamily: "'Fira Code', 'Cascadia Code', Consolas, monospace",
+                                                                    color: '#d4d4d4',
+                                                                    overflowX: 'auto',
+                                                                    lineHeight: '1.6',
+                                                                    margin: 0,
+                                                                    whiteSpace: 'pre-wrap',
+                                                                    wordBreak: 'break-word'
+                                                                }}>
+                                                                    {sub.code}
+                                                                </pre>
+                                                            </div>
+                                                        )}
                                                     </div>
                                                 );
                                             })}

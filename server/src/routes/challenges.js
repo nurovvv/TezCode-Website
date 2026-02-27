@@ -176,7 +176,7 @@ router.get('/:id/submissions', authenticate, async (req, res) => {
                 user_id: req.user.id,
                 challenge_id: req.params.id
             },
-            attributes: ['id', 'language', 'status', 'completedAt', 'createdAt'],
+            attributes: ['id', 'language', 'code', 'status', 'completedAt', 'createdAt'],
             order: [['createdAt', 'DESC']]
         });
         res.json(submissions);
