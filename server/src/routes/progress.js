@@ -1,12 +1,15 @@
 const express = require('express');
 const { UserProgress, Activity, User } = require('../models');
-const { authenticate } = require('../middleware/auth');
+const { authenticate, authenticateOptional } = require('../middleware/auth');
 
 const router = express.Router();
 
 // Submit activity progress
-router.post('/', authenticate, async (req, res) => {
+router.post('/', authenticateOptional, async (req, res) => {
     try {
+        if (!req.user) {
+            return res.json({ message: 'Progress not saved (Guest)' });
+        }
         const { activityId, activitySlug, completed, score } = req.body;
         const finalSlug = activitySlug || activityId;
 

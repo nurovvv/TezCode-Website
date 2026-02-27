@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useAuth } from '../context/AuthContext';
 import api from '../services/api';
 import { runCode } from '../services/codeRunner';
 import CodeEditor from '../components/CodeEditor';
@@ -2891,6 +2892,7 @@ function ExerciseQuiz({ exercise }) {
 export default function CourseReaderPage() {
     const { id } = useParams();
     const navigate = useNavigate();
+    const { user } = useAuth();
     const [currentIdx, setCurrentIdx] = useState(0);
     const [sidebarOpen, setSidebarOpen] = useState(true);
     const [expandedChapters, setExpandedChapters] = useState(new Set());
@@ -2901,13 +2903,15 @@ export default function CourseReaderPage() {
 
     useEffect(() => {
         // 1. Automatically enroll the user in this course when they open it
-        api.post(`/courses/${id}/enroll`).catch(err => {
-            console.error('Enrollment failed:', err);
-        });
+        if (user) {
+            api.post(`/courses/${id}/enroll`).catch(err => {
+                console.error('Enrollment failed:', err);
+            });
+        }
 
         // 2. Sync localStorage progress to backend on mount
         const syncLocalProgress = async () => {
-            if (completed.size > 0) {
+            if (user && completed.size > 0) {
                 console.log('Syncing global progress from localStorage...');
                 for (const sid of completed) {
                     try {
@@ -2919,7 +2923,7 @@ export default function CourseReaderPage() {
             }
         };
         syncLocalProgress();
-    }, [id]);
+    }, [id, user]);
 
     const section = allSections[currentIdx];
     const progress = Math.round((completed.size / allSections.length) * 100);
@@ -2934,10 +2938,12 @@ export default function CourseReaderPage() {
         });
 
         // Sync with backend using SLUG
-        try {
-            await api.post('/progress', { activitySlug: sid, completed: true });
-        } catch (err) {
-            console.error('Failed to sync progress:', err);
+        if (user) {
+            try {
+                await api.post('/progress', { activitySlug: sid, completed: true });
+            } catch (err) {
+                console.error('Failed to sync progress:', err);
+            }
         }
     };
 

@@ -1,6 +1,6 @@
 const express = require('express');
 const { Course, Chapter, Section, Activity, Enrollment, User } = require('../models');
-const { authenticate, authorize } = require('../middleware/auth');
+const { authenticate, authenticateOptional, authorize } = require('../middleware/auth');
 
 const router = express.Router();
 
@@ -72,8 +72,11 @@ router.post('/', authenticate, authorize('teacher', 'admin'), async (req, res) =
 });
 
 // Enroll in course
-router.post('/:id/enroll', authenticate, async (req, res) => {
+router.post('/:id/enroll', authenticateOptional, async (req, res) => {
     try {
+        if (!req.user) {
+            return res.json({ enrolled: true, guest: true });
+        }
         const [enrollment, created] = await Enrollment.findOrCreate({
             where: { user_id: req.user.id, course_id: req.params.id },
         });
