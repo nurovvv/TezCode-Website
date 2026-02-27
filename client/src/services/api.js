@@ -8,7 +8,7 @@ if (!VITE_API_URL && !import.meta.env.DEV) {
     console.warn('[API] VITE_API_BASE_URL is not set! API calls will likely fail on static host.');
 }
 
-const API_BASE_URL = VITE_API_URL || (import.meta.env.DEV ? '/api/' : '/api/');
+const API_BASE_URL = VITE_API_URL || (import.meta.env.DEV ? '/api/' : 'https://tezcode-backend.onrender.com/api/');
 
 const api = axios.create({
     baseURL: API_BASE_URL,
