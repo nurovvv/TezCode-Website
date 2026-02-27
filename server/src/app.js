@@ -62,10 +62,25 @@ async function start() {
         }
 
         // Import models to connect & sync
-        const { sequelize } = require('./models');
+        const { sequelize, Challenge, Course } = require('./models');
         await sequelize.authenticate();
         await sequelize.sync(); // Creates tables if they don't exist
         console.log('✅ SQLite database connected & synced');
+
+        // Automated production seeding
+        const challengeCount = await Challenge.count();
+        if (challengeCount === 0) {
+            console.log('🌱 Database is empty. Seeding challenges...');
+            const seedChallenges = require('./seed_challenges');
+            await seedChallenges();
+        }
+
+        const courseCount = await Course.count();
+        if (courseCount === 0) {
+            console.log('🌱 Course structure missing. Synchronizing...');
+            const syncCourseStructure = require('../sync_structure');
+            await syncCourseStructure();
+        }
 
         app.listen(config.port, () => {
             console.log(`🚀 TezCode server on http://localhost:${config.port}`);

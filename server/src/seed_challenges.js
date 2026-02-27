@@ -466,8 +466,8 @@ async function seedChallenges() {
     } catch (err) {
         console.error("Error seeding challenges:", err);
     } finally {
-        sequelize.close();
+        // Do not close connection here when called from app.js
     }
 }
 
-seedChallenges();
+module.exports = seedChallenges;
