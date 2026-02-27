@@ -11,7 +11,7 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import CatalogPage from './pages/CatalogPage';
 import CourseReaderPage from './pages/CourseReaderPage';
-import ChallengePage from './pages/ChallengePage';
+
 import StudentDashboard from './pages/StudentDashboard';
 import TeacherDashboard from './pages/TeacherDashboard';
 import AdminDashboard from './pages/AdminDashboard';
@@ -32,7 +32,7 @@ function App() {
             <Route element={<MainLayout />}>
               <Route path="/" element={<LandingPage />} />
               <Route path="/catalog" element={<CatalogPage />} />
-              <Route path="/challenge" element={<ChallengePage />} />
+
               <Route path="/challenges" element={<ChallengesPage />} />
               <Route path="/leaderboard" element={<LeaderboardPage />} />
               <Route path="/profile" element={<ProfilePage />} />

@@ -1,6 +1,8 @@
 /* ═══════════════════════════════════════════════════════
-   PYODIDE SINGLETON SERVICE
+   UNIFIED CODE RUNNER SERVICE
+   Supports Python (via Pyodide) and JavaScript (v8)
    ═══════════════════════════════════════════════════════ */
+
 let pyodideInstance = null;
 let pyodideLoading = false;
 let pyodideLoadCallbacks = [];
@@ -14,7 +16,6 @@ async function getPyodide() {
     }
     pyodideLoading = true;
     try {
-        // Assume loadPyodide is available globally from script tag in index.html
         if (typeof window.loadPyodide === 'undefined') {
             throw new Error('Pyodide script not loaded. Check index.html');
         }
@@ -30,12 +31,23 @@ async function getPyodide() {
 }
 
 /**
- * Runs python code locally in the browser.
- * @param {string} code - The python code to execute.
+ * Runs code locally in the browser based on the language.
+ * @param {string} code - The code to execute.
+ * @param {string} language - 'python' or 'javascript'.
  * @param {string} stdin - Optional input for the execution.
  * @returns {Promise<{success: boolean, output: string, error: string}>}
  */
-export async function runPython(code, stdin = "") {
+export async function runCode(code, language, stdin = "") {
+    if (language === 'python') {
+        return runPython(code, stdin);
+    } else if (language === 'javascript') {
+        return runJavaScript(code, stdin);
+    } else {
+        return { success: false, output: '', error: `Unsupported language: ${language}` };
+    }
+}
+
+async function runPython(code, stdin = "") {
     try {
         const py = await getPyodide();
 
@@ -52,28 +64,50 @@ sys.stdin = io.StringIO("""${(stdin || "").replace(/"""/g, '\\"\\"\\"')}""")
             const output = py.runPython('sys.stdout.getvalue()');
             const stderr = py.runPython('sys.stderr.getvalue()');
 
-            // Only treat as failure if there's a real Python exception
-            // (Pyodide can write harmless warnings to stderr)
             const isRealError = stderr && (
                 stderr.includes('Traceback') ||
-                stderr.includes('SyntaxError') ||
-                stderr.includes('NameError') ||
-                stderr.includes('TypeError') ||
-                stderr.includes('ValueError') ||
-                stderr.includes('IndentationError') ||
-                stderr.includes('AttributeError') ||
-                stderr.includes('ImportError') ||
-                stderr.includes('ZeroDivisionError') ||
-                stderr.includes('IndexError') ||
-                stderr.includes('KeyError') ||
-                stderr.includes('RecursionError')
+                stderr.includes('Error') ||
+                stderr.includes('Exception')
             );
+
             if (isRealError) {
                 return { success: false, output: output, error: stderr };
             }
             return { success: true, output: output, error: '' };
         } catch (e) {
             return { success: false, output: '', error: e.message || String(e) };
+        }
+    } catch (err) {
+        return { success: false, output: '', error: err.message };
+    }
+}
+
+async function runJavaScript(code, stdin = "") {
+    try {
+        let output = "";
+        const originalLog = console.log;
+
+        // Mock stdin
+        const inputs = stdin.split('\n');
+        let inputIdx = 0;
+        const input = () => {
+            return inputs[inputIdx++] || "";
+        };
+
+        // Mock console.log to capture output
+        const logs = [];
+        const mockLog = (...args) => {
+            logs.push(args.map(a => typeof a === 'object' ? JSON.stringify(a) : String(a)).join(' '));
+        };
+
+        try {
+            // Simple sandbox using Function
+            const fn = new Function('input', 'console', code);
+            fn(input, { log: mockLog, error: mockLog, warn: mockLog });
+            output = logs.join('\n');
+            return { success: true, output: output, error: '' };
+        } catch (e) {
+            return { success: false, output: logs.join('\n'), error: e.message || String(e) };
         }
     } catch (err) {
         return { success: false, output: '', error: err.message };

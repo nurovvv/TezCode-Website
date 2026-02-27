@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Confetti from 'react-confetti';
 import { useAuth } from '../context/AuthContext';
 import api from '../services/api';
-import { runPython } from '../services/pythonRunner';
+import { runCode } from '../services/codeRunner';
 import CodeEditor from '../components/CodeEditor';
 import './ChallengeSolver.css';
 
@@ -90,23 +90,22 @@ export default function ChallengeSolverPage() {
             const evaluationResults = [];
             let passedAll = true;
 
-            if (language === 'python') {
-                for (const tc of challenge.testCases || []) {
-                    const res = await runPython(code, tc.input);
-                    const actualOutput = res.output ? res.output.trim() : "";
-                    const expected = tc.expectedOutput ? tc.expectedOutput.trim() : "";
-                    const hasFatalError = !res.success && !actualOutput;
-                    const passed = !hasFatalError && outputsMatch(actualOutput, expected);
+            for (const tc of challenge.testCases || []) {
+                const res = await runCode(code, language, tc.input);
+                const actualOutput = res.output ? res.output.trim() : "";
+                const expected = tc.expectedOutput ? tc.expectedOutput.trim() : "";
+                const hasFatalError = !res.success && !actualOutput;
+                const passed = !hasFatalError && outputsMatch(actualOutput, expected);
 
-                    evaluationResults.push({
-                        input: tc.input,
-                        expectedOutput: expected,
-                        actualOutput: actualOutput || (res.error ? `Error: ${res.error}` : '(no output)'),
-                        passed
-                    });
-                    if (!passed) passedAll = false;
-                }
+                evaluationResults.push({
+                    input: tc.input,
+                    expectedOutput: expected,
+                    actualOutput: actualOutput || (res.error ? `Error: ${res.error}` : '(no output)'),
+                    passed
+                });
+                if (!passed) passedAll = false;
             }
+
             const runResults = { passed: passedAll, results: evaluationResults };
             setResults(runResults);
             return runResults;
