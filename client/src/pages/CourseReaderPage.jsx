@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import api from '../services/api';
-import { runPython } from '../services/pythonRunner';
+import { runCode } from '../services/codeRunner';
 import CodeEditor from '../components/CodeEditor';
 
 function highlightPython(code) {
@@ -2516,7 +2516,7 @@ function TryItYourself({ initialCode, title, variant, staticResult }) {
 
     const handleRun = useCallback(async () => {
         setRunning(true); setOutput('');
-        const res = await runPython(code);
+        const res = await runCode(code, 'python');
         setOutput(res.success ? (res.output || '(no output)') : ('Error: ' + res.error));
         setRunning(false);
     }, [code]);
@@ -2640,7 +2640,7 @@ function CodeChallenge({ section }) {
         console.log('Running code challenge...');
         setRunning(true); setOutput('');
         try {
-            const res = await runPython(code);
+            const res = await runCode(code, 'python');
             console.log('Python execution result:', res);
             const newOutput = res.success ? (res.output || '(no output)') : ('Error: ' + res.error);
             setOutput(newOutput);
