@@ -17,6 +17,23 @@ function authenticate(req, res, next) {
     }
 }
 
+function authenticateOptional(req, res, next) {
+    const authHeader = req.headers.authorization;
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        req.user = null;
+        return next();
+    }
+
+    const token = authHeader.split(' ')[1];
+    try {
+        const decoded = jwt.verify(token, config.jwt.secret);
+        req.user = decoded;
+    } catch (err) {
+        req.user = null;
+    }
+    next();
+}
+
 function authorize(...roles) {
     return (req, res, next) => {
         if (!req.user || !roles.includes(req.user.role)) {
@@ -26,4 +43,4 @@ function authorize(...roles) {
     };
 }
 
-module.exports = { authenticate, authorize };
+module.exports = { authenticate, authenticateOptional, authorize };

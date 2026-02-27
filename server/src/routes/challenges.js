@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const { Challenge, ChallengeSubmission, User, sequelize } = require('../models');
-const { authenticate } = require('../middleware/auth');
+const { authenticate, authenticateOptional } = require('../middleware/auth');
 
 // Get all challenges
-router.get('/', authenticate, async (req, res) => {
+router.get('/', authenticateOptional, async (req, res) => {
     try {
         const challenges = await Challenge.findAll({
             attributes: ['id', 'title', 'difficulty', 'xpReward'],
@@ -19,15 +19,17 @@ router.get('/', authenticate, async (req, res) => {
         });
 
         // Check completion for current user
-        const submissions = await ChallengeSubmission.findAll({
-            where: {
-                user_id: req.user.id,
-                status: 'passed'
-            },
-            attributes: ['challenge_id']
-        });
-
-        const completedIds = new Set(submissions.map(s => s.challenge_id));
+        let completedIds = new Set();
+        if (req.user) {
+            const submissions = await ChallengeSubmission.findAll({
+                where: {
+                    user_id: req.user.id,
+                    status: 'passed'
+                },
+                attributes: ['challenge_id']
+            });
+            completedIds = new Set(submissions.map(s => s.challenge_id));
+        }
 
         const challengesWithStatus = challenges.map(c => ({
             ...c.toJSON(),
@@ -42,7 +44,7 @@ router.get('/', authenticate, async (req, res) => {
 });
 
 // Get a specific challenge
-router.get('/:id', authenticate, async (req, res) => {
+router.get('/:id', authenticateOptional, async (req, res) => {
     try {
         const challenge = await Challenge.findByPk(req.params.id);
         if (!challenge) {
@@ -50,13 +52,16 @@ router.get('/:id', authenticate, async (req, res) => {
         }
 
         // Check if user already completed this
-        const completed = await ChallengeSubmission.findOne({
-            where: {
-                user_id: req.user.id,
-                challenge_id: req.params.id,
-                status: 'passed'
-            }
-        });
+        let completed = null;
+        if (req.user) {
+            completed = await ChallengeSubmission.findOne({
+                where: {
+                    user_id: req.user.id,
+                    challenge_id: req.params.id,
+                    status: 'passed'
+                }
+            });
+        }
 
         res.json({
             ...challenge.toJSON(),
@@ -69,10 +74,10 @@ router.get('/:id', authenticate, async (req, res) => {
 });
 
 // Submit a solution
-router.post('/:id/submit', authenticate, async (req, res) => {
+router.post('/:id/submit', authenticateOptional, async (req, res) => {
     try {
         const { language, code, localResults } = req.body;
-        console.log(`Submitting challenge ${req.params.id} for user ${req.user.id} in ${language}`);
+        console.log(`Submitting challenge ${req.params.id} for user ${req.user ? req.user.id : 'GUEST'} in ${language}`);
 
         const challenge = await Challenge.findByPk(req.params.id);
 
@@ -174,17 +179,19 @@ router.post('/:id/submit', authenticate, async (req, res) => {
         }
 
         console.log(`Challenge result: ${passedAll ? 'PASSED ALL' : 'FAILED SOME'}`);
-        // Record submission
-        await ChallengeSubmission.create({
-            code,
-            language,
-            status: passedAll ? 'passed' : 'failed',
-            completedAt: new Date(),
-            user_id: req.user.id,
-            challenge_id: challenge.id
-        });
+        // Record submission if user is logged in
+        if (req.user) {
+            await ChallengeSubmission.create({
+                code,
+                language,
+                status: passedAll ? 'passed' : 'failed',
+                completedAt: new Date(),
+                user_id: req.user.id,
+                challenge_id: challenge.id
+            });
+        }
 
-        if (passedAll) {
+        if (passedAll && req.user) {
             // Check if user already passed this challenge previously
             const alreadyPassed = await ChallengeSubmission.findOne({
                 where: {

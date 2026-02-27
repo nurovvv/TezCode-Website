@@ -237,20 +237,49 @@ export default function ChallengeSolverPage() {
                             <p style={{ fontSize: '15px', color: '#8a8a8a', marginBottom: '8px' }}>
                                 You solved <strong style={{ color: '#eff1f6' }}>{challenge.title}</strong>
                             </p>
-                            <div style={{
-                                display: 'inline-flex',
-                                alignItems: 'center',
-                                gap: '6px',
-                                background: 'rgba(0, 175, 155, 0.1)',
-                                color: '#00af9b',
-                                padding: '8px 20px',
-                                borderRadius: '999px',
-                                fontSize: '16px',
-                                fontWeight: '700',
-                                marginBottom: '32px'
-                            }}>
-                                +{challenge.xpReward} XP Earned
-                            </div>
+                            {user ? (
+                                <div style={{
+                                    display: 'inline-flex',
+                                    alignItems: 'center',
+                                    gap: '6px',
+                                    background: 'rgba(0, 175, 155, 0.1)',
+                                    color: '#00af9b',
+                                    padding: '8px 20px',
+                                    borderRadius: '999px',
+                                    fontSize: '16px',
+                                    fontWeight: '700',
+                                    marginBottom: '32px'
+                                }}>
+                                    +{challenge.xpReward} XP Earned
+                                </div>
+                            ) : (
+                                <div style={{
+                                    display: 'inline-flex',
+                                    flexDirection: 'column',
+                                    alignItems: 'center',
+                                    gap: '12px',
+                                    marginBottom: '32px'
+                                }}>
+                                    <div style={{
+                                        background: 'rgba(255, 161, 22, 0.1)',
+                                        color: '#ffa116',
+                                        padding: '8px 20px',
+                                        borderRadius: '999px',
+                                        fontSize: '14px',
+                                        fontWeight: '700',
+                                    }}>
+                                        Points are not saved as guest
+                                    </div>
+                                    <Link to="/login" style={{
+                                        color: '#00af9b',
+                                        fontSize: '14px',
+                                        fontWeight: '600',
+                                        textDecoration: 'none'
+                                    }}>
+                                        Log in to save progress & earn XP →
+                                    </Link>
+                                </div>
+                            )}
                             <div style={{ display: 'flex', gap: '12px', justifyContent: 'center' }}>
                                 <button
                                     onClick={() => setShowSuccess(false)}
