@@ -1,247 +1,243 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useParams, Link } from 'react-router-dom';
+import axios from 'axios';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useAuth } from '../context/AuthContext';
-import api from '../services/api';
-import { runPython } from '../services/pythonRunner';
 import CodeEditor from '../components/CodeEditor';
-
-const outputsMatch = (actual, expected) => {
-    if (!actual && !expected) return true;
-    if (!actual || !expected) return false;
-    let a = actual.trim();
-    let e = expected.trim();
-    if (a === e) return true;
-    const normList = (s) => s
-        .replace(/\(/g, '[')
-        .replace(/\)/g, ']')
-        .replace(/\s*,\s*/g, ', ')
-        .replace(/\[\s+/g, '[')
-        .replace(/\s+\]/g, ']')
-        .replace(/'/g, '"');
-    if (normList(a) === normList(e)) return true;
-    if (a.toLowerCase() === e.toLowerCase() && ['true', 'false', 'none'].includes(a.toLowerCase())) return true;
-    return false;
-};
+import './ChallengeSolver.css';
 
 export default function ChallengeSolverPage() {
     const { id } = useParams();
-    const { user } = useAuth();
-    const navigate = useNavigate();
     const [challenge, setChallenge] = useState(null);
     const [code, setCode] = useState('');
     const [language, setLanguage] = useState('python');
+    const [activeTab, setActiveTab] = useState('question');
+    const [consoleOpen, setConsoleOpen] = useState(true);
+    const [consoleTab, setConsoleTab] = useState('testcase');
+    const [activeTestCase, setActiveTestCase] = useState(0);
     const [running, setRunning] = useState(false);
     const [results, setResults] = useState(null);
-    const [activeTab, setActiveTab] = useState('question'); // question, solution, submissions
-    const [consoleOpen, setConsoleOpen] = useState(true);
-    const [consoleTab, setConsoleTab] = useState('testcase'); // testcase, result
-    const [activeTestCase, setActiveTestCase] = useState(0);
-
-    const scrollRef = useRef(null);
 
     useEffect(() => {
-        api.get(`challenges/${id}`)
-            .then(res => {
-                if (res.data.message) navigate('/challenges');
-                else {
-                    setChallenge(res.data);
-                    if (res.data.starterCode) setCode(res.data.starterCode);
-                }
-            })
-            .catch(() => navigate('/challenges'));
-    }, [id, navigate]);
+        const fetchChallenge = async () => {
+            try {
+                const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL || ''}/api/challenges/${id}`);
+                setChallenge(response.data);
+                setCode(response.data.starterCode || '');
+            } catch (error) {
+                console.error('Error fetching challenge:', error);
+            }
+        };
+        fetchChallenge();
+    }, [id]);
 
-    const handleRun = useCallback(async () => {
-        if (!challenge) return;
+    const handleRun = async () => {
+        if (!code.trim()) return;
         setRunning(true);
         setConsoleOpen(true);
         setConsoleTab('result');
-
         try {
-            const evaluationResults = [];
-            let passedAll = true;
-
-            if (language === 'python') {
-                for (const tc of challenge.testCases || []) {
-                    const res = await runPython(code, tc.input);
-                    const actualOutput = res.output ? res.output.trim() : "";
-                    const expected = tc.expectedOutput ? tc.expectedOutput.trim() : "";
-                    const hasFatalError = !res.success && !actualOutput;
-                    const passed = !hasFatalError && outputsMatch(actualOutput, expected);
-
-                    evaluationResults.push({
-                        input: tc.input,
-                        expectedOutput: expected,
-                        actualOutput: actualOutput || (res.error ? `Error: ${res.error}` : '(no output)'),
-                        passed
-                    });
-                    if (!passed) passedAll = false;
-                }
-            }
-            setResults({ passed: passedAll, results: evaluationResults });
-        } catch (err) {
-            console.error(err);
-        }
-        setRunning(false);
-    }, [challenge, code, language]);
-
-    const handleSubmit = async () => {
-        await handleRun();
-        if (user && challenge) {
-            await api.post(`challenges/${id}/submit`, { language, code });
+            const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL || ''}/api/challenges/${id}/run`, {
+                code,
+                language
+            });
+            setResults(response.data);
+        } catch (error) {
+            console.error('Error running code:', error);
+            setResults({ error: 'Failed to execute code' });
+        } finally {
+            setRunning(false);
         }
     };
 
-    if (!challenge) return <div className="flex h-screen items-center justify-center bg-[#0a0a0a] text-white">Loading...</div>;
+    const handleSubmit = async () => {
+        if (!code.trim()) return;
+        setRunning(true);
+        setConsoleOpen(true);
+        setConsoleTab('result');
+        try {
+            const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL || ''}/api/challenges/${id}/submit`, {
+                code,
+                language
+            });
+            setResults(response.data);
+        } catch (error) {
+            console.error('Error submitting code:', error);
+            setResults({ error: 'Failed to submit' });
+        } finally {
+            setRunning(false);
+        }
+    };
+
+    if (!challenge) return <div className="solver-page-container" style={{ justifyContent: 'center', alignItems: 'center' }}>Loading...</div>;
 
     return (
-        <div className="flex flex-col h-screen bg-[#1a1a1a] text-[#eff1f6] overflow-hidden font-sans">
+        <div className="solver-page-container">
             {/* Header */}
-            <header className="h-12 border-b border-[#333] flex items-center justify-between px-4 bg-[#282828]">
-                <div className="flex items-center gap-4">
-                    <Link to="/challenges" className="text-sm text-[#8a8a8a] hover:text-white transition-colors">
+            <header className="solver-nav-header">
+                <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                    <Link to="/challenges" style={{ fontSize: '14px', color: '#8a8a8a', textDecoration: 'none' }}>
                         &larr; Problem List
                     </Link>
-                    <div className="h-4 w-[1px] bg-[#444]" />
-                    <span className="text-sm font-semibold">{challenge.title}</span>
+                    <div style={{ height: '16px', width: '1px', background: '#444' }} />
+                    <span style={{ fontSize: '14px', fontWeight: '600' }}>{challenge.title}</span>
                 </div>
-                <div className="flex items-center gap-2">
-                    <button className="p-2 hover:bg-[#333] rounded transition-colors"><i className="fas fa-cog text-sm opacity-60"></i></button>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                    <button style={{ background: 'none', border: 'none', color: '#8a8a8a', cursor: 'pointer' }}>
+                        <i className="fas fa-cog" style={{ fontSize: '14px' }}></i>
+                    </button>
                 </div>
             </header>
 
             {/* Main Content */}
-            <main className="flex-1 flex overflow-hidden">
-                {/* Left Pane: Description & Tabs */}
-                <section className="w-[45%] flex flex-col border-r border-[#333] bg-[#1a1a1a]">
-                    <div className="flex bg-[#282828] border-b border-[#333]">
+            <main className="solver-main-content">
+                {/* Left Pane */}
+                <section className="solver-left-pane">
+                    <div className="solver-tabs-row">
                         {['question', 'solution', 'submissions'].map(tab => (
                             <button
                                 key={tab}
                                 onClick={() => setActiveTab(tab)}
-                                className={`px-4 py-2 text-xs font-medium uppercase tracking-wider transition-colors relative ${activeTab === tab ? 'text-white' : 'text-[#8a8a8a] hover:text-white'}`}
+                                className={`solver-tab-item ${activeTab === tab ? 'active' : ''}`}
                             >
                                 {tab}
-                                {activeTab === tab && <motion.div layoutId="tab-underline" className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#ffa116]" />}
                             </button>
                         ))}
                     </div>
 
-                    <div ref={scrollRef} className="flex-1 overflow-y-auto p-6 dark-scrollbar">
+                    <div className="solver-description-area thin-scrollbar">
                         <AnimatePresence mode="wait">
                             {activeTab === 'question' && (
                                 <motion.div
                                     key="question"
-                                    initial={{ opacity: 0, x: -10 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    exit={{ opacity: 0, x: 10 }}
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -10 }}
                                 >
-                                    <h1 className="text-2xl font-bold mb-4">{challenge.title}</h1>
-                                    <div className="flex flex-wrap gap-2 mb-6">
-                                        <span className={`px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-widest ${challenge.difficulty === 'easy' ? 'bg-[#00af9b26] text-[#00af9b]' : challenge.difficulty === 'medium' ? 'bg-[#feb90026] text-[#feb900]' : 'bg-[#ff2d5526] text-[#ff2d55]'}`}>
+                                    <h1 style={{ fontSize: '24px', fontWeight: '700', marginBottom: '16px' }}>{challenge.title}</h1>
+                                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px', marginBottom: '24px' }}>
+                                        <span className={`solver-badge badge-${challenge.difficulty || 'easy'}`}>
                                             {challenge.difficulty}
                                         </span>
                                         {challenge.topics?.map((topic, i) => (
-                                            <span key={i} className="px-3 py-1 rounded-full bg-[#3e3e3e] text-[#eff1f6] text-[10px] uppercase font-bold tracking-widest">
+                                            <span key={i} className="solver-badge badge-tag" style={{ color: '#eff1f6', background: '#3e3e3e' }}>
                                                 {topic}
                                             </span>
                                         ))}
                                         {challenge.tags?.map((tag, i) => (
-                                            <span key={i} className="px-3 py-1 rounded-full bg-[#ffffff10] text-[#8a8a8a] text-[10px] uppercase font-bold tracking-widest">
+                                            <span key={i} className="solver-badge badge-tag">
                                                 {tag}
                                             </span>
                                         ))}
-                                        <div className="h-6 w-[1px] bg-[#333] hidden sm:block mx-1" />
-                                        <span className="px-3 py-1 rounded-full bg-[#00af9b15] text-[#00af9b] text-[10px] uppercase font-bold tracking-widest leading-none flex items-center">
+                                        <span className="solver-badge badge-xp">
                                             +{challenge.xpReward} XP
                                         </span>
                                     </div>
-                                    <div className="prose prose-invert max-w-none text-[#eff1f6] opacity-90 leading-relaxed" dangerouslySetInnerHTML={{ __html: challenge.description }} />
+                                    <div
+                                        style={{ color: '#eff1f6', opacity: 0.9, lineHeight: '1.7', fontSize: '15px' }}
+                                        dangerouslySetInnerHTML={{ __html: challenge.description }}
+                                    />
                                 </motion.div>
                             )}
                             {activeTab === 'solution' && (
-                                <motion.div key="solution">Solution content coming soon...</motion.div>
+                                <motion.div key="solution" style={{ color: '#8a8a8a' }}>No solution available for this problem yet.</motion.div>
                             )}
                             {activeTab === 'submissions' && (
-                                <motion.div key="submissions">Submission history coming soon...</motion.div>
+                                <motion.div key="submissions" style={{ color: '#8a8a8a' }}>You have no submissions yet.</motion.div>
                             )}
                         </AnimatePresence>
                     </div>
                 </section>
 
-                {/* Right Pane: Editor & Console */}
-                <section className="flex-1 flex flex-col bg-[#1e1e1e]">
-                    {/* Toolbar */}
-                    <div className="h-10 border-b border-[#333] flex items-center justify-between px-4 bg-[#282828]">
-                        <div className="flex items-center gap-2">
-                            <select
-                                value={language}
-                                onChange={e => setLanguage(e.target.value)}
-                                className="bg-transparent text-xs font-medium focus:outline-none cursor-pointer hover:text-white"
-                            >
-                                <option value="python">Python</option>
-                                <option value="javascript">JavaScript</option>
-                            </select>
-                        </div>
+                {/* Right Pane */}
+                <section className="solver-right-pane">
+                    <div className="solver-editor-toolbar">
+                        <select
+                            value={language}
+                            onChange={e => setLanguage(e.target.value)}
+                            style={{ background: 'transparent', color: '#eff1f6', fontSize: '13px', border: 'none', outline: 'none', cursor: 'pointer', fontWeight: '500' }}
+                        >
+                            <option value="python">Python</option>
+                            <option value="javascript">JavaScript</option>
+                        </select>
                     </div>
 
-                    {/* Editor */}
-                    <div className="flex-1 min-h-0 relative">
+                    <div className="solver-editor-container">
                         <CodeEditor value={code} onChange={setCode} onRun={handleRun} language={language} theme="vs-dark" />
                     </div>
 
                     {/* Console */}
-                    <div className={`flex flex-col border-t border-[#333] bg-[#282828] transition-all duration-300 ${consoleOpen ? 'h-[300px]' : 'h-10'}`}>
-                        <div className="h-10 flex items-center justify-between px-4 cursor-pointer" onClick={() => setConsoleOpen(!consoleOpen)}>
-                            <div className="flex gap-4">
-                                <button onClick={e => { e.stopPropagation(); setConsoleTab('testcase'); setConsoleOpen(true); }} className={`text-xs font-semibold ${consoleTab === 'testcase' ? 'text-white' : 'text-[#8a8a8a]'}`}>Console</button>
+                    <div className="solver-console-container" style={{ height: consoleOpen ? '320px' : '40px' }}>
+                        <div className="solver-console-header" onClick={() => setConsoleOpen(!consoleOpen)}>
+                            <div style={{ display: 'flex', gap: '20px' }}>
+                                <span
+                                    onClick={(e) => { e.stopPropagation(); setConsoleTab('testcase'); setConsoleOpen(true); }}
+                                    style={{ fontSize: '13px', fontWeight: '600', color: consoleTab === 'testcase' ? '#fff' : '#8a8a8a' }}
+                                >
+                                    Console
+                                </span>
                                 {results && (
-                                    <button onClick={e => { e.stopPropagation(); setConsoleTab('result'); setConsoleOpen(true); }} className={`text-xs font-semibold ${consoleTab === 'result' ? 'text-white' : 'text-[#8a8a8a]'}`}>Result</button>
+                                    <span
+                                        onClick={(e) => { e.stopPropagation(); setConsoleTab('result'); setConsoleOpen(true); }}
+                                        style={{ fontSize: '13px', fontWeight: '600', color: consoleTab === 'result' ? '#fff' : '#8a8a8a' }}
+                                    >
+                                        Result
+                                    </span>
                                 )}
                             </div>
-                            <i className={`fas fa-chevron-${consoleOpen ? 'down' : 'up'} text-xs opacity-60`}></i>
+                            <i className={`fas fa-chevron-${consoleOpen ? 'down' : 'up'}`} style={{ fontSize: '12px', opacity: 0.5 }}></i>
                         </div>
 
                         {consoleOpen && (
-                            <div className="flex-1 overflow-hidden flex flex-col p-4">
+                            <div className="solver-console-body thin-scrollbar">
                                 {consoleTab === 'testcase' ? (
-                                    <div className="flex flex-col gap-4">
-                                        <div className="flex gap-2">
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                                        <div style={{ display: 'flex', gap: '8px' }}>
                                             {challenge.testCases?.map((_, idx) => (
                                                 <button
                                                     key={idx}
                                                     onClick={() => setActiveTestCase(idx)}
-                                                    className={`px-3 py-1.5 rounded bg-[#3e3e3e] text-xs font-medium ${activeTestCase === idx ? 'bg-[#4e4e4e] text-white shadow-lg' : 'text-[#8a8a8a] opacity-60'}`}
+                                                    style={{
+                                                        padding: '6px 12px',
+                                                        borderRadius: '4px',
+                                                        background: activeTestCase === idx ? '#4e4e4e' : '#3e3e3e',
+                                                        color: activeTestCase === idx ? '#fff' : '#8a8a8a',
+                                                        fontSize: '12px',
+                                                        fontWeight: '600',
+                                                        border: 'none',
+                                                        cursor: 'pointer'
+                                                    }}
                                                 >
                                                     Case {idx + 1}
                                                 </button>
                                             ))}
                                         </div>
-                                        <div className="flex flex-col gap-2">
-                                            <label className="text-[10px] uppercase font-bold tracking-widest opacity-40">Input</label>
-                                            <pre className="p-3 bg-[#1e1e1e] rounded text-sm font-mono whitespace-pre-wrap">{challenge.testCases?.[activeTestCase]?.input}</pre>
+                                        <div>
+                                            <p style={{ fontSize: '10px', fontWeight: '700', textTransform: 'uppercase', color: '#8a8a8a', marginBottom: '8px' }}>Input</p>
+                                            <pre style={{ padding: '12px', background: '#1e1e1e', borderRadius: '4px', fontSize: '13px', fontFamily: 'monospace', color: '#eff1f6' }}>
+                                                {challenge.testCases?.[activeTestCase]?.input}
+                                            </pre>
                                         </div>
                                     </div>
                                 ) : (
-                                    <div className="flex flex-col gap-4 overflow-y-auto pr-2 dark-scrollbar">
-                                        <div className={`text-lg font-bold ${results?.passed ? 'text-[#00af9b]' : 'text-[#ff2d55]'}`}>
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                                        <div style={{ fontSize: '18px', fontWeight: '700', color: results?.passed ? '#00af9b' : '#ff2d55' }}>
                                             {results?.passed ? 'Accepted' : 'Wrong Answer'}
                                         </div>
+                                        {results?.error && <div style={{ color: '#ff2d55' }}>{results.error}</div>}
                                         {results?.results?.map((res, idx) => (
-                                            <div key={idx} className="flex flex-col gap-2 p-3 bg-[#1e1e1e] rounded border border-[#333]">
-                                                <div className="flex items-center justify-between">
-                                                    <span className="text-xs font-bold opacity-60 uppercase">Case {idx + 1}</span>
-                                                    <span className={`text-[10px] uppercase font-black ${res.passed ? 'text-[#00af9b]' : 'text-[#ff2d55]'}`}>{res.passed ? 'Passed' : 'Failed'}</span>
+                                            <div key={idx} style={{ padding: '12px', background: '#1e1e1e', borderRadius: '4px', border: '1px solid #333' }}>
+                                                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
+                                                    <span style={{ fontSize: '11px', fontWeight: '700', color: '#8a8a8a' }}>CASE {idx + 1}</span>
+                                                    <span style={{ fontSize: '10px', fontWeight: '900', color: res.passed ? '#00af9b' : '#ff2d55' }}>{res.passed ? 'PASSED' : 'FAILED'}</span>
                                                 </div>
-                                                <div className="grid grid-cols-2 gap-4">
+                                                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
                                                     <div>
-                                                        <label className="text-[9px] uppercase font-bold opacity-30">Expected</label>
-                                                        <pre className="text-xs font-mono">{res.expectedOutput}</pre>
+                                                        <label style={{ fontSize: '9px', fontWeight: '700', color: '#555', display: 'block', marginBottom: '4px' }}>EXPECTED</label>
+                                                        <pre style={{ fontSize: '12px', fontFamily: 'monospace' }}>{res.expectedOutput}</pre>
                                                     </div>
                                                     <div>
-                                                        <label className="text-[9px] uppercase font-bold opacity-30">Actual</label>
-                                                        <pre className={`text-xs font-mono ${!res.passed && 'text-[#ff2d55]'}`}>{res.actualOutput}</pre>
+                                                        <label style={{ fontSize: '9px', fontWeight: '700', color: '#555', display: 'block', marginBottom: '4px' }}>ACTUAL</label>
+                                                        <pre style={{ fontSize: '12px', fontFamily: 'monospace', color: !res.passed ? '#ff2d55' : 'inherit' }}>{res.actualOutput}</pre>
                                                     </div>
                                                 </div>
                                             </div>
@@ -251,22 +247,13 @@ export default function ChallengeSolverPage() {
                             </div>
                         )}
 
-                        {/* Footer Actions */}
-                        <div className="h-12 border-t border-[#333] flex items-center justify-between px-4 bg-[#282828]">
-                            <button className="text-xs opacity-60 hover:opacity-100 flex items-center gap-1">Console <i className="fas fa-chevron-up text-[8px]"></i></button>
-                            <div className="flex gap-2">
-                                <button
-                                    onClick={handleRun}
-                                    disabled={running}
-                                    className="px-4 py-1.5 bg-[#3e3e3e] hover:bg-[#4e4e4e] rounded text-xs font-semibold transition-colors disabled:opacity-50"
-                                >
+                        <div className="solver-console-footer">
+                            <span style={{ fontSize: '12px', color: '#8a8a8a' }}>Console <i className="fas fa-chevron-up" style={{ fontSize: '8px' }}></i></span>
+                            <div style={{ display: 'flex', gap: '8px' }}>
+                                <button onClick={handleRun} disabled={running} className="solver-btn btn-run">
                                     {running ? 'Running...' : 'Run'}
                                 </button>
-                                <button
-                                    onClick={handleSubmit}
-                                    disabled={running}
-                                    className="px-4 py-1.5 bg-[#00af9b] hover:bg-[#28c5b3] rounded text-xs font-semibold text-white transition-colors disabled:opacity-50"
-                                >
+                                <button onClick={handleSubmit} disabled={running} className="solver-btn btn-submit">
                                     Submit
                                 </button>
                             </div>

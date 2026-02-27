@@ -122,6 +122,191 @@ li {
 }
 
 /* LeetCode Split Layout Utilities */
+.solver-page {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100vh !important;
+  background: #1a1a1a !important;
+  color: #eff1f6 !important;
+  overflow: hidden !important;
+  font-family: 'Inter', sans-serif !important;
+}
+
+.solver-header {
+  height: 48px !important;
+  border-bottom: 1px solid #333 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 0 16px !important;
+  background: #282828 !important;
+  z-index: 10 !important;
+}
+
+.solver-main {
+  flex: 1 !important;
+  display: flex !important;
+  overflow: hidden !important;
+}
+
+.pane-left {
+  width: 45% !important;
+  min-width: 350px !important;
+  border-right: 1px solid #333 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  background: #1a1a1a !important;
+}
+
+.pane-right {
+  flex: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  background: #1e1e1e !important;
+}
+
+.tabs-container {
+  display: flex !important;
+  background: #282828 !important;
+  border-bottom: 1px solid #333 !important;
+}
+
+.tab-btn {
+  padding: 10px 16px !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  color: #8a8a8a !important;
+  background: none !important;
+  border: none !important;
+  cursor: pointer !important;
+  position: relative !important;
+  transition: color 0.2s !important;
+}
+
+.tab-btn:hover {
+  color: #fff !important;
+}
+
+.tab-btn.active {
+  color: #fff !important;
+}
+
+.tab-indicator {
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: 2px !important;
+  background: #ffa116 !important;
+}
+
+.description-content {
+  flex: 1 !important;
+  overflow-y: auto !important;
+  padding: 24px !important;
+}
+
+.difficulty-badge {
+  padding: 4px 12px !important;
+  border-radius: 999px !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.1em !important;
+}
+
+.difficulty-easy {
+  background: rgba(0, 175, 155, 0.15) !important;
+  color: #00af9b !important;
+}
+
+.difficulty-medium {
+  background: rgba(254, 185, 0, 0.15) !important;
+  color: #feb900 !important;
+}
+
+.difficulty-hard {
+  background: rgba(255, 45, 85, 0.15) !important;
+  color: #ff2d55 !important;
+}
+
+.xp-badge {
+  padding: 4px 12px !important;
+  border-radius: 999px !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #eff1f6 !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+}
+
+.solver-console {
+  border-top: 1px solid #333 !important;
+  background: #282828 !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.console-header {
+  height: 40px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 0 16px !important;
+  cursor: pointer !important;
+}
+
+.console-body {
+  flex: 1 !important;
+  padding: 16px !important;
+  overflow: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.console-footer {
+  height: 48px !important;
+  border-top: 1px solid #333 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 0 16px !important;
+}
+
+.action-btn {
+  padding: 6px 16px !important;
+  border-radius: 4px !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  border: none !important;
+  transition: background 0.2s !important;
+}
+
+.btn-secondary {
+  background: #3e3e3e !important;
+  color: #fff !important;
+}
+
+.btn-secondary:hover {
+  background: #4e4e4e !important;
+}
+
+.btn-primary {
+  background: #00af9b !important;
+  color: #fff !important;
+}
+
+.btn-primary:hover {
+  background: #28c5b3 !important;
+}
+
+.btn-primary:disabled {
+  opacity: 0.5 !important;
+  cursor: not-allowed !important;
+}
+
 .solver-container {
   display: flex;
   height: calc(100vh - 56px);
