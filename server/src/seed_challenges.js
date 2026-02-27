@@ -15,7 +15,9 @@ async function seedChallenges() {
                 { input: "3\n3 2 4\n6", expectedOutput: "[1, 2]" },
                 { input: "2\n3 3\n6", expectedOutput: "[0, 1]" }
             ],
-            starterCode: "import sys\ndata = sys.stdin.read().split()\nn = int(data[0])\nnums = [int(x) for x in data[1:n+1]]\ntarget = int(data[n+1])\n\n# Write your solution here and print the result\n# Example: print([0, 1])\n"
+            starterCode: "import sys\ndata = sys.stdin.read().split()\nn = int(data[0])\nnums = [int(x) for x in data[1:n+1]]\ntarget = int(data[n+1])\n\n# Write your solution here and print the result\n# Example: print([0, 1])\n",
+            tags: ["Array", "Hash Table"],
+            topics: ["Easy", "Top Interview Questions"]
         },
         {
             title: "Reverse String",

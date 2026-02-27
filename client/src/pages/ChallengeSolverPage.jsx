@@ -1,27 +1,17 @@
-import { useState, useEffect, useCallback } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { useState, useEffect, useCallback, useRef } from 'react';
+import { useParams, useNavigate, Link } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../context/AuthContext';
 import api from '../services/api';
 import { runPython } from '../services/pythonRunner';
 import CodeEditor from '../components/CodeEditor';
 
-/**
- * Smart comparison: trims whitespace, normalizes brackets/spacing,
- * but PRESERVES element order (critical for index-based answers).
- */
 const outputsMatch = (actual, expected) => {
     if (!actual && !expected) return true;
     if (!actual || !expected) return false;
-
-    // Step 1: Trim whitespace and trailing newlines
     let a = actual.trim();
     let e = expected.trim();
-
-    // Step 2: Exact match after trim
     if (a === e) return true;
-
-    // Step 3: Normalize list-like outputs — replace () with [], remove extra spaces
     const normList = (s) => s
         .replace(/\(/g, '[')
         .replace(/\)/g, ']')
@@ -30,29 +20,7 @@ const outputsMatch = (actual, expected) => {
         .replace(/\s+\]/g, ']')
         .replace(/'/g, '"');
     if (normList(a) === normList(e)) return true;
-
-    // Step 4: Case-insensitive for boolean-like outputs (true/false, True/False)
-    if (a.toLowerCase() === e.toLowerCase() &&
-        ['true', 'false', 'yes', 'no', 'none'].includes(a.toLowerCase())) return true;
-
-    // Step 5: Normalize nested list outputs (sort inner groups for problems like Group Anagrams)
-    // Only if both look like nested arrays
-    try {
-        const pa = JSON.parse(normList(a).replace(/'/g, '"'));
-        const pe = JSON.parse(normList(e).replace(/'/g, '"'));
-        if (Array.isArray(pa) && Array.isArray(pe)) {
-            // For flat arrays, compare directly (order matters)
-            if (!Array.isArray(pa[0]) && !Array.isArray(pe[0])) {
-                return JSON.stringify(pa) === JSON.stringify(pe);
-            }
-            // For nested arrays (like Group Anagrams), sort each inner array and then sort outer
-            const sortNested = (arr) => arr
-                .map(inner => Array.isArray(inner) ? [...inner].sort() : inner)
-                .sort((a, b) => JSON.stringify(a).localeCompare(JSON.stringify(b)));
-            return JSON.stringify(sortNested(pa)) === JSON.stringify(sortNested(pe));
-        }
-    } catch { /* not JSON, skip */ }
-
+    if (a.toLowerCase() === e.toLowerCase() && ['true', 'false', 'none'].includes(a.toLowerCase())) return true;
     return false;
 };
 
@@ -65,238 +33,247 @@ export default function ChallengeSolverPage() {
     const [language, setLanguage] = useState('python');
     const [running, setRunning] = useState(false);
     const [results, setResults] = useState(null);
+    const [activeTab, setActiveTab] = useState('question'); // question, solution, submissions
+    const [consoleOpen, setConsoleOpen] = useState(true);
+    const [consoleTab, setConsoleTab] = useState('testcase'); // testcase, result
+    const [activeTestCase, setActiveTestCase] = useState(0);
 
-    const languages = [
-        { id: 'python', name: 'Python' },
-        { id: 'javascript', name: 'JavaScript' },
-        { id: 'java', name: 'Java' },
-        { id: 'cpp', name: 'C++' },
-        { id: 'go', name: 'Go' },
-        { id: 'rust', name: 'Rust' }
-    ];
+    const scrollRef = useRef(null);
 
     useEffect(() => {
-        console.log('Fetching challenge:', id);
         api.get(`challenges/${id}`)
             .then(res => {
-                console.log('Challenge data received:', res.data);
-                if (res.data.message) {
-                    console.warn('Redirecting to /challenges');
-                    navigate('/challenges');
-                } else {
+                if (res.data.message) navigate('/challenges');
+                else {
                     setChallenge(res.data);
-                    if (res.data.starterCode) {
-                        setCode(res.data.starterCode);
-                    }
+                    if (res.data.starterCode) setCode(res.data.starterCode);
                 }
             })
-            .catch(err => {
-                console.error('Error fetching challenge:', err);
-                navigate('/challenges');
-            });
+            .catch(() => navigate('/challenges'));
     }, [id, navigate]);
 
-
-    const handleSubmit = useCallback(async () => {
-        if (!user) {
-            alert("Please log in to submit challenges!");
-            return;
-        }
+    const handleRun = useCallback(async () => {
         if (!challenge) return;
-
         setRunning(true);
-        setResults(null);
-        console.log(`Evaluating challenge ${id} locally...`);
+        setConsoleOpen(true);
+        setConsoleTab('result');
 
         try {
-            // 1. Run evaluation locally using Pyodide (for Python)
             const evaluationResults = [];
             let passedAll = true;
 
             if (language === 'python') {
                 for (const tc of challenge.testCases || []) {
                     const res = await runPython(code, tc.input);
-                    // Use whatever the code printed to stdout, trimmed
                     const actualOutput = res.output ? res.output.trim() : "";
                     const expected = tc.expectedOutput ? tc.expectedOutput.trim() : "";
-
-                    // If fatal error with no output at all → fail
                     const hasFatalError = !res.success && !actualOutput;
                     const passed = !hasFatalError && outputsMatch(actualOutput, expected);
 
                     evaluationResults.push({
                         input: tc.input,
                         expectedOutput: expected,
-                        actualOutput: actualOutput || (res.error ? `Runtime Error: ${res.error}` : '(no output)'),
+                        actualOutput: actualOutput || (res.error ? `Error: ${res.error}` : '(no output)'),
                         passed
                     });
                     if (!passed) passedAll = false;
                 }
-            } else {
-                // For other languages, fallback to backend (which is currently limited)
-                const res = await api.post(`challenges/${id}/submit`, { language, code });
-                setResults(res.data);
-                setRunning(false);
-                return;
             }
-
-            const resultsData = {
-                passed: passedAll,
-                results: evaluationResults,
-                error: evaluationResults.find(r => !r.passed && r.actualOutput && (
-                    r.actualOutput.includes('Traceback') ||
-                    r.actualOutput.includes('SyntaxError') ||
-                    r.actualOutput.includes('NameError') ||
-                    r.actualOutput.includes('TypeError') ||
-                    r.actualOutput.includes('ValueError')
-                ))?.actualOutput
-            };
-
-            console.log('Local evaluation complete:', resultsData);
-            setResults(resultsData);
-
-            // 2. Report result to backend to save progress and award XP
-            await api.post(`challenges/${id}/submit`, {
-                language,
-                code,
-                localResults: resultsData // Backend will trust this if it can't run Piston
-            });
-
+            setResults({ passed: passedAll, results: evaluationResults });
         } catch (err) {
-            console.error('Submission failed:', err);
-            alert("An error occurred during evaluation. Check console for details.");
+            console.error(err);
         }
         setRunning(false);
-    }, [id, user, challenge, code, language]);
+    }, [challenge, code, language]);
 
-    if (!challenge || !challenge.title) {
-        console.log('Challenge is null or missing title, showing loading...');
-        return <div style={{ padding: '100px', textAlign: 'center', color: '#fff' }}>Loading challenge...</div>;
-    }
+    const handleSubmit = async () => {
+        await handleRun();
+        if (user && challenge) {
+            await api.post(`challenges/${id}/submit`, { language, code });
+        }
+    };
+
+    if (!challenge) return <div className="flex h-screen items-center justify-center bg-[#0a0a0a] text-white">Loading...</div>;
 
     return (
-        <div style={{ display: 'flex', height: '100vh', background: '#0a0a0a', color: '#fff', paddingTop: '70px' }}>
-            {/* Left: Description */}
-            <div style={{ flex: 1, padding: '30px', overflowY: 'auto', borderRight: '1px solid #222' }}>
-                <h1 style={{ fontSize: '2rem', fontWeight: 700, margin: '0 0 10px' }}>{challenge.title}</h1>
-                <div style={{ display: 'flex', gap: '15px', marginBottom: '30px' }}>
-                    <span style={{ color: challenge.difficulty === 'easy' ? '#04AA6D' : challenge.difficulty === 'medium' ? '#ff9800' : '#f44336', fontSize: '0.9rem', fontWeight: 600, textTransform: 'uppercase' }}>{challenge.difficulty}</span>
-                    <span style={{ color: '#888', fontSize: '0.9rem' }}>+{challenge.xpReward} XP</span>
+        <div className="flex flex-col h-screen bg-[#1a1a1a] text-[#eff1f6] overflow-hidden font-sans">
+            {/* Header */}
+            <header className="h-12 border-b border-[#333] flex items-center justify-between px-4 bg-[#282828]">
+                <div className="flex items-center gap-4">
+                    <Link to="/challenges" className="text-sm text-[#8a8a8a] hover:text-white transition-colors">
+                        &larr; Problem List
+                    </Link>
+                    <div className="h-4 w-[1px] bg-[#444]" />
+                    <span className="text-sm font-semibold">{challenge.title}</span>
                 </div>
+                <div className="flex items-center gap-2">
+                    <button className="p-2 hover:bg-[#333] rounded transition-colors"><i className="fas fa-cog text-sm opacity-60"></i></button>
+                </div>
+            </header>
 
-                <div style={{ lineHeight: 1.7, color: '#ccc', marginBottom: '40px' }} dangerouslySetInnerHTML={{ __html: challenge.description }} />
-
-                {results && (
-                    <motion.div
-                        initial={{ scale: 0.9, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        style={{
-                            background: results.passed ? 'rgba(4, 170, 109, 0.1)' : 'rgba(244, 67, 54, 0.1)',
-                            border: `2px solid ${results.passed ? '#04AA6D' : '#f44336'}`,
-                            borderRadius: '12px',
-                            padding: '30px',
-                            textAlign: 'center',
-                            marginBottom: '30px'
-                        }}
-                    >
-                        <h2 style={{
-                            fontSize: '2.5rem',
-                            fontWeight: 900,
-                            margin: 0,
-                            color: results.passed ? '#04AA6D' : '#f44336',
-                            textTransform: 'uppercase',
-                            letterSpacing: '2px'
-                        }}>
-                            {results.passed ? 'COMPLETED' : 'INCORRECT'}
-                        </h2>
-                        {results.error && (
-                            <div style={{
-                                marginTop: '15px',
-                                padding: '10px',
-                                background: 'rgba(244, 67, 54, 0.1)',
-                                border: '1px solid #f44336',
-                                borderRadius: '4px',
-                                color: '#f44336',
-                                textAlign: 'left',
-                                fontFamily: 'monospace',
-                                fontSize: '0.9rem',
-                                whiteSpace: 'pre-wrap'
-                            }}>
-                                <strong>Runtime Error:</strong><br />
-                                {results.error}
-                            </div>
-                        )}
-                        <p style={{ color: '#888', margin: '10px 0 20px', fontSize: '1.1rem' }}>
-                            {results.passed
-                                ? `Congratulations! You earned ${challenge.xpReward} XP.`
-                                : `Keep trying! ${results.results?.filter(r => r.passed).length || 0} / ${results.results?.length || 0} test cases passed.`}
-                        </p>
-                        {results.passed && (
+            {/* Main Content */}
+            <main className="flex-1 flex overflow-hidden">
+                {/* Left Pane: Description & Tabs */}
+                <section className="w-[45%] flex flex-col border-r border-[#333] bg-[#1a1a1a]">
+                    <div className="flex bg-[#282828] border-b border-[#333]">
+                        {['question', 'solution', 'submissions'].map(tab => (
                             <button
-                                onClick={() => navigate('/challenges')}
-                                style={{
-                                    background: '#04AA6D',
-                                    color: '#fff',
-                                    border: 'none',
-                                    padding: '10px 20px',
-                                    borderRadius: '6px',
-                                    fontWeight: 600,
-                                    cursor: 'pointer',
-                                    marginTop: '10px'
-                                }}
+                                key={tab}
+                                onClick={() => setActiveTab(tab)}
+                                className={`px-4 py-2 text-xs font-medium uppercase tracking-wider transition-colors relative ${activeTab === tab ? 'text-white' : 'text-[#8a8a8a] hover:text-white'}`}
                             >
-                                Back to Challenges
+                                {tab}
+                                {activeTab === tab && <motion.div layoutId="tab-underline" className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#ffa116]" />}
                             </button>
-                        )}
-                    </motion.div>
-                )}
-
-                {results && (
-                    <div style={{ background: '#111', border: '1px solid #222', borderRadius: '8px', padding: '20px' }}>
-                        <h3 style={{ color: '#fff', fontSize: '1.2rem', fontWeight: 600, margin: '0 0 15px' }}>
-                            Test Case Results
-                        </h3>
-                        {results.results?.map((tc, idx) => (
-                            <div key={idx} style={{ marginBottom: '15px', padding: '10px', background: '#1a1a1a', borderRadius: '4px' }}>
-                                <div style={{ fontWeight: 600, color: tc.passed ? '#04AA6D' : '#f44336', marginBottom: '5px' }}>Test Case {idx + 1}: {tc.passed ? 'Passed' : 'Failed'}</div>
-                                <div style={{ fontSize: '0.85rem', color: '#888' }}>
-                                    <div><strong>Input:</strong> {tc.input}</div>
-                                    <div><strong>Expected:</strong> {tc.expectedOutput}</div>
-                                    <div><strong>Actual:</strong> <span style={{ color: tc.passed ? '#888' : '#f44336' }}>{tc.actualOutput}</span></div>
-                                </div>
-                            </div>
                         ))}
                     </div>
-                )}
-            </div>
 
-            {/* Right: Editor */}
-            <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-                <div style={{ background: '#111', padding: '10px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #222' }}>
-                    <select
-                        value={language}
-                        onChange={(e) => setLanguage(e.target.value)}
-                        style={{ background: '#222', color: '#fff', border: 'none', padding: '8px 12px', borderRadius: '4px', outline: 'none' }}
-                    >
-                        {languages.map(l => <option key={l.id} value={l.id}>{l.name}</option>)}
-                    </select>
-                    <button
-                        onClick={handleSubmit}
-                        disabled={running}
-                        style={{ background: '#04AA6D', color: '#fff', border: 'none', padding: '8px 20px', borderRadius: '4px', fontWeight: 600, cursor: running ? 'not-allowed' : 'pointer' }}
-                    >
-                        {running ? 'Running...' : 'Submit Code'}
-                    </button>
-                </div>
-                <div style={{ flex: 1, background: '#1e1e1e' }}>
-                    <CodeEditor
-                        value={code}
-                        onChange={setCode}
-                        onRun={handleSubmit}
-                        language={language}
-                    />
-                </div>
-            </div>
+                    <div ref={scrollRef} className="flex-1 overflow-y-auto p-6 dark-scrollbar">
+                        <AnimatePresence mode="wait">
+                            {activeTab === 'question' && (
+                                <motion.div
+                                    key="question"
+                                    initial={{ opacity: 0, x: -10 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    exit={{ opacity: 0, x: 10 }}
+                                >
+                                    <h1 className="text-2xl font-bold mb-4">{challenge.title}</h1>
+                                    <div className="flex flex-wrap gap-2 mb-6">
+                                        <span className={`px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-widest ${challenge.difficulty === 'easy' ? 'bg-[#00af9b26] text-[#00af9b]' : challenge.difficulty === 'medium' ? 'bg-[#feb90026] text-[#feb900]' : 'bg-[#ff2d5526] text-[#ff2d55]'}`}>
+                                            {challenge.difficulty}
+                                        </span>
+                                        {challenge.topics?.map((topic, i) => (
+                                            <span key={i} className="px-3 py-1 rounded-full bg-[#3e3e3e] text-[#eff1f6] text-[10px] uppercase font-bold tracking-widest">
+                                                {topic}
+                                            </span>
+                                        ))}
+                                        {challenge.tags?.map((tag, i) => (
+                                            <span key={i} className="px-3 py-1 rounded-full bg-[#ffffff10] text-[#8a8a8a] text-[10px] uppercase font-bold tracking-widest">
+                                                {tag}
+                                            </span>
+                                        ))}
+                                        <div className="h-6 w-[1px] bg-[#333] hidden sm:block mx-1" />
+                                        <span className="px-3 py-1 rounded-full bg-[#00af9b15] text-[#00af9b] text-[10px] uppercase font-bold tracking-widest leading-none flex items-center">
+                                            +{challenge.xpReward} XP
+                                        </span>
+                                    </div>
+                                    <div className="prose prose-invert max-w-none text-[#eff1f6] opacity-90 leading-relaxed" dangerouslySetInnerHTML={{ __html: challenge.description }} />
+                                </motion.div>
+                            )}
+                            {activeTab === 'solution' && (
+                                <motion.div key="solution">Solution content coming soon...</motion.div>
+                            )}
+                            {activeTab === 'submissions' && (
+                                <motion.div key="submissions">Submission history coming soon...</motion.div>
+                            )}
+                        </AnimatePresence>
+                    </div>
+                </section>
+
+                {/* Right Pane: Editor & Console */}
+                <section className="flex-1 flex flex-col bg-[#1e1e1e]">
+                    {/* Toolbar */}
+                    <div className="h-10 border-b border-[#333] flex items-center justify-between px-4 bg-[#282828]">
+                        <div className="flex items-center gap-2">
+                            <select
+                                value={language}
+                                onChange={e => setLanguage(e.target.value)}
+                                className="bg-transparent text-xs font-medium focus:outline-none cursor-pointer hover:text-white"
+                            >
+                                <option value="python">Python</option>
+                                <option value="javascript">JavaScript</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    {/* Editor */}
+                    <div className="flex-1 min-h-0 relative">
+                        <CodeEditor value={code} onChange={setCode} onRun={handleRun} language={language} theme="vs-dark" />
+                    </div>
+
+                    {/* Console */}
+                    <div className={`flex flex-col border-t border-[#333] bg-[#282828] transition-all duration-300 ${consoleOpen ? 'h-[300px]' : 'h-10'}`}>
+                        <div className="h-10 flex items-center justify-between px-4 cursor-pointer" onClick={() => setConsoleOpen(!consoleOpen)}>
+                            <div className="flex gap-4">
+                                <button onClick={e => { e.stopPropagation(); setConsoleTab('testcase'); setConsoleOpen(true); }} className={`text-xs font-semibold ${consoleTab === 'testcase' ? 'text-white' : 'text-[#8a8a8a]'}`}>Console</button>
+                                {results && (
+                                    <button onClick={e => { e.stopPropagation(); setConsoleTab('result'); setConsoleOpen(true); }} className={`text-xs font-semibold ${consoleTab === 'result' ? 'text-white' : 'text-[#8a8a8a]'}`}>Result</button>
+                                )}
+                            </div>
+                            <i className={`fas fa-chevron-${consoleOpen ? 'down' : 'up'} text-xs opacity-60`}></i>
+                        </div>
+
+                        {consoleOpen && (
+                            <div className="flex-1 overflow-hidden flex flex-col p-4">
+                                {consoleTab === 'testcase' ? (
+                                    <div className="flex flex-col gap-4">
+                                        <div className="flex gap-2">
+                                            {challenge.testCases?.map((_, idx) => (
+                                                <button
+                                                    key={idx}
+                                                    onClick={() => setActiveTestCase(idx)}
+                                                    className={`px-3 py-1.5 rounded bg-[#3e3e3e] text-xs font-medium ${activeTestCase === idx ? 'bg-[#4e4e4e] text-white shadow-lg' : 'text-[#8a8a8a] opacity-60'}`}
+                                                >
+                                                    Case {idx + 1}
+                                                </button>
+                                            ))}
+                                        </div>
+                                        <div className="flex flex-col gap-2">
+                                            <label className="text-[10px] uppercase font-bold tracking-widest opacity-40">Input</label>
+                                            <pre className="p-3 bg-[#1e1e1e] rounded text-sm font-mono whitespace-pre-wrap">{challenge.testCases?.[activeTestCase]?.input}</pre>
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <div className="flex flex-col gap-4 overflow-y-auto pr-2 dark-scrollbar">
+                                        <div className={`text-lg font-bold ${results?.passed ? 'text-[#00af9b]' : 'text-[#ff2d55]'}`}>
+                                            {results?.passed ? 'Accepted' : 'Wrong Answer'}
+                                        </div>
+                                        {results?.results?.map((res, idx) => (
+                                            <div key={idx} className="flex flex-col gap-2 p-3 bg-[#1e1e1e] rounded border border-[#333]">
+                                                <div className="flex items-center justify-between">
+                                                    <span className="text-xs font-bold opacity-60 uppercase">Case {idx + 1}</span>
+                                                    <span className={`text-[10px] uppercase font-black ${res.passed ? 'text-[#00af9b]' : 'text-[#ff2d55]'}`}>{res.passed ? 'Passed' : 'Failed'}</span>
+                                                </div>
+                                                <div className="grid grid-cols-2 gap-4">
+                                                    <div>
+                                                        <label className="text-[9px] uppercase font-bold opacity-30">Expected</label>
+                                                        <pre className="text-xs font-mono">{res.expectedOutput}</pre>
+                                                    </div>
+                                                    <div>
+                                                        <label className="text-[9px] uppercase font-bold opacity-30">Actual</label>
+                                                        <pre className={`text-xs font-mono ${!res.passed && 'text-[#ff2d55]'}`}>{res.actualOutput}</pre>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                        )}
+
+                        {/* Footer Actions */}
+                        <div className="h-12 border-t border-[#333] flex items-center justify-between px-4 bg-[#282828]">
+                            <button className="text-xs opacity-60 hover:opacity-100 flex items-center gap-1">Console <i className="fas fa-chevron-up text-[8px]"></i></button>
+                            <div className="flex gap-2">
+                                <button
+                                    onClick={handleRun}
+                                    disabled={running}
+                                    className="px-4 py-1.5 bg-[#3e3e3e] hover:bg-[#4e4e4e] rounded text-xs font-semibold transition-colors disabled:opacity-50"
+                                >
+                                    {running ? 'Running...' : 'Run'}
+                                </button>
+                                <button
+                                    onClick={handleSubmit}
+                                    disabled={running}
+                                    className="px-4 py-1.5 bg-[#00af9b] hover:bg-[#28c5b3] rounded text-xs font-semibold text-white transition-colors disabled:opacity-50"
+                                >
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
         </div>
     );
 }

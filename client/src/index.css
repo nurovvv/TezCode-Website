@@ -89,3 +89,58 @@ li {
   margin: 4px 0;
   line-height: 1.6;
 }
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.dark-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.dark-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.dark-scrollbar::-webkit-scrollbar-track {
+  background: #1e1e1e;
+}
+
+/* LeetCode Split Layout Utilities */
+.solver-container {
+  display: flex;
+  height: calc(100vh - 56px);
+  background: #1a1a1a;
+  color: #eff1f6;
+  overflow: hidden;
+}
+
+.pane-left {
+  flex: 1;
+  min-width: 300px;
+  border-right: 1px solid #333;
+  display: flex;
+  flex-direction: column;
+}
+
+.pane-right {
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+}

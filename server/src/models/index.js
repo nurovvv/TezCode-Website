@@ -170,6 +170,8 @@ const Challenge = sequelize.define('Challenge', {
     xpReward: { type: DataTypes.INTEGER, defaultValue: 10, field: 'xp_reward' },
     testCases: { type: DataTypes.JSON, field: 'test_cases' },
     starterCode: { type: DataTypes.TEXT, field: 'starter_code' },
+    tags: { type: DataTypes.JSON, defaultValue: [] },
+    topics: { type: DataTypes.JSON, defaultValue: [] },
 }, { tableName: 'challenges', timestamps: true, underscored: true });
 
 const ChallengeSubmission = sequelize.define('ChallengeSubmission', {
