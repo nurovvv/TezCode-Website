@@ -10,3 +10,12 @@ services:
     envVars:
       - key: NODE_ENV
         value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: tezcode-db
+          property: connectionString
+
+databases:
+  - name: tezcode-db
+    plan: free
+
