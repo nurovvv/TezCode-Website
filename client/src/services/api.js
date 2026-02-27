@@ -2,7 +2,13 @@ import axios from 'axios';
 
 // Base URL for API requests. In dev we usually hit the Vite proxy at /api.
 // In production (GitHub Pages) this should be set via VITE_API_BASE_URL to your backend URL.
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || (import.meta.env.DEV ? '/api/' : '/api/');
+const VITE_API_URL = import.meta.env.VITE_API_BASE_URL;
+
+if (!VITE_API_URL && !import.meta.env.DEV) {
+    console.warn('[API] VITE_API_BASE_URL is not set! API calls will likely fail on static host.');
+}
+
+const API_BASE_URL = VITE_API_URL || (import.meta.env.DEV ? '/api/' : '/api/');
 
 const api = axios.create({
     baseURL: API_BASE_URL,

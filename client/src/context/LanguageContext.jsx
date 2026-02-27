@@ -17,14 +17,24 @@ export function LanguageProvider({ children }) {
         localStorage.setItem('tezcode-lang', newLang);
     }, []);
 
-    const t = useCallback((key) => {
+    const t = useCallback((key, options = {}) => {
         const keys = key.split('.');
         let value = translations[lang];
+
         for (const k of keys) {
-            if (value === undefined) return key;
+            if (value === undefined || value === null) return key;
             value = value[k];
         }
-        return value || key;
+
+        if (value === undefined || value === null) return key;
+
+        // If it's an array/object and we didn't explicitly ask for it, 
+        // return the key or a stringified version to avoid React render errors
+        if (typeof value === 'object' && !options.returnObjects) {
+            return key;
+        }
+
+        return value;
     }, [lang]);
 
     return (
