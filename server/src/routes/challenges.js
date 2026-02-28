@@ -179,6 +179,18 @@ router.post('/:id/submit', authenticateOptional, async (req, res) => {
         }
 
         console.log(`Challenge result: ${passedAll ? 'PASSED ALL' : 'FAILED SOME'}`);
+        // Check if user already passed this challenge previously (before creating the new submission)
+        let alreadyPassed = null;
+        if (passedAll && req.user) {
+            alreadyPassed = await ChallengeSubmission.findOne({
+                where: {
+                    user_id: req.user.id,
+                    challenge_id: challenge.id,
+                    status: 'passed'
+                }
+            });
+        }
+
         // Record submission if user is logged in
         if (req.user) {
             await ChallengeSubmission.create({
@@ -192,15 +204,6 @@ router.post('/:id/submit', authenticateOptional, async (req, res) => {
         }
 
         if (passedAll && req.user) {
-            // Check if user already passed this challenge previously
-            const alreadyPassed = await ChallengeSubmission.findOne({
-                where: {
-                    user_id: req.user.id,
-                    challenge_id: challenge.id,
-                    status: 'passed'
-                }
-            });
-
             if (!alreadyPassed) {
                 const user = await User.findByPk(req.user.id);
                 if (user) {
