@@ -123,6 +123,9 @@ export default function LandingPage() {
 
                         {/* Contacts */}
                         <div>
+                            <p style={{ color: '#888', fontSize: '11px', fontWeight: 600, letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '16px' }}>
+                                CONTACTS
+                            </p>
                             <a href="https://t.me/tezcode" target="_blank" rel="noreferrer" style={{ display: 'block', color: 'inherit', textDecoration: 'none', marginBottom: '12px' }}>Telegram</a>
                             <a href="https://instagram.com/tezcode" target="_blank" rel="noreferrer" style={{ display: 'block', color: 'inherit', textDecoration: 'none', marginBottom: '12px' }}>Instagram</a>
                         </div>
