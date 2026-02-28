@@ -743,32 +743,14 @@ const COURSE_DATA = {
             ]
         },
         {
-            "id": "inheritance",
-            "title": "Python Inheritance",
-            "sections": [
-                {
-                    "id": "inheritance-basics",
-                    "title": "Inheritance"
-                },
-                {
-                    "id": "inheritance-challenge",
-                    "title": "Code Challenge"
-                }
-            ]
+            "id": "classes_header",
+            "title": "Python Classes",
+            "sections": []
         },
         {
-            "id": "polymorphism",
-            "title": "Python Polymorphism",
-            "sections": [
-                {
-                    "id": "polymorphism-basics",
-                    "title": "Polymorphism"
-                },
-                {
-                    "id": "polymorphism-challenge",
-                    "title": "Code Challenge"
-                }
-            ]
+            "id": "oop_header",
+            "title": "Python OOP",
+            "sections": []
         },
         {
             "id": "classes_objects",
@@ -840,6 +822,34 @@ const COURSE_DATA = {
                 },
                 {
                     "id": "class-methods-challenge",
+                    "title": "Code Challenge"
+                }
+            ]
+        },
+        {
+            "id": "inheritance",
+            "title": "Python Inheritance",
+            "sections": [
+                {
+                    "id": "inheritance-basics",
+                    "title": "Inheritance"
+                },
+                {
+                    "id": "inheritance-challenge",
+                    "title": "Code Challenge"
+                }
+            ]
+        },
+        {
+            "id": "polymorphism",
+            "title": "Python Polymorphism",
+            "sections": [
+                {
+                    "id": "polymorphism-basics",
+                    "title": "Polymorphism"
+                },
+                {
+                    "id": "polymorphism-challenge",
                     "title": "Code Challenge"
                 }
             ]
