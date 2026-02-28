@@ -4114,6 +4114,78 @@ else:
                     content: `<p>Glossary of common Python terms.</p>`
                 }
             ]
+        },
+
+        /* ────── 153. Module Reference (Header) ────── */
+        {
+            id: 'module_reference_header', title: 'Module Reference', isHeader: true,
+            sections: []
+        },
+
+        /* ────── 154. Built-in Modules ────── */
+        {
+            id: 'built_in_modules', title: 'Built-in Modules',
+            sections: [
+                {
+                    id: 'built-in-modules-basics', title: 'Built-in Modules',
+                    content: `<p>Learn about Python's built-in modules.</p>`
+                }
+            ]
+        },
+
+        /* ────── 155. Random Module ────── */
+        {
+            id: 'random_module', title: 'Random Module',
+            sections: [
+                {
+                    id: 'random-module-basics', title: 'Random Module',
+                    content: `<p>Reference guide to the random module in Python.</p>`
+                }
+            ]
+        },
+
+        /* ────── 156. Requests Module ────── */
+        {
+            id: 'requests_module', title: 'Requests Module',
+            sections: [
+                {
+                    id: 'requests-module-basics', title: 'Requests Module',
+                    content: `<p>Reference guide to the requests module in Python.</p>`
+                }
+            ]
+        },
+
+        /* ────── 157. Statistics Module ────── */
+        {
+            id: 'statistics_module', title: 'Statistics Module',
+            sections: [
+                {
+                    id: 'statistics-module-basics', title: 'Statistics Module',
+                    content: `<p>Reference guide to the statistics module in Python.</p>`
+                }
+            ]
+        },
+
+        /* ────── 158. Math Module ────── */
+        {
+            id: 'math_module', title: 'Math Module',
+            sections: [
+                {
+                    id: 'math-module-basics', title: 'Math Module',
+                    content: `<p>Reference guide to the math module in Python.</p>`
+                }
+            ]
+        },
+
+        /* ────── 159. cMath Module ────── */
+        {
+            id: 'cmath_module', title: 'cMath Module',
+            sections: [
+                {
+                    id: 'cmath-module-basics', title: 'cMath Module',
+                    content: `<p>Reference guide to the cmath module in Python.</p>`
+                }
+            ]
         }
     ],
 };

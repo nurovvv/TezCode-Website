@@ -1292,7 +1292,14 @@ const COURSE_DATA = {
         { "id": "python_file_methods", "title": "Python File Methods", "sections": [{ "id": "python-file-methods-basics", "title": "Python File Methods" }] },
         { "id": "python_keywords", "title": "Python Keywords", "sections": [{ "id": "python-keywords-basics", "title": "Python Keywords" }] },
         { "id": "python_exceptions", "title": "Python Exceptions", "sections": [{ "id": "python-exceptions-basics", "title": "Python Exceptions" }] },
-        { "id": "python_glossary", "title": "Python Glossary", "sections": [{ "id": "python-glossary-basics", "title": "Python Glossary" }] }
+        { "id": "python_glossary", "title": "Python Glossary", "sections": [{ "id": "python-glossary-basics", "title": "Python Glossary" }] },
+        { "id": "module_reference_header", "title": "Module Reference", "sections": [] },
+        { "id": "built_in_modules", "title": "Built-in Modules", "sections": [{ "id": "built-in-modules-basics", "title": "Built-in Modules" }] },
+        { "id": "random_module", "title": "Random Module", "sections": [{ "id": "random-module-basics", "title": "Random Module" }] },
+        { "id": "requests_module", "title": "Requests Module", "sections": [{ "id": "requests-module-basics", "title": "Requests Module" }] },
+        { "id": "statistics_module", "title": "Statistics Module", "sections": [{ "id": "statistics-module-basics", "title": "Statistics Module" }] },
+        { "id": "math_module", "title": "Math Module", "sections": [{ "id": "math-module-basics", "title": "Math Module" }] },
+        { "id": "cmath_module", "title": "cMath Module", "sections": [{ "id": "cmath-module-basics", "title": "cMath Module" }] }
     ]
 };
 
