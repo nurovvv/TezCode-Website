@@ -3491,12 +3491,235 @@ else:
         {
             id: 'ml_k_nearest_neighbors', title: 'K-nearest neighbors',
             sections: [
-                {
-                    id: 'ml-k-nearest-neighbors-basics', title: 'K-nearest neighbors',
-                    content: `<p>Learn about K-nearest neighbors (KNN) in Machine Learning.</p>`
+                }
+    ]
+},
+
+    /* ────── 95. Python DSA (Header) ────── */
+    {
+        id: 'python_dsa_header', title: 'Python DSA', isHeader: true,
+        sections: []
+    },
+
+    /* ────── 96. Python DSA ────── */
+    {
+        id: 'dsa_python_dsa', title: 'Python DSA',
+        sections: [
+            {
+                id: 'dsa-python-dsa-basics', title: 'Python DSA',
+                content: `<p>Learn Data Structures and Algorithms in Python.</p>`
                 }
             ]
-        }
+        },
+
+/* ────── 97. Lists and Arrays ────── */
+{
+    id: 'dsa_lists_and_arrays', title: 'Lists and Arrays',
+        sections: [
+            {
+                id: 'dsa-lists-and-arrays-basics', title: 'Lists and Arrays',
+                content: `<p>Learn about Lists and Arrays in Python DSA.</p>`
+            }
+        ]
+},
+
+/* ────── 98. Stacks ────── */
+{
+    id: 'dsa_stacks', title: 'Stacks',
+        sections: [
+            {
+                id: 'dsa-stacks-basics', title: 'Stacks',
+                content: `<p>Learn about Stacks in Python DSA.</p>`
+            }
+        ]
+},
+
+/* ────── 99. Queues ────── */
+{
+    id: 'dsa_queues', title: 'Queues',
+        sections: [
+            {
+                id: 'dsa-queues-basics', title: 'Queues',
+                content: `<p>Learn about Queues in Python DSA.</p>`
+            }
+        ]
+},
+
+/* ────── 100. Linked Lists ────── */
+{
+    id: 'dsa_linked_lists', title: 'Linked Lists',
+        sections: [
+            {
+                id: 'dsa-linked-lists-basics', title: 'Linked Lists',
+                content: `<p>Learn about Linked Lists in Python DSA.</p>`
+            }
+        ]
+},
+
+/* ────── 101. Hash Tables ────── */
+{
+    id: 'dsa_hash_tables', title: 'Hash Tables',
+        sections: [
+            {
+                id: 'dsa-hash-tables-basics', title: 'Hash Tables',
+                content: `<p>Learn about Hash Tables in Python DSA.</p>`
+            }
+        ]
+},
+
+/* ────── 102. Trees ────── */
+{
+    id: 'dsa_trees', title: 'Trees',
+        sections: [
+            {
+                id: 'dsa-trees-basics', title: 'Trees',
+                content: `<p>Learn about Trees in Python DSA.</p>`
+            }
+        ]
+},
+
+/* ────── 103. Binary Trees ────── */
+{
+    id: 'dsa_binary_trees', title: 'Binary Trees',
+        sections: [
+            {
+                id: 'dsa-binary-trees-basics', title: 'Binary Trees',
+                content: `<p>Learn about Binary Trees in Python DSA.</p>`
+            }
+        ]
+},
+
+/* ────── 104. Binary Search Trees ────── */
+{
+    id: 'dsa_binary_search_trees', title: 'Binary Search Trees',
+        sections: [
+            {
+                id: 'dsa-binary-search-trees-basics', title: 'Binary Search Trees',
+                content: `<p>Learn about Binary Search Trees in Python DSA.</p>`
+            }
+        ]
+},
+
+/* ────── 105. AVL Trees ────── */
+{
+    id: 'dsa_avl_trees', title: 'AVL Trees',
+        sections: [
+            {
+                id: 'dsa-avl-trees-basics', title: 'AVL Trees',
+                content: `<p>Learn about AVL Trees in Python DSA.</p>`
+            }
+        ]
+},
+
+/* ────── 106. Graphs ────── */
+{
+    id: 'dsa_graphs', title: 'Graphs',
+        sections: [
+            {
+                id: 'dsa-graphs-basics', title: 'Graphs',
+                content: `<p>Learn about Graphs in Python DSA.</p>`
+            }
+        ]
+},
+
+/* ────── 107. Linear Search ────── */
+{
+    id: 'dsa_linear_search', title: 'Linear Search',
+        sections: [
+            {
+                id: 'dsa-linear-search-basics', title: 'Linear Search',
+                content: `<p>Learn about Linear Search algorithms in Python DSA.</p>`
+            }
+        ]
+},
+
+/* ────── 108. Binary Search ────── */
+{
+    id: 'dsa_binary_search', title: 'Binary Search',
+        sections: [
+            {
+                id: 'dsa-binary-search-basics', title: 'Binary Search',
+                content: `<p>Learn about Binary Search algorithms in Python DSA.</p>`
+            }
+        ]
+},
+
+/* ────── 109. Bubble Sort ────── */
+{
+    id: 'dsa_bubble_sort', title: 'Bubble Sort',
+        sections: [
+            {
+                id: 'dsa-bubble-sort-basics', title: 'Bubble Sort',
+                content: `<p>Learn about the Bubble Sort algorithm in Python DSA.</p>`
+            }
+        ]
+},
+
+/* ────── 110. Selection Sort ────── */
+{
+    id: 'dsa_selection_sort', title: 'Selection Sort',
+        sections: [
+            {
+                id: 'dsa-selection-sort-basics', title: 'Selection Sort',
+                content: `<p>Learn about the Selection Sort algorithm in Python DSA.</p>`
+            }
+        ]
+},
+
+/* ────── 111. Insertion Sort ────── */
+{
+    id: 'dsa_insertion_sort', title: 'Insertion Sort',
+        sections: [
+            {
+                id: 'dsa-insertion-sort-basics', title: 'Insertion Sort',
+                content: `<p>Learn about the Insertion Sort algorithm in Python DSA.</p>`
+            }
+        ]
+},
+
+/* ────── 112. Quick Sort ────── */
+{
+    id: 'dsa_quick_sort', title: 'Quick Sort',
+        sections: [
+            {
+                id: 'dsa-quick-sort-basics', title: 'Quick Sort',
+                content: `<p>Learn about the Quick Sort algorithm in Python DSA.</p>`
+            }
+        ]
+},
+
+/* ────── 113. Counting Sort ────── */
+{
+    id: 'dsa_counting_sort', title: 'Counting Sort',
+        sections: [
+            {
+                id: 'dsa-counting-sort-basics', title: 'Counting Sort',
+                content: `<p>Learn about the Counting Sort algorithm in Python DSA.</p>`
+            }
+        ]
+},
+
+/* ────── 114. Radix Sort ────── */
+{
+    id: 'dsa_radix_sort', title: 'Radix Sort',
+        sections: [
+            {
+                id: 'dsa-radix-sort-basics', title: 'Radix Sort',
+                content: `<p>Learn about the Radix Sort algorithm in Python DSA.</p>`
+            }
+        ]
+},
+
+/* ────── 115. Merge Sort ────── */
+{
+    id: 'dsa_merge_sort', title: 'Merge Sort',
+        sections: [
+            {
+                id: 'dsa-merge-sort-basics', title: 'Merge Sort',
+                content: `<p>Learn about the Merge Sort algorithm in Python DSA.</p>`
+            }
+        ]
+}
     ],
 };
 
