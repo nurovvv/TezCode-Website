@@ -972,80 +972,7 @@ Hello, World!</div>
                     content: `<p>Test your knowledge of everything you've learned about Python operators!</p>`
                 }
             ]
-        }, {
-            id: 'operators-assignment', title: 'Assignment Operators',
-            content: `<p>Assignment operators are used to assign values to variables.</p>`,
-            examples: [
-                { title: 'Basic Assignment (=)', code: 'x = 5\nprint(x)' },
-                { title: 'Add AND (+=)', code: 'x = 5\nx += 3   # Same as x = x + 3\nprint(x) # 8' },
-                { title: 'Subtract AND (-=)', code: 'x = 5\nx -= 3   # Same as x = x - 3\nprint(x) # 2' },
-                { title: 'Multiply AND (*=)', code: 'x = 5\nx *= 3   # Same as x = x * 3\nprint(x) # 15' },
-                { title: 'Divide AND (/=)', code: 'x = 5\nx /= 2   # Same as x = x / 2\nprint(x) # 2.5' }
-            ],
-            exercise: { question: 'What is x after: x = 10; x += 5', options: ['5', '10', '15'], answer: 2 }
         },
-        {
-            id: 'operators-comparison', title: 'Comparison Operators',
-            content: `<p>Comparison operators are used to compare two values. They return a boolean (True or False).</p>`,
-            examples: [
-                { title: 'Equal and Not Equal', code: 'x = 5\ny = 3\n\nprint(x == y)  # False (Equal)\nprint(x != y)  # True (Not equal)' },
-                { title: 'Greater / Less Than', code: 'x = 5\ny = 3\n\nprint(x > y)   # True (Greater than)\nprint(x < y)   # False (Less than)' },
-                { title: 'Greater/Less or Equal', code: 'x = 5\ny = 5\n\nprint(x >= y)  # True (Greater than or equal to)\nprint(x <= y)  # True (Less than or equal to)' }
-            ],
-            exercise: { question: 'Which operator checks if two values are equal?', options: ['=', '==', '!=', '==='], answer: 1 }
-        },
-        {
-            id: 'operators-logical', title: 'Logical Operators',
-            content: `<p>Logical operators are used to combine conditional statements.</p>`,
-            examples: [
-                { title: 'The "and" Operator', code: 'x = 5\n# Returns True if BOTH statements are true\nprint(x > 3 and x < 10)  # True' },
-                { title: 'The "or" Operator', code: 'x = 5\n# Returns True if ONE of the statements is true\nprint(x > 10 or x < 10)  # True' },
-                { title: 'The "not" Operator', code: 'x = 5\n# Reverse the result (returns False if the result is true)\nprint(not(x > 3 and x < 10))  # False' }
-            ],
-            exercise: { question: 'What does "True and False" evaluate to?', options: ['True', 'False', 'None'], answer: 1 }
-        },
-        {
-            id: 'operators-identity', title: 'Identity Operators',
-            content: `<p>Identity operators are used to compare the objects, not if they are equal, but if they are actually the <strong>same object</strong> with the same memory location.</p>`,
-            examples: [
-                { title: 'The "is" Operator', code: 'x = ["apple", "banana"]\ny = ["apple", "banana"]\nz = x\n\nprint(x is z)  # True (z is the same object as x)\nprint(x is y)  # False (y is a different object, even though content is the same)\n\nprint(x == y)  # True (== checks value equality, "is" checks identity)' },
-                { title: 'The "is not" Operator', code: 'x = ["apple", "banana"]\ny = ["apple", "banana"]\n\nprint(x is not y)  # True (they are not the same object in memory)' }
-            ],
-            exercise: { question: 'Difference between "==" and "is"?', options: ['"==" checks value, "is" checks memory identity', 'They are the same', 'No difference'], answer: 0 }
-        },
-        {
-            id: 'operators-membership', title: 'Membership Operators',
-            content: `<p>Membership operators are used to test if a sequence is presented in an object.</p>`,
-            examples: [
-                { title: 'The "in" Operator', code: 'fruits = ["apple", "banana"]\n\nprint("banana" in fruits)  # True\nprint("orange" in fruits)  # False\n\n# Works on strings too!\nname = "Python"\nprint("yt" in name)        # True' },
-                { title: 'The "not in" Operator', code: 'fruits = ["apple", "banana"]\n\nprint("pineapple" not in fruits)  # True' }
-            ],
-            exercise: { question: 'Which operator checks if an item is inside a list?', options: ['inside', 'has', 'in'], answer: 2 }
-        },
-        {
-            id: 'operators-precedence', title: 'Operator Precedence',
-            content: `<p>Operator precedence describes the order in which operations are performed.</p>`,
-            examples: [
-                { title: 'Precedence Rules', code: '# Multiplication has higher precedence than addition:\nprint(10 + 5 * 2)  # 20\n\n# Parentheses have the highest precedence:\nprint((10 + 5) * 2)  # 30' }
-            ],
-            exercise: { question: 'Which operation is evaluated first in: 10 + 5 * 2?', options: ['10 + 5', '5 * 2'], answer: 1 }
-        },
-        {
-            id: 'operators-challenge', title: 'Code Challenge',
-            type: 'challenge',
-            instructions: [
-                'Create two variables: <code>a = 15</code> and <code>b = 4</code>',
-                'Print the result of the division (<code>/</code>)',
-                'Print the result of the floor division (<code>//</code>)',
-                'Check if <code>a</code> is greater than 10 AND <code>b</code> is less than 5',
-                'Use the assignment operator (<code>+=</code>) to add 10 to <code>a</code>'
-            ],
-            starterCode: '# Create variables\n\n# Division\n\n# Floor division\n\n# Logical Check\n\n# Assignment\n',
-            solution: 'a = 15\nb = 4\nprint(a / b)\nprint(a // b)\nprint(a > 10 and b < 5)\na += 10\nprint(a)',
-            content: `<p>Test your knowledge of everything you've learned about Python operators!</p>`
-        }
-    ]
-},
 
     /* ────── 14. Python Lists ────── */
         {
@@ -1053,7 +980,7 @@ Hello, World!</div>
             sections: [
                 {
                     id: 'lists-intro', title: 'Python Lists',
-                    content: \`<p>Lists are used to store multiple items in a single variable.</p>
+                    content: `<p>Lists are used to store multiple items in a single variable.</p>
 <p>Lists are one of 4 built-in data types in Python used to store collections of data. The other 3 are Tuple, Set, and Dictionary.</p>
 <p>Lists are created using square brackets <code>[]</code>.</p>
 <p>List items are:</p>
@@ -1061,22 +988,22 @@ Hello, World!</div>
 <li><strong>Ordered</strong> — they have a defined order that will not change.</li>
 <li><strong>Changeable</strong> — we can change, add, and remove items after it has been created.</li>
 <li><strong>Allow duplicates</strong> — lists can have items with the same value.</li>
-</ul>\`,
+</ul>`,
                     examples: [
                         {
                             title: 'Create a List',
-                            code: 'fruits = ["apple", "banana", "cherry"]\\nprint(fruits)\\nprint(type(fruits))  # <class \\'list\\'>\\nprint(len(fruits))   # 3 items',
-                            preContent: \`<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Create a List</h2>\\n<p>Use square brackets to create a list:</p>\`
+                            code: 'fruits = ["apple", "banana", "cherry"]\nprint(fruits)\nprint(type(fruits))  # <class \'list\'>\nprint(len(fruits))   # 3 items',
+                            preContent: `<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Create a List</h2>\n<p>Use square brackets to create a list:</p>`
                         },
                         {
                             title: 'Allow Duplicates',
-                            code: 'fruits = ["apple", "banana", "cherry", "apple", "cherry"]\\nprint(fruits)  # both apples and cherries are kept',
-                            preContent: \`<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Duplicates Allowed</h2>\\n<p>Because lists are indexed, they can have items with the same value:</p>\`
+                            code: 'fruits = ["apple", "banana", "cherry", "apple", "cherry"]\nprint(fruits)  # both apples and cherries are kept',
+                            preContent: `<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Duplicates Allowed</h2>\n<p>Because lists are indexed, they can have items with the same value:</p>`
                         },
                         {
                             title: 'List Data Types',
-                            code: 'list1 = ["apple", "banana", "cherry"]    # Strings\\nlist2 = [1, 5, 7, 9, 3]                  # Integers\\nlist3 = [True, False, False]             # Booleans\\n\\n# A list can contain different data types:\\nlist4 = ["abc", 34, True, 40, "male"]\\nprint(list4)',
-                            preContent: \`<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Any Data Type</h2>\\n<p>List items can be of any data type, and a single list can contain different types:</p>\`
+                            code: 'list1 = ["apple", "banana", "cherry"]    # Strings\nlist2 = [1, 5, 7, 9, 3]                  # Integers\nlist3 = [True, False, False]             # Booleans\n\n# A list can contain different data types:\nlist4 = ["abc", 34, True, 40, "male"]\nprint(list4)',
+                            preContent: `<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Any Data Type</h2>\n<p>List items can be of any data type, and a single list can contain different types:</p>`
                         }
                     ],
                     exercise: {
@@ -1087,28 +1014,28 @@ Hello, World!</div>
                 },
                 {
                     id: 'lists-access', title: 'Access List Items',
-                    content: \`<p>List items are indexed, which means you can access them by referring to their index number.</p>
-<p><strong>Note:</strong> The first item has index <code>0</code>, not <code>1</code>!</p>\`,
+                    content: `<p>List items are indexed, which means you can access them by referring to their index number.</p>
+<p><strong>Note:</strong> The first item has index <code>0</code>, not <code>1</code>!</p>`,
                     examples: [
                         {
                             title: 'Access Items',
-                            code: 'fruits = ["apple", "banana", "cherry", "orange", "kiwi"]\\nprint(fruits[0])  # apple\\nprint(fruits[1])  # banana',
-                            preContent: \`<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Access Items</h2>\`
+                            code: 'fruits = ["apple", "banana", "cherry", "orange", "kiwi"]\nprint(fruits[0])  # apple\nprint(fruits[1])  # banana',
+                            preContent: `<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Access Items</h2>`
                         },
                         {
                             title: 'Negative Indexing',
-                            code: 'fruits = ["apple", "banana", "cherry", "orange", "kiwi"]\\nprint(fruits[-1])  # kiwi (last item)\\nprint(fruits[-2])  # orange (second to last)',
-                            preContent: \`<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Negative Indexing</h2>\\n<p><code>-1</code> refers to the last item, <code>-2</code> refers to the second last item etc.</p>\`
+                            code: 'fruits = ["apple", "banana", "cherry", "orange", "kiwi"]\nprint(fruits[-1])  # kiwi (last item)\nprint(fruits[-2])  # orange (second to last)',
+                            preContent: `<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Negative Indexing</h2>\n<p><code>-1</code> refers to the last item, <code>-2</code> refers to the second last item etc.</p>`
                         },
                         {
                             title: 'Range of Indexes (Slicing)',
-                            code: 'fruits = ["apple", "banana", "cherry", "orange", "kiwi", "melon", "mango"]\\n\\nprint(fruits[2:5])   # [\\'cherry\\', \\'orange\\', \\'kiwi\\']\\nprint(fruits[:4])    # Starts from beginning: [\\'apple\\', \\'banana\\', \\'cherry\\', \\'orange\\']\\nprint(fruits[4:])    # Goes to the end: [\\'kiwi\\', \\'melon\\', \\'mango\\']\\nprint(fruits[-4:-1]) # Negative slice: [\\'orange\\', \\'kiwi\\', \\'melon\\']',
-                            preContent: \`<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Range of Indexes</h2>\\n<p>You can specify a range of indexes. The return value will be a <strong>new list</strong>.</p>\`
+                            code: 'fruits = ["apple", "banana", "cherry", "orange", "kiwi", "melon", "mango"]\n\nprint(fruits[2:5])   # [\'cherry\', \'orange\', \'kiwi\']\nprint(fruits[:4])    # Starts from beginning: [\'apple\', \'banana\', \'cherry\', \'orange\']\nprint(fruits[4:])    # Goes to the end: [\'kiwi\', \'melon\', \'mango\']\nprint(fruits[-4:-1]) # Negative slice: [\'orange\', \'kiwi\', \'melon\']',
+                            preContent: `<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Range of Indexes</h2>\n<p>You can specify a range of indexes. The return value will be a <strong>new list</strong>.</p>`
                         },
                         {
                             title: 'Check if Item Exists',
-                            code: 'fruits = ["apple", "banana", "cherry"]\\nif "apple" in fruits:\\n    print("Yes, apple is in the fruits list")\\nelse:\\n    print("No, not found")',
-                            preContent: \`<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Check If Exists</h2>\\n<p>Use the <code>in</code> keyword to check if an item exists:</p>\`
+                            code: 'fruits = ["apple", "banana", "cherry"]\nif "apple" in fruits:\n    print("Yes, apple is in the fruits list")\nelse:\n    print("No, not found")',
+                            preContent: `<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Check If Exists</h2>\n<p>Use the <code>in</code> keyword to check if an item exists:</p>`
                         }
                     ],
                     exercise: {
@@ -1119,22 +1046,22 @@ Hello, World!</div>
                 },
                 {
                     id: 'lists-change', title: 'Change List Items',
-                    content: \`<p>To change the value of a specific item, refer to the index number.</p>\`,
+                    content: `<p>To change the value of a specific item, refer to the index number.</p>`,
                     examples: [
                         {
                             title: 'Change Item Value',
-                            code: 'fruits = ["apple", "banana", "cherry"]\\nfruits[1] = "blackcurrant"\\nprint(fruits)  # [\\'apple\\', \\'blackcurrant\\', \\'cherry\\']',
-                            preContent: \`<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Change One Item</h2>\`
+                            code: 'fruits = ["apple", "banana", "cherry"]\nfruits[1] = "blackcurrant"\nprint(fruits)  # [\'apple\', \'blackcurrant\', \'cherry\']',
+                            preContent: `<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Change One Item</h2>`
                         },
                         {
                             title: 'Change a Range of Item Values',
-                            code: 'fruits = ["apple", "banana", "cherry", "orange", "kiwi", "mango"]\\nfruits[1:3] = ["blackcurrant", "watermelon"]\\nprint(fruits)  # [\\'apple\\', \\'blackcurrant\\', \\'watermelon\\', \\'orange\\', \\'kiwi\\', \\'mango\\']',
-                            preContent: \`<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Change Multiple Items</h2>\\n<p>Specify a range and assign a new list of values.</p>\`
+                            code: 'fruits = ["apple", "banana", "cherry", "orange", "kiwi", "mango"]\nfruits[1:3] = ["blackcurrant", "watermelon"]\nprint(fruits)  # [\'apple\', \'blackcurrant\', \'watermelon\', \'orange\', \'kiwi\', \'mango\']',
+                            preContent: `<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Change Multiple Items</h2>\n<p>Specify a range and assign a new list of values.</p>`
                         },
                         {
                             title: 'Insert Items',
-                            code: 'fruits = ["apple", "banana", "cherry"]\\nfruits.insert(2, "watermelon")\\nprint(fruits)  # [\\'apple\\', \\'banana\\', \\'watermelon\\', \\'cherry\\']',
-                            preContent: \`<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Insert Items</h2>\\n<p>To insert a new item without replacing any existing values, use the <code>insert()</code> method.</p>\`
+                            code: 'fruits = ["apple", "banana", "cherry"]\nfruits.insert(2, "watermelon")\nprint(fruits)  # [\'apple\', \'banana\', \'watermelon\', \'cherry\']',
+                            preContent: `<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Insert Items</h2>\n<p>To insert a new item without replacing any existing values, use the <code>insert()</code> method.</p>`
                         }
                     ],
                     exercise: {
@@ -1145,27 +1072,27 @@ Hello, World!</div>
                 },
                 {
                     id: 'lists-add', title: 'Add List Items',
-                    content: \`<p>Python has several methods to add new items to a list.</p>\`,
+                    content: `<p>Python has several methods to add new items to a list.</p>`,
                     examples: [
                         {
                             title: 'Append Items',
-                            code: 'fruits = ["apple", "banana", "cherry"]\\nfruits.append("orange")\\nprint(fruits)  # [\\'apple\\', \\'banana\\', \\'cherry\\', \\'orange\\']',
-                            preContent: \`<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Append</h2>\\n<p>To add an item to the <strong>end</strong> of the list, use the <code>append()</code> method:</p>\`
+                            code: 'fruits = ["apple", "banana", "cherry"]\nfruits.append("orange")\nprint(fruits)  # [\'apple\', \'banana\', \'cherry\', \'orange\']',
+                            preContent: `<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Append</h2>\n<p>To add an item to the <strong>end</strong> of the list, use the <code>append()</code> method:</p>`
                         },
                         {
                             title: 'Insert Items',
-                            code: 'fruits = ["apple", "banana", "cherry"]\\nfruits.insert(1, "orange")\\nprint(fruits)  # [\\'apple\\', \\'orange\\', \\'banana\\', \\'cherry\\']',
-                            preContent: \`<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Insert</h2>\\n<p>To insert an item at a <strong>specified index</strong>, use <code>insert()</code>:</p>\`
+                            code: 'fruits = ["apple", "banana", "cherry"]\nfruits.insert(1, "orange")\nprint(fruits)  # [\'apple\', \'orange\', \'banana\', \'cherry\']',
+                            preContent: `<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Insert</h2>\n<p>To insert an item at a <strong>specified index</strong>, use <code>insert()</code>:</p>`
                         },
                         {
                             title: 'Extend List',
-                            code: 'fruits = ["apple", "banana", "cherry"]\\ntropical = ["mango", "pineapple", "papaya"]\\nfruits.extend(tropical)\\nprint(fruits)',
-                            preContent: \`<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Extend</h2>\\n<p>To append elements from <strong>another list</strong> to the current list, use <code>extend()</code>:</p>\`
+                            code: 'fruits = ["apple", "banana", "cherry"]\ntropical = ["mango", "pineapple", "papaya"]\nfruits.extend(tropical)\nprint(fruits)',
+                            preContent: `<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Extend</h2>\n<p>To append elements from <strong>another list</strong> to the current list, use <code>extend()</code>:</p>`
                         },
                         {
                             title: 'Add Any Iterable',
-                            code: 'fruits = ["apple", "banana"]\\nmytuple = ("kiwi", "orange")  # A tuple\\nfruits.extend(mytuple)        # Works with tuples, sets, dictionaries!\\nprint(fruits)',
-                            preContent: \`<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Add Any Iterable</h2>\\n<p>The <code>extend()</code> method doesn\\'t have to append lists, you can add any iterable object.</p>\`
+                            code: 'fruits = ["apple", "banana"]\nmytuple = ("kiwi", "orange")  # A tuple\nfruits.extend(mytuple)        # Works with tuples, sets, dictionaries!\nprint(fruits)',
+                            preContent: `<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Add Any Iterable</h2>\n<p>The <code>extend()</code> method doesn\'t have to append lists, you can add any iterable object.</p>`
                         }
                     ],
                     exercise: {
@@ -1176,27 +1103,27 @@ Hello, World!</div>
                 },
                 {
                     id: 'lists-remove', title: 'Remove List Items',
-                    content: \`<p>There are multiple ways to remove items from a list.</p>\`,
+                    content: `<p>There are multiple ways to remove items from a list.</p>`,
                     examples: [
                         {
                             title: 'Remove Specified Item',
-                            code: 'fruits = ["apple", "banana", "cherry", "banana"]\\nfruits.remove("banana")\\nprint(fruits)  # Removes the FIRST occurrence of "banana"',
-                            preContent: \`<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">The remove() Method</h2>\\n<p><code>remove()</code> removes the specified item:</p>\`
+                            code: 'fruits = ["apple", "banana", "cherry", "banana"]\nfruits.remove("banana")\nprint(fruits)  # Removes the FIRST occurrence of "banana"',
+                            preContent: `<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">The remove() Method</h2>\n<p><code>remove()</code> removes the specified item:</p>`
                         },
                         {
                             title: 'Remove Specified Index',
-                            code: 'fruits = ["apple", "banana", "cherry"]\\nfruits.pop(1)\\nprint(fruits)  # [\\'apple\\', \\'cherry\\']\\n\\n# Without index, pop() removes the last item:\\nfruits.pop()\\nprint(fruits)  # [\\'apple\\']',
-                            preContent: \`<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">The pop() Method</h2>\\n<p><code>pop()</code> removes the specified index. If you don\\'t specify an index, it removes the last item.</p>\`
+                            code: 'fruits = ["apple", "banana", "cherry"]\nfruits.pop(1)\nprint(fruits)  # [\'apple\', \'cherry\']\n\n# Without index, pop() removes the last item:\nfruits.pop()\nprint(fruits)  # [\'apple\']',
+                            preContent: `<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">The pop() Method</h2>\n<p><code>pop()</code> removes the specified index. If you don\'t specify an index, it removes the last item.</p>`
                         },
                         {
                             title: 'The del Keyword',
-                            code: 'fruits = ["apple", "banana", "cherry"]\\ndel fruits[0]\\nprint(fruits)  # [\\'banana\\', \\'cherry\\']\\n\\n# You can also delete the entire list\\ndel fruits',
-                            preContent: \`<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">The del Keyword</h2>\\n<p><code>del</code> can remove an index or delete the entire list completely:</p>\`
+                            code: 'fruits = ["apple", "banana", "cherry"]\ndel fruits[0]\nprint(fruits)  # [\'banana\', \'cherry\']\n\n# You can also delete the entire list\ndel fruits',
+                            preContent: `<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">The del Keyword</h2>\n<p><code>del</code> can remove an index or delete the entire list completely:</p>`
                         },
                         {
                             title: 'Clear the List',
-                            code: 'fruits = ["apple", "banana", "cherry"]\\nfruits.clear()\\nprint(fruits)  # [] — the list still exists, but has no content',
-                            preContent: \`<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">The clear() Method</h2>\\n<p><code>clear()</code> empties the list:</p>\`
+                            code: 'fruits = ["apple", "banana", "cherry"]\nfruits.clear()\nprint(fruits)  # [] — the list still exists, but has no content',
+                            preContent: `<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">The clear() Method</h2>\n<p><code>clear()</code> empties the list:</p>`
                         }
                     ],
                     exercise: {
@@ -1207,22 +1134,22 @@ Hello, World!</div>
                 },
                 {
                     id: 'lists-loop', title: 'Loop Lists',
-                    content: \`<p>You can loop through the list items by using a <code>for</code> loop.</p>\`,
+                    content: `<p>You can loop through the list items by using a <code>for</code> loop.</p>`,
                     examples: [
                         {
                             title: 'Loop Through Items',
-                            code: 'fruits = ["apple", "banana", "cherry"]\\nfor fruit in fruits:\\n    print(fruit)',
-                            preContent: \`<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Loop Through Items</h2>\`
+                            code: 'fruits = ["apple", "banana", "cherry"]\nfor fruit in fruits:\n    print(fruit)',
+                            preContent: `<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Loop Through Items</h2>`
                         },
                         {
                             title: 'Loop Through Index Numbers',
-                            code: 'fruits = ["apple", "banana", "cherry"]\\nfor i in range(len(fruits)):\\n    print(f"Index {i}: {fruits[i]}")',
-                            preContent: \`<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Loop Through Indexes</h2>\\n<p>Use <code>range()</code> and <code>len()</code> to create a suitable iterable.</p>\`
+                            code: 'fruits = ["apple", "banana", "cherry"]\nfor i in range(len(fruits)):\n    print(f"Index {i}: {fruits[i]}")',
+                            preContent: `<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Loop Through Indexes</h2>\n<p>Use <code>range()</code> and <code>len()</code> to create a suitable iterable.</p>`
                         },
                         {
                             title: 'Using a While Loop',
-                            code: 'fruits = ["apple", "banana", "cherry"]\\ni = 0\\nwhile i < len(fruits):\\n    print(fruits[i])\\n    i += 1',
-                            preContent: \`<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Using While Loop</h2>\\n<p>You can loop using a <code>while</code> loop and an index number.</p>\`
+                            code: 'fruits = ["apple", "banana", "cherry"]\ni = 0\nwhile i < len(fruits):\n    print(fruits[i])\n    i += 1',
+                            preContent: `<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Using While Loop</h2>\n<p>You can loop using a <code>while</code> loop and an index number.</p>`
                         }
                     ],
                     exercise: {
@@ -1233,22 +1160,22 @@ Hello, World!</div>
                 },
                 {
                     id: 'lists-comprehension', title: 'List Comprehension',
-                    content: \`<p>List comprehension offers a shorter syntax when you want to create a new list based on the values of an existing list.</p>\`,
+                    content: `<p>List comprehension offers a shorter syntax when you want to create a new list based on the values of an existing list.</p>`,
                     examples: [
                         {
                             title: 'Without List Comprehension',
-                            code: 'fruits = ["apple", "banana", "cherry", "kiwi", "mango"]\\nnewlist = []\\n\\nfor fruit in fruits:\\n    if "a" in fruit:\\n        newlist.append(fruit)\\n\\nprint(newlist)',
-                            preContent: \`<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">The Long Way</h2>\\n<p>You want a new list with only fruits containing "a":</p>\`
+                            code: 'fruits = ["apple", "banana", "cherry", "kiwi", "mango"]\nnewlist = []\n\nfor fruit in fruits:\n    if "a" in fruit:\n        newlist.append(fruit)\n\nprint(newlist)',
+                            preContent: `<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">The Long Way</h2>\n<p>You want a new list with only fruits containing "a":</p>`
                         },
                         {
                             title: 'With List Comprehension',
-                            code: 'fruits = ["apple", "banana", "cherry", "kiwi", "mango"]\\n\\n# One line of code!\\nnewlist = [fruit for fruit in fruits if "a" in fruit]\\n\\nprint(newlist)',
-                            preContent: \`<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">The Short Way</h2>\\n<p>You can do it in one line with list comprehension:</p>\`
+                            code: 'fruits = ["apple", "banana", "cherry", "kiwi", "mango"]\n\n# One line of code!\nnewlist = [fruit for fruit in fruits if "a" in fruit]\n\nprint(newlist)',
+                            preContent: `<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">The Short Way</h2>\n<p>You can do it in one line with list comprehension:</p>`
                         },
                         {
                             title: 'Syntax: [expression for item in iterable if condition == True]',
-                            code: '# Condition is optional\\nall_upper = [f.upper() for f in fruits]\\n\\n# Range iterable\\nnumbers = [x for x in range(10)]\\n\\n# With condition\\nevens = [x for x in range(10) if x % 2 == 0]\\n\\nprint(all_upper)\\nprint(numbers)\\nprint(evens)',
-                            preContent: \`<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Syntax</h2>\`
+                            code: '# Condition is optional\nall_upper = [f.upper() for f in fruits]\n\n# Range iterable\nnumbers = [x for x in range(10)]\n\n# With condition\nevens = [x for x in range(10) if x % 2 == 0]\n\nprint(all_upper)\nprint(numbers)\nprint(evens)',
+                            preContent: `<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Syntax</h2>`
                         }
                     ],
                     exercise: {
@@ -1259,27 +1186,27 @@ Hello, World!</div>
                 },
                 {
                     id: 'lists-sort', title: 'Sort Lists',
-                    content: \`<p>List objects have a <code>sort()</code> method that will sort the list alphanumerically, ascending, by default.</p>\`,
+                    content: `<p>List objects have a <code>sort()</code> method that will sort the list alphanumerically, ascending, by default.</p>`,
                     examples: [
                         {
                             title: 'Sort Alphanumerically',
-                            code: 'fruits = ["orange", "mango", "kiwi", "pineapple", "banana"]\\nfruits.sort()\\nprint(fruits)\\n\\nnumbers = [100, 50, 65, 82, 23]\\nnumbers.sort()\\nprint(numbers)',
-                            preContent: \`<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Sort Ascending</h2>\`
+                            code: 'fruits = ["orange", "mango", "kiwi", "pineapple", "banana"]\nfruits.sort()\nprint(fruits)\n\nnumbers = [100, 50, 65, 82, 23]\nnumbers.sort()\nprint(numbers)',
+                            preContent: `<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Sort Ascending</h2>`
                         },
                         {
                             title: 'Sort Descending',
-                            code: 'fruits = ["orange", "mango", "kiwi", "pineapple", "banana"]\\nfruits.sort(reverse = True)\\nprint(fruits)\\n\\nnumbers = [100, 50, 65, 82, 23]\\nnumbers.sort(reverse = True)\\nprint(numbers)',
-                            preContent: \`<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Sort Descending</h2>\\n<p>Use the keyword argument <code>reverse = True</code>:</p>\`
+                            code: 'fruits = ["orange", "mango", "kiwi", "pineapple", "banana"]\nfruits.sort(reverse = True)\nprint(fruits)\n\nnumbers = [100, 50, 65, 82, 23]\nnumbers.sort(reverse = True)\nprint(numbers)',
+                            preContent: `<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Sort Descending</h2>\n<p>Use the keyword argument <code>reverse = True</code>:</p>`
                         },
                         {
                             title: 'Case Insensitive Sort',
-                            code: 'fruits = ["banana", "Orange", "Kiwi", "cherry"]\\n\\n# By default, capital letters are sorted before lower case!\\nfruits.sort()\\nprint("Default sort:", fruits)\\n\\n# Case-insensitive sort\\nfruits.sort(key = str.lower)\\nprint("Case insensitive:", fruits)',
-                            preContent: \`<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Case Insensitive Sort</h2>\\n<p>By default, capital letters sort before lowercase. To ignore case, use <code>key = str.lower</code></p>\`
+                            code: 'fruits = ["banana", "Orange", "Kiwi", "cherry"]\n\n# By default, capital letters are sorted before lower case!\nfruits.sort()\nprint("Default sort:", fruits)\n\n# Case-insensitive sort\nfruits.sort(key = str.lower)\nprint("Case insensitive:", fruits)',
+                            preContent: `<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Case Insensitive Sort</h2>\n<p>By default, capital letters sort before lowercase. To ignore case, use <code>key = str.lower</code></p>`
                         },
                         {
                             title: 'Reverse Order',
-                            code: 'fruits = ["apple", "banana", "cherry"]\\nfruits.reverse()\\nprint(fruits)',
-                            preContent: \`<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Reverse Order</h2>\\n<p>Use the <code>reverse()</code> method reverses the current sorting order of the elements.</p>\`
+                            code: 'fruits = ["apple", "banana", "cherry"]\nfruits.reverse()\nprint(fruits)',
+                            preContent: `<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Reverse Order</h2>\n<p>Use the <code>reverse()</code> method reverses the current sorting order of the elements.</p>`
                         }
                     ],
                     exercise: {
@@ -1290,22 +1217,22 @@ Hello, World!</div>
                 },
                 {
                     id: 'lists-copy', title: 'Copy Lists',
-                    content: \`<p>You cannot copy a list simply by typing <code>list2 = list1</code>, because: <code>list2</code> will only be a <em>reference</em> to <code>list1</code>, and changes made in <code>list1</code> will automatically also be made in <code>list2</code>.</p>\`,
+                    content: `<p>You cannot copy a list simply by typing <code>list2 = list1</code>, because: <code>list2</code> will only be a <em>reference</em> to <code>list1</code>, and changes made in <code>list1</code> will automatically also be made in <code>list2</code>.</p>`,
                     examples: [
                         {
                             title: 'The Reference Problem (Why we copy)',
-                            code: 'list1 = ["apple", "banana"]\\nlist2 = list1   # This is just a reference, NOT a copy!\\n\\nlist1.append("cherry")\\nprint(list2)    # list2 changed too! [\\'apple\\', \\'banana\\', \\'cherry\\']',
-                            preContent: \`<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">The Reference Problem</h2>\`
+                            code: 'list1 = ["apple", "banana"]\nlist2 = list1   # This is just a reference, NOT a copy!\n\nlist1.append("cherry")\nprint(list2)    # list2 changed too! [\'apple\', \'banana\', \'cherry\']',
+                            preContent: `<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">The Reference Problem</h2>`
                         },
                         {
                             title: 'Alternative 1: Use the copy() method',
-                            code: 'thislist = ["apple", "banana", "cherry"]\\nmylist = thislist.copy()\\n\\nthislist.append("orange")\\nprint("Original:", thislist)\\nprint("Copy:", mylist)  # The copy did NOT change!',
-                            preContent: \`<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Proper Copy with copy()</h2>\`
+                            code: 'thislist = ["apple", "banana", "cherry"]\nmylist = thislist.copy()\n\nthislist.append("orange")\nprint("Original:", thislist)\nprint("Copy:", mylist)  # The copy did NOT change!',
+                            preContent: `<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Proper Copy with copy()</h2>`
                         },
                         {
                             title: 'Alternative 2: Use the list() function',
-                            code: 'thislist = ["apple", "banana", "cherry"]\\nmylist = list(thislist)\\nprint(mylist)',
-                            preContent: \`<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Proper Copy with list()</h2>\`
+                            code: 'thislist = ["apple", "banana", "cherry"]\nmylist = list(thislist)\nprint(mylist)',
+                            preContent: `<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Proper Copy with list()</h2>`
                         }
                     ],
                     exercise: {
@@ -1316,22 +1243,22 @@ Hello, World!</div>
                 },
                 {
                     id: 'lists-join', title: 'Join Lists',
-                    content: \`<p>There are several ways to join, or concatenate, two or more lists in Python.</p>\`,
+                    content: `<p>There are several ways to join, or concatenate, two or more lists in Python.</p>`,
                     examples: [
                         {
                             title: 'Using the + Operator',
-                            code: 'list1 = ["a", "b", "c"]\\nlist2 = [1, 2, 3]\\n\\nlist3 = list1 + list2\\nprint(list3)',
-                            preContent: \`<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Using + Operator</h2>\\n<p>One of the easiest ways is using the <code>+</code> operator.</p>\`
+                            code: 'list1 = ["a", "b", "c"]\nlist2 = [1, 2, 3]\n\nlist3 = list1 + list2\nprint(list3)',
+                            preContent: `<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Using + Operator</h2>\n<p>One of the easiest ways is using the <code>+</code> operator.</p>`
                         },
                         {
                             title: 'Using append() in a loop',
-                            code: 'list1 = ["a", "b", "c"]\\nlist2 = [1, 2, 3]\\n\\nfor x in list2:\\n    list1.append(x)\\n\\nprint(list1)',
-                            preContent: \`<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Using append()</h2>\\n<p>You can append items one by one.</p>\`
+                            code: 'list1 = ["a", "b", "c"]\nlist2 = [1, 2, 3]\n\nfor x in list2:\n    list1.append(x)\n\nprint(list1)',
+                            preContent: `<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Using append()</h2>\n<p>You can append items one by one.</p>`
                         },
                         {
                             title: 'Using the extend() method',
-                            code: 'list1 = ["a", "b", "c"]\\nlist2 = [1, 2, 3]\\n\\nlist1.extend(list2)\\nprint(list1)',
-                            preContent: \`<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Using extend()</h2>\\n<p>The <code>extend()</code> method appends elements from one list to another.</p>\`
+                            code: 'list1 = ["a", "b", "c"]\nlist2 = [1, 2, 3]\n\nlist1.extend(list2)\nprint(list1)',
+                            preContent: `<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Using extend()</h2>\n<p>The <code>extend()</code> method appends elements from one list to another.</p>`
                         }
                     ],
                     exercise: {
@@ -1350,9 +1277,9 @@ Hello, World!</div>
                         'Remove <code>20</code> from the list',
                         'Print the final list and its length using an f-string'
                     ],
-                    starterCode: '# Create empty list\\n\\n# Append elements\\n\\n# Insert at index 1\\n\\n# Remove an element\\n\\n# Print list and length\\n',
-                    solution: 'my_list = []\\nmy_list.append(10)\\nmy_list.append(20)\\nmy_list.append(30)\\nmy_list.insert(1, 15)\\nmy_list.remove(20)\\nprint(f"List: {my_list}, Length: {len(my_list)}")',
-                    content: \`<p>Test your knowledge of Python Lists!</p>\`
+                    starterCode: '# Create empty list\n\n# Append elements\n\n# Insert at index 1\n\n# Remove an element\n\n# Print list and length\n',
+                    solution: 'my_list = []\nmy_list.append(10)\nmy_list.append(20)\nmy_list.append(30)\nmy_list.insert(1, 15)\nmy_list.remove(20)\nprint(f"List: {my_list}, Length: {len(my_list)}")',
+                    content: `<p>Test your knowledge of Python Lists!</p>`
                 }
             ]
         },
@@ -1717,50 +1644,50 @@ Hello, World!</div>
             sections: [
                 {
                     id: 'conditions-if', title: 'If Statements',
-                    content: \`<p>Python relies on indentation (whitespace at the beginning of a line) to define scope in the code. Other programming languages often use curly-brackets for this purpose.</p>
-<p>An <code>if</code> statement is written by using the <code>if</code> keyword.</p>\`,
+                    content: `<p>Python relies on indentation (whitespace at the beginning of a line) to define scope in the code. Other programming languages often use curly-brackets for this purpose.</p>
+<p>An <code>if</code> statement is written by using the <code>if</code> keyword.</p>`,
                     examples: [
-                        { title: 'The if statement', code: 'a = 33\\nb = 200\\n\\nif b > a:\\n    print("b is greater than a")' },
-                        { title: 'Indentation Error', code: '# If statement, without indentation (will raise an error):\\na = 33\\nb = 200\\n\\n# if b > a:\\n# print("b is greater than a")' },
-                        { title: 'Elif ("Else If")', code: 'a = 33\\nb = 33\\n\\nif b > a:\\n    print("b is greater than a")\\nelif a == b:\\n    print("a and b are equal")' },
-                        { title: 'Else', code: 'a = 200\\nb = 33\\n\\nif b > a:\\n    print("b is greater than a")\\nelif a == b:\\n    print("a and b are equal")\\nelse:\\n    print("a is greater than b")' }
+                        { title: 'The if statement', code: 'a = 33\nb = 200\n\nif b > a:\n    print("b is greater than a")' },
+                        { title: 'Indentation Error', code: '# If statement, without indentation (will raise an error):\na = 33\nb = 200\n\n# if b > a:\n# print("b is greater than a")' },
+                        { title: 'Elif ("Else If")', code: 'a = 33\nb = 33\n\nif b > a:\n    print("b is greater than a")\nelif a == b:\n    print("a and b are equal")' },
+                        { title: 'Else', code: 'a = 200\nb = 33\n\nif b > a:\n    print("b is greater than a")\nelif a == b:\n    print("a and b are equal")\nelse:\n    print("a is greater than b")' }
                     ],
                     exercise: { question: 'What keyword is used for "else if" in Python?', options: ['elseif', 'else if', 'elif', 'catch'], answer: 2 }
                 },
                 {
                     id: 'conditions-shorthand', title: 'Short Hand If / Else',
-                    content: \`<p>If you have only one statement to execute, you can put it on the same line as the if statement.</p>
-<p>This technique is known as <strong>Ternary Operators</strong>, or Conditional Expressions.</p>\`,
+                    content: `<p>If you have only one statement to execute, you can put it on the same line as the if statement.</p>
+<p>This technique is known as <strong>Ternary Operators</strong>, or Conditional Expressions.</p>`,
                     examples: [
                         { title: 'Short Hand If', code: 'if 9 > 5: print("Nine is greater than five")' },
-                        { title: 'Short Hand If ... Else', code: 'a = 2\\nb = 330\\n\\nprint("A") if a > b else print("B")' },
-                        { title: 'Multiple Else Statements', code: 'a = 330\\nb = 330\\n\\nprint("A") if a > b else print("=") if a == b else print("B")' }
+                        { title: 'Short Hand If ... Else', code: 'a = 2\nb = 330\n\nprint("A") if a > b else print("B")' },
+                        { title: 'Multiple Else Statements', code: 'a = 330\nb = 330\n\nprint("A") if a > b else print("=") if a == b else print("B")' }
                     ],
                     exercise: { question: 'Translate to shorthand: if a > b: print("Yes") else: print("No")', options: ['print("Yes") if a > b else print("No")', 'if a > b print("Yes") else print("No")', 'a > b ? print("Yes") : print("No")'], answer: 0 }
                 },
                 {
                     id: 'conditions-logical', title: 'Logical Conditions',
-                    content: \`<p>The <code>and</code>, <code>or</code>, and <code>not</code> keywords are logical operators, and are used to combine conditional statements.</p>\`,
+                    content: `<p>The <code>and</code>, <code>or</code>, and <code>not</code> keywords are logical operators, and are used to combine conditional statements.</p>`,
                     examples: [
-                        { title: 'The "and" keyword', code: 'a = 200\\nb = 33\\nc = 500\\n\\n# Both conditions must be True\\nif a > b and c > a:\\n    print("Both conditions are True")' },
-                        { title: 'The "or" keyword', code: 'a = 200\\nb = 33\\nc = 500\\n\\n# At least one condition must be True\\nif a > b or a > c:\\n    print("At least one of the conditions is True")' },
-                        { title: 'The "not" keyword', code: 'a = 33\\nb = 200\\n\\n# Reverses the conditional result\\nif not a > b:\\n    print("a is NOT greater than b")' }
+                        { title: 'The "and" keyword', code: 'a = 200\nb = 33\nc = 500\n\n# Both conditions must be True\nif a > b and c > a:\n    print("Both conditions are True")' },
+                        { title: 'The "or" keyword', code: 'a = 200\nb = 33\nc = 500\n\n# At least one condition must be True\nif a > b or a > c:\n    print("At least one of the conditions is True")' },
+                        { title: 'The "not" keyword', code: 'a = 33\nb = 200\n\n# Reverses the conditional result\nif not a > b:\n    print("a is NOT greater than b")' }
                     ],
                     exercise: { question: 'Which operator evaluates to True if ONE out of TWO conditions are True?', options: ['and', 'or', 'not', 'xor'], answer: 1 }
                 },
                 {
                     id: 'conditions-nested', title: 'Nested If',
-                    content: \`<p>You can have <code>if</code> statements inside <code>if</code> statements, this is called <em>nested</em> <code>if</code> statements.</p>\`,
+                    content: `<p>You can have <code>if</code> statements inside <code>if</code> statements, this is called <em>nested</em> <code>if</code> statements.</p>`,
                     examples: [
-                        { title: 'Nested If', code: 'x = 41\\n\\nif x > 10:\\n    print("Above ten,")\\n    if x > 20:\\n        print("and also above 20!")\\n    else:\\n        print("but not above 20.")' }
+                        { title: 'Nested If', code: 'x = 41\n\nif x > 10:\n    print("Above ten,")\n    if x > 20:\n        print("and also above 20!")\n    else:\n        print("but not above 20.")' }
                     ],
                     exercise: { question: 'What is required for a nested if to run?', options: ['The outer if condition must be True', 'They run independently', 'They must have the same condition'], answer: 0 }
                 },
                 {
                     id: 'conditions-pass', title: 'The pass Statement',
-                    content: \`<p><code>if</code> statements cannot be empty, but if you for some reason have an <code>if</code> statement with no content, put in the <code>pass</code> statement to avoid getting an error.</p>\`,
+                    content: `<p><code>if</code> statements cannot be empty, but if you for some reason have an <code>if</code> statement with no content, put in the <code>pass</code> statement to avoid getting an error.</p>`,
                     examples: [
-                        { title: 'The pass statement', code: 'a = 33\\nb = 200\\n\\nif b > a:\\n    pass  # To avoid an error, we do nothing for now' }
+                        { title: 'The pass statement', code: 'a = 33\nb = 200\n\nif b > a:\n    pass  # To avoid an error, we do nothing for now' }
                     ],
                     exercise: { question: 'Which keyword can be used to prevent an error in an empty if block?', options: ['continue', 'break', 'pass', 'return'], answer: 2 }
                 },
@@ -1769,14 +1696,14 @@ Hello, World!</div>
                     type: 'challenge',
                     instructions: [
                         'Create a variable <code>temperature</code> and set it to <code>25</code>.',
-                        'Write an <code>if</code> statement that prints "It\\\'s hot!" if the temperature is greater than 30.',
-                        'Write an <code>elif</code> statement that prints "It\\\'s a nice day." if the temperature is between 20 and 30.',
-                        'Write an <code>else</code> statement that prints "It\\\'s cold." if the temperature is below 20.',
+                        'Write an <code>if</code> statement that prints "It\'s hot!" if the temperature is greater than 30.',
+                        'Write an <code>elif</code> statement that prints "It\'s a nice day." if the temperature is between 20 and 30.',
+                        'Write an <code>else</code> statement that prints "It\'s cold." if the temperature is below 20.',
                         'Run the code to see what it prints.'
                     ],
-                    starterCode: '# Set temperature\\n\\n\\n# Write conditional statements\\n',
-                    solution: 'temperature = 25\\n\\nif temperature > 30:\\n    print("It\\'s hot!")\\nelif temperature >= 20 and temperature <= 30:\\n    print("It\\'s a nice day.")\\nelse:\\n    print("It\\'s cold.")',
-                    content: \`<p>Put your knowledge of conditional statements to the test!</p>\`
+                    starterCode: '# Set temperature\n\n\n# Write conditional statements\n',
+                    solution: 'temperature = 25\n\nif temperature > 30:\n    print("It\'s hot!")\nelif temperature >= 20 and temperature <= 30:\n    print("It\'s a nice day.")\nelse:\n    print("It\'s cold.")',
+                    content: `<p>Put your knowledge of conditional statements to the test!</p>`
                 }
             ]
         },
