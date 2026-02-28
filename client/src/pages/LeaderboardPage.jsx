@@ -6,7 +6,7 @@ export default function LeaderboardPage() {
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
+    const fetchLeaderboard = () => {
         api.get('leaderboard')
             .then(res => {
                 setUsers(res.data);
@@ -16,6 +16,15 @@ export default function LeaderboardPage() {
                 console.error(err);
                 setLoading(false);
             });
+    };
+
+    useEffect(() => {
+        fetchLeaderboard();
+        
+        // Auto-refresh leaderboard every 10 seconds
+        const interval = setInterval(fetchLeaderboard, 10000);
+        
+        return () => clearInterval(interval);
     }, []);
 
     if (loading) return <div style={{ padding: '100px', textAlign: 'center', color: '#fff' }}>Loading leaderboard...</div>;
@@ -23,9 +32,34 @@ export default function LeaderboardPage() {
     return (
         <div style={{ background: '#0a0a0a', minHeight: '100vh', color: '#fff', padding: '100px 20px 40px' }}>
             <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-                <div style={{ textAlign: 'center', marginBottom: '50px' }}>
-                    <h1 style={{ fontSize: '3rem', fontWeight: 800, margin: '0 0 10px', background: 'linear-gradient(90deg, #04AA6D, #28a745)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Global Leaderboard</h1>
-                    <p style={{ color: '#888', fontSize: '1.1rem' }}>Top coders on TezCode. Solve challenges to earn XP and climb the ranks!</p>
+                <div style={{ textAlign: 'center', marginBottom: '50px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '16px', flexWrap: 'wrap' }}>
+                    <div style={{ flex: 1, minWidth: '300px' }}>
+                        <h1 style={{ fontSize: '3rem', fontWeight: 800, margin: '0 0 10px', background: 'linear-gradient(90deg, #04AA6D, #28a745)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Global Leaderboard</h1>
+                        <p style={{ color: '#888', fontSize: '1.1rem' }}>Top coders on TezCode. Solve challenges to earn XP and climb the ranks!</p>
+                    </div>
+                    <button
+                        onClick={fetchLeaderboard}
+                        style={{
+                            background: '#04AA6D',
+                            color: '#fff',
+                            border: 'none',
+                            padding: '10px 16px',
+                            borderRadius: '8px',
+                            cursor: 'pointer',
+                            fontWeight: '600',
+                            fontSize: '14px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '8px',
+                            height: 'fit-content',
+                            transition: 'opacity 0.2s ease'
+                        }}
+                        onMouseOver={(e) => e.target.style.opacity = '0.8'}
+                        onMouseOut={(e) => e.target.style.opacity = '1'}
+                    >
+                        <i className="fas fa-sync-alt" style={{ fontSize: '14px' }}></i>
+                        Refresh
+                    </button>
                 </div>
 
                 <div style={{ background: '#111', borderRadius: '16px', border: '1px solid #222', overflow: 'hidden' }}>
