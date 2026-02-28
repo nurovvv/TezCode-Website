@@ -881,6 +881,59 @@ const COURSE_DATA = {
                     "title": "Code Challenge"
                 }
             ]
+        },
+        {
+            "id": "file_handling_header",
+            "title": "File Handling",
+            "sections": []
+        },
+        {
+            "id": "file_handling",
+            "title": "Python File Handling",
+            "sections": [
+                {
+                    "id": "file-handling-basics",
+                    "title": "File Handling"
+                }
+            ]
+        },
+        {
+            "id": "file_read",
+            "title": "Python Read Files",
+            "sections": [
+                {
+                    "id": "file-read-basics",
+                    "title": "Read Files"
+                },
+                {
+                    "id": "file-read-challenge",
+                    "title": "Code Challenge"
+                }
+            ]
+        },
+        {
+            "id": "file_write",
+            "title": "Python Write/Create Files",
+            "sections": [
+                {
+                    "id": "file-write-basics",
+                    "title": "Write/Create Files"
+                },
+                {
+                    "id": "file-write-challenge",
+                    "title": "Code Challenge"
+                }
+            ]
+        },
+        {
+            "id": "file_delete",
+            "title": "Python Delete Files",
+            "sections": [
+                {
+                    "id": "file-delete-basics",
+                    "title": "Delete Files"
+                }
+            ]
         }
     ]
 };

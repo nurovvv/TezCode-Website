@@ -53,7 +53,7 @@ export default function CatalogPage() {
                                     <div style={{ display: 'flex', gap: '32px' }}>
                                         <div>
                                             <p style={{ fontSize: '11px', color: '#86868b', margin: '0 0 2px', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.05em' }}>{t('catalog.labels.chapters')}</p>
-                                            <p style={{ fontSize: '20px', fontWeight: 800, color: '#1d1d1f', margin: 0 }}>46</p>
+                                            <p style={{ fontSize: '20px', fontWeight: 800, color: '#1d1d1f', margin: 0 }}>51</p>
                                         </div>
                                         <div>
                                             <p style={{ fontSize: '11px', color: '#86868b', margin: '0 0 2px', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.05em' }}>{t('catalog.labels.sections')}</p>

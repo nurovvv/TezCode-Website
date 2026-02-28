@@ -2810,6 +2810,130 @@ print("Username is: " + username)</pre>`,
                     content: `<p>Practice creating and accessing inner classes in Python!</p>`
                 }
             ]
+        },
+
+        /* ────── 47. File Handling (Header) ────── */
+        {
+            id: 'file_handling_header', title: 'File Handling', isHeader: true,
+            sections: []
+        },
+
+        /* ────── 48. Python File Handling ────── */
+        {
+            id: 'file_handling', title: 'Python File Handling',
+            sections: [
+                {
+                    id: 'file-handling-basics', title: 'File Handling',
+                    content: `<p>File handling is an important part of any web application. Python has several functions for creating, reading, updating, and deleting files.</p>
+<h3>The open() Function</h3>
+<p>The key function for working with files in Python is the <code>open()</code> function.</p>
+<p>The <code>open()</code> function takes two parameters; <strong>filename</strong>, and <strong>mode</strong>.</p>
+<p>There are four different methods (modes) for opening a file:</p>
+<ul>
+    <li><code>"r"</code> - <strong>Read</strong> - Default value. Opens a file for reading, error if the file does not exist</li>
+    <li><code>"a"</code> - <strong>Append</strong> - Opens a file for appending, creates the file if it does not exist</li>
+    <li><code>"w"</code> - <strong>Write</strong> - Opens a file for writing, creates the file if it does not exist</li>
+    <li><code>"x"</code> - <strong>Create</strong> - Creates the specified file, returns an error if the file exists</li>
+</ul>`,
+                    examples: [
+                        { title: 'Open for Reading', code: 'f = open("demofile.txt", "r")' }
+                    ],
+                    exercise: { question: 'Which function is used to open a file in Python?', options: ['openFile()', 'open()', 'file()'], answer: 1 }
+                }
+            ]
+        },
+
+        /* ────── 49. Python Read Files ────── */
+        {
+            id: 'file_read', title: 'Python Read Files',
+            sections: [
+                {
+                    id: 'file-read-basics', title: 'Read Files',
+                    content: `<p>To open the file, use the built-in <code>open()</code> function.</p>
+<p>The <code>open()</code> function returns a file object, which has a <code>read()</code> method for reading the content of the file:</p>
+<pre>f = open("demofile.txt", "r")
+print(f.read())</pre>
+<p>If the file is located in a different location, you will have to specify the file path.</p>
+<h3>Read Only Parts of the File</h3>
+<p>By default the <code>read()</code> method returns the whole text, but you can also specify how many characters you want to return:</p>
+<pre>print(f.read(5)) # Reads first 5 characters</pre>`,
+                    examples: [
+                        { title: 'Read Line', code: 'f = open("demofile.txt", "r")\nprint(f.readline())\nf.close()' }
+                    ],
+                    exercise: { question: 'What method is used to read the entire content of a file?', options: ['getText()', 'read()', 'getContent()'], answer: 1 }
+                },
+                {
+                    id: 'file-read-challenge', title: 'Code Challenge',
+                    type: 'challenge',
+                    instructions: [
+                        'This is a theoretical challenge.',
+                        'Print the command to open a file named <code>"data.txt"</code> in read mode and store it in variable <code>f</code>.',
+                        'Then print the command to read only the first 10 characters.'
+                    ],
+                    starterCode: '# write your code here\n',
+                    solution: 'print(\'f = open("data.txt", "r")\')\nprint(\'f.read(10)\')',
+                    content: `<p>Practice the syntax for reading files!</p>`
+                }
+            ]
+        },
+
+        /* ────── 50. Python Write/Create Files ────── */
+        {
+            id: 'file_write', title: 'Python Write/Create Files',
+            sections: [
+                {
+                    id: 'file-write-basics', title: 'Write/Create Files',
+                    content: `<p>To write to an existing file, you must add a parameter to the <code>open()</code> function:</p>
+<ul>
+    <li><code>"a"</code> - <strong>Append</strong> - will append to the end of the file</li>
+    <li><code>"w"</code> - <strong>Write</strong> - will overwrite any existing content</li>
+</ul>
+<h3>Example: Overwrite content</h3>
+<pre>f = open("demofile3.txt", "w")
+f.write("Woops! I have deleted the content!")
+f.close()</pre>`,
+                    examples: [
+                        { title: 'Append content', code: 'f = open("demofile2.txt", "a")\nf.write("Now the file has more content!")\nf.close()' }
+                    ],
+                    exercise: { question: 'Which mode will overwrite existing content in a file?', options: ['"a"', '"w"', '"r"'], answer: 1 }
+                },
+                {
+                    id: 'file-write-challenge', title: 'Code Challenge',
+                    type: 'challenge',
+                    instructions: [
+                        'Assuming you have a file object <code>f</code> opened in write mode.',
+                        'Write the string <code>"TezCode is Awesome!"</code> to the file.',
+                        'Close the file.'
+                    ],
+                    starterCode: 'f = open("note.txt", "w")\n# Write and close\n',
+                    solution: 'f = open("note.txt", "w")\nf.write("TezCode is Awesome!")\nf.close()',
+                    content: `<p>Practice writing content to a file!</p>`
+                }
+            ]
+        },
+
+        /* ────── 51. Python Delete Files ────── */
+        {
+            id: 'file_delete', title: 'Python Delete Files',
+            sections: [
+                {
+                    id: 'file-delete-basics', title: 'Delete Files',
+                    content: `<p>To delete a file, you must import the OS module, and run its <code>os.remove()</code> function:</p>
+<pre>import os
+os.remove("demofile.txt")</pre>
+<h3>Check if File exist:</h3>
+<p>To avoid getting an error, you might want to check if the file exists before you try to delete it:</p>
+<pre>import os
+if os.path.exists("demofile.txt"):
+  os.remove("demofile.txt")
+else:
+  print("The file does not exist")</pre>`,
+                    examples: [
+                        { title: 'Delete Folder', code: 'import os\nos.rmdir("myfolder")' }
+                    ],
+                    exercise: { question: 'Which module is needed to delete files in Python?', options: ['sys', 'fs', 'os'], answer: 2 }
+                }
+            ]
         }
     ],
 };
