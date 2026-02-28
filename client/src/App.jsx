@@ -19,6 +19,7 @@ import ChallengesPage from './pages/ChallengesPage';
 import ChallengeSolverPage from './pages/ChallengeSolverPage';
 import LeaderboardPage from './pages/LeaderboardPage';
 import ProfilePage from './pages/ProfilePage';
+import PartnersPage from './pages/PartnersPage';
 
 import './index.css';
 
@@ -36,7 +37,9 @@ function App() {
               <Route path="/challenges" element={<ChallengesPage />} />
               <Route path="/leaderboard" element={<LeaderboardPage />} />
               <Route path="/profile" element={<ProfilePage />} />
+              <Route path="/partners" element={<PartnersPage />} />
             </Route>
+
             <Route path="/challenges/:id" element={<ChallengeSolverPage />} />
 
             {/* Auth pages (standalone) */}

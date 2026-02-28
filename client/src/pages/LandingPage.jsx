@@ -135,7 +135,7 @@ export default function LandingPage() {
                             <p style={{ color: '#888', fontSize: '11px', fontWeight: 600, letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '16px' }}>
                                 {t('landing.footer.about')}
                             </p>
-                            <Link to="/about" style={{ display: 'block', color: 'inherit', textDecoration: 'none', marginBottom: '12px' }}>Partners</Link>
+                            <Link to="/partners" style={{ display: 'block', color: 'inherit', textDecoration: 'none', marginBottom: '12px' }}>Partners</Link>
                             <Link to="/reviews" style={{ display: 'block', color: 'inherit', textDecoration: 'none', marginBottom: '12px' }}>{t('landing.footer.reviews')}</Link>
                         </div>
 
