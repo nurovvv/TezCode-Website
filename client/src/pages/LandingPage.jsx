@@ -30,38 +30,19 @@ export default function LandingPage() {
                         {t('landing.exploreSubtitle')}
                     </p>
 
-                    {/* Toggle Buttons */}
-                    <div style={{
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        background: '#f5f5f7',
+                    {/* Action Button */}
+                    <Link to="/register" style={{
+                        display: 'inline-block',
+                        padding: '12px 28px',
+                        background: '#1d1d1f',
+                        color: '#fff',
+                        fontSize: '14px',
+                        fontWeight: 600,
                         borderRadius: '12px',
-                        padding: '4px',
-                        gap: '2px',
+                        textDecoration: 'none',
                     }}>
-                        <Link to="/register" style={{
-                            padding: '10px 24px',
-                            background: '#1d1d1f',
-                            color: '#fff',
-                            fontSize: '13px',
-                            fontWeight: 600,
-                            borderRadius: '10px',
-                            textDecoration: 'none',
-                        }}>
-                            {t('landing.cta.buyLaunch')}
-                        </Link>
-                        <Link to="/catalog" style={{
-                            padding: '10px 24px',
-                            background: 'transparent',
-                            color: '#86868b',
-                            fontSize: '13px',
-                            fontWeight: 500,
-                            borderRadius: '10px',
-                            textDecoration: 'none',
-                        }}>
-                            {t('landing.cta.discussion')}
-                        </Link>
-                    </div>
+                        {t('landing.cta.buyLaunch')}
+                    </Link>
                 </motion.div>
             </section>
 
