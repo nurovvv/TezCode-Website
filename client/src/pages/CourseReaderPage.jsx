@@ -2468,75 +2468,6 @@ print("Username is: " + username)</pre>`,
                 }
             ]
         },
-        /* ────── 36. Python Inheritance ────── */
-        {
-            id: 'inheritance', title: 'Python Inheritance',
-            sections: [
-                {
-                    id: 'inheritance-basics', title: 'Inheritance',
-                    content: `<p>Inheritance allows us to define a class that inherits all the methods and properties from another class.</p>
-<p><strong>Parent class</strong> is the class being inherited from, also called base class.</p>
-<p><strong>Child class</strong> is the class that inherits from another class, also called derived class.</p>
-<h3>Create a Parent Class</h3>
-<p>Any class can be a parent class, so the syntax is the same as creating any other class:</p>
-<pre>class Person:
-  def __init__(self, fname, lname):
-    self.firstname = fname
-    self.lastname = lname
-
-  def printname(self):
-    print(self.firstname, self.lastname)</pre>`,
-                    examples: [
-                        { title: 'Create a Child Class', code: 'class Person:\n  def __init__(self, fname, lname):\n    self.firstname = fname\n    self.lastname = lname\n  def printname(self):\n    print(self.firstname, self.lastname)\n\nclass Student(Person):\n  pass\n\nx = Student("Mike", "Olsen")\nx.printname()' }
-                    ],
-                    exercise: { question: 'What is the correct syntax to create a class named Student that inherits from a class named Person?', options: ['class Student(Person):', 'class Student inherit Person:', 'class Student : Person:'], answer: 0 }
-                },
-                {
-                    id: 'inheritance-challenge', title: 'Code Challenge',
-                    type: 'challenge',
-                    instructions: [
-                        'Create a class named <code>Animal</code> with a method <code>speak</code> that prints <code>"Animal speaks"</code>.',
-                        'Create a class named <code>Dog</code> that inherits from <code>Animal</code>.',
-                        'Create an object of <code>Dog</code> and call the <code>speak</code> method.'
-                    ],
-                    starterCode: 'class Animal:\n    def speak(self):\n        print("Animal speaks")\n\n# Create Dog class\n\n\n# Create object and call speak\n',
-                    solution: 'class Animal:\n    def speak(self):\n        print("Animal speaks")\n\nclass Dog(Animal):\n    pass\n\nmy_dog = Dog()\nmy_dog.speak()',
-                    content: `<p>Practice basic inheritance in Python!</p>`
-                }
-            ]
-        },
-
-        /* ────── 37. Python Polymorphism ────── */
-        {
-            id: 'polymorphism', title: 'Python Polymorphism',
-            sections: [
-                {
-                    id: 'polymorphism-basics', title: 'Polymorphism',
-                    content: `<p>The word "polymorphism" means "many forms", and in programming it refers to methods/functions/operators with the same name that can be executed on many objects or types.</p>
-<h3>Function Polymorphism</h3>
-<p>An example of a Python function that can be used on different objects is the <code>len()</code> function.</p>`,
-                    examples: [
-                        { title: 'len() with String', code: 'x = "Hello World!"\nprint(len(x))' },
-                        { title: 'len() with List', code: 'mytuple = ("apple", "banana", "cherry")\nprint(len(mytuple))' }
-                    ],
-                    exercise: { question: 'What does "polymorphism" mean in Greek?', options: ['Many forms', 'Single form', 'Changing types'], answer: 0 }
-                },
-                {
-                    id: 'polymorphism-challenge', title: 'Code Challenge',
-                    type: 'challenge',
-                    instructions: [
-                        'Create two classes: <code>Cat</code> and <code>Dog</code>.',
-                        'Both should have a method named <code>sound</code>.',
-                        '<code>Cat.sound()</code> should print <code>"Meow"</code>.',
-                        '<code>Dog.sound()</code> should print <code>"Woof"</code>.',
-                        'Loop through a list containing both objects and call the <code>sound()</code> method on each.'
-                    ],
-                    starterCode: 'class Cat:\n    def sound(self):\n        print("Meow")\n\n# Add Dog class\n\n\n# Create list and loop\n',
-                    solution: 'class Cat:\n    def sound(self):\n        print("Meow")\n\nclass Dog:\n    def sound(self):\n        print("Woof")\n\nfor animal in [Cat(), Dog()]:\n    animal.sound()',
-                    content: `<p>Practice polymorphism by using the same method name on different classes!</p>`
-                }
-            ]
-        },
 
         /* ────── 38. Python Classes ────── */
         {
@@ -2726,6 +2657,79 @@ print("Username is: " + username)</pre>`,
                     starterCode: 'class Square:\n    # Define __init__ and area methods\n\n\n# Create object and print area\n',
                     solution: 'class Square:\n    def __init__(self, side):\n        self.side = side\n    def area(self):\n        return self.side * self.side\n\ns1 = Square(5)\nprint(s1.area())',
                     content: `<p>Practice defining and calling methods within a class!</p>`
+                }
+            ]
+        },
+        /* ────── 45. Python Inheritance ────── */
+        {
+            id: 'inheritance', title: 'Python Inheritance',
+            sections: [
+                {
+                    id: 'inheritance-basics', title: 'Inheritance',
+                    content: `<p>Inheritance allows us to define a class that inherits all the methods and properties from another class.</p>
+<p><strong>Parent class</strong> is the class being inherited from, also called base class.</p>
+<p><strong>Child class</strong> is the class that inherits from another class, also called derived class.</p>
+<h3>Create a Parent Class</h3>
+<p>Any class can be a parent class, so the syntax is the same as creating any other class:</p>
+<pre>class Person:
+  def __init__(self, fname, lname):
+    self.firstname = fname
+    self.lastname = lname
+
+  def printname(self):
+    print(self.firstname, self.lastname)</pre>`,
+                    examples: [
+                        { title: 'Create a Child Class', code: 'class Person:\n  def __init__(self, fname, lname):\n    self.firstname = fname\n    self.lastname = lname\n  def printname(self):\n    print(self.firstname, self.lastname)\n\nclass Student(Person):\n  pass\n\nx = Student("Mike", "Olsen")\nx.printname()' }
+                    ],
+                    exercise: { question: 'What is the correct syntax to create a class named Student that inherits from a class named Person?', options: ['class Student(Person):', 'class Student inherit Person:', 'class Student : Person:'], answer: 0 }
+                },
+                {
+                    id: 'inheritance-challenge', title: 'Code Challenge',
+                    type: 'challenge',
+                    instructions: [
+                        'Create a class named <code>Animal</code> with a method <code>speak</code> that prints <code>"Animal speaks"</code>.',
+                        'Create a class named <code>Dog</code> that inherits from <code>Animal</code>.',
+                        'Create an object of <code>Dog</code> and call the <code>speak</code> method.'
+                    ],
+                    starterCode: 'class Animal:\n    def speak(self):\n        print("Animal speaks")\n\n# Create Dog class\n\n\n# Create object and call speak\n',
+                    solution: 'class Animal:\n    def speak(self):\n        print("Animal speaks")\n\nclass Dog(Animal):\n    pass\n\nmy_dog = Dog()\nmy_dog.speak()',
+                    content: `<p>Practice basic inheritance in Python!</p>`
+                }
+            ]
+        },
+        /* ────── 46. Python Inheritance ────── */
+        {
+            id: 'inheritance_header', title: 'Python Inheritance', isHeader: true,
+            sections: []
+        },
+        /* ────── 47. Python Polymorphism ────── */
+        {
+            id: 'polymorphism', title: 'Python Polymorphism',
+            sections: [
+                {
+                    id: 'polymorphism-basics', title: 'Polymorphism',
+                    content: `<p>The word "polymorphism" means "many forms", and in programming it refers to methods/functions/operators with the same name that can be executed on many objects or types.</p>
+<h3>Function Polymorphism</h3>
+<p>An example of a Python function that can be used on different objects is the <code>len()</code> function.</p>`,
+                    examples: [
+                        { title: 'len() with String', code: 'x = "Hello World!"\nprint(len(x))' },
+                        { title: 'len() with List', code: 'mytuple = ("apple", "banana", "cherry")\nprint(len(mytuple))' }
+                    ],
+                    exercise: { question: 'What does "polymorphism" mean in Greek?', options: ['Many forms', 'Single form', 'Changing types'], answer: 0 }
+                },
+                {
+                    id: 'polymorphism-challenge', title: 'Code Challenge',
+                    type: 'challenge',
+                    instructions: [
+                        'Create two classes: <code>Cat</code> and <code>Dog</code>.',
+                        'Both should have a method named <code>sound</code>.',
+                        '<code>Cat.sound()</code> should print <code>"Meow"</code>.',
+                        '<code>Dog.sound()</code> should print <code>"Woof"</code>.',
+                        'Loop through a list containing both objects and call the <code>sound()</code> method on each.'
+                    ],
+                    starterCode: 'class Cat:\n    def sound(self):\n        print("Meow")\n\n# Add Dog class\n\n\n# Create list and loop\n',
+                    solution: 'class Cat:\n    def sound(self):\n        print("Meow")\n\nclass Dog:\n    def sound(self):\n        print("Woof")\n\nfor animal in [Cat(), Dog()]:\n    animal.sound()',
+                    content: `<p>Practice polymorphism by using the same method name on different classes!</p>`
                 }
             ]
         }
