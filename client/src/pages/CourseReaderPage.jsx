@@ -2958,7 +2958,7 @@ export default function CourseReaderPage() {
                             <button onClick={() => navigate('/catalog')} style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '13px', color: '#86868b', fontFamily: 'inherit', marginBottom: '16px' }}>
                                 ← Back to Catalog
                             </button>
-                            <h2 style={{ fontSize: '16px', fontWeight: 800, color: '#1d1d1f', margin: '0 0 4px' }}>🐍 {COURSE.title}</h2>
+                            <h2 style={{ fontSize: '16px', fontWeight: 800, color: '#1d1d1f', margin: '0 0 4px' }}>🐍 {COURSE.title} (v2)</h2>
 
                             {/* Progress */}
                             <div style={{ margin: '12px 0 20px' }}>
