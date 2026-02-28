@@ -325,6 +325,16 @@ Hello, World!</div>
                             title: 'Example',
                             code: 'x = 5\ny = "John"\nprint(type(x))\nprint(type(y))',
                             preContent: `<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Get the Type</h2>\n<p>You can get the data type of a variable with the <code>type()</code> function.</p>`
+                        },
+                        {
+                            title: 'Example',
+                            code: 'x = "John"\n# is the same as\nx = \'John\'',
+                            preContent: `<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Single or Double Quotes?</h2>\n<p>String variables can be declared either by using single or double quotes:</p>`
+                        },
+                        {
+                            title: 'Example',
+                            code: 'a = 4\nA = "Sally"\n#A will not overwrite a',
+                            preContent: `<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Case-Sensitive</h2>\n<p>Variable names are case-sensitive.</p>`
                         }
                     ],
                     exercise: {
@@ -332,6 +342,18 @@ Hello, World!</div>
                         options: ['x = 5', 'x = int(5)', 'Both are correct'],
                         answer: 2,
                     },
+                },
+                {
+                    id: 'variables-intro-challenge', title: 'Code Challenge',
+                    type: 'challenge',
+                    instructions: [
+                        'Create a variable <code>name</code> and assign the value <code>"Alice"</code> to it',
+                        'Create a variable <code>age</code> and assign the value <code>25</code> to it',
+                        'Print the <code>name</code> and <code>age</code> variables'
+                    ],
+                    starterCode: '# Assign variables here\n\n\n# Print variables here\n',
+                    solution: 'name = "Alice"\nage = 25\nprint(name)\nprint(age)',
+                    content: `<p>Test your understanding of basic variable assignment by completing this challenge!</p>`
                 },
                 {
                     id: 'variables-names', title: 'Variable Names',

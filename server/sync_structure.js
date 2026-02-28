@@ -82,6 +82,10 @@ const COURSE_DATA = {
                     "title": "Python Variables"
                 },
                 {
+                    "id": "variables-intro-challenge",
+                    "title": "Code Challenge"
+                },
+                {
                     "id": "variables-names",
                     "title": "Variable Names"
                 },
