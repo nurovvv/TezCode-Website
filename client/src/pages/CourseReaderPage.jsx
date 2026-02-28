@@ -2934,6 +2934,91 @@ else:
                     exercise: { question: 'Which module is needed to delete files in Python?', options: ['sys', 'fs', 'os'], answer: 2 }
                 }
             ]
+        },
+
+        /* ────── 52. Python Modules (Header) ────── */
+        {
+            id: 'python_modules_header', title: 'Python Modules', isHeader: true,
+            sections: []
+        },
+
+        /* ────── 53. NumPy Tutorial ────── */
+        {
+            id: 'numpy_tutorial', title: 'NumPy Tutorial',
+            sections: [
+                {
+                    id: 'numpy-basics', title: 'NumPy Tutorial',
+                    content: `<p>NumPy is a Python library used for working with arrays.</p>
+<p>It also has functions for working in domain of linear algebra, fourier transform, and matrices.</p>
+<p>NumPy was created in 2005 by Travis Oliphant. It is an open source project and you can use it freely.</p>
+<h3>Import NumPy</h3>
+<p>Once NumPy is installed, import it in your applications by adding the <code>import</code> keyword:</p>
+<pre>import numpy</pre>`,
+                    examples: [
+                        { title: 'Create NumPy Array', code: 'import numpy as np\n\narr = np.array([1, 2, 3, 4, 5])\n\nprint(arr)' }
+                    ],
+                    exercise: { question: 'What does NumPy primarily work with?', options: ['Lists', 'Arrays', 'Sets'], answer: 1 }
+                }
+            ]
+        },
+
+        /* ────── 54. Pandas Tutorial ────── */
+        {
+            id: 'pandas_tutorial', title: 'Pandas Tutorial',
+            sections: [
+                {
+                    id: 'pandas-basics', title: 'Pandas Tutorial',
+                    content: `<p>Pandas is a Python library used for working with data sets.</p>
+<p>It has functions for analyzing, cleaning, exploring, and manipulating data.</p>
+<p>The name "Pandas" has a reference to both "Panel Data", and "Python Data Analysis".</p>
+<h3>Import Pandas</h3>
+<p>Once Pandas is installed, import it in your applications by adding the <code>import</code> keyword:</p>
+<pre>import pandas</pre>`,
+                    examples: [
+                        { title: 'Create Pandas DataFrame', code: 'import pandas as pd\n\nmydataset = {\n  \'cars\': ["BMW", "Volvo", "Ford"],\n  \'passings\': [3, 7, 2]\n}\n\nmyvar = pd.DataFrame(mydataset)\n\nprint(myvar)' }
+                    ],
+                    exercise: { question: 'What is Pandas used for?', options: ['Working with HTML', 'Working with Data Sets', 'Styling web pages'], answer: 1 }
+                }
+            ]
+        },
+
+        /* ────── 55. SciPy Tutorial ────── */
+        {
+            id: 'scipy_tutorial', title: 'SciPy Tutorial',
+            sections: [
+                {
+                    id: 'scipy-basics', title: 'SciPy Tutorial',
+                    content: `<p>SciPy is a scientific computation library that uses NumPy underneath.</p>
+<p>SciPy stands for Scientific Python.</p>
+<p>It provides more utility functions for optimization, stats and signal processing.</p>
+<h3>Import SciPy</h3>
+<p>Once SciPy is installed, import the SciPy module(s) you want to use in your applications by adding the <code>from scipy import module</code> statement:</p>
+<pre>from scipy import constants</pre>`,
+                    examples: [
+                        { title: 'SciPy Constants', code: 'from scipy import constants\n\nprint(constants.pi)' }
+                    ],
+                    exercise: { question: 'What does SciPy stand for?', options: ['Science Python', 'Scientific Python', 'Simple Python'], answer: 1 }
+                }
+            ]
+        },
+
+        /* ────── 56. Django Tutorial ────── */
+        {
+            id: 'django_tutorial', title: 'Django Tutorial',
+            sections: [
+                {
+                    id: 'django-basics', title: 'Django Tutorial',
+                    content: `<p>Django is a back-end server-side web framework.</p>
+<p>Django is free, open source and written in Python.</p>
+<p>Django makes it easier to build web pages using Python.</p>
+<h3>What is Django?</h3>
+<p>Django is a high-level Python web framework that encourages rapid development and clean, pragmatic design.</p>`,
+                    examples: [
+                        { title: 'Check Django Version', code: 'import django\nprint(django.get_version())' }
+                    ],
+                    exercise: { question: 'What type of framework is Django?', options: ['Front-end', 'Back-end', 'Database'], answer: 1 }
+                }
+            ]
         }
     ],
 };

@@ -934,6 +934,51 @@ const COURSE_DATA = {
                     "title": "Delete Files"
                 }
             ]
+        },
+        {
+            "id": "python_modules_header",
+            "title": "Python Modules",
+            "sections": []
+        },
+        {
+            "id": "numpy_tutorial",
+            "title": "NumPy Tutorial",
+            "sections": [
+                {
+                    "id": "numpy-basics",
+                    "title": "NumPy Tutorial"
+                }
+            ]
+        },
+        {
+            "id": "pandas_tutorial",
+            "title": "Pandas Tutorial",
+            "sections": [
+                {
+                    "id": "pandas-basics",
+                    "title": "Pandas Tutorial"
+                }
+            ]
+        },
+        {
+            "id": "scipy_tutorial",
+            "title": "SciPy Tutorial",
+            "sections": [
+                {
+                    "id": "scipy-basics",
+                    "title": "SciPy Tutorial"
+                }
+            ]
+        },
+        {
+            "id": "django_tutorial",
+            "title": "Django Tutorial",
+            "sections": [
+                {
+                    "id": "django-basics",
+                    "title": "Django Tutorial"
+                }
+            ]
         }
     ]
 };
