@@ -1307,6 +1307,161 @@ substring</em>.</p>
             starterCode: "import ast\nnums = ast.literal_eval(input())\n\n# Return the answer array\n",
             tags: ["Array", "Prefix Sum"],
             topics: ["Medium"]
+        },
+        {
+            title: "Length of Last Word",
+            description: `<div class="lc-description">
+<p>Given a string <code>s</code> consisting of words and spaces, return <em>the length of the <strong>last</strong> word in the string.</em></p>
+<p>A <strong>word</strong> is a maximal substring consisting of non-space characters only.</p>
+
+<p><strong>Example 1:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> s = "Hello World"</p>
+<p><strong class="lc-label">Output:</strong> 5</p>
+<p><strong>Explanation:</strong> The last word is "World" with length 5.</p>
+</div>
+
+<p><strong>Example 2:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> s = "   fly me   to   the moon  "</p>
+<p><strong class="lc-label">Output:</strong> 4</p>
+<p><strong>Explanation:</strong> The last word is "moon" with length 4.</p>
+</div>
+</div>`,
+            difficulty: "easy",
+            xpReward: 10,
+            testCases: [
+                { input: "Hello World", expectedOutput: "5" },
+                { input: "   fly me   to   the moon  ", expectedOutput: "4" },
+                { input: "luffy is still joyboy", expectedOutput: "6" }
+            ],
+            starterCode: "s = input()\n\n# Return the length of the last word\n",
+            tags: ["String"],
+            topics: ["Easy"]
+        },
+        {
+            title: "Roman to Integer",
+            description: `<div class="lc-description">
+<p>Roman numerals are represented by seven different symbols:&nbsp;<code>I</code>, <code>V</code>, <code>X</code>, <code>L</code>, <code>C</code>, <code>D</code> and <code>M</code>.</p>
+<p>Given a roman numeral, convert it to an integer.</p>
+
+<p><strong>Example 1:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> s = "III"</p>
+<p><strong class="lc-label">Output:</strong> 3</p>
+</div>
+
+<p><strong>Example 2:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> s = "LVIII"</p>
+<p><strong class="lc-label">Output:</strong> 58</p>
+</div>
+
+<p><strong>Example 3:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> s = "MCMXCIV"</p>
+<p><strong class="lc-label">Output:</strong> 1994</p>
+</div>
+</div>`,
+            difficulty: "easy",
+            xpReward: 15,
+            testCases: [
+                { input: "III", expectedOutput: "3" },
+                { input: "LVIII", expectedOutput: "58" },
+                { input: "MCMXCIV", expectedOutput: "1994" }
+            ],
+            starterCode: "s = input()\n\n# Return the integer value of the roman numeral\n",
+            tags: ["Hash Table", "Math", "String"],
+            topics: ["Easy"]
+        },
+        {
+            title: "Is Subsequence",
+            description: `<div class="lc-description">
+<p>Given two strings <code>s</code> and <code>t</code>, return <code>true</code> if <code>s</code> is a <strong>subsequence</strong> of <code>t</code>, or <code>false</code> otherwise.</p>
+<p>A <strong>subsequence</strong> of a string is a new string that is formed from the original string by deleting some (can be none) of the characters without disturbing the relative positions of the remaining characters. (i.e., <code>"ace"</code> is a subsequence of <code>"abcde"</code> while <code>"aec"</code> is not).</p>
+
+<p><strong>Example 1:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> s = "abc", t = "ahbgdc"</p>
+<p><strong class="lc-label">Output:</strong> True</p>
+</div>
+
+<p><strong>Example 2:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> s = "axc", t = "ahbgdc"</p>
+<p><strong class="lc-label">Output:</strong> False</p>
+</div>
+</div>`,
+            difficulty: "easy",
+            xpReward: 15,
+            testCases: [
+                { input: "abc\nahbgdc", expectedOutput: "True" },
+                { input: "axc\nahbgdc", expectedOutput: "False" }
+            ],
+            starterCode: "s = input()\nt = input()\n\n# Return True if s is a subsequence of t, else False\n",
+            tags: ["Two Pointers", "String", "Dynamic Programming"],
+            topics: ["Easy"]
+        },
+        {
+            title: "Find Minimum in Rotated Sorted Array",
+            description: `<div class="lc-description">
+<p>Suppose an array of length <code>n</code> sorted in ascending order is <strong>rotated</strong> between <code>1</code> and <code>n</code> times.</p>
+<p>Given the sorted rotated array <code>nums</code> of <strong>unique</strong> elements, return <em>the minimum element of this array</em>.</p>
+<p>You must write an algorithm that runs in&nbsp;<code>O(log n) time.</code></p>
+
+<p><strong>Example 1:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> nums = [3,4,5,1,2]</p>
+<p><strong class="lc-label">Output:</strong> 1</p>
+</div>
+
+<p><strong>Example 2:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> nums = [4,5,6,7,0,1,2]</p>
+<p><strong class="lc-label">Output:</strong> 0</p>
+</div>
+</div>`,
+            difficulty: "medium",
+            xpReward: 30,
+            testCases: [
+                { input: "[3,4,5,1,2]", expectedOutput: "1" },
+                { input: "[4,5,6,7,0,1,2]", expectedOutput: "0" },
+                { input: "[11,13,15,17]", expectedOutput: "11" }
+            ],
+            starterCode: "import ast\nnums = ast.literal_eval(input())\n\n# Return the minimum element\n",
+            tags: ["Array", "Binary Search"],
+            topics: ["Medium"]
+        },
+        {
+            title: "Find Peak Element",
+            description: `<div class="lc-description">
+<p>A peak element is an element that is strictly greater than its neighbors.</p>
+<p>Given a <strong>0-indexed</strong> integer array <code>nums</code>, find a peak element, and return its index. If the array contains multiple peaks, return the index to <strong>any of the peaks</strong>.</p>
+<p>You may imagine that <code>nums[-1] = nums[n] = -∞</code>. In other words, an element is always considered to be strictly greater than a neighbor that is outside the array.</p>
+<p>You must write an algorithm that runs in&nbsp;<code>O(log n)</code> time.</p>
+
+<p><strong>Example 1:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> nums = [1,2,3,1]</p>
+<p><strong class="lc-label">Output:</strong> 2</p>
+<p><strong>Explanation:</strong> 3 is a peak element and your function should return the index number 2.</p>
+</div>
+
+<p><strong>Example 2:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> nums = [1,2,1,3,5,6,4]</p>
+<p><strong class="lc-label">Output:</strong> 5</p>
+</div>
+</div>`,
+            difficulty: "medium",
+            xpReward: 35,
+            testCases: [
+                { input: "[1,2,3,1]", expectedOutput: "2" },
+                { input: "[1,2,1,3,5,6,4]", expectedOutput: "5" }
+            ],
+            starterCode: "import ast\nnums = ast.literal_eval(input())\n\n# Return the index of any peak element\n",
+            tags: ["Array", "Binary Search"],
+            topics: ["Medium"]
         }
     ];
 
