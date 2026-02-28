@@ -123,39 +123,11 @@ export default function LandingPage() {
 
                         {/* Contacts */}
                         <div>
-                            <p style={{ color: '#888', fontSize: '11px', fontWeight: 600, letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '16px' }}>
-                                {t('landing.footer.contact')}
-                            </p>
                             <a href="https://t.me/tezcode" target="_blank" rel="noreferrer" style={{ display: 'block', color: 'inherit', textDecoration: 'none', marginBottom: '12px' }}>Telegram</a>
                             <a href="https://instagram.com/tezcode" target="_blank" rel="noreferrer" style={{ display: 'block', color: 'inherit', textDecoration: 'none', marginBottom: '12px' }}>Instagram</a>
                         </div>
 
-                        {/* About */}
-                        <div>
-                            <p style={{ color: '#888', fontSize: '11px', fontWeight: 600, letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '16px' }}>
-                                {t('landing.footer.about')}
-                            </p>
-                            <Link to="/partners" style={{ display: 'block', color: 'inherit', textDecoration: 'none', marginBottom: '12px' }}>Partners</Link>
-                            <Link to="/reviews" style={{ display: 'block', color: 'inherit', textDecoration: 'none', marginBottom: '12px' }}>{t('landing.footer.reviews')}</Link>
-                        </div>
 
-                        {/* Documents */}
-                        <div>
-                            <p style={{ color: '#888', fontSize: '11px', fontWeight: 600, letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '16px' }}>
-                                {t('landing.footer.legal')}
-                            </p>
-                            <Link to="/terms" style={{ display: 'block', color: 'inherit', textDecoration: 'none', marginBottom: '12px' }}>Terms of Service</Link>
-                            <Link to="/privacy" style={{ display: 'block', color: 'inherit', textDecoration: 'none', marginBottom: '12px' }}>{t('landing.footer.privacy')}</Link>
-                        </div>
-
-                        {/* Links */}
-                        <div>
-                            <p style={{ color: '#888', fontSize: '11px', fontWeight: 600, letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '16px' }}>
-                                Links
-                            </p>
-                            <Link to="/pricing" style={{ display: 'block', color: 'inherit', textDecoration: 'none', marginBottom: '12px' }}>Pricing</Link>
-                            <Link to="/faq" style={{ display: 'block', color: 'inherit', textDecoration: 'none', marginBottom: '12px' }}>{t('landing.footer.faq')}</Link>
-                        </div>
                     </div>
 
                     {/* Bottom Bar */}
