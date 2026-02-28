@@ -115,11 +115,25 @@ router.post('/register', async (req, res) => {
 router.post('/google-auth', async (req, res) => {
     try {
         const { token } = req.body;
-        const ticket = await client.verifyIdToken({
-            idToken: token,
-            audience: config.google.clientId,
-        });
-        const { sub, email, name, picture } = ticket.getPayload();
+        if (!token) {
+            console.error('[Google Auth] No token provided in request body');
+            return res.status(400).json({ message: 'Token is required' });
+        }
+
+        let ticket;
+        try {
+            ticket = await client.verifyIdToken({
+                idToken: token,
+                audience: config.google.clientId,
+            });
+        } catch (verifyErr) {
+            console.error('[Google Auth] Token verification failed:', verifyErr.message);
+            return res.status(401).json({ message: 'Invalid Google token', details: verifyErr.message });
+        }
+
+        const payload = ticket.getPayload();
+        const { sub, email, name, picture } = payload;
+        console.log(`[Google Auth] Attempting login for: ${email} (${name})`);
 
         let user = await User.findOne({
             where: {
@@ -128,9 +142,13 @@ router.post('/google-auth', async (req, res) => {
         });
 
         if (!user) {
+            console.log(`[Google Auth] User not found. Creating new account for ${email}`);
             // Create new user
             // Generate a temporary unique username from name or email
-            let baseUsername = name.toLowerCase().replace(/\s/g, '_') || email.split('@')[0];
+            let baseName = name || email.split('@')[0];
+            let baseUsername = baseName.toLowerCase().replace(/\s/g, '_').replace(/[^a-z0-9_]/g, '');
+            if (!baseUsername) baseUsername = 'user';
+
             let username = baseUsername;
             let count = 1;
             while (await User.findOne({ where: { username } })) {
@@ -138,14 +156,16 @@ router.post('/google-auth', async (req, res) => {
             }
 
             user = await User.create({
-                name,
+                name: name || baseUsername,
                 username,
                 email,
                 googleId: sub,
                 avatarUrl: picture,
                 role: 'student',
             });
+            console.log(`[Google Auth] New user created: ${username} (ID: ${user.id})`);
         } else if (!user.googleId) {
+            console.log(`[Google Auth] Linking existing account (ID: ${user.id}) to Google ID: ${sub}`);
             // Link existing account
             user.googleId = sub;
             if (picture && !user.avatarUrl) user.avatarUrl = picture;
@@ -168,6 +188,7 @@ router.post('/google-auth', async (req, res) => {
             expiresAt,
         });
 
+        console.log(`[Google Auth] Success for user ${user.username}`);
         res.json({
             accessToken,
             refreshToken,
@@ -192,14 +213,17 @@ router.post('/google-auth', async (req, res) => {
 router.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body;
+        console.log(`[Auth] Manual login attempt for: ${email}`);
 
         const user = await User.findOne({ where: { email } });
         if (!user) {
+            console.log(`[Auth] Login failed: User ${email} not found`);
             return res.status(401).json({ message: 'Invalid credentials' });
         }
 
         const isValid = await bcrypt.compare(password, user.passwordHash);
         if (!isValid) {
+            console.log(`[Auth] Login failed: Invalid password for ${email}`);
             return res.status(401).json({ message: 'Invalid credentials' });
         }
 

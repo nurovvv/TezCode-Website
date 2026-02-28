@@ -43,6 +43,16 @@ api.interceptors.response.use(
         const originalRequest = error.config;
 
         if (error.response?.status === 401 && !originalRequest._retry) {
+            // DO NOT auto-redirect for login/register/google-auth. 
+            // We want the user to see "Invalid credentials" or other errors.
+            const isAuthRoute = originalRequest.url.includes('/auth/login') ||
+                originalRequest.url.includes('/auth/register') ||
+                originalRequest.url.includes('/auth/google-auth');
+
+            if (isAuthRoute) {
+                return Promise.reject(error);
+            }
+
             originalRequest._retry = true;
 
             try {

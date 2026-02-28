@@ -6,6 +6,15 @@ const config = require('./config/env');
 
 const app = express();
 
+// Import routes
+const authRoutes = require('./routes/auth');
+const courseRoutes = require('./routes/courses');
+const progressRoutes = require('./routes/progress');
+const challengeRoutes = require('./routes/challenges');
+const leaderboardRoutes = require('./routes/leaderboard');
+const runPythonRoutes = require('./routes/runPython');
+const dashboardRoutes = require('./routes/dashboard');
+
 // Middleware
 app.use(cors({
     origin: '*',
@@ -19,37 +28,31 @@ const uploadsDir = path.join(__dirname, '../public/uploads');
 if (!fs.existsSync(uploadsDir)) {
     fs.mkdirSync(uploadsDir, { recursive: true });
 }
-app.use('/uploads', express.static(path.join(__dirname, '../public/uploads')));
+app.use('/uploads', express.static(uploadsDir));
 
 // Health check
 app.get('/api/health', (req, res) => {
-    res.json({ status: 'ok', db: 'sqlite', timestamp: new Date().toISOString() });
+    const { sequelize } = require('./models');
+    res.json({
+        status: 'ok',
+        db: sequelize.getDialect(),
+        timestamp: new Date().toISOString()
+    });
 });
 
 // Routes
-app.use('/api/auth', (req, res, next) => {
-    require('./routes/auth')(req, res, next);
-});
-app.use('/api/courses', (req, res, next) => {
-    require('./routes/courses')(req, res, next);
-});
-app.use('/api/progress', (req, res, next) => {
-    require('./routes/progress')(req, res, next);
-});
-app.use('/api/run-python', require('./routes/runPython'));
-
-app.use('/api/challenges', (req, res, next) => {
-    require('./routes/challenges')(req, res, next);
-});
-app.use('/api/leaderboard', (req, res, next) => {
-    require('./routes/leaderboard')(req, res, next);
-});
-app.use('/api/dashboard', require('./routes/dashboard'));
+app.use('/api/auth', authRoutes);
+app.use('/api/courses', courseRoutes);
+app.use('/api/progress', progressRoutes);
+app.use('/api/run-python', runPythonRoutes);
+app.use('/api/challenges', challengeRoutes);
+app.use('/api/leaderboard', leaderboardRoutes);
+app.use('/api/dashboard', dashboardRoutes);
 
 // Error handler
 app.use((err, req, res, next) => {
     console.error('Server error:', err.message);
-    res.status(500).json({ message: 'Internal server error' });
+    res.status(500).json({ message: err.message || 'Internal server error' });
 });
 
 // Start
@@ -65,7 +68,7 @@ async function start() {
         const { sequelize, Challenge, Course } = require('./models');
         await sequelize.authenticate();
         await sequelize.sync(); // Creates tables if they don't exist
-        console.log('✅ SQLite database connected & synced');
+        console.log(`✅ ${sequelize.getDialect().toUpperCase()} database connected & synced`);
 
         // Automated production seeding
         const challengeCount = await Challenge.count();
