@@ -743,6 +743,34 @@ const COURSE_DATA = {
             ]
         },
         {
+            "id": "inheritance",
+            "title": "Python Inheritance",
+            "sections": [
+                {
+                    "id": "inheritance-basics",
+                    "title": "Inheritance"
+                },
+                {
+                    "id": "inheritance-challenge",
+                    "title": "Code Challenge"
+                }
+            ]
+        },
+        {
+            "id": "polymorphism",
+            "title": "Python Polymorphism",
+            "sections": [
+                {
+                    "id": "polymorphism-basics",
+                    "title": "Polymorphism"
+                },
+                {
+                    "id": "polymorphism-challenge",
+                    "title": "Code Challenge"
+                }
+            ]
+        },
+        {
             "id": "classes_header",
             "title": "Python Classes",
             "sections": []
@@ -757,11 +785,29 @@ const COURSE_DATA = {
             "title": "Python Classes/Objects",
             "sections": [
                 {
+                    "id": "classes-oop-intro",
+                    "title": "Python OOP"
+                },
+                {
                     "id": "classes-objects-basics",
                     "title": "Classes/Objects"
                 },
                 {
                     "id": "classes-objects-challenge",
+                    "title": "Code Challenge"
+                }
+            ]
+        },
+        {
+            "id": "init_method",
+            "title": "Python __init__ Method",
+            "sections": [
+                {
+                    "id": "init-basics",
+                    "title": "__init__ Method"
+                },
+                {
+                    "id": "init-challenge",
                     "title": "Code Challenge"
                 }
             ]
@@ -826,3 +872,14 @@ async function sync() {
 }
 
 module.exports = sync;
+
+if (require.main === module) {
+    sync().then(() => {
+        console.log('Sync process finished.');
+        process.exit(0);
+    }).catch(err => {
+        console.error('Sync failed:', err);
+        process.exit(1);
+    });
+}
+
