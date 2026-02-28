@@ -21,14 +21,36 @@ const errorHandler = require('./middleware/errorHandler');
 
 // Middleware
 // FIXED: Restrict CORS to known origins instead of wildcard
-const clientUrl = process.env.CLIENT_URL || process.env.FRONTEND_URL || 'http://localhost:3000';
-app.use(cors({
-    origin: clientUrl,
-    credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    maxAge: 86400
-}));
+
+function getCorsConfig() {
+    if (process.env.NODE_ENV === 'development') {
+        // Allow any localhost variant in development
+        return {
+            origin: (origin, callback) => {
+                if (!origin || origin.includes('localhost') || origin.includes('127.0.0.1')) {
+                    return callback(null, true);
+                }
+                callback(new Error('CORS not allowed'));
+            },
+            credentials: true,
+            methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+            allowedHeaders: ['Content-Type', 'Authorization'],
+            maxAge: 86400
+        };
+    } else {
+        // Production: allow configured domain
+        const clientUrl = process.env.CLIENT_URL || process.env.FRONTEND_URL;
+        return {
+            origin: clientUrl,
+            credentials: true,
+            methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+            allowedHeaders: ['Content-Type', 'Authorization'],
+            maxAge: 86400
+        };
+    }
+}
+
+app.use(cors(getCorsConfig()));
 app.use(express.json({ limit: '10mb' }));
 
 // Apply rate limiting to API
@@ -59,12 +81,6 @@ app.use('/api/run-python', runPythonRoutes);
 app.use('/api/challenges', challengeRoutes);
 app.use('/api/leaderboard', leaderboardRoutes);
 app.use('/api/dashboard', dashboardRoutes);
-
-// Error handler
-app.use((err, req, res, next) => {
-    console.error('Server error:', err.message);
-    res.status(500).json({ message: err.message || 'Internal server error' });
-});
 
 // Start
 async function start() {
