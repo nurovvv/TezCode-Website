@@ -3722,6 +3722,144 @@ else:
                     content: `<p>Learn about the Merge Sort algorithm in Python DSA.</p>`
                 }
             ]
+        },
+
+        /* ────── 116. Python MySQL (Header) ────── */
+        {
+            id: 'python_mysql_header', title: 'Python MySQL', isHeader: true,
+            sections: []
+        },
+
+        /* ────── 117. MySQL Get Started ────── */
+        {
+            id: 'mysql_get_started', title: 'MySQL Get Started',
+            sections: [
+                {
+                    id: 'mysql-get-started-basics', title: 'MySQL Get Started',
+                    content: `<p>Learn how to connect Python to a MySQL database.</p>`
+                }
+            ]
+        },
+
+        /* ────── 118. MySQL Create Database ────── */
+        {
+            id: 'mysql_create_database', title: 'MySQL Create Database',
+            sections: [
+                {
+                    id: 'mysql-create-database-basics', title: 'MySQL Create Database',
+                    content: `<p>Learn how to create a MySQL database using Python.</p>`
+                }
+            ]
+        },
+
+        /* ────── 119. MySQL Create Table ────── */
+        {
+            id: 'mysql_create_table', title: 'MySQL Create Table',
+            sections: [
+                {
+                    id: 'mysql-create-table-basics', title: 'MySQL Create Table',
+                    content: `<p>Learn how to create MySQL tables using Python.</p>`
+                }
+            ]
+        },
+
+        /* ────── 120. MySQL Insert ────── */
+        {
+            id: 'mysql_insert', title: 'MySQL Insert',
+            sections: [
+                {
+                    id: 'mysql-insert-basics', title: 'MySQL Insert',
+                    content: `<p>Learn how to insert data into MySQL database using Python.</p>`
+                }
+            ]
+        },
+
+        /* ────── 121. MySQL Select ────── */
+        {
+            id: 'mysql_select', title: 'MySQL Select',
+            sections: [
+                {
+                    id: 'mysql-select-basics', title: 'MySQL Select',
+                    content: `<p>Learn how to query data from a MySQL database using Python.</p>`
+                }
+            ]
+        },
+
+        /* ────── 122. MySQL Where ────── */
+        {
+            id: 'mysql_where', title: 'MySQL Where',
+            sections: [
+                {
+                    id: 'mysql-where-basics', title: 'MySQL Where',
+                    content: `<p>Learn how to filter MySQL records using the WHERE clause in Python.</p>`
+                }
+            ]
+        },
+
+        /* ────── 123. MySQL Order By ────── */
+        {
+            id: 'mysql_order_by', title: 'MySQL Order By',
+            sections: [
+                {
+                    id: 'mysql-order-by-basics', title: 'MySQL Order By',
+                    content: `<p>Learn how to sort MySQL results using ORDER BY in Python.</p>`
+                }
+            ]
+        },
+
+        /* ────── 124. MySQL Delete ────── */
+        {
+            id: 'mysql_delete', title: 'MySQL Delete',
+            sections: [
+                {
+                    id: 'mysql-delete-basics', title: 'MySQL Delete',
+                    content: `<p>Learn how to delete records from a MySQL table using Python.</p>`
+                }
+            ]
+        },
+
+        /* ────── 125. MySQL Drop Table ────── */
+        {
+            id: 'mysql_drop_table', title: 'MySQL Drop Table',
+            sections: [
+                {
+                    id: 'mysql-drop-table-basics', title: 'MySQL Drop Table',
+                    content: `<p>Learn how to delete a table entirely in MySQL using Python.</p>`
+                }
+            ]
+        },
+
+        /* ────── 126. MySQL Update ────── */
+        {
+            id: 'mysql_update', title: 'MySQL Update',
+            sections: [
+                {
+                    id: 'mysql-update-basics', title: 'MySQL Update',
+                    content: `<p>Learn how to update existing records in a MySQL table using Python.</p>`
+                }
+            ]
+        },
+
+        /* ────── 127. MySQL Limit ────── */
+        {
+            id: 'mysql_limit', title: 'MySQL Limit',
+            sections: [
+                {
+                    id: 'mysql-limit-basics', title: 'MySQL Limit',
+                    content: `<p>Learn how to limit the number of records returned from MySQL.</p>`
+                }
+            ]
+        },
+
+        /* ────── 128. MySQL Join ────── */
+        {
+            id: 'mysql_join', title: 'MySQL Join',
+            sections: [
+                {
+                    id: 'mysql-join-basics', title: 'MySQL Join',
+                    content: `<p>Learn how to combine rows from two or more tables in MySQL.</p>`
+                }
+            ]
         }
     ],
 };
