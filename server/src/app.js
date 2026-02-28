@@ -15,13 +15,24 @@ const leaderboardRoutes = require('./routes/leaderboard');
 const runPythonRoutes = require('./routes/runPython');
 const dashboardRoutes = require('./routes/dashboard');
 
+// Import middleware
+const { apiLimiter } = require('./middleware/rateLimit');
+const errorHandler = require('./middleware/errorHandler');
+
 // Middleware
+// FIXED: Restrict CORS to known origins instead of wildcard
+const clientUrl = process.env.CLIENT_URL || process.env.FRONTEND_URL || 'http://localhost:3000';
 app.use(cors({
-    origin: '*',
+    origin: clientUrl,
+    credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization']
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    maxAge: 86400
 }));
 app.use(express.json({ limit: '10mb' }));
+
+// Apply rate limiting to API
+app.use('/api/', apiLimiter);
 
 // Static files for uploads
 const uploadsDir = path.join(__dirname, '../public/uploads');
@@ -112,6 +123,9 @@ async function start() {
         } catch (e) {
             console.error('Failed to recalculate XP:', e.message);
         }
+
+        // Error handling middleware (must be after all routes)
+        app.use(errorHandler);
 
         app.listen(config.port, () => {
             console.log(`🚀 TezCode server on http://localhost:${config.port}`);
