@@ -98,21 +98,8 @@ export default function LandingPage() {
             {/* ═══════ FOOTER ═══════ */}
             <section style={{ borderTop: '1px solid #e5e5e5' }}>
                 <div style={{ maxWidth: '900px', margin: '0 auto', padding: '48px 24px' }}>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '32px', fontSize: '13px' }}>
-                        <div>
-                            <p style={{ fontWeight: 700, color: '#1d1d1f', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 12px' }}>
-                                {t('landing.footer.chapters')}
-                            </p>
-                            <Link to="/catalog" style={{ display: 'block', color: '#86868b', textDecoration: 'none', marginBottom: '8px', fontSize: '13px' }}>{t('catalog.python.title')}</Link>
-                            <Link to="/challenges" style={{ display: 'block', color: '#86868b', textDecoration: 'none', marginBottom: '8px', fontSize: '13px' }}>{t('nav.challenges')}</Link>
-                        </div>
-                        <div>
-                            <p style={{ fontWeight: 700, color: '#1d1d1f', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 12px' }}>
-                                {t('nav.dashboard')}
-                            </p>
-                            <Link to="/dashboard" style={{ display: 'block', color: '#86868b', textDecoration: 'none', marginBottom: '8px', fontSize: '13px' }}>{t('dashboard.myCourses')}</Link>
-                            <Link to="/profile" style={{ display: 'block', color: '#86868b', textDecoration: 'none', marginBottom: '8px', fontSize: '13px' }}>{t('nav.profile')}</Link>
-                        </div>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '32px', fontSize: '13px' }}>
+
                         <div>
                             <p style={{ fontWeight: 700, color: '#1d1d1f', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 12px' }}>
                                 {t('landing.footer.contact')}
