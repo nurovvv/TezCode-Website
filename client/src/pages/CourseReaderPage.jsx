@@ -2729,6 +2729,43 @@ print("Username is: " + username)</pre>`,
                     content: `<p>Practice polymorphism by using the same method name on different classes!</p>`
                 }
             ]
+        },
+
+        /* ────── 45. Python Encapsulation ────── */
+        {
+            id: 'encapsulation', title: 'Python Encapsulation',
+            sections: [
+                {
+                    id: 'encapsulation-basics', title: 'Encapsulation',
+                    content: `<p>Encapsulation is one of the fundamental concepts in object-oriented programming (OOP). It describes the idea of wrapping data and the methods that work on data within one unit. This puts restrictions on accessing variables and methods directly and can prevent the accidental modification of data.</p>
+<h3>Private Members</h3>
+<p>To define a private member, prefix the name with double underscores <code>__</code>:</p>
+<pre>class Car:
+    def __init__(self):
+        self.__max_speed = 200 # Private attribute</pre>
+<h3>Protected Members</h3>
+<p>Protected members are prefixed with a single underscore <code>_</code>. It is a convention to indicate that they should not be accessed outside the class (though Python doesn't strictly enforce this):</p>
+<pre>self._speed = 100 # Protected attribute</pre>`,
+                    examples: [
+                        { title: 'Private Attribute', code: 'class Computer:\n    def __init__(self):\n        self.__maxprice = 900\n\n    def sell(self):\n        print("Selling Price: {}".format(self.__maxprice))\n\n    def setMaxPrice(price):\n        self.__maxprice = price\n\nc = Computer()\nc.sell()\n\n# change the price\nc.__maxprice = 1000\nc.sell()' }
+                    ],
+                    exercise: { question: 'How do you define a private member in a Python class?', options: ['Prefix with _', 'Prefix with __', 'Use private keyword'], answer: 1 }
+                },
+                {
+                    id: 'encapsulation-challenge', title: 'Code Challenge',
+                    type: 'challenge',
+                    instructions: [
+                        'Create a class named <code>BankAccount</code>.',
+                        'Use <code>__init__</code> to set a private attribute <code>__balance</code> to <code>0</code>.',
+                        'Create a method <code>deposit(amount)</code> that adds the amount to <code>__balance</code>.',
+                        'Create a method <code>get_balance()</code> that returns the current <code>__balance</code>.',
+                        'Create an object, deposit <code>100</code>, and print the balance using <code>get_balance()</code>.'
+                    ],
+                    starterCode: 'class BankAccount:\n    # Define __init__, deposit, and get_balance\n\n\n# Create object, deposit 100, and print balance\n',
+                    solution: 'class BankAccount:\n    def __init__(self):\n        self.__balance = 0\n    def deposit(self, amount):\n        self.__balance += amount\n    def get_balance(self):\n        return self.__balance\n\nacc = BankAccount()\nacc.deposit(100)\nprint(acc.get_balance())',
+                    content: `<p>Practice encapsulation by creating a BankAccount class with a private balance!</p>`
+                }
+            ]
         }
     ],
 };

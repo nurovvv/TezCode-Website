@@ -853,6 +853,20 @@ const COURSE_DATA = {
                     "title": "Code Challenge"
                 }
             ]
+        },
+        {
+            "id": "encapsulation",
+            "title": "Python Encapsulation",
+            "sections": [
+                {
+                    "id": "encapsulation-basics",
+                    "title": "Encapsulation"
+                },
+                {
+                    "id": "encapsulation-challenge",
+                    "title": "Code Challenge"
+                }
+            ]
         }
     ]
 };
