@@ -2766,6 +2766,50 @@ print("Username is: " + username)</pre>`,
                     content: `<p>Practice encapsulation by creating a BankAccount class with a private balance!</p>`
                 }
             ]
+        },
+
+        /* ────── 46. Python Inner Classes ────── */
+        {
+            id: 'inner_classes', title: 'Python Inner Classes',
+            sections: [
+                {
+                    id: 'inner-classes-basics', title: 'Inner Classes',
+                    content: `<p>An inner class or nested class is a class defined inside another class. In Python, this is possible and can be used to logically group classes that are only used in one place, or to increase encapsulation.</p>
+<h3>Defining an Inner Class</h3>
+<p>To define an inner class, simply place another <code>class</code> definition inside the body of the outer class:</p>
+<pre>class Outer:
+    def __init__(self):
+        self.inner = self.Inner()
+
+    class Inner:
+        def display(self):
+            print("This is the inner class")</pre>
+<h3>Why Use Inner Classes?</h3>
+<ul>
+    <li>Building more readable and maintainable code.</li>
+    <li>Logically grouping classes that only belong together.</li>
+    <li>Increased encapsulation.</li>
+</ul>`,
+                    examples: [
+                        { title: 'Accessing Inner Class', code: 'class Student:\n    def __init__(self, name, rollno):\n        self.name = name\n        self.rollno = rollno\n        self.lap = self.Laptop()\n\n    class Laptop:\n        def __init__(self):\n            self.brand = "HP"\n            self.cpu = "i5"\n\ns1 = Student("John", 2)\nprint(s1.lap.brand)' }
+                    ],
+                    exercise: { question: 'Can you define a class inside another class in Python?', options: ['Yes', 'No', 'Only inside the __init__ method'], answer: 0 }
+                },
+                {
+                    id: 'inner-classes-challenge', title: 'Code Challenge',
+                    type: 'challenge',
+                    instructions: [
+                        'Create an outer class named <code>Zoo</code>.',
+                        'Inside <code>Zoo</code>, create an inner class named <code>Animal</code>.',
+                        'The <code>Animal</code> class should have a method <code>identify()</code> that prints <code>"I am an animal in the zoo"</code>.',
+                        'In the <code>Zoo</code> class constructor, create an instance of <code>Animal</code> and assign it to <code>self.animal</code>.',
+                        'Create a <code>Zoo</code> object and call <code>identify()</code> through the <code>animal</code> attribute.'
+                    ],
+                    starterCode: 'class Zoo:\n    # Define __init__ and Inner class Animal\n\n\n# Create Zoo object and call identify\n',
+                    solution: 'class Zoo:\n    def __init__(self):\n        self.animal = self.Animal()\n    class Animal:\n        def identify(self):\n            print("I am an animal in the zoo")\n\nmy_zoo = Zoo()\nmy_zoo.animal.identify()',
+                    content: `<p>Practice creating and accessing inner classes in Python!</p>`
+                }
+            ]
         }
     ],
 };

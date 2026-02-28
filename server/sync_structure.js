@@ -867,6 +867,20 @@ const COURSE_DATA = {
                     "title": "Code Challenge"
                 }
             ]
+        },
+        {
+            "id": "inner_classes",
+            "title": "Python Inner Classes",
+            "sections": [
+                {
+                    "id": "inner-classes-basics",
+                    "title": "Inner Classes"
+                },
+                {
+                    "id": "inner-classes-challenge",
+                    "title": "Code Challenge"
+                }
+            ]
         }
     ]
 };
