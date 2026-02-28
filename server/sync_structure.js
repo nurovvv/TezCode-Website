@@ -811,6 +811,20 @@ const COURSE_DATA = {
                     "title": "Code Challenge"
                 }
             ]
+        },
+        {
+            "id": "self_parameter",
+            "title": "Python self Parameter",
+            "sections": [
+                {
+                    "id": "self-basics",
+                    "title": "self Parameter"
+                },
+                {
+                    "id": "self-challenge",
+                    "title": "Code Challenge"
+                }
+            ]
         }
     ]
 };

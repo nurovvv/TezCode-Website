@@ -2617,6 +2617,38 @@ print("Username is: " + username)</pre>`,
                     content: `<p>Practice using the __init__ method in Python classes!</p>`
                 }
             ]
+        },
+        /* ────── 42. Python self Parameter ────── */
+        {
+            id: 'self_parameter', title: 'Python self Parameter',
+            sections: [
+                {
+                    id: 'self-basics', title: 'self Parameter',
+                    content: `<p>The <code>self</code> parameter is a reference to the current instance of the class, and is used to access variables that belong to the class.</p>
+<p>It does not have to be named <code>self</code>, you can call it whatever you like, but it has to be the <b>first parameter</b> of any function in the class:</p>`,
+                    examples: [
+                        {
+                            title: 'Example',
+                            code: 'class Person:\n  def __init__(mysillyobject, name, age):\n    mysillyobject.name = name\n    mysillyobject.age = age\n\n  def myfunc(abc):\n    print("Hello my name is " + abc.name)\n\np1 = Person("John", 36)\np1.myfunc()',
+                            preContent: '<p>Use the words <code>mysillyobject</code> and <code>abc</code> instead of <code>self</code>:</p>'
+                        }
+                    ],
+                    exercise: { question: 'Does the self parameter have to be named "self"?', options: ['Yes', 'No', 'Only in the __init__ method'], answer: 1 }
+                },
+                {
+                    id: 'self-challenge', title: 'Code Challenge',
+                    type: 'challenge',
+                    instructions: [
+                        'Create a class named <code>Person</code>.',
+                        'Use the <code>__init__()</code> function to assign values for <code>name</code>.',
+                        'Add a method named <code>greet</code> that prints <code>"Hello, my name is "</code> followed by the name.',
+                        'Create an object named <code>p1</code> and call the <code>greet</code> method.'
+                    ],
+                    starterCode: 'class Person:\n    # Define __init__ and greet methods\n\n\n# Create object and call greet\n',
+                    solution: 'class Person:\n    def __init__(self, name):\n        self.name = name\n    def greet(self):\n        print("Hello, my name is " + self.name)\n\np1 = Person("Alice")\np1.greet()',
+                    content: `<p>Practice using the self parameter to access instance variables!</p>`
+                }
+            ]
         }
     ],
 };
