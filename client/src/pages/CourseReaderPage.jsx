@@ -2483,7 +2483,7 @@ print("Username is: " + username)</pre>`,
         },
         /* ────── 38. Python OOP ────── */
         {
-            id: 'oop', title: 'Python OOP', isSpecial: true,
+            id: 'oop', title: 'Python OOP',
             sections: [
                 {
                     id: 'oop-intro', title: 'Python OOP',
@@ -3011,29 +3011,6 @@ export default function CourseReaderPage() {
                             {/* Chapter list */}
                             {COURSE.chapters.map(ch => {
                                 const isExpanded = expandedChapters.has(ch.id);
-                                if (ch.isSpecial) {
-                                    return (
-                                        <div key={ch.id} style={{ marginTop: '32px', marginBottom: '16px' }}>
-                                            <h2 style={{ fontSize: '32px', fontWeight: 500, color: '#000', margin: '0 0 8px', fontFamily: 'inherit' }}>{ch.title}</h2>
-                                            {ch.sections.map(s => {
-                                                const sIdx = allSections.findIndex(sec => sec.id === s.id);
-                                                const active = sIdx === currentIdx;
-                                                return (
-                                                    <div key={s.id}
-                                                        onClick={() => goTo(sIdx)}
-                                                        style={{
-                                                            padding: '8px 0', cursor: 'pointer', fontSize: '20px',
-                                                            color: active ? C.green : '#000',
-                                                            fontWeight: 400,
-                                                            transition: 'color 0.1s'
-                                                        }}>
-                                                        {s.title}
-                                                    </div>
-                                                );
-                                            })}
-                                        </div>
-                                    );
-                                }
                                 return (
                                     <div key={ch.id} style={{ marginBottom: '8px' }}>
                                         {/* Header / Dropdown Button */}
