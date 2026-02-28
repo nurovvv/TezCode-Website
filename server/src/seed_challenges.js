@@ -1636,6 +1636,422 @@ substring</em>.</p>
             starterCode: "import ast\nnums = ast.literal_eval(input())\ntarget = int(input())\n\n# Return the index of target\n",
             tags: ["Array", "Binary Search"],
             topics: ["Medium"]
+        },
+        {
+            title: "Maximum Subarray",
+            description: `<div class="lc-description">
+<p>Given an integer array <code>nums</code>, find the subarray with the largest sum, and return <em>its sum</em>.</p>
+
+<p><strong>Example 1:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> nums = [-2,1,-3,4,-1,2,1,-5,4]</p>
+<p><strong class="lc-label">Output:</strong> 6</p>
+<p><strong class="lc-label">Explanation:</strong> The subarray [4,-1,2,1] has the largest sum 6.</p>
+</div>
+
+<p><strong>Example 2:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> nums = [5]</p>
+<p><strong class="lc-label">Output:</strong> 5</p>
+</div>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>1 <= nums.length <= 10^5</code></li>
+<li><code>-10^4 <= nums[i] <= 10^4</code></li>
+</ul>
+</div>`,
+            difficulty: "medium",
+            xpReward: 35,
+            testCases: [
+                { input: "[-2,1,-3,4,-1,2,1,-5,4]", expectedOutput: "6" },
+                { input: "[5]", expectedOutput: "5" },
+                { input: "[-2,-1]", expectedOutput: "-1" }
+            ],
+            starterCode: "import ast\nnums = ast.literal_eval(input())\n\n# Return the maximum sum of any subarray\n",
+            tags: ["Array", "Divide and Conquer", "Dynamic Programming"],
+            topics: ["Medium"]
+        },
+        {
+            title: "Remove Duplicates from Sorted Array",
+            description: `<div class="lc-description">
+<p>Given an integer array <code>nums</code> sorted in non-decreasing order, remove the duplicates <strong>in-place</strong> such that each unique element appears only once. The relative order of the elements should be kept the same. Then return <em>the number of unique elements in</em> <code>nums</code>.</p>
+
+<p><strong>Example 1:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> nums = [1,1,2]</p>
+<p><strong class="lc-label">Output:</strong> 2, nums = [1,2,_]</p>
+</div>
+
+<p><strong>Example 2:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> nums = [0,0,1,1,1,2,2,3,3,4]</p>
+<p><strong class="lc-label">Output:</strong> 5, nums = [0,1,2,3,4,_,_,_,_,_]</p>
+</div>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>1 <= nums.length <= 3 * 10^4</code></li>
+<li><code>-100 <= nums[i] <= 100</code></li>
+<li><code>nums</code> is sorted in non-decreasing order.</li>
+</ul>
+</div>`,
+            difficulty: "easy",
+            xpReward: 15,
+            testCases: [
+                { input: "[1, 1, 2]", expectedOutput: "2" },
+                { input: "[0, 0, 1, 1, 1, 2, 2, 3, 3, 4]", expectedOutput: "5" }
+            ],
+            starterCode: "import ast\nnums = ast.literal_eval(input())\n\n# Count and return the number of unique elements\n",
+            tags: ["Array", "Two Pointers"],
+            topics: ["Easy"]
+        },
+        {
+            title: "Trapping Rain Water",
+            description: `<div class="lc-description">
+<p>Given <code>n</code> non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it can trap after raining.</p>
+
+<p><strong>Example 1:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> height = [0,1,0,2,1,0,1,3,2,1,2,1]</p>
+<p><strong class="lc-label">Output:</strong> 6</p>
+</div>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>n == height.length</code></li>
+<li><code>1 <= n <= 2 * 10^4</code></li>
+<li><code>0 <= height[i] <= 10^5</code></li>
+</ul>
+</div>`,
+            difficulty: "hard",
+            xpReward: 60,
+            testCases: [
+                { input: "[0,1,0,2,1,0,1,3,2,1,2,1]", expectedOutput: "6" },
+                { input: "[4,2,0,3,2,5]", expectedOutput: "9" }
+            ],
+            starterCode: "import ast\nheight = ast.literal_eval(input())\n\n# Calculate the trapped water\n",
+            tags: ["Array", "Dynamic Programming", "Two Pointers", "Stack"],
+            topics: ["Hard"]
+        },
+        {
+            title: "Median of Two Sorted Arrays",
+            description: `<div class="lc-description">
+<p>Given two sorted arrays <code>nums1</code> and <code>nums2</code> of size <code>m</code> and <code>n</code> respectively, return <em>the median of the two sorted arrays</em>.</p>
+<p>The overall run time complexity should be <code>O(log (m+n))</code>.</p>
+
+<p><strong>Example 1:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> nums1 = [1,3], nums2 = [2]</p>
+<p><strong class="lc-label">Output:</strong> 2.0</p>
+</div>
+
+<p><strong>Example 2:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> nums1 = [1,2], nums2 = [3,4]</p>
+<p><strong class="lc-label">Output:</strong> 2.5</p>
+</div>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>nums1.length == m</code></li>
+<li><code>nums2.length == n</code></li>
+<li><code>0 <= m <= 1000</code></li>
+<li><code>0 <= n <= 1000</code></li>
+</ul>
+</div>`,
+            difficulty: "hard",
+            xpReward: 65,
+            testCases: [
+                { input: "[1, 3]\n[2]", expectedOutput: "2.0" },
+                { input: "[1, 2]\n[3, 4]", expectedOutput: "2.5" }
+            ],
+            starterCode: "import ast\nnums1 = ast.literal_eval(input())\nnums2 = ast.literal_eval(input())\n\n# Return the median as a float\n",
+            tags: ["Array", "Divide and Conquer", "Binary Search"],
+            topics: ["Hard"]
+        },
+        {
+            title: "Reverse Integer",
+            description: `<div class="lc-description">
+<p>Given a signed 32-bit integer <code>x</code>, return <em>x</em> <em>with its digits reversed</em>. If reversing <code>x</code> causes the value to go outside the signed 32-bit integer range <code>[-2^31, 2^31 - 1]</code>, then return <code>0</code>.</p>
+
+<p><strong>Example 1:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> x = 123</p>
+<p><strong class="lc-label">Output:</strong> 321</p>
+</div>
+
+<p><strong>Example 2:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> x = -123</p>
+<p><strong class="lc-label">Output:</strong> -321</p>
+</div>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>-2^31 <= x <= 2^31 - 1</code></li>
+</ul>
+</div>`,
+            difficulty: "easy",
+            xpReward: 15,
+            testCases: [
+                { input: "123", expectedOutput: "321" },
+                { input: "-123", expectedOutput: "-321" },
+                { input: "120", expectedOutput: "21" }
+            ],
+            starterCode: "x = int(input())\n\n# Return the reversed integer\n",
+            tags: ["Math"],
+            topics: ["Easy"]
+        },
+        {
+            title: "Majority Element",
+            description: `<div class="lc-description">
+<p>Given an array <code>nums</code> of size <code>n</code>, return <em>the majority element</em>.</p>
+<p>The majority element is the element that appears more than ⌊n / 2⌋ times. You may assume that the majority element always exists in the array.</p>
+
+<p><strong>Example 1:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> nums = [3,2,3]</p>
+<p><strong class="lc-label">Output:</strong> 3</p>
+</div>
+
+<p><strong>Example 2:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> nums = [2,2,1,1,1,2,2]</p>
+<p><strong class="lc-label">Output:</strong> 2</p>
+</div>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>1 <= nums.length <= 5 * 10^4</code></li>
+<li><code>-10^9 <= nums[i] <= 10^9</code></li>
+</ul>
+</div>`,
+            difficulty: "easy",
+            xpReward: 18,
+            testCases: [
+                { input: "[3, 2, 3]", expectedOutput: "3" },
+                { input: "[2, 2, 1, 1, 1, 2, 2]", expectedOutput: "2" }
+            ],
+            starterCode: "import ast\nnums = ast.literal_eval(input())\n\n# Return the majority element\n",
+            tags: ["Array", "Hash Table", "Divide and Conquer", "Sorting", "Counting"],
+            topics: ["Easy"]
+        },
+        {
+            title: "Search for a Range",
+            description: `<div class="lc-description">
+<p>Given an array of integers <code>nums</code> sorted in non-decreasing order, find the starting and ending position of a given <code>target</code> value.</p>
+<p>If <code>target</code> is not found in the array, return <code>[-1, -1]</code>.</p>
+<p>You must write an algorithm with <code>O(log n)</code> runtime complexity.</p>
+
+<p><strong>Example 1:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> nums = [5,7,7,8,8,10], target = 8</p>
+<p><strong class="lc-label">Output:</strong> [3,4]</p>
+</div>
+
+<p><strong>Example 2:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> nums = [5,7,7,8,8,10], target = 6</p>
+<p><strong class="lc-label">Output:</strong> [-1,-1]</p>
+</div>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>0 <= nums.length <= 10^5</code></li>
+<li><code>-10^9 <= nums[i] <= 10^9</code></li>
+<li><code>-10^9 <= target <= 10^9</code></li>
+</ul>
+</div>`,
+            difficulty: "medium",
+            xpReward: 38,
+            testCases: [
+                { input: "[5, 7, 7, 8, 8, 10]\n8", expectedOutput: "[3, 4]" },
+                { input: "[5, 7, 7, 8, 8, 10]\n6", expectedOutput: "[-1, -1]" },
+                { input: "[]\n5", expectedOutput: "[-1, -1]" }
+            ],
+            starterCode: "import ast\nnums = ast.literal_eval(input())\ntarget = int(input())\n\n# Return [first_occurrence, last_occurrence] or [-1, -1]\n",
+            tags: ["Array", "Binary Search"],
+            topics: ["Medium"]
+        },
+        {
+            title: "First Missing Positive",
+            description: `<div class="lc-description">
+<p>Given an unsorted integer array <code>nums</code>, return the smallest missing positive integer.</p>
+<p>You must implement an algorithm that runs in <code>O(n)</code> time and uses <code>O(1)</code> auxiliary space.</p>
+
+<p><strong>Example 1:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> nums = [1,2,0]</p>
+<p><strong class="lc-label">Output:</strong> 3</p>
+</div>
+
+<p><strong>Example 2:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> nums = [3,4,-1,1]</p>
+<p><strong class="lc-label">Output:</strong> 2</p>
+</div>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>1 <= nums.length <= 10^5</code></li>
+<li><code>-2^31 <= nums[i] <= 2^31 - 1</code></li>
+</ul>
+</div>`,
+            difficulty: "hard",
+            xpReward: 60,
+            testCases: [
+                { input: "[1, 2, 0]", expectedOutput: "3" },
+                { input: "[3, 4, -1, 1]", expectedOutput: "2" },
+                { input: "[7, 8, 9, 11, 12]", expectedOutput: "1" }
+            ],
+            starterCode: "import ast\nnums = ast.literal_eval(input())\n\n# Return the smallest missing positive integer\n",
+            tags: ["Array", "Hash Table"],
+            topics: ["Hard"]
+        },
+        {
+            title: "Contains Duplicate",
+            description: `<div class="lc-description">
+<p>Given an integer array <code>nums</code>, return <code>True</code> if any value appears <strong>at least twice</strong> in the array, and return <code>False</code> if every element is distinct.</p>
+
+<p><strong>Example 1:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> nums = [1,2,3,1]</p>
+<p><strong class="lc-label">Output:</strong> True</p>
+</div>
+
+<p><strong>Example 2:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> nums = [1,2,3,4]</p>
+<p><strong class="lc-label">Output:</strong> False</p>
+</div>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>1 <= nums.length <= 10^5</code></li>
+<li><code>-10^9 <= nums[i] <= 10^9</code></li>
+</ul>
+</div>`,
+            difficulty: "easy",
+            xpReward: 12,
+            testCases: [
+                { input: "[1, 2, 3, 1]", expectedOutput: "True" },
+                { input: "[1, 2, 3, 4]", expectedOutput: "False" }
+            ],
+            starterCode: "import ast\nnums = ast.literal_eval(input())\n\n# Use set() to find duplicates\n",
+            tags: ["Array", "Hash Table"],
+            topics: ["Easy"]
+        },
+        {
+            title: "Best Time to Buy and Sell Stock",
+            description: `<div class="lc-description">
+<p>You are given an array <code>prices</code> where <code>prices[i]</code> is the price of a given stock on the <code>i</code>th day.</p>
+<p>You want to maximize your profit by choosing a <strong>single day</strong> to buy one stock and a <strong>different day</strong> in the future to sell that stock. Return <em>the maximum profit you can achieve from this transaction</em>. If you cannot achieve any profit, return <code>0</code>.</p>
+
+<p><strong>Example 1:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> prices = [7,1,5,3,6,4]</p>
+<p><strong class="lc-label">Output:</strong> 5</p>
+<p><strong class="lc-label">Explanation:</strong> Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.</p>
+</div>
+
+<p><strong>Example 2:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> prices = [7,6,4,3,1]</p>
+<p><strong class="lc-label">Output:</strong> 0</p>
+</div>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>1 <= prices.length <= 10^5</code></li>
+<li><code>0 <= prices[i] <= 10^4</code></li>
+</ul>
+</div>`,
+            difficulty: "easy",
+            xpReward: 18,
+            testCases: [
+                { input: "[7, 1, 5, 3, 6, 4]", expectedOutput: "5" },
+                { input: "[7, 6, 4, 3, 1]", expectedOutput: "0" }
+            ],
+            starterCode: "import ast\nprices = ast.literal_eval(input())\n\n# Return the maximum profit\n",
+            tags: ["Array", "Dynamic Programming"],
+            topics: ["Easy"]
+        },
+        {
+            title: "Wildcard Matching",
+            description: `<div class="lc-description">
+<p>Given an input string <code>s</code> and a pattern <code>p</code>, implement wildcard pattern matching with support for <code>'?'</code> and <code>'*'</code> where:</p>
+<ul>
+<li><code>'?'</code> Matches any single character.</li>
+<li><code>'*'</code> Matches any sequence of characters (including the empty sequence).</li>
+</ul>
+<p>The matching should cover the <strong>entire</strong> input string (not partial).</p>
+
+<p><strong>Example 1:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> s = "aa", p = "a"</p>
+<p><strong class="lc-label">Output:</strong> False</p>
+</div>
+
+<p><strong>Example 2:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> s = "aa", p = "*"</p>
+<p><strong class="lc-label">Output:</strong> True</p>
+</div>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>1 <= s.length <= 2000</code></li>
+<li><code>1 <= p.length <= 2000</code></li>
+</ul>
+</div>`,
+            difficulty: "hard",
+            xpReward: 70,
+            testCases: [
+                { input: "aa\na", expectedOutput: "False" },
+                { input: "aa\n*", expectedOutput: "True" },
+                { input: "cb\n?a", expectedOutput: "False" }
+            ],
+            starterCode: "s = input()\np = input()\n\n# Implement wildcard matching and return True or False\n",
+            tags: ["String", "Dynamic Programming", "Greedy", "Recursion"],
+            topics: ["Hard"]
+        },
+        {
+            title: "Word Search",
+            description: `<div class="lc-description">
+<p>Given an <code>m x n</code> grid of characters <code>board</code> and a string <code>word</code>, return <code>true</code> if <code>word</code> exists in the grid.</p>
+<p>The word can be constructed from letters of sequentially adjacent cells, where adjacent cells are horizontally or vertically neighboring. The same letter cell may not be used more than once in a word.</p>
+
+<p><strong>Example 1:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "ABCCED"</p>
+<p><strong class="lc-label">Output:</strong> True</p>
+</div>
+
+<p><strong>Example 2:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "SEE"</p>
+<p><strong class="lc-label">Output:</strong> True</p>
+</div>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>m == board.length</code></li>
+<li><code>n = board[i].length</code></li>
+<li><code>1 <= m, n <= 6</code></li>
+<li><code>1 <= word.length <= 15</code></li>
+</ul>
+</div>`,
+            difficulty: "medium",
+            xpReward: 42,
+            testCases: [
+                { input: "[[\"A\",\"B\",\"C\",\"E\"],[\"S\",\"F\",\"C\",\"S\"],[\"A\",\"D\",\"E\",\"E\"]]\nABCCED", expectedOutput: "True" },
+                { input: "[[\"A\",\"B\",\"C\",\"E\"],[\"S\",\"F\",\"C\",\"S\"],[\"A\",\"D\",\"E\",\"E\"]]\nSEE", expectedOutput: "True" },
+                { input: "[[\"A\",\"B\",\"C\",\"E\"],[\"S\",\"F\",\"C\",\"S\"],[\"A\",\"D\",\"E\",\"E\"]]\nABCB", expectedOutput: "False" }
+            ],
+            starterCode: "import ast\nboard = ast.literal_eval(input())\nword = input()\n\n# Use DFS/backtracking to find word\n",
+            tags: ["Array", "String", "Backtracking", "Matrix"],
+            topics: ["Medium"]
         }
     ];
 
