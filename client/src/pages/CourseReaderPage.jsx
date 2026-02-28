@@ -589,6 +589,16 @@ Hello, World!</div>
                             title: 'Getting the Data Type',
                             code: 'x = 5\nprint(type(x))',
                             preContent: '<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Getting the Data Type</h2>\n<p>You can get the data type of any object by using the <code>type()</code> function:</p>'
+                        },
+                        {
+                            title: 'Checking String Types',
+                            code: 'name = "John"\nprint(name)\nprint(type(name))',
+                            preContent: '<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Text Types (str)</h2>\n<p>A string in Python is a sequence of characters, enclosed in single or double quotes.</p>'
+                        },
+                        {
+                            title: 'Checking Numeric Types',
+                            code: 'age = 36          # int\nprice = 99.99     # float\ncomplex_num = 1j  # complex\n\nprint(type(age))\nprint(type(price))\nprint(type(complex_num))',
+                            preContent: '<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Numeric Types (int, float, complex)</h2>\n<p>Python supports three different numerical types: Integer, Float, and Complex Numbers.</p>'
                         }
                     ],
                     exercise: {
@@ -596,6 +606,19 @@ Hello, World!</div>
                         options: ['str', 'int', 'list', 'bool'],
                         answer: 1
                     }
+                },
+                {
+                    id: 'data-types-practice', title: 'Data Types Practice',
+                    type: 'challenge',
+                    instructions: [
+                        'Create a variable <code>greeting</code> and set it to the string <code>"Hello World"</code>',
+                        'Create a variable <code>score</code> and set it to the integer <code>100</code>',
+                        'Create a variable <code>pi</code> and set it to the float <code>3.14</code>',
+                        'Print the <code>type()</code> for all three variables.'
+                    ],
+                    starterCode: '# Create variables\n\n\n# Print their types\n',
+                    solution: 'greeting = "Hello World"\nscore = 100\npi = 3.14\n\nprint(type(greeting))\nprint(type(score))\nprint(type(pi))',
+                    content: `<p>Put your knowledge of primary data types to the test!</p>`
                 },
                 {
                     id: 'data-types-setting', title: 'Setting the Data Type',

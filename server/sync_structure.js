@@ -112,15 +112,27 @@ const COURSE_DATA = {
             ]
         },
         {
-            "id": "datatypes",
+            "id": "data-types",
             "title": "Python Data Types",
             "sections": [
                 {
-                    "id": "datatypes-intro",
+                    "id": "data-types-main",
                     "title": "Data Types"
                 },
                 {
-                    "id": "datatypes-challenge",
+                    "id": "data-types-practice",
+                    "title": "Data Types Practice"
+                },
+                {
+                    "id": "data-types-setting",
+                    "title": "Setting the Data Type"
+                },
+                {
+                    "id": "data-types-specific",
+                    "title": "Setting Specific Data Type"
+                },
+                {
+                    "id": "data-types-challenge",
                     "title": "Code Challenge"
                 }
             ]
