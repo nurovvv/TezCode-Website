@@ -3237,6 +3237,265 @@ else:
                     exercise: { question: 'Which function creates a pie chart?', options: ['piechart()', 'pie()', 'circle()'], answer: 1 }
                 }
             ]
+        },
+
+        /* ────── 71. Machine Learning (Header) ────── */
+        {
+            id: 'machine_learning_header', title: 'Machine Learning', isHeader: true,
+            sections: []
+        },
+
+        /* ────── 72. Getting Started ────── */
+        {
+            id: 'ml_getting_started', title: 'Getting Started',
+            sections: [
+                {
+                    id: 'ml-getting-started-basics', title: 'Getting Started',
+                    content: `<p>Learn how to get started with Machine Learning in Python.</p>`
+                }
+            ]
+        },
+
+        /* ────── 73. Mean Median Mode ────── */
+        {
+            id: 'ml_mean_median_mode', title: 'Mean Median Mode',
+            sections: [
+                {
+                    id: 'ml-mean-median-mode-basics', title: 'Mean Median Mode',
+                    content: `<p>Learn about Mean, Median, and Mode in Machine Learning.</p>`
+                }
+            ]
+        },
+
+        /* ────── 74. Standard Deviation ────── */
+        {
+            id: 'ml_standard_deviation', title: 'Standard Deviation',
+            sections: [
+                {
+                    id: 'ml-standard-deviation-basics', title: 'Standard Deviation',
+                    content: `<p>Learn about Standard Deviation in Machine Learning.</p>`
+                }
+            ]
+        },
+
+        /* ────── 75. Percentile ────── */
+        {
+            id: 'ml_percentile', title: 'Percentile',
+            sections: [
+                {
+                    id: 'ml-percentile-basics', title: 'Percentile',
+                    content: `<p>Learn about Percentiles in Machine Learning.</p>`
+                }
+            ]
+        },
+
+        /* ────── 76. Data Distribution ────── */
+        {
+            id: 'ml_data_distribution', title: 'Data Distribution',
+            sections: [
+                {
+                    id: 'ml-data-distribution-basics', title: 'Data Distribution',
+                    content: `<p>Learn about Data Distribution in Machine Learning.</p>`
+                }
+            ]
+        },
+
+        /* ────── 77. Normal Data Distribution ────── */
+        {
+            id: 'ml_normal_data_distribution', title: 'Normal Data Distribution',
+            sections: [
+                {
+                    id: 'ml-normal-data-distribution-basics', title: 'Normal Data Distribution',
+                    content: `<p>Learn about Normal Data Distribution in Machine Learning.</p>`
+                }
+            ]
+        },
+
+        /* ────── 78. Scatter Plot ────── */
+        {
+            id: 'ml_scatter_plot', title: 'Scatter Plot',
+            sections: [
+                {
+                    id: 'ml-scatter-plot-basics', title: 'Scatter Plot',
+                    content: `<p>Learn how to use Scatter Plots in Machine Learning.</p>`
+                }
+            ]
+        },
+
+        /* ────── 79. Linear Regression ────── */
+        {
+            id: 'ml_linear_regression', title: 'Linear Regression',
+            sections: [
+                {
+                    id: 'ml-linear-regression-basics', title: 'Linear Regression',
+                    content: `<p>Learn about Linear Regression in Machine Learning.</p>`
+                }
+            ]
+        },
+
+        /* ────── 80. Polynomial Regression ────── */
+        {
+            id: 'ml_polynomial_regression', title: 'Polynomial Regression',
+            sections: [
+                {
+                    id: 'ml-polynomial-regression-basics', title: 'Polynomial Regression',
+                    content: `<p>Learn about Polynomial Regression in Machine Learning.</p>`
+                }
+            ]
+        },
+
+        /* ────── 81. Multiple Regression ────── */
+        {
+            id: 'ml_multiple_regression', title: 'Multiple Regression',
+            sections: [
+                {
+                    id: 'ml-multiple-regression-basics', title: 'Multiple Regression',
+                    content: `<p>Learn about Multiple Regression in Machine Learning.</p>`
+                }
+            ]
+        },
+
+        /* ────── 82. Scale ────── */
+        {
+            id: 'ml_scale', title: 'Scale',
+            sections: [
+                {
+                    id: 'ml-scale-basics', title: 'Scale',
+                    content: `<p>Learn about Scaling in Machine Learning.</p>`
+                }
+            ]
+        },
+
+        /* ────── 83. Train/Test ────── */
+        {
+            id: 'ml_train_test', title: 'Train/Test',
+            sections: [
+                {
+                    id: 'ml-train-test-basics', title: 'Train/Test',
+                    content: `<p>Learn about Train/Test evaluations in Machine Learning.</p>`
+                }
+            ]
+        },
+
+        /* ────── 84. Decision Tree ────── */
+        {
+            id: 'ml_decision_tree', title: 'Decision Tree',
+            sections: [
+                {
+                    id: 'ml-decision-tree-basics', title: 'Decision Tree',
+                    content: `<p>Learn about Decision Trees in Machine Learning.</p>`
+                }
+            ]
+        },
+
+        /* ────── 85. Confusion Matrix ────── */
+        {
+            id: 'ml_confusion_matrix', title: 'Confusion Matrix',
+            sections: [
+                {
+                    id: 'ml-confusion-matrix-basics', title: 'Confusion Matrix',
+                    content: `<p>Learn about Confusion Matrix in Machine Learning.</p>`
+                }
+            ]
+        },
+
+        /* ────── 86. Hierarchical Clustering ────── */
+        {
+            id: 'ml_hierarchical_clustering', title: 'Hierarchical Clustering',
+            sections: [
+                {
+                    id: 'ml-hierarchical-clustering-basics', title: 'Hierarchical Clustering',
+                    content: `<p>Learn about Hierarchical Clustering in Machine Learning.</p>`
+                }
+            ]
+        },
+
+        /* ────── 87. Logistic Regression ────── */
+        {
+            id: 'ml_logistic_regression', title: 'Logistic Regression',
+            sections: [
+                {
+                    id: 'ml-logistic-regression-basics', title: 'Logistic Regression',
+                    content: `<p>Learn about Logistic Regression in Machine Learning.</p>`
+                }
+            ]
+        },
+
+        /* ────── 88. Grid Search ────── */
+        {
+            id: 'ml_grid_search', title: 'Grid Search',
+            sections: [
+                {
+                    id: 'ml-grid-search-basics', title: 'Grid Search',
+                    content: `<p>Learn about Grid Search in Machine Learning.</p>`
+                }
+            ]
+        },
+
+        /* ────── 89. Categorical Data ────── */
+        {
+            id: 'ml_categorical_data', title: 'Categorical Data',
+            sections: [
+                {
+                    id: 'ml-categorical-data-basics', title: 'Categorical Data',
+                    content: `<p>Learn how to handle Categorical Data in Machine Learning.</p>`
+                }
+            ]
+        },
+
+        /* ────── 90. K-means ────── */
+        {
+            id: 'ml_k_means', title: 'K-means',
+            sections: [
+                {
+                    id: 'ml-k-means-basics', title: 'K-means',
+                    content: `<p>Learn about K-means clustering in Machine Learning.</p>`
+                }
+            ]
+        },
+
+        /* ────── 91. Bootstrap Aggregation ────── */
+        {
+            id: 'ml_bootstrap_aggregation', title: 'Bootstrap Aggregation',
+            sections: [
+                {
+                    id: 'ml-bootstrap-aggregation-basics', title: 'Bootstrap Aggregation',
+                    content: `<p>Learn about Bootstrap Aggregation (Bagging) in Machine Learning.</p>`
+                }
+            ]
+        },
+
+        /* ────── 92. Cross Validation ────── */
+        {
+            id: 'ml_cross_validation', title: 'Cross Validation',
+            sections: [
+                {
+                    id: 'ml-cross-validation-basics', title: 'Cross Validation',
+                    content: `<p>Learn about Cross Validation in Machine Learning.</p>`
+                }
+            ]
+        },
+
+        /* ────── 93. AUC - ROC Curve ────── */
+        {
+            id: 'ml_auc_roc_curve', title: 'AUC - ROC Curve',
+            sections: [
+                {
+                    id: 'ml-auc-roc-curve-basics', title: 'AUC - ROC Curve',
+                    content: `<p>Learn about AUC - ROC Curve in Machine Learning.</p>`
+                }
+            ]
+        },
+
+        /* ────── 94. K-nearest neighbors ────── */
+        {
+            id: 'ml_k_nearest_neighbors', title: 'K-nearest neighbors',
+            sections: [
+                {
+                    id: 'ml-k-nearest-neighbors-basics', title: 'K-nearest neighbors',
+                    content: `<p>Learn about K-nearest neighbors (KNN) in Machine Learning.</p>`
+                }
+            ]
         }
     ],
 };
