@@ -227,6 +227,7 @@ router.post('/login', async (req, res) => {
             return res.status(401).json({ message: 'Invalid credentials' });
         }
 
+        console.log(`[Auth] Generating tokens for: ${user.email}`);
         const accessToken = jwt.sign(
             { id: user.id, email: user.email, role: user.role },
             config.jwt.secret,
@@ -237,12 +238,14 @@ router.post('/login', async (req, res) => {
         const expiresAt = new Date();
         expiresAt.setDate(expiresAt.getDate() + 7);
 
+        console.log(`[Auth] Creating refresh token for: ${user.email}`);
         await RefreshToken.create({
             user_id: user.id,
             token: refreshToken,
             expiresAt,
         });
 
+        console.log(`[Auth] Login successful for: ${user.email}`);
         res.json({
             accessToken,
             refreshToken,
@@ -262,7 +265,11 @@ router.post('/login', async (req, res) => {
         });
     } catch (err) {
         console.error('Login error:', err);
-        res.status(500).json({ message: 'Server error' });
+        res.status(500).json({
+            message: 'Server error',
+            details: process.env.NODE_ENV === 'development' ? err.message : undefined,
+            error: err.toString()
+        });
     }
 });
 
