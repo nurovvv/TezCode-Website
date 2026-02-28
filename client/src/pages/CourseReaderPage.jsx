@@ -3987,6 +3987,133 @@ else:
                     content: `<p>Learn how to limit the number of documents returned from MongoDB.</p>`
                 }
             ]
+        },
+
+        /* ────── 141. Python Reference (Header) ────── */
+        {
+            id: 'python_reference_header', title: 'Python Reference', isHeader: true,
+            sections: []
+        },
+
+        /* ────── 142. Python Overview ────── */
+        {
+            id: 'python_overview', title: 'Python Overview',
+            sections: [
+                {
+                    id: 'python-overview-basics', title: 'Python Overview',
+                    content: `<p>Comprehensive overview of the Python reference materials.</p>`
+                }
+            ]
+        },
+
+        /* ────── 143. Python Built-in Functions ────── */
+        {
+            id: 'python_built_in_functions', title: 'Python Built-in Functions',
+            sections: [
+                {
+                    id: 'python-built-in-functions-basics', title: 'Python Built-in Functions',
+                    content: `<p>Reference guide to Python's built-in functions.</p>`
+                }
+            ]
+        },
+
+        /* ────── 144. Python String Methods ────── */
+        {
+            id: 'python_string_methods', title: 'Python String Methods',
+            sections: [
+                {
+                    id: 'python-string-methods-basics', title: 'Python String Methods',
+                    content: `<p>Reference guide to string methods in Python.</p>`
+                }
+            ]
+        },
+
+        /* ────── 145. Python List Methods ────── */
+        {
+            id: 'python_list_methods', title: 'Python List Methods',
+            sections: [
+                {
+                    id: 'python-list-methods-basics', title: 'Python List Methods',
+                    content: `<p>Reference guide to list methods in Python.</p>`
+                }
+            ]
+        },
+
+        /* ────── 146. Python Dictionary Methods ────── */
+        {
+            id: 'python_dictionary_methods', title: 'Python Dictionary Methods',
+            sections: [
+                {
+                    id: 'python-dictionary-methods-basics', title: 'Python Dictionary Methods',
+                    content: `<p>Reference guide to dictionary methods in Python.</p>`
+                }
+            ]
+        },
+
+        /* ────── 147. Python Tuple Methods ────── */
+        {
+            id: 'python_tuple_methods', title: 'Python Tuple Methods',
+            sections: [
+                {
+                    id: 'python-tuple-methods-basics', title: 'Python Tuple Methods',
+                    content: `<p>Reference guide to tuple methods in Python.</p>`
+                }
+            ]
+        },
+
+        /* ────── 148. Python Set Methods ────── */
+        {
+            id: 'python_set_methods', title: 'Python Set Methods',
+            sections: [
+                {
+                    id: 'python-set-methods-basics', title: 'Python Set Methods',
+                    content: `<p>Reference guide to set methods in Python.</p>`
+                }
+            ]
+        },
+
+        /* ────── 149. Python File Methods ────── */
+        {
+            id: 'python_file_methods', title: 'Python File Methods',
+            sections: [
+                {
+                    id: 'python-file-methods-basics', title: 'Python File Methods',
+                    content: `<p>Reference guide to file handling methods in Python.</p>`
+                }
+            ]
+        },
+
+        /* ────── 150. Python Keywords ────── */
+        {
+            id: 'python_keywords', title: 'Python Keywords',
+            sections: [
+                {
+                    id: 'python-keywords-basics', title: 'Python Keywords',
+                    content: `<p>Reference guide to reserved keywords in Python.</p>`
+                }
+            ]
+        },
+
+        /* ────── 151. Python Exceptions ────── */
+        {
+            id: 'python_exceptions', title: 'Python Exceptions',
+            sections: [
+                {
+                    id: 'python-exceptions-basics', title: 'Python Exceptions',
+                    content: `<p>Reference guide to built-in exceptions in Python.</p>`
+                }
+            ]
+        },
+
+        /* ────── 152. Python Glossary ────── */
+        {
+            id: 'python_glossary', title: 'Python Glossary',
+            sections: [
+                {
+                    id: 'python-glossary-basics', title: 'Python Glossary',
+                    content: `<p>Glossary of common Python terms.</p>`
+                }
+            ]
         }
     ],
 };

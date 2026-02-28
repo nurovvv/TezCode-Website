@@ -1280,7 +1280,19 @@ const COURSE_DATA = {
         { "id": "mongodb_delete", "title": "MongoDB Delete", "sections": [{ "id": "mongodb-delete-basics", "title": "MongoDB Delete" }] },
         { "id": "mongodb_drop_collection", "title": "MongoDB Drop Collection", "sections": [{ "id": "mongodb-drop-collection-basics", "title": "MongoDB Drop Collection" }] },
         { "id": "mongodb_update", "title": "MongoDB Update", "sections": [{ "id": "mongodb-update-basics", "title": "MongoDB Update" }] },
-        { "id": "mongodb_limit", "title": "MongoDB Limit", "sections": [{ "id": "mongodb-limit-basics", "title": "MongoDB Limit" }] }
+        { "id": "mongodb_limit", "title": "MongoDB Limit", "sections": [{ "id": "mongodb-limit-basics", "title": "MongoDB Limit" }] },
+        { "id": "python_reference_header", "title": "Python Reference", "sections": [] },
+        { "id": "python_overview", "title": "Python Overview", "sections": [{ "id": "python-overview-basics", "title": "Python Overview" }] },
+        { "id": "python_built_in_functions", "title": "Python Built-in Functions", "sections": [{ "id": "python-built-in-functions-basics", "title": "Python Built-in Functions" }] },
+        { "id": "python_string_methods", "title": "Python String Methods", "sections": [{ "id": "python-string-methods-basics", "title": "Python String Methods" }] },
+        { "id": "python_list_methods", "title": "Python List Methods", "sections": [{ "id": "python-list-methods-basics", "title": "Python List Methods" }] },
+        { "id": "python_dictionary_methods", "title": "Python Dictionary Methods", "sections": [{ "id": "python-dictionary-methods-basics", "title": "Python Dictionary Methods" }] },
+        { "id": "python_tuple_methods", "title": "Python Tuple Methods", "sections": [{ "id": "python-tuple-methods-basics", "title": "Python Tuple Methods" }] },
+        { "id": "python_set_methods", "title": "Python Set Methods", "sections": [{ "id": "python-set-methods-basics", "title": "Python Set Methods" }] },
+        { "id": "python_file_methods", "title": "Python File Methods", "sections": [{ "id": "python-file-methods-basics", "title": "Python File Methods" }] },
+        { "id": "python_keywords", "title": "Python Keywords", "sections": [{ "id": "python-keywords-basics", "title": "Python Keywords" }] },
+        { "id": "python_exceptions", "title": "Python Exceptions", "sections": [{ "id": "python-exceptions-basics", "title": "Python Exceptions" }] },
+        { "id": "python_glossary", "title": "Python Glossary", "sections": [{ "id": "python-glossary-basics", "title": "Python Glossary" }] }
     ]
 };
 
