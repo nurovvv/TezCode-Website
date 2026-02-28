@@ -2694,6 +2694,40 @@ print("Username is: " + username)</pre>`,
                     content: `<p>Practice modifying and deleting class properties!</p>`
                 }
             ]
+        },
+        /* ────── 44. Python Class Methods ────── */
+        {
+            id: 'class_methods', title: 'Python Class Methods',
+            sections: [
+                {
+                    id: 'class-methods-basics', title: 'Class Methods',
+                    content: `<p>Objects can also contain methods. Methods in objects are functions that belong to the object.</p>
+<p>Let us create a method in the Person class:</p>`,
+                    examples: [
+                        {
+                            title: 'Example',
+                            code: 'class Person:\n  def __init__(self, name, age):\n    self.name = name\n    self.age = age\n\n  def myfunc(self):\n    print("Hello my name is " + self.name)\n\np1 = Person("John", 36)\np1.myfunc()',
+                            preContent: '<p>Insert a function that prints a greeting, and execute it on the p1 object:</p>',
+                            postContent: '<p><strong>Note:</strong> The <code>self</code> parameter is a reference to the current instance of the class, and is used to access variables that belong to the class.</p>'
+                        }
+                    ],
+                    exercise: { question: 'What are functions called when they are defined inside a class?', options: ['Attributes', 'Methods', 'Procedures'], answer: 1 }
+                },
+                {
+                    id: 'class-methods-challenge', title: 'Code Challenge',
+                    type: 'challenge',
+                    instructions: [
+                        'Create a class named <code>Square</code>.',
+                        'Use the <code>__init__</code> method to set a property named <code>side</code>.',
+                        'Create a method named <code>area</code> that calculates and returns the area (side * side).',
+                        'Create an object named <code>s1</code> with side <code>5</code>.',
+                        'Print the result of <code>s1.area()</code>.'
+                    ],
+                    starterCode: 'class Square:\n    # Define __init__ and area methods\n\n\n# Create object and print area\n',
+                    solution: 'class Square:\n    def __init__(self, side):\n        self.side = side\n    def area(self):\n        return self.side * self.side\n\ns1 = Square(5)\nprint(s1.area())',
+                    content: `<p>Practice defining and calling methods within a class!</p>`
+                }
+            ]
         }
     ],
 };

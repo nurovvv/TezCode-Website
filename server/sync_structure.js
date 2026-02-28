@@ -839,6 +839,20 @@ const COURSE_DATA = {
                     "title": "Code Challenge"
                 }
             ]
+        },
+        {
+            "id": "class_methods",
+            "title": "Python Class Methods",
+            "sections": [
+                {
+                    "id": "class-methods-basics",
+                    "title": "Class Methods"
+                },
+                {
+                    "id": "class-methods-challenge",
+                    "title": "Code Challenge"
+                }
+            ]
         }
     ]
 };
