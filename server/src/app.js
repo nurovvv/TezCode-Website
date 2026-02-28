@@ -102,6 +102,11 @@ async function start() {
         const seedChallenges = require('./seed_challenges');
         await seedChallenges();
 
+        // Seed default demo user for testing
+        console.log('🌱 Seeding demo user...');
+        const seedUsers = require('./seed_users');
+        await seedUsers();
+
         const courseCount = await Course.count();
         if (courseCount === 0) {
             console.log('🌱 Course structure missing. Synchronizing...');
