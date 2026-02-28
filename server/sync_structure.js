@@ -979,6 +979,141 @@ const COURSE_DATA = {
                     "title": "Django Tutorial"
                 }
             ]
+        },
+        {
+            "id": "matplotlib_header",
+            "title": "Python Matplotlib",
+            "sections": []
+        },
+        {
+            "id": "matplotlib_intro",
+            "title": "Matplotlib Intro",
+            "sections": [
+                {
+                    "id": "matplotlib-intro-basics",
+                    "title": "Matplotlib Intro"
+                }
+            ]
+        },
+        {
+            "id": "matplotlib_get_started",
+            "title": "Matplotlib Get Started",
+            "sections": [
+                {
+                    "id": "matplotlib-get-started-basics",
+                    "title": "Matplotlib Get Started"
+                }
+            ]
+        },
+        {
+            "id": "matplotlib_pyplot",
+            "title": "Matplotlib Pyplot",
+            "sections": [
+                {
+                    "id": "matplotlib-pyplot-basics",
+                    "title": "Matplotlib Pyplot"
+                }
+            ]
+        },
+        {
+            "id": "matplotlib_plotting",
+            "title": "Matplotlib Plotting",
+            "sections": [
+                {
+                    "id": "matplotlib-plotting-basics",
+                    "title": "Matplotlib Plotting"
+                }
+            ]
+        },
+        {
+            "id": "matplotlib_markers",
+            "title": "Matplotlib Markers",
+            "sections": [
+                {
+                    "id": "matplotlib-markers-basics",
+                    "title": "Matplotlib Markers"
+                }
+            ]
+        },
+        {
+            "id": "matplotlib_line",
+            "title": "Matplotlib Line",
+            "sections": [
+                {
+                    "id": "matplotlib-line-basics",
+                    "title": "Matplotlib Line"
+                }
+            ]
+        },
+        {
+            "id": "matplotlib_labels",
+            "title": "Matplotlib Labels",
+            "sections": [
+                {
+                    "id": "matplotlib-labels-basics",
+                    "title": "Matplotlib Labels"
+                }
+            ]
+        },
+        {
+            "id": "matplotlib_grid",
+            "title": "Matplotlib Grid",
+            "sections": [
+                {
+                    "id": "matplotlib-grid-basics",
+                    "title": "Matplotlib Grid"
+                }
+            ]
+        },
+        {
+            "id": "matplotlib_subplot",
+            "title": "Matplotlib Subplot",
+            "sections": [
+                {
+                    "id": "matplotlib-subplot-basics",
+                    "title": "Matplotlib Subplot"
+                }
+            ]
+        },
+        {
+            "id": "matplotlib_scatter",
+            "title": "Matplotlib Scatter",
+            "sections": [
+                {
+                    "id": "matplotlib-scatter-basics",
+                    "title": "Matplotlib Scatter"
+                }
+            ]
+        },
+        {
+            "id": "matplotlib_bars",
+            "title": "Matplotlib Bars",
+            "sections": [
+                {
+                    "id": "matplotlib-bars-basics",
+                    "title": "Matplotlib Bars"
+                }
+            ]
+        },
+        {
+            "id": "matplotlib_histograms",
+            "title": "Matplotlib Histograms",
+            "sections": [
+                {
+                    "id": "matplotlib-histograms-basics",
+                    "title": "Matplotlib Histograms"
+                }
+            ]
+        },
+        {
+            "id": "matplotlib_pie_charts",
+            "title": "Matplotlib Pie Charts",
+            "sections": [
+                {
+                    "id": "matplotlib-pie-charts-basics",
+                    "title": "Matplotlib Pie Charts"
+                }
+            ]
         }
     ]
 };

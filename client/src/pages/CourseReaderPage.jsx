@@ -3019,6 +3019,224 @@ else:
                     exercise: { question: 'What type of framework is Django?', options: ['Front-end', 'Back-end', 'Database'], answer: 1 }
                 }
             ]
+        },
+
+        /* ────── 57. Python Matplotlib (Header) ────── */
+        {
+            id: 'matplotlib_header', title: 'Python Matplotlib', isHeader: true,
+            sections: []
+        },
+
+        /* ────── 58. Matplotlib Intro ────── */
+        {
+            id: 'matplotlib_intro', title: 'Matplotlib Intro',
+            sections: [
+                {
+                    id: 'matplotlib-intro-basics', title: 'Matplotlib Intro',
+                    content: `<p>Matplotlib is a low level graph plotting library in python that serves as a visualization utility.</p>
+<p>Matplotlib was created by John D. Hunter.</p>
+<p>Matplotlib is open source and we can use it freely.</p>
+<p>Matplotlib is mostly written in python, a few segments are written in C, Objective-C and Javascript for Platform compatibility.</p>`,
+                    examples: [
+                        { title: 'Check Matplotlib Version', code: 'import matplotlib\nprint(matplotlib.__version__)' }
+                    ],
+                    exercise: { question: 'What is Matplotlib primarily used for?', options: ['Database Management', 'Graph Plotting', 'Web Development'], answer: 1 }
+                }
+            ]
+        },
+
+        /* ────── 59. Matplotlib Get Started ────── */
+        {
+            id: 'matplotlib_get_started', title: 'Matplotlib Get Started',
+            sections: [
+                {
+                    id: 'matplotlib-get-started-basics', title: 'Matplotlib Get Started',
+                    content: `<p>Once Matplotlib is installed, import it in your applications by adding the <code>import matplotlib</code> statement.</p>
+<p>Usually, the <code>pyplot</code> submodule is imported under the alias <code>plt</code>:</p>
+<pre>import matplotlib.pyplot as plt</pre>`,
+                    examples: [
+                        { title: 'Draw a Line', code: 'import matplotlib.pyplot as plt\nimport numpy as np\n\nxpoints = np.array([0, 6])\nypoints = np.array([0, 250])\n\nplt.plot(xpoints, ypoints)\nplt.show()' }
+                    ],
+                    exercise: { question: 'What is the common alias used when importing matplotlib.pyplot?', options: ['mp', 'plt', 'plot'], answer: 1 }
+                }
+            ]
+        },
+
+        /* ────── 60. Matplotlib Pyplot ────── */
+        {
+            id: 'matplotlib_pyplot', title: 'Matplotlib Pyplot',
+            sections: [
+                {
+                    id: 'matplotlib-pyplot-basics', title: 'Matplotlib Pyplot',
+                    content: `<p>Most of the Matplotlib utilities lies under the <code>pyplot</code> submodule, and are usually imported under the <code>plt</code> alias.</p>
+<pre>import matplotlib.pyplot as plt</pre>`,
+                    examples: [
+                        { title: 'Pyplot Plotting', code: 'import matplotlib.pyplot as plt\nimport numpy as np\n\nxpoints = np.array([0, 6])\nypoints = np.array([0, 250])\n\nplt.plot(xpoints, ypoints)\nplt.show()' }
+                    ],
+                    exercise: { question: 'Which submodule of Matplotlib contains most of the utilities?', options: ['plotit', 'pyplot', 'graph'], answer: 1 }
+                }
+            ]
+        },
+
+        /* ────── 61. Matplotlib Plotting ────── */
+        {
+            id: 'matplotlib_plotting', title: 'Matplotlib Plotting',
+            sections: [
+                {
+                    id: 'matplotlib-plotting-basics', title: 'Matplotlib Plotting',
+                    content: `<p>The <code>plot()</code> function is used to draw points (markers) in a diagram.</p>
+<p>By default, the <code>plot()</code> function draws a line from point to point.</p>
+<p>The function takes parameters for specifying points in the diagram.</p>
+<p>Parameter 1 is an array containing the points on the <strong>x-axis</strong>.</p>
+<p>Parameter 2 is an array containing the points on the <strong>y-axis</strong>.</p>`,
+                    examples: [
+                        { title: 'Plotting Points', code: 'import matplotlib.pyplot as plt\nimport numpy as np\n\nxpoints = np.array([1, 8])\nypoints = np.array([3, 10])\n\nplt.plot(xpoints, ypoints)\nplt.show()' }
+                    ],
+                    exercise: { question: 'Which function is used to draw points in a diagram in Pyplot?', options: ['draw()', 'plot()', 'line()'], answer: 1 }
+                }
+            ]
+        },
+
+        /* ────── 62. Matplotlib Markers ────── */
+        {
+            id: 'matplotlib_markers', title: 'Matplotlib Markers',
+            sections: [
+                {
+                    id: 'matplotlib-markers-basics', title: 'Matplotlib Markers',
+                    content: `<p>You can use the keyword argument <code>marker</code> to emphasize each point with a specified marker.</p>
+<p>For example, use <code>marker = 'o'</code> to draw a circle at each point.</p>`,
+                    examples: [
+                        { title: 'Using a Marker', code: 'import matplotlib.pyplot as plt\nimport numpy as np\n\nypoints = np.array([3, 8, 1, 10])\n\nplt.plot(ypoints, marker = \'o\')\nplt.show()' }
+                    ],
+                    exercise: { question: 'Which keyword argument is used to emphasize points in Pyplot?', options: ['point', 'marker', 'dot'], answer: 1 }
+                }
+            ]
+        },
+
+        /* ────── 63. Matplotlib Line ────── */
+        {
+            id: 'matplotlib_line', title: 'Matplotlib Line',
+            sections: [
+                {
+                    id: 'matplotlib-line-basics', title: 'Matplotlib Line',
+                    content: `<p>You can use the keyword argument <code>linestyle</code>, or shorter <code>ls</code>, to change the style of the plotted line.</p>
+<p>For example, use <code>linestyle = 'dotted'</code> to draw a dotted line.</p>`,
+                    examples: [
+                        { title: 'Dotted Line', code: 'import matplotlib.pyplot as plt\nimport numpy as np\n\nypoints = np.array([3, 8, 1, 10])\n\nplt.plot(ypoints, linestyle = \'dotted\')\nplt.show()' }
+                    ],
+                    exercise: { question: 'Which keyword argument changes the style of the line?', options: ['lineformat', 'linestyle', 'linewidth'], answer: 1 }
+                }
+            ]
+        },
+
+        /* ────── 64. Matplotlib Labels ────── */
+        {
+            id: 'matplotlib_labels', title: 'Matplotlib Labels',
+            sections: [
+                {
+                    id: 'matplotlib-labels-basics', title: 'Matplotlib Labels',
+                    content: `<p>With Pyplot, you can use the <code>xlabel()</code> and <code>ylabel()</code> functions to set a label for the x- and y-axis.</p>
+<p>You can use the <code>title()</code> function to set a title for the plot.</p>`,
+                    examples: [
+                        { title: 'Add Labels and Title', code: 'import numpy as np\nimport matplotlib.pyplot as plt\n\nx = np.array([80, 85, 90, 95, 100, 105, 110, 115, 120, 125])\ny = np.array([240, 250, 260, 270, 280, 290, 300, 310, 320, 330])\n\nplt.plot(x, y)\n\nplt.title("Sports Watch Data")\nplt.xlabel("Average Pulse")\nplt.ylabel("Calorie Burnage")\n\nplt.show()' }
+                    ],
+                    exercise: { question: 'Which functions set labels for the axes?', options: ['SetX() and SetY()', 'xlabel() and ylabel()', 'axis_x() and axis_y()'], answer: 1 }
+                }
+            ]
+        },
+
+        /* ────── 65. Matplotlib Grid ────── */
+        {
+            id: 'matplotlib_grid', title: 'Matplotlib Grid',
+            sections: [
+                {
+                    id: 'matplotlib-grid-basics', title: 'Matplotlib Grid',
+                    content: `<p>With Pyplot, you can use the <code>grid()</code> function to add grid lines to the plot.</p>`,
+                    examples: [
+                        { title: 'Add Grid Lines', code: 'import numpy as np\nimport matplotlib.pyplot as plt\n\nx = np.array([80, 85, 90, 95, 100, 105, 110, 115, 120, 125])\ny = np.array([240, 250, 260, 270, 280, 290, 300, 310, 320, 330])\n\nplt.title("Sports Watch Data")\nplt.xlabel("Average Pulse")\nplt.ylabel("Calorie Burnage")\n\nplt.plot(x, y)\n\nplt.grid()\n\nplt.show()' }
+                    ],
+                    exercise: { question: 'Which function adds grid lines to a Matplotlib plot?', options: ['lines()', 'grid()', 'mesh()'], answer: 1 }
+                }
+            ]
+        },
+
+        /* ────── 66. Matplotlib Subplot ────── */
+        {
+            id: 'matplotlib_subplot', title: 'Matplotlib Subplot',
+            sections: [
+                {
+                    id: 'matplotlib-subplot-basics', title: 'Matplotlib Subplot',
+                    content: `<p>With the <code>subplot()</code> function you can draw multiple plots in one figure.</p>
+<p>The <code>subplot()</code> function takes three arguments that describes the layout of the figure. The layout is organized in rows and columns, which are represented by the first and second argument. The third argument represents the index of the current plot.</p>`,
+                    examples: [
+                        { title: 'Draw Two Plots', code: 'import matplotlib.pyplot as plt\nimport numpy as np\n\n#plot 1:\nx = np.array([0, 1, 2, 3])\ny = np.array([3, 8, 1, 10])\n\nplt.subplot(1, 2, 1)\nplt.plot(x,y)\n\n#plot 2:\nx = np.array([0, 1, 2, 3])\ny = np.array([10, 20, 30, 40])\n\nplt.subplot(1, 2, 2)\nplt.plot(x,y)\n\nplt.show()' }
+                    ],
+                    exercise: { question: 'What does the third argument in subplot(1, 2, 1) represent?', options: ['Index of current plot', 'Number of rows', 'Number of columns'], answer: 0 }
+                }
+            ]
+        },
+
+        /* ────── 67. Matplotlib Scatter ────── */
+        {
+            id: 'matplotlib_scatter', title: 'Matplotlib Scatter',
+            sections: [
+                {
+                    id: 'matplotlib-scatter-basics', title: 'Matplotlib Scatter',
+                    content: `<p>With Pyplot, you can use the <code>scatter()</code> function to draw a scatter plot.</p>
+<p>The <code>scatter()</code> function plots one dot for each observation. It needs two arrays of the same length, one for the values of the x-axis, and one for values on the y-axis.</p>`,
+                    examples: [
+                        { title: 'Draw a Scatter Plot', code: 'import matplotlib.pyplot as plt\nimport numpy as np\n\nx = np.array([5,7,8,7,2,17,2,9,4,11,12,9,6])\ny = np.array([99,86,87,88,111,86,103,87,94,78,77,85,86])\n\nplt.scatter(x, y)\nplt.show()' }
+                    ],
+                    exercise: { question: 'Which function creates a scatter plot?', options: ['plot()', 'scatter()', 'dots()'], answer: 1 }
+                }
+            ]
+        },
+
+        /* ────── 68. Matplotlib Bars ────── */
+        {
+            id: 'matplotlib_bars', title: 'Matplotlib Bars',
+            sections: [
+                {
+                    id: 'matplotlib-bars-basics', title: 'Matplotlib Bars',
+                    content: `<p>With Pyplot, you can use the <code>bar()</code> function to draw bar graphs.</p>`,
+                    examples: [
+                        { title: 'Draw a Bar Graph', code: 'import matplotlib.pyplot as plt\nimport numpy as np\n\nx = np.array(["A", "B", "C", "D"])\ny = np.array([3, 8, 1, 10])\n\nplt.bar(x, y)\nplt.show()' }
+                    ],
+                    exercise: { question: 'Which function is used to draw a vertical bar graph?', options: ['bar_v()', 'bar()', 'column()'], answer: 1 }
+                }
+            ]
+        },
+
+        /* ────── 69. Matplotlib Histograms ────── */
+        {
+            id: 'matplotlib_histograms', title: 'Matplotlib Histograms',
+            sections: [
+                {
+                    id: 'matplotlib-histograms-basics', title: 'Matplotlib Histograms',
+                    content: `<p>A histogram is a graph showing frequency distributions.</p>
+<p>It is a graph showing the number of observations within each given interval.</p>
+<p>In Matplotlib, we use the <code>hist()</code> function to create histograms.</p>`,
+                    examples: [
+                        { title: 'Create a Histogram', code: 'import matplotlib.pyplot as plt\nimport numpy as np\n\nx = np.random.normal(170, 10, 250)\n\nplt.hist(x)\nplt.show()' }
+                    ],
+                    exercise: { question: 'What does a histogram show?', options: ['Linear relationships', 'Frequency distributions', 'Averages only'], answer: 1 }
+                }
+            ]
+        },
+
+        /* ────── 70. Matplotlib Pie Charts ────── */
+        {
+            id: 'matplotlib_pie_charts', title: 'Matplotlib Pie Charts',
+            sections: [
+                {
+                    id: 'matplotlib-pie-charts-basics', title: 'Matplotlib Pie Charts',
+                    content: `<p>With Pyplot, you can use the <code>pie()</code> function to draw pie charts.</p>`,
+                    examples: [
+                        { title: 'Draw a Pie Chart', code: 'import matplotlib.pyplot as plt\nimport numpy as np\n\ny = np.array([35, 25, 25, 15])\n\nplt.pie(y)\nplt.show()' }
+                    ],
+                    exercise: { question: 'Which function creates a pie chart?', options: ['piechart()', 'pie()', 'circle()'], answer: 1 }
+                }
+            ]
         }
     ],
 };
