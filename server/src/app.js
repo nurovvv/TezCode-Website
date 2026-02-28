@@ -82,6 +82,37 @@ async function start() {
             await syncCourseStructure();
         }
 
+        // Automatic XP Recalculation
+        console.log('🔄 Verifying user XP totals...');
+        try {
+            const { User, ChallengeSubmission } = require('./models');
+            const users = await User.findAll();
+            const allChallenges = await Challenge.findAll();
+            const xpMap = {};
+            allChallenges.forEach(c => { xpMap[c.id] = c.xpReward; });
+
+            for (const user of users) {
+                const passedSubmissions = await ChallengeSubmission.findAll({
+                    where: { user_id: user.id, status: 'passed' },
+                    attributes: ['challenge_id'],
+                    group: ['challenge_id']
+                });
+
+                let calculatedXP = 0;
+                for (const sub of passedSubmissions) {
+                    if (xpMap[sub.challenge_id]) calculatedXP += xpMap[sub.challenge_id];
+                }
+
+                if (calculatedXP > user.xp) {
+                    user.xp = calculatedXP;
+                    await user.save();
+                    console.log(`-> Fixed XP for user ${user.username}: ${calculatedXP} XP`);
+                }
+            }
+        } catch (e) {
+            console.error('Failed to recalculate XP:', e.message);
+        }
+
         app.listen(config.port, () => {
             console.log(`🚀 TezCode server on http://localhost:${config.port}`);
         });
