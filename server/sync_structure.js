@@ -1299,7 +1299,11 @@ const COURSE_DATA = {
         { "id": "requests_module", "title": "Requests Module", "sections": [{ "id": "requests-module-basics", "title": "Requests Module" }] },
         { "id": "statistics_module", "title": "Statistics Module", "sections": [{ "id": "statistics-module-basics", "title": "Statistics Module" }] },
         { "id": "math_module", "title": "Math Module", "sections": [{ "id": "math-module-basics", "title": "Math Module" }] },
-        { "id": "cmath_module", "title": "cMath Module", "sections": [{ "id": "cmath-module-basics", "title": "cMath Module" }] }
+        { "id": "cmath_module", "title": "cMath Module", "sections": [{ "id": "cmath-module-basics", "title": "cMath Module" }] },
+        { "id": "python_how_to_header", "title": "Python How To", "sections": [] },
+        { "id": "remove_list_duplicates", "title": "Remove List Duplicates", "sections": [{ "id": "remove-list-duplicates-basics", "title": "Remove List Duplicates" }] },
+        { "id": "reverse_a_string", "title": "Reverse a String", "sections": [{ "id": "reverse-a-string-basics", "title": "Reverse a String" }] },
+        { "id": "add_two_numbers", "title": "Add Two Numbers", "sections": [{ "id": "add-two-numbers-basics", "title": "Add Two Numbers" }] }
     ]
 };
 

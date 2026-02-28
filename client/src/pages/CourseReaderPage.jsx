@@ -4186,6 +4186,45 @@ else:
                     content: `<p>Reference guide to the cmath module in Python.</p>`
                 }
             ]
+        },
+
+        /* ────── 160. Python How To (Header) ────── */
+        {
+            id: 'python_how_to_header', title: 'Python How To', isHeader: true,
+            sections: []
+        },
+
+        /* ────── 161. Remove List Duplicates ────── */
+        {
+            id: 'remove_list_duplicates', title: 'Remove List Duplicates',
+            sections: [
+                {
+                    id: 'remove-list-duplicates-basics', title: 'Remove List Duplicates',
+                    content: `<p>Learn how to remove duplicates from a list in Python.</p>`
+                }
+            ]
+        },
+
+        /* ────── 162. Reverse a String ────── */
+        {
+            id: 'reverse_a_string', title: 'Reverse a String',
+            sections: [
+                {
+                    id: 'reverse-a-string-basics', title: 'Reverse a String',
+                    content: `<p>Learn how to reverse a string in Python.</p>`
+                }
+            ]
+        },
+
+        /* ────── 163. Add Two Numbers ────── */
+        {
+            id: 'add_two_numbers', title: 'Add Two Numbers',
+            sections: [
+                {
+                    id: 'add-two-numbers-basics', title: 'Add Two Numbers',
+                    content: `<p>Learn how to add two numbers in Python.</p>`
+                }
+            ]
         }
     ],
 };
