@@ -96,41 +96,79 @@ export default function LandingPage() {
             </section>
 
             {/* ═══════ FOOTER ═══════ */}
-            <section style={{ borderTop: '1px solid #e5e5e5' }}>
-                <div style={{ maxWidth: '900px', margin: '0 auto', padding: '48px 24px' }}>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '32px', fontSize: '13px' }}>
-
+            <section style={{ backgroundColor: '#1a1a1a', color: '#a0a0a0', paddingTop: '64px', paddingBottom: '32px' }}>
+                <div style={{ maxWidth: '1000px', margin: '0 auto', padding: '0 24px' }}>
+                    <div style={{
+                        display: 'grid',
+                        gridTemplateColumns: 'minmax(250px, 1.5fr) repeat(4, 1fr)',
+                        gap: '24px',
+                        fontSize: '13px',
+                        marginBottom: '48px'
+                    }}>
+                        {/* Logo & Description */}
                         <div>
-                            <p style={{ fontWeight: 700, color: '#1d1d1f', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 12px' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
+                                {/* Placeholder for Logo icon */}
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M22 2L11 13" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                    <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                </svg>
+                                <span style={{ color: 'white', fontSize: '18px', fontWeight: 'bold' }}>TezCode</span>
+                            </div>
+                            <p style={{ lineHeight: '1.5', margin: 0 }}>
+                                Interactive learning platform<br />
+                                for the modern student
+                            </p>
+                        </div>
+
+                        {/* Contacts */}
+                        <div>
+                            <p style={{ color: '#888', fontSize: '11px', fontWeight: 600, letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '16px' }}>
                                 {t('landing.footer.contact')}
                             </p>
-                            <a href="https://instagram.com/tezcode" target="_blank" rel="noreferrer" style={{ display: 'block', color: '#86868b', textDecoration: 'none', marginBottom: '8px', fontSize: '13px' }}>Instagram</a>
-                            <a href="mailto:support@tezcode.tj" style={{ display: 'block', color: '#86868b', textDecoration: 'none', marginBottom: '8px', fontSize: '13px' }}>Support</a>
+                            <a href="https://t.me/tezcode" target="_blank" rel="noreferrer" style={{ display: 'block', color: 'inherit', textDecoration: 'none', marginBottom: '12px' }}>Telegram</a>
+                            <a href="https://instagram.com/tezcode" target="_blank" rel="noreferrer" style={{ display: 'block', color: 'inherit', textDecoration: 'none', marginBottom: '12px' }}>Instagram</a>
                         </div>
+
+                        {/* About */}
                         <div>
-                            <p style={{ fontWeight: 700, color: '#1d1d1f', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 12px' }}>
+                            <p style={{ color: '#888', fontSize: '11px', fontWeight: 600, letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '16px' }}>
                                 {t('landing.footer.about')}
                             </p>
-                            <Link to="/catalog" style={{ display: 'block', color: '#86868b', textDecoration: 'none', marginBottom: '8px', fontSize: '13px' }}>{t('landing.footer.about')}</Link>
+                            <Link to="/about" style={{ display: 'block', color: 'inherit', textDecoration: 'none', marginBottom: '12px' }}>Partners</Link>
+                            <Link to="/reviews" style={{ display: 'block', color: 'inherit', textDecoration: 'none', marginBottom: '12px' }}>{t('landing.footer.reviews')}</Link>
                         </div>
+
+                        {/* Documents */}
                         <div>
-                            <p style={{ fontWeight: 700, color: '#1d1d1f', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.08em', margin: '0 0 12px' }}>
+                            <p style={{ color: '#888', fontSize: '11px', fontWeight: 600, letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '16px' }}>
                                 {t('landing.footer.legal')}
                             </p>
-                            <Link to="#" style={{ display: 'block', color: '#86868b', textDecoration: 'none', marginBottom: '8px', fontSize: '13px' }}>{t('landing.footer.privacy')}</Link>
+                            <Link to="/terms" style={{ display: 'block', color: 'inherit', textDecoration: 'none', marginBottom: '12px' }}>Terms of Service</Link>
+                            <Link to="/privacy" style={{ display: 'block', color: 'inherit', textDecoration: 'none', marginBottom: '12px' }}>{t('landing.footer.privacy')}</Link>
+                        </div>
+
+                        {/* Links */}
+                        <div>
+                            <p style={{ color: '#888', fontSize: '11px', fontWeight: 600, letterSpacing: '0.05em', textTransform: 'uppercase', marginBottom: '16px' }}>
+                                Links
+                            </p>
+                            <Link to="/pricing" style={{ display: 'block', color: 'inherit', textDecoration: 'none', marginBottom: '12px' }}>Pricing</Link>
+                            <Link to="/faq" style={{ display: 'block', color: 'inherit', textDecoration: 'none', marginBottom: '12px' }}>{t('landing.footer.faq')}</Link>
                         </div>
                     </div>
 
+                    {/* Bottom Bar */}
                     <div style={{
-                        marginTop: '40px',
+                        borderTop: '1px solid #333',
                         paddingTop: '24px',
-                        borderTop: '1px solid #e5e5e5',
                         display: 'flex',
+                        justifyContent: 'center',
                         alignItems: 'center',
-                        justifyContent: 'space-between',
+                        fontSize: '12px',
+                        color: '#666'
                     }}>
-                        <span style={{ fontSize: '20px', fontWeight: 900, color: '#1d1d1f' }}>TezCode</span>
-                        <p style={{ fontSize: '11px', color: '#ccc', margin: 0 }}>© 2026 · Built with ❤️ for Students</p>
+                        <p style={{ margin: 0 }}>© 2026 TezCode. All rights reserved.</p>
                     </div>
                 </div>
             </section>
