@@ -1156,6 +1156,157 @@ substring</em>.</p>
                 { input: "[1]\n1", expectedOutput: "[1]" }
             ],
             starterCode: "import ast\nnums = ast.literal_eval(input())\nk = int(input())\n\n# Write your solution and print the result list\n"
+        },
+        {
+            title: "Defanging an IP Address",
+            description: `<div class="lc-description">
+<p>Given a valid (IPv4) IP <code>address</code>, return a defanged version of that IP address.</p>
+<p>A <em>defanged IP address</em> replaces every period <code>"."</code> with <code>"[.]"</code>.</p>
+
+<p><strong>Example 1:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> address = "1.1.1.1"</p>
+<p><strong class="lc-label">Output:</strong> "1[.]1[.]1[.]1"</p>
+</div>
+
+<p><strong>Example 2:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> address = "255.100.50.0"</p>
+<p><strong class="lc-label">Output:</strong> "255[.]100[.]50[.]0"</p>
+</div>
+</div>`,
+            difficulty: "easy",
+            xpReward: 10,
+            testCases: [
+                { input: "1.1.1.1", expectedOutput: "1[.]1[.]1[.]1" },
+                { input: "255.100.50.0", expectedOutput: "255[.]100[.]50[.]0" }
+            ],
+            starterCode: "address = input()\n\n# Return the defanged IP address\n",
+            tags: ["String"],
+            topics: ["Easy"]
+        },
+        {
+            title: "Number of Good Pairs",
+            description: `<div class="lc-description">
+<p>Given an array of integers <code>nums</code>, return the number of <strong>good pairs</strong>.</p>
+<p>A pair <code>(i, j)</code> is called <em>good</em> if <code>nums[i] == nums[j]</code> and <code>i < j</code>.</p>
+
+<p><strong>Example 1:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> nums = [1,2,3,1,1,3]</p>
+<p><strong class="lc-label">Output:</strong> 4</p>
+</div>
+
+<p><strong>Example 2:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> nums = [1,1,1,1]</p>
+<p><strong class="lc-label">Output:</strong> 6</p>
+</div>
+</div>`,
+            difficulty: "easy",
+            xpReward: 15,
+            testCases: [
+                { input: "[1,2,3,1,1,3]", expectedOutput: "4" },
+                { input: "[1,1,1,1]", expectedOutput: "6" },
+                { input: "[1,2,3]", expectedOutput: "0" }
+            ],
+            starterCode: "import ast\nnums = ast.literal_eval(input())\n\n# Return the number of good pairs\n",
+            tags: ["Array", "Hash Table", "Math", "Counting"],
+            topics: ["Easy"]
+        },
+        {
+            title: "Contains Duplicate II",
+            description: `<div class="lc-description">
+<p>Given an integer array <code>nums</code> and an integer <code>k</code>, return <code>true</code> if there are two <strong>distinct indices</strong> <code>i</code> and <code>j</code> in the array such that <code>nums[i] == nums[j]</code> and <code>abs(i - j) <= k</code>.</p>
+
+<p><strong>Example 1:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> nums = [1,2,3,1], k = 3</p>
+<p><strong class="lc-label">Output:</strong> True</p>
+</div>
+
+<p><strong>Example 2:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> nums = [1,0,1,1], k = 1</p>
+<p><strong class="lc-label">Output:</strong> True</p>
+</div>
+
+<p><strong>Example 3:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> nums = [1,2,3,1,2,3], k = 2</p>
+<p><strong class="lc-label">Output:</strong> False</p>
+</div>
+</div>`,
+            difficulty: "easy",
+            xpReward: 15,
+            testCases: [
+                { input: "[1,2,3,1]\n3", expectedOutput: "True" },
+                { input: "[1,0,1,1]\n1", expectedOutput: "True" },
+                { input: "[1,2,3,1,2,3]\n2", expectedOutput: "False" }
+            ],
+            starterCode: "import ast\nnums = ast.literal_eval(input())\nk = int(input())\n\n# Return True or False\n",
+            tags: ["Array", "Hash Table", "Sliding Window"],
+            topics: ["Easy"]
+        },
+        {
+            title: "Two Sum II - Input Array Is Sorted",
+            description: `<div class="lc-description">
+<p>Given a <strong>1-indexed</strong> array of integers <code>numbers</code> that is already <strong><em>sorted in non-decreasing order</em></strong>, find two numbers such that they add up to a specific <code>target</code> number. Let these two numbers be <code>numbers[index1]</code> and <code>numbers[index2]</code> where <code>1 <= index1 < index2 <= numbers.length</code>.</p>
+<p>Return the indices of the two numbers, <code>index1</code> and <code>index2</code>, <strong>added by one</strong> as an integer array <code>[index1, index2]</code> of length 2.</p>
+<p>The tests are generated such that there is <strong>exactly one solution</strong>. You <strong>may not</strong> use the same element twice.</p>
+<p>Your solution must use only constant extra space.</p>
+
+<p><strong>Example 1:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> numbers = [2,7,11,15], target = 9</p>
+<p><strong class="lc-label">Output:</strong> [1, 2]</p>
+</div>
+
+<p><strong>Example 2:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> numbers = [2,3,4], target = 6</p>
+<p><strong class="lc-label">Output:</strong> [1, 3]</p>
+</div>
+</div>`,
+            difficulty: "medium",
+            xpReward: 35,
+            testCases: [
+                { input: "[2,7,11,15]\n9", expectedOutput: "[1, 2]" },
+                { input: "[2,3,4]\n6", expectedOutput: "[1, 3]" },
+                { input: "[-1,0]\n-1", expectedOutput: "[1, 2]" }
+            ],
+            starterCode: "import ast\nnumbers = ast.literal_eval(input())\ntarget = int(input())\n\n# Return the 1-indexed positions of the two numbers\n",
+            tags: ["Array", "Two Pointers", "Binary Search"],
+            topics: ["Medium"]
+        },
+        {
+            title: "Product of Array Except Self",
+            description: `<div class="lc-description">
+<p>Given an integer array <code>nums</code>, return <em>an array</em> <code>answer</code> <em>such that</em> <code>answer[i]</code> <em>is equal to the product of all the elements of</em> <code>nums</code> <em>except</em> <code>nums[i]</code>.</p>
+<p>The product of any prefix or suffix of <code>nums</code> is <strong>guaranteed</strong> to fit in a <strong>32-bit</strong> integer.</p>
+<p>You must write an algorithm that runs in&nbsp;<code>O(n)</code>&nbsp;time and without using the division operation.</p>
+
+<p><strong>Example 1:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> nums = [1,2,3,4]</p>
+<p><strong class="lc-label">Output:</strong> [24,12,8,6]</p>
+</div>
+
+<p><strong>Example 2:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> nums = [-1,1,0,-3,3]</p>
+<p><strong class="lc-label">Output:</strong> [0,0,9,0,0]</p>
+</div>
+</div>`,
+            difficulty: "medium",
+            xpReward: 40,
+            testCases: [
+                { input: "[1,2,3,4]", expectedOutput: "[24, 12, 8, 6]" },
+                { input: "[-1,1,0,-3,3]", expectedOutput: "[0, 0, 9, 0, 0]" }
+            ],
+            starterCode: "import ast\nnums = ast.literal_eval(input())\n\n# Return the answer array\n",
+            tags: ["Array", "Prefix Sum"],
+            topics: ["Medium"]
         }
     ];
 
