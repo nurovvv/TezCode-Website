@@ -825,6 +825,20 @@ const COURSE_DATA = {
                     "title": "Code Challenge"
                 }
             ]
+        },
+        {
+            "id": "class_properties",
+            "title": "Python Class Properties",
+            "sections": [
+                {
+                    "id": "class-properties-basics",
+                    "title": "Class Properties"
+                },
+                {
+                    "id": "class-properties-challenge",
+                    "title": "Code Challenge"
+                }
+            ]
         }
     ]
 };

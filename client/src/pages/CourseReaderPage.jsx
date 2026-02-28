@@ -2649,6 +2649,51 @@ print("Username is: " + username)</pre>`,
                     content: `<p>Practice using the self parameter to access instance variables!</p>`
                 }
             ]
+        },
+        /* ────── 43. Python Class Properties ────── */
+        {
+            id: 'class_properties', title: 'Python Class Properties',
+            sections: [
+                {
+                    id: 'class-properties-basics', title: 'Class Properties',
+                    content: `<p>Properties in Python are variables that belong to an object or a class.</p>
+<p>You can modify properties on objects like this:</p>
+<pre>p1.age = 40</pre>
+<p>You can also delete properties on objects by using the <code>del</code> keyword:</p>
+<pre>del p1.age</pre>
+<p>And you can delete objects by using the <code>del</code> keyword:</p>
+<pre>del p1</pre>`,
+                    examples: [
+                        {
+                            title: 'Modify Object Properties',
+                            code: 'class Person:\n  def __init__(self, name, age):\n    self.name = name\n    self.age = age\n\np1 = Person("John", 36)\n\np1.age = 40\n\nprint(p1.age)',
+                            preContent: '<p>Set the age of p1 to 40:</p>'
+                        },
+                        {
+                            title: 'Delete Object Properties',
+                            code: 'class Person:\n  def __init__(self, name, age):\n    self.name = name\n    self.age = age\n\np1 = Person("John", 36)\n\ndel p1.age\n\nprint(p1.age)',
+                            variant: 'error',
+                            staticResult: "AttributeError: 'Person' object has no attribute 'age'",
+                            preContent: '<p>Delete the age property from the p1 object:</p>'
+                        }
+                    ],
+                    exercise: { question: 'What keyword is used to delete a property from an object?', options: ['remove', 'delete', 'del'], answer: 2 }
+                },
+                {
+                    id: 'class-properties-challenge', title: 'Code Challenge',
+                    type: 'challenge',
+                    instructions: [
+                        'Create a class named <code>Vehicle</code> with a property <code>speed</code> set to <code>100</code>.',
+                        'Create an object named <code>v1</code>.',
+                        'Modify the <code>speed</code> property of <code>v1</code> to <code>150</code>.',
+                        'Print the <code>speed</code> of <code>v1</code>.',
+                        'Delete the <code>speed</code> property of <code>v1</code>.'
+                    ],
+                    starterCode: 'class Vehicle:\n    speed = 100\n\n# Create object, modify, print, and delete property\n',
+                    solution: 'class Vehicle:\n    speed = 100\n\nv1 = Vehicle()\nv1.speed = 150\nprint(v1.speed)\ndel v1.speed',
+                    content: `<p>Practice modifying and deleting class properties!</p>`
+                }
+            ]
         }
     ],
 };
