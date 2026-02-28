@@ -2481,14 +2481,41 @@ print("Username is: " + username)</pre>`,
                 }
             ]
         },
-        /* ────── 38. Python Classes ────── */
+        /* ────── 38. Python OOP ────── */
         {
-            id: 'classes', title: 'Python Classes', isSpecial: true,
+            id: 'oop', title: 'Python OOP', isSpecial: true,
             sections: [
                 {
-                    id: 'classes-oop', title: 'Python OOP',
-                    content: '<p>Python Classes are the blueprint for creating objects. An object is a collection of data (variables) and methods (functions) that act on the data.</p>',
+                    id: 'oop-intro', title: 'Python OOP',
+                    content: '<p>Python is an object oriented programming language.</p><p>Almost everything in Python is an object, with its properties and methods.</p><p>A Class is like an object constructor, or a "blueprint" for creating objects.</p>',
                     examples: [],
+                }
+            ]
+        },
+
+        /* ────── 39. Python Classes/Objects ────── */
+        {
+            id: 'classes_objects', title: 'Python Classes/Objects',
+            sections: [
+                {
+                    id: 'classes-objects-basics', title: 'Classes/Objects',
+                    content: '<p>To create a class, use the keyword <code>class</code>:</p><pre>class MyClass:\n  x = 5</pre><p>Now we can use the class named MyClass to create objects:</p><pre>p1 = MyClass()\nprint(p1.x)</pre>',
+                    examples: [
+                        { title: 'Create an object', code: 'class MyClass:\n  x = 5\n\np1 = MyClass()\nprint(p1.x)' }
+                    ],
+                    exercise: { question: 'What keyword is used to create a class?', options: ['className', 'class', 'struct'], answer: 1 }
+                },
+                {
+                    id: 'classes-objects-challenge', title: 'Code Challenge',
+                    type: 'challenge',
+                    instructions: [
+                        'Create a class named <code>Car</code> with a property named <code>brand</code> set to <code>"Ford"</code>.',
+                        'Create an object of that class named <code>my_car</code>.',
+                        'Print the <code>brand</code> of the <code>my_car</code> object.'
+                    ],
+                    starterCode: '# Create Class\n\n\n# Create Object\n\n\n# Print brand\n',
+                    solution: 'class Car:\n    brand = "Ford"\n\nmy_car = Car()\nprint(my_car.brand)',
+                    content: `<p>Practice creating your first Python class and object!</p>`
                 }
             ]
         }

@@ -743,12 +743,26 @@ const COURSE_DATA = {
             ]
         },
         {
-            "id": "classes",
-            "title": "Python Classes",
+            "id": "oop",
+            "title": "Python OOP",
             "sections": [
                 {
-                    "id": "classes-oop",
+                    "id": "oop-intro",
                     "title": "Python OOP"
+                }
+            ]
+        },
+        {
+            "id": "classes_objects",
+            "title": "Python Classes/Objects",
+            "sections": [
+                {
+                    "id": "classes-objects-basics",
+                    "title": "Classes/Objects"
+                },
+                {
+                    "id": "classes-objects-challenge",
+                    "title": "Code Challenge"
                 }
             ]
         }
