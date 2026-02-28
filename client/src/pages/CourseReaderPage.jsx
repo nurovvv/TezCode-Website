@@ -299,6 +299,192 @@ Hello, World!</div>
             ]
         },
 
+        /* ────── 5. Python Variables ────── */
+        {
+            id: 'variables', title: 'Python Variables',
+            sections: [
+                {
+                    id: 'variables-intro', title: 'Python Variables',
+                    content: `<p>Variables are containers for storing data values.</p>\n<p>Unlike other programming languages, Python has no command for declaring a variable.</p>\n<p>A variable is created the moment you first assign a value to it.</p>`,
+                    examples: [
+                        {
+                            title: 'Example',
+                            code: 'x = 5\ny = "John"\nprint(x)\nprint(y)'
+                        },
+                        {
+                            title: 'Example',
+                            code: 'x = 4       # x is of type int\nx = "Sally" # x is now of type str\nprint(x)',
+                            preContent: `<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Variables do not need to be declared with any particular type, and can even change type after they have been set.</h2>`
+                        },
+                        {
+                            title: 'Example',
+                            code: 'x = str(3)    # x will be \'3\'\ny = int(3)    # y will be 3\nz = float(3)  # z will be 3.0',
+                            preContent: `<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Casting</h2>\n<p>If you want to specify the data type of a variable, this can be done with casting.</p>`
+                        },
+                        {
+                            title: 'Example',
+                            code: 'x = 5\ny = "John"\nprint(type(x))\nprint(type(y))',
+                            preContent: `<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Get the Type</h2>\n<p>You can get the data type of a variable with the <code>type()</code> function.</p>`
+                        }
+                    ],
+                    exercise: {
+                        question: 'How do you create a variable with the numeric value 5?',
+                        options: ['x = 5', 'x = int(5)', 'Both are correct'],
+                        answer: 2,
+                    },
+                },
+                {
+                    id: 'variables-names', title: 'Variable Names',
+                    content: `<p>A variable can have a short name (like x and y) or a more descriptive name (age, carname, total_volume).</p>\n<p>Rules for Python variables:</p>\n<ul>\n<li>A variable name must start with a letter or the underscore character</li>\n<li>A variable name cannot start with a number</li>\n<li>A variable name can only contain alpha-numeric characters and underscores (A-z, 0-9, and _ )</li>\n<li>Variable names are case-sensitive (age, Age and AGE are three different variables)</li>\n<li>A variable name cannot be any of the Python keywords.</li>\n</ul>`,
+                    examples: [
+                        {
+                            title: 'Example',
+                            code: 'myvar = "John"\nmy_var = "John"\n_my_var = "John"\nmyVar = "John"\nMYVAR = "John"\nmyvar2 = "John"\nprint(myvar)\nprint(my_var)\nprint(_my_var)\nprint(myVar)\nprint(MYVAR)\nprint(myvar2)',
+                            preContent: `<p>Legal variable names:</p>`
+                        },
+                        {
+                            title: 'Example',
+                            code: '2myvar = "John"\nmy-var = "John"\nmy var = "John"',
+                            variant: 'error',
+                            staticResult: 'SyntaxError: invalid syntax',
+                            preContent: `<p>Illegal variable names:</p>`
+                        },
+                        {
+                            title: 'Example',
+                            code: 'myVariableName = "John"',
+                            preContent: `<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Camel Case</h2>\n<p>Each word, except the first, starts with a capital letter:</p>`
+                        },
+                        {
+                            title: 'Example',
+                            code: 'MyVariableName = "John"',
+                            preContent: `<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Pascal Case</h2>\n<p>Each word starts with a capital letter:</p>`
+                        },
+                        {
+                            title: 'Example',
+                            code: 'my_variable_name = "John"',
+                            preContent: `<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Snake Case</h2>\n<p>Each word is separated by an underscore character:</p>`
+                        }
+                    ],
+                    exercise: {
+                        question: 'Which is NOT a valid Python variable name?',
+                        options: ['my_var', '_myvar', 'my-var', 'myVar'],
+                        answer: 2,
+                    }
+                },
+                {
+                    id: 'variables-multi', title: 'Assign Multiple Values',
+                    content: `<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Many Values to Multiple Variables</h2>\n<p>Python allows you to assign values to multiple variables in one line:</p>`,
+                    examples: [
+                        {
+                            title: 'Example',
+                            code: 'x, y, z = "Orange", "Banana", "Cherry"\nprint(x)\nprint(y)\nprint(z)',
+                            postContent: `<p><strong>Note:</strong> Make sure the number of variables matches the number of values, or else you will get an error.</p>`
+                        },
+                        {
+                            title: 'Example',
+                            code: 'x = y = z = "Orange"\nprint(x)\nprint(y)\nprint(z)',
+                            preContent: `<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">One Value to Multiple Variables</h2>\n<p>And you can assign the same value to multiple variables in one line:</p>`
+                        },
+                        {
+                            title: 'Example',
+                            code: 'fruits = ["apple", "banana", "cherry"]\nx, y, z = fruits\nprint(x)\nprint(y)\nprint(z)',
+                            preContent: `<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Unpack a Collection</h2>\n<p>If you have a collection of values in a list, tuple etc. Python allows you to extract the values into variables. This is called unpacking.</p>`
+                        }
+                    ],
+                    exercise: {
+                        question: 'Which is a correct way to assign the same value to three variables?',
+                        options: ['x = y = z = 5', 'x, y, z = 5', 'x = 5, y = 5, z = 5'],
+                        answer: 0,
+                    }
+                },
+                {
+                    id: 'variables-output', title: 'Output Variables',
+                    content: `<p>The Python <code>print()</code> function is often used to output variables.</p>`,
+                    examples: [
+                        {
+                            title: 'Example',
+                            code: 'x = "Python is awesome"\nprint(x)'
+                        },
+                        {
+                            title: 'Example',
+                            code: 'x = "Python"\ny = "is"\nz = "awesome"\nprint(x, y, z)',
+                            preContent: `<p>In the <code>print()</code> function, you output multiple variables, separated by a comma:</p>`
+                        },
+                        {
+                            title: 'Example',
+                            code: 'x = "Python "\ny = "is "\nz = "awesome"\nprint(x + y + z)',
+                            preContent: `<p>You can also use the <code>+</code> operator to output multiple variables:</p>`
+                        },
+                        {
+                            title: 'Example',
+                            code: 'x = 5\ny = 10\nprint(x + y)',
+                            preContent: `<p>For numbers, the <code>+</code> character works as a mathematical operator:</p>`
+                        },
+                        {
+                            title: 'Example',
+                            code: 'x = 5\ny = "John"\nprint(x + y)',
+                            variant: 'error',
+                            staticResult: 'TypeError: unsupported operand type(s) for +: \'int\' and \'str\'',
+                            preContent: `<p>In the <code>print()</code> function, when you try to combine a string and a number with the <code>+</code> operator, Python will give you an error:</p>`
+                        },
+                        {
+                            title: 'Example',
+                            code: 'x = 5\ny = "John"\nprint(x, y)',
+                            preContent: `<p>The best way to output multiple variables in the <code>print()</code> function is to separate them with commas, which even supports different data types:</p>`
+                        }
+                    ],
+                    exercise: {
+                        question: 'What is the correct way to print both a string and a number together?',
+                        options: ['print("Age: " + 25)', 'print("Age: ", 25)', 'Both are correct'],
+                        answer: 1,
+                    }
+                },
+                {
+                    id: 'variables-global', title: 'Global Variables',
+                    content: `<p>Variables that are created outside of a function (as in all of the examples above) are known as global variables.</p>\n<p>Global variables can be used by everyone, both inside of functions and outside.</p>`,
+                    examples: [
+                        {
+                            title: 'Example',
+                            code: 'x = "awesome"\n\ndef myfunc():\n  print("Python is " + x)\n\nmyfunc()',
+                            preContent: `<p>Create a variable outside of a function, and use it inside the function</p>`
+                        },
+                        {
+                            title: 'Example',
+                            code: 'x = "awesome"\n\ndef myfunc():\n  x = "fantastic"\n  print("Python is " + x)\n\nmyfunc()\n\nprint("Python is " + x)',
+                            preContent: `<p>If you create a variable with the same name inside a function, this variable will be local, and can only be used inside the function. The global variable with the same name will remain as it was, global and with the original value.</p>`
+                        },
+                        {
+                            title: 'Example',
+                            code: 'def myfunc():\n  global x\n  x = "fantastic"\n\nmyfunc()\n\nprint("Python is " + x)',
+                            preContent: `<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">The global Keyword</h2>\n<p>Normally, when you create a variable inside a function, that variable is local, and can only be used inside that function.</p>\n<p>To create a global variable inside a function, you can use the <code>global</code> keyword.</p>`
+                        },
+                        {
+                            title: 'Example',
+                            code: 'x = "awesome"\n\ndef myfunc():\n  global x\n  x = "fantastic"\n\nmyfunc()\n\nprint("Python is " + x)',
+                            preContent: `<p>Also, use the <code>global</code> keyword if you want to change a global variable inside a function.</p>`
+                        }
+                    ],
+                    exercise: {
+                        question: 'Which keyword is used to create or modify a global variable from inside a function?',
+                        options: ['global', 'public', 'universal'],
+                        answer: 0,
+                    }
+                },
+                {
+                    id: 'variables-exercises', title: 'Variable Exercises',
+                    type: 'challenge',
+                    instructions: [
+                        'Create a variable named `carname` and assign the value `Volvo` to it.',
+                        'Create a variable named `x` and assign the value `50` to it.',
+                        'Remove the illegal characters in the variable name `2my-first_name = "John"` so it becomes a legal variable `myfirst_name`.'
+                    ],
+                    starterCode: '# 1. carname\n\n\n# 2. x\n\n\n# 3. Fix the illegal variable name\n2my-first_name = "John"',
+                    solution: 'carname = "Volvo"\nx = 50\nmyfirst_name = "John"',
+                    content: `<p>Test your knowledge of Python variables by completing these exercises.</p>`
+                }
+            ]
+        },
+
         /* ────── 5. Python Comments ────── */
         {
             id: 'comments', title: 'Python Comments',
