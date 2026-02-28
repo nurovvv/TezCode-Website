@@ -4225,6 +4225,144 @@ else:
                     content: `<p>Learn how to add two numbers in Python.</p>`
                 }
             ]
+        },
+
+        /* ────── 164. Python Examples (Header) ────── */
+        {
+            id: 'python_examples_header', title: 'Python Examples', isHeader: true,
+            sections: []
+        },
+
+        /* ────── 165. Python Examples ────── */
+        {
+            id: 'python_examples', title: 'Python Examples',
+            sections: [
+                {
+                    id: 'python-examples-basics', title: 'Python Examples',
+                    content: `<p>Explore various Python examples.</p>`
+                }
+            ]
+        },
+
+        /* ────── 166. Python Compiler ────── */
+        {
+            id: 'python_compiler', title: 'Python Compiler',
+            sections: [
+                {
+                    id: 'python-compiler-basics', title: 'Python Compiler',
+                    content: `<p>Learn how to use an online Python compiler.</p>`
+                }
+            ]
+        },
+
+        /* ────── 167. Python Exercises ────── */
+        {
+            id: 'python_exercises', title: 'Python Exercises',
+            sections: [
+                {
+                    id: 'python-exercises-basics', title: 'Python Exercises',
+                    content: `<p>Practice with Python exercises.</p>`
+                }
+            ]
+        },
+
+        /* ────── 168. Python Quiz ────── */
+        {
+            id: 'python_quiz', title: 'Python Quiz',
+            sections: [
+                {
+                    id: 'python-quiz-basics', title: 'Python Quiz',
+                    content: `<p>Test your knowledge with a Python quiz.</p>`
+                }
+            ]
+        },
+
+        /* ────── 169. Python Challenges ────── */
+        {
+            id: 'python_challenges', title: 'Python Challenges',
+            sections: [
+                {
+                    id: 'python-challenges-basics', title: 'Python Challenges',
+                    content: `<p>Take on advanced Python challenges.</p>`
+                }
+            ]
+        },
+
+        /* ────── 170. Python Server ────── */
+        {
+            id: 'python_server', title: 'Python Server',
+            sections: [
+                {
+                    id: 'python-server-basics', title: 'Python Server',
+                    content: `<p>Learn how to run a Python web server.</p>`
+                }
+            ]
+        },
+
+        /* ────── 171. Python Syllabus ────── */
+        {
+            id: 'python_syllabus', title: 'Python Syllabus',
+            sections: [
+                {
+                    id: 'python-syllabus-basics', title: 'Python Syllabus',
+                    content: `<p>Review the comprehensive Python syllabus.</p>`
+                }
+            ]
+        },
+
+        /* ────── 172. Python Study Plan ────── */
+        {
+            id: 'python_study_plan', title: 'Python Study Plan',
+            sections: [
+                {
+                    id: 'python-study-plan-basics', title: 'Python Study Plan',
+                    content: `<p>Follow a structured Python study plan.</p>`
+                }
+            ]
+        },
+
+        /* ────── 173. Python Interview Q&A ────── */
+        {
+            id: 'python_interview_qa', title: 'Python Interview Q&A',
+            sections: [
+                {
+                    id: 'python-interview-qa-basics', title: 'Python Interview Q&A',
+                    content: `<p>Prepare with common Python interview questions.</p>`
+                }
+            ]
+        },
+
+        /* ────── 174. Python Bootcamp ────── */
+        {
+            id: 'python_bootcamp', title: 'Python Bootcamp',
+            sections: [
+                {
+                    id: 'python-bootcamp-basics', title: 'Python Bootcamp',
+                    content: `<p>Join an intensive Python bootcamp.</p>`
+                }
+            ]
+        },
+
+        /* ────── 175. Python Certificate ────── */
+        {
+            id: 'python_certificate', title: 'Python Certificate',
+            sections: [
+                {
+                    id: 'python-certificate-basics', title: 'Python Certificate',
+                    content: `<p>Learn about Python certifications.</p>`
+                }
+            ]
+        },
+
+        /* ────── 176. Python Training ────── */
+        {
+            id: 'python_training', title: 'Python Training',
+            sections: [
+                {
+                    id: 'python-training-basics', title: 'Python Training',
+                    content: `<p>Explore deeper Python training opportunities.</p>`
+                }
+            ]
         }
     ],
 };

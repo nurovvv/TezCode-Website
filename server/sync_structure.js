@@ -1303,7 +1303,20 @@ const COURSE_DATA = {
         { "id": "python_how_to_header", "title": "Python How To", "sections": [] },
         { "id": "remove_list_duplicates", "title": "Remove List Duplicates", "sections": [{ "id": "remove-list-duplicates-basics", "title": "Remove List Duplicates" }] },
         { "id": "reverse_a_string", "title": "Reverse a String", "sections": [{ "id": "reverse-a-string-basics", "title": "Reverse a String" }] },
-        { "id": "add_two_numbers", "title": "Add Two Numbers", "sections": [{ "id": "add-two-numbers-basics", "title": "Add Two Numbers" }] }
+        { "id": "add_two_numbers", "title": "Add Two Numbers", "sections": [{ "id": "add-two-numbers-basics", "title": "Add Two Numbers" }] },
+        { "id": "python_examples_header", "title": "Python Examples", "sections": [] },
+        { "id": "python_examples", "title": "Python Examples", "sections": [{ "id": "python-examples-basics", "title": "Python Examples" }] },
+        { "id": "python_compiler", "title": "Python Compiler", "sections": [{ "id": "python-compiler-basics", "title": "Python Compiler" }] },
+        { "id": "python_exercises", "title": "Python Exercises", "sections": [{ "id": "python-exercises-basics", "title": "Python Exercises" }] },
+        { "id": "python_quiz", "title": "Python Quiz", "sections": [{ "id": "python-quiz-basics", "title": "Python Quiz" }] },
+        { "id": "python_challenges", "title": "Python Challenges", "sections": [{ "id": "python-challenges-basics", "title": "Python Challenges" }] },
+        { "id": "python_server", "title": "Python Server", "sections": [{ "id": "python-server-basics", "title": "Python Server" }] },
+        { "id": "python_syllabus", "title": "Python Syllabus", "sections": [{ "id": "python-syllabus-basics", "title": "Python Syllabus" }] },
+        { "id": "python_study_plan", "title": "Python Study Plan", "sections": [{ "id": "python-study-plan-basics", "title": "Python Study Plan" }] },
+        { "id": "python_interview_qa", "title": "Python Interview Q&A", "sections": [{ "id": "python-interview-qa-basics", "title": "Python Interview Q&A" }] },
+        { "id": "python_bootcamp", "title": "Python Bootcamp", "sections": [{ "id": "python-bootcamp-basics", "title": "Python Bootcamp" }] },
+        { "id": "python_certificate", "title": "Python Certificate", "sections": [{ "id": "python-certificate-basics", "title": "Python Certificate" }] },
+        { "id": "python_training", "title": "Python Training", "sections": [{ "id": "python-training-basics", "title": "Python Training" }] }
     ]
 };
 
