@@ -71,12 +71,9 @@ async function start() {
         console.log(`✅ ${sequelize.getDialect().toUpperCase()} database connected & synced`);
 
         // Automated production seeding
-        const challengeCount = await Challenge.count();
-        if (challengeCount === 0) {
-            console.log('🌱 Database is empty. Seeding challenges...');
-            const seedChallenges = require('./seed_challenges');
-            await seedChallenges();
-        }
+        console.log('🌱 Synchronizing challenges database...');
+        const seedChallenges = require('./seed_challenges');
+        await seedChallenges();
 
         const courseCount = await Course.count();
         if (courseCount === 0) {
