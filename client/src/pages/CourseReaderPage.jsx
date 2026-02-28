@@ -3860,6 +3860,133 @@ else:
                     content: `<p>Learn how to combine rows from two or more tables in MySQL.</p>`
                 }
             ]
+        },
+
+        /* ────── 129. Python MongoDB (Header) ────── */
+        {
+            id: 'python_mongodb_header', title: 'Python MongoDB', isHeader: true,
+            sections: []
+        },
+
+        /* ────── 130. MongoDB Get Started ────── */
+        {
+            id: 'mongodb_get_started', title: 'MongoDB Get Started',
+            sections: [
+                {
+                    id: 'mongodb-get-started-basics', title: 'MongoDB Get Started',
+                    content: `<p>Learn how to connect Python to a MongoDB database.</p>`
+                }
+            ]
+        },
+
+        /* ────── 131. MongoDB Create DB ────── */
+        {
+            id: 'mongodb_create_db', title: 'MongoDB Create DB',
+            sections: [
+                {
+                    id: 'mongodb-create-db-basics', title: 'MongoDB Create DB',
+                    content: `<p>Learn how to create a database in MongoDB using Python.</p>`
+                }
+            ]
+        },
+
+        /* ────── 132. MongoDB Collection ────── */
+        {
+            id: 'mongodb_collection', title: 'MongoDB Collection',
+            sections: [
+                {
+                    id: 'mongodb-collection-basics', title: 'MongoDB Collection',
+                    content: `<p>Learn how to create a collection (table) in MongoDB using Python.</p>`
+                }
+            ]
+        },
+
+        /* ────── 133. MongoDB Insert ────── */
+        {
+            id: 'mongodb_insert', title: 'MongoDB Insert',
+            sections: [
+                {
+                    id: 'mongodb-insert-basics', title: 'MongoDB Insert',
+                    content: `<p>Learn how to insert documents into a MongoDB collection using Python.</p>`
+                }
+            ]
+        },
+
+        /* ────── 134. MongoDB Find ────── */
+        {
+            id: 'mongodb_find', title: 'MongoDB Find',
+            sections: [
+                {
+                    id: 'mongodb-find-basics', title: 'MongoDB Find',
+                    content: `<p>Learn how to retrieve data from a MongoDB database using Python.</p>`
+                }
+            ]
+        },
+
+        /* ────── 135. MongoDB Query ────── */
+        {
+            id: 'mongodb_query', title: 'MongoDB Query',
+            sections: [
+                {
+                    id: 'mongodb-query-basics', title: 'MongoDB Query',
+                    content: `<p>Learn how to filter MongoDB results using queries in Python.</p>`
+                }
+            ]
+        },
+
+        /* ────── 136. MongoDB Sort ────── */
+        {
+            id: 'mongodb_sort', title: 'MongoDB Sort',
+            sections: [
+                {
+                    id: 'mongodb-sort-basics', title: 'MongoDB Sort',
+                    content: `<p>Learn how to sort MongoDB result sets.</p>`
+                }
+            ]
+        },
+
+        /* ────── 137. MongoDB Delete ────── */
+        {
+            id: 'mongodb_delete', title: 'MongoDB Delete',
+            sections: [
+                {
+                    id: 'mongodb-delete-basics', title: 'MongoDB Delete',
+                    content: `<p>Learn how to delete documents from a MongoDB collection.</p>`
+                }
+            ]
+        },
+
+        /* ────── 138. MongoDB Drop Collection ────── */
+        {
+            id: 'mongodb_drop_collection', title: 'MongoDB Drop Collection',
+            sections: [
+                {
+                    id: 'mongodb-drop-collection-basics', title: 'MongoDB Drop Collection',
+                    content: `<p>Learn how to delete a collection entirely in MongoDB.</p>`
+                }
+            ]
+        },
+
+        /* ────── 139. MongoDB Update ────── */
+        {
+            id: 'mongodb_update', title: 'MongoDB Update',
+            sections: [
+                {
+                    id: 'mongodb-update-basics', title: 'MongoDB Update',
+                    content: `<p>Learn how to update existing documents in MongoDB using Python.</p>`
+                }
+            ]
+        },
+
+        /* ────── 140. MongoDB Limit ────── */
+        {
+            id: 'mongodb_limit', title: 'MongoDB Limit',
+            sections: [
+                {
+                    id: 'mongodb-limit-basics', title: 'MongoDB Limit',
+                    content: `<p>Learn how to limit the number of documents returned from MongoDB.</p>`
+                }
+            ]
         }
     ],
 };
