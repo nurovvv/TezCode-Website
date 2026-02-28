@@ -19,8 +19,8 @@ export default function LoginPage() {
         setError('');
         setLoading(true);
         try {
-            const res = await login(email, password);
-            const role = res?.user?.role || 'student';
+            const user = await login(email, password);
+            const role = user?.role || 'student';
             navigate(role === 'admin' ? '/admin' : role === 'teacher' ? '/teacher' : '/dashboard');
         } catch (err) {
             setError(err.response?.data?.message || 'Login failed');

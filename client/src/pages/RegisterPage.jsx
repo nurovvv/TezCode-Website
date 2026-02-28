@@ -26,8 +26,9 @@ export default function RegisterPage() {
         }
         setLoading(true);
         try {
-            await register(name, username, email, password);
-            navigate('/dashboard');
+            const user = await register(name, username, email, password);
+            const role = user?.role || 'student';
+            navigate(role === 'admin' ? '/admin' : role === 'teacher' ? '/teacher' : '/dashboard');
         } catch (err) {
             setError(err.response?.data?.message || 'Registration failed');
         }

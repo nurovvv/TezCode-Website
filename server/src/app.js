@@ -39,9 +39,19 @@ function getCorsConfig() {
         };
     } else {
         // Production: allow configured domain
-        const clientUrl = process.env.CLIENT_URL || process.env.FRONTEND_URL;
+        let clientUrl = process.env.CLIENT_URL || process.env.FRONTEND_URL || 'https://nurovvv.github.io';
+        // Normalize: remove trailing slash for comparison
+        const normalizedClientUrl = clientUrl.replace(/\/+$/, '');
+
         return {
-            origin: clientUrl,
+            origin: (origin, callback) => {
+                // Allow if origin matches (with or without trailing slash) 
+                // or if it's the exact configured URL
+                if (!origin || origin.replace(/\/+$/, '') === normalizedClientUrl) {
+                    return callback(null, true);
+                }
+                callback(new Error('CORS not allowed'));
+            },
             credentials: true,
             methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
             allowedHeaders: ['Content-Type', 'Authorization'],
