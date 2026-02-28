@@ -63,10 +63,7 @@ export default function CatalogPage() {
                                             <p style={{ fontSize: '11px', color: '#86868b', margin: '0 0 2px', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.05em' }}>{t('catalog.labels.activities')}</p>
                                             <p style={{ fontSize: '20px', fontWeight: 800, color: '#1d1d1f', margin: 0 }}>300+</p>
                                         </div>
-                                        <div>
-                                            <p style={{ fontSize: '11px', color: '#86868b', margin: '0 0 2px', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.05em' }}>{t('catalog.labels.instructor')}</p>
-                                            <p style={{ fontSize: '14px', fontWeight: 600, color: '#1d1d1f', margin: 0 }}>Farrukh Saidov</p>
-                                        </div>
+
                                     </div>
                                     <div style={{
                                         padding: '12px 28px', borderRadius: '12px',
