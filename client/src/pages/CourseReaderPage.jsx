@@ -2481,19 +2481,19 @@ print("Username is: " + username)</pre>`,
                 }
             ]
         },
-        /* ────── 38. Python OOP ────── */
+        /* ────── 38. Python Classes ────── */
         {
-            id: 'oop', title: 'Python OOP',
-            sections: [
-                {
-                    id: 'oop-intro', title: 'Python OOP',
-                    content: '<p>Python is an object oriented programming language.</p><p>Almost everything in Python is an object, with its properties and methods.</p><p>A Class is like an object constructor, or a "blueprint" for creating objects.</p>',
-                    examples: [],
-                }
-            ]
+            id: 'classes_header', title: 'Python Classes', isHeader: true,
+            sections: []
         },
 
-        /* ────── 39. Python Classes/Objects ────── */
+        /* ────── 39. Python OOP ────── */
+        {
+            id: 'oop_header', title: 'Python OOP', isHeader: true,
+            sections: []
+        },
+
+        /* ────── 40. Python Classes/Objects ────── */
         {
             id: 'classes_objects', title: 'Python Classes/Objects',
             sections: [
@@ -3011,6 +3011,24 @@ export default function CourseReaderPage() {
                             {/* Chapter list */}
                             {COURSE.chapters.map(ch => {
                                 const isExpanded = expandedChapters.has(ch.id);
+                                if (ch.isHeader) {
+                                    const isOOP = ch.id === 'oop_header';
+                                    return (
+                                        <div key={ch.id} style={{
+                                            marginTop: isOOP ? '8px' : '32px',
+                                            marginBottom: '8px',
+                                            padding: '0 4px'
+                                        }}>
+                                            <h2 style={{
+                                                fontSize: isOOP ? '24px' : '32px',
+                                                fontWeight: 500,
+                                                color: '#000',
+                                                margin: 0,
+                                                fontFamily: 'inherit'
+                                            }}>{ch.title}</h2>
+                                        </div>
+                                    );
+                                }
                                 return (
                                     <div key={ch.id} style={{ marginBottom: '8px' }}>
                                         {/* Header / Dropdown Button */}
