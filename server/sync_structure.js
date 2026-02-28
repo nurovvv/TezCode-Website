@@ -503,16 +503,7 @@ const COURSE_DATA = {
                 }
             ]
         },
-        {
-            "id": "classes",
-            "title": "Python Classes",
-            "sections": [
-                {
-                    "id": "classes-oop",
-                    "title": "Python OOP"
-                }
-            ]
-        },
+
         {
             "id": "functions",
             "title": "Python Functions",
@@ -748,6 +739,16 @@ const COURSE_DATA = {
                 {
                     "id": "virtualenv-challenge",
                     "title": "Code Challenge"
+                }
+            ]
+        },
+        {
+            "id": "classes",
+            "title": "Python Classes",
+            "sections": [
+                {
+                    "id": "classes-oop",
+                    "title": "Python OOP"
                 }
             ]
         }
