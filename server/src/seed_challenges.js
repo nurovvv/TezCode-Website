@@ -1461,6 +1461,180 @@ substring</em>.</p>
             ],
             starterCode: "import ast\nnums = ast.literal_eval(input())\n\n# Return the index of any peak element\n",
             tags: ["Array", "Binary Search"],
+            tags: ["Array", "Binary Search"],
+            topics: ["Medium"]
+        },
+        {
+            title: "Valid Perfect Square",
+            description: `<div class="lc-description">
+<p>Given a positive integer <code>num</code>, write a function which returns True if <code>num</code> is a perfect square else False.</p>
+<p><strong>Follow up:</strong> <strong>Do not</strong> use any built-in library function such as <code>sqrt</code>.</p>
+
+<p><strong>Example 1:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> num = 16</p>
+<p><strong class="lc-label">Output:</strong> True</p>
+</div>
+
+<p><strong>Example 2:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> num = 14</p>
+<p><strong class="lc-label">Output:</strong> False</p>
+</div>
+</div>`,
+            difficulty: "easy",
+            xpReward: 10,
+            testCases: [
+                { input: "16", expectedOutput: "True" },
+                { input: "14", expectedOutput: "False" },
+                { input: "1", expectedOutput: "True" }
+            ],
+            starterCode: "num = int(input())\n\n# Return True if perfect square else False\n",
+            tags: ["Math", "Binary Search"],
+            topics: ["Easy"]
+        },
+        {
+            title: "Plus One",
+            description: `<div class="lc-description">
+<p>You are given a <strong>large integer</strong> represented as an integer array <code>digits</code>, where each <code>digits[i]</code> is the <code>i</code>th digit of the integer. The digits are ordered from most significant to least significant in left-to-right order. The large integer does not contain any leading <code>0</code>'s.</p>
+<p>Increment the large integer by one and return <em>the resulting array of digits</em>.</p>
+
+<p><strong>Example 1:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> digits = [1,2,3]</p>
+<p><strong class="lc-label">Output:</strong> [1,2,4]</p>
+<p><strong>Explanation:</strong> The array represents the integer 123.</p>
+<p>Incrementing by one gives 123 + 1 = 124.</p>
+<p>Thus, the result should be [1,2,4].</p>
+</div>
+
+<p><strong>Example 2:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> digits = [4,3,2,1]</p>
+<p><strong class="lc-label">Output:</strong> [4,3,2,2]</p>
+</div>
+
+<p><strong>Example 3:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> digits = [9]</p>
+<p><strong class="lc-label">Output:</strong> [1,0]</p>
+</div>
+</div>`,
+            difficulty: "easy",
+            xpReward: 15,
+            testCases: [
+                { input: "[1,2,3]", expectedOutput: "[1, 2, 4]" },
+                { input: "[4,3,2,1]", expectedOutput: "[4, 3, 2, 2]" },
+                { input: "[9]", expectedOutput: "[1, 0]" }
+            ],
+            starterCode: "import ast\ndigits = ast.literal_eval(input())\n\n# Return the incremented array\n",
+            tags: ["Array", "Math"],
+            topics: ["Easy"]
+        },
+        {
+            title: "Reverse Integer",
+            description: `<div class="lc-description">
+<p>Given a signed 32-bit integer <code>x</code>, return <code>x</code> <em>with its digits reversed</em>. If reversing <code>x</code> causes the value to go outside the signed 32-bit integer range <code>[-2^31, 2^31 - 1]</code>, then return <code>0</code>.</p>
+
+<p><strong>Example 1:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> x = 123</p>
+<p><strong class="lc-label">Output:</strong> 321</p>
+</div>
+
+<p><strong>Example 2:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> x = -123</p>
+<p><strong class="lc-label">Output:</strong> -321</p>
+</div>
+
+<p><strong>Example 3:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> x = 120</p>
+<p><strong class="lc-label">Output:</strong> 21</p>
+</div>
+</div>`,
+            difficulty: "medium",
+            xpReward: 30,
+            testCases: [
+                { input: "123", expectedOutput: "321" },
+                { input: "-123", expectedOutput: "-321" },
+                { input: "120", expectedOutput: "21" }
+            ],
+            starterCode: "x = int(input())\n\n# Return the reversed integer\n",
+            tags: ["Math"],
+            topics: ["Medium"]
+        },
+        {
+            title: "Valid Parenthesis String",
+            description: `<div class="lc-description">
+<p>Given a string <code>s</code> containing only three types of characters: <code>'('</code>, <code>')'</code> and <code>'*'</code>, return <code>true</code> if <code>s</code> is <strong>valid</strong>.</p>
+<p>The following rules define a <strong>valid</strong> string:</p>
+<ul>
+<li>Any left parenthesis <code>'('</code> must have a corresponding right parenthesis <code>')'</code>.</li>
+<li>Any right parenthesis <code>')'</code> must have a corresponding left parenthesis <code>'('</code>.</li>
+<li>Left parenthesis <code>'('</code> must go before the corresponding right parenthesis <code>')'</code>.</li>
+<li><code>'*'</code> could be treated as a single right parenthesis <code>')'</code> or a single left parenthesis <code>'('</code> or an empty string <code>""</code>.</li>
+</ul>
+
+<p><strong>Example 1:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> s = "()"</p>
+<p><strong class="lc-label">Output:</strong> True</p>
+</div>
+
+<p><strong>Example 2:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> s = "(*)"</p>
+<p><strong class="lc-label">Output:</strong> True</p>
+</div>
+
+<p><strong>Example 3:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> s = "(*))"</p>
+<p><strong class="lc-label">Output:</strong> True</p>
+</div>
+</div>`,
+            difficulty: "medium",
+            xpReward: 35,
+            testCases: [
+                { input: "()", expectedOutput: "True" },
+                { input: "(*)", expectedOutput: "True" },
+                { input: "(*))", expectedOutput: "True" }
+            ],
+            starterCode: "s = input()\n\n# Return True if valid else False\n",
+            tags: ["String", "Dynamic Programming", "Stack", "Greedy"],
+            topics: ["Medium"]
+        },
+        {
+            title: "Search in Rotated Sorted Array",
+            description: `<div class="lc-description">
+<p>There is an integer array <code>nums</code> sorted in ascending order (with <strong>distinct</strong> values).</p>
+<p>Prior to being passed to your function, <code>nums</code> is <strong>possibly rotated</strong> at an unknown pivot index <code>k</code> (<code>1 <= k < nums.length</code>) such that the resulting array is <code>[nums[k], nums[k+1], ..., nums[n-1], nums[0], nums[1], ..., nums[k-1]]</code> (<strong>0-indexed</strong>). For example, <code>[0,1,2,4,5,6,7]</code> might be rotated at pivot index <code>3</code> and become <code>[4,5,6,7,0,1,2]</code>.</p>
+<p>Given the array <code>nums</code> <strong>after</strong> the possible rotation and an integer <code>target</code>, return <em>the index of</em> <code>target</code> <em>if it is in</em> <code>nums</code><em>, or</em> <code>-1</code> <em>if it is not in</em> <code>nums</code>.</p>
+<p>You must write an algorithm with <code>O(log n)</code> runtime complexity.</p>
+
+<p><strong>Example 1:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> nums = [4,5,6,7,0,1,2], target = 0</p>
+<p><strong class="lc-label">Output:</strong> 4</p>
+</div>
+
+<p><strong>Example 2:</strong></p>
+<div class="lc-example">
+<p><strong class="lc-label">Input:</strong> nums = [4,5,6,7,0,1,2], target = 3</p>
+<p><strong class="lc-label">Output:</strong> -1</p>
+</div>
+</div>`,
+            difficulty: "medium",
+            xpReward: 35,
+            testCases: [
+                { input: "[4,5,6,7,0,1,2]\n0", expectedOutput: "4" },
+                { input: "[4,5,6,7,0,1,2]\n3", expectedOutput: "-1" },
+                { input: "[1]\n0", expectedOutput: "-1" }
+            ],
+            starterCode: "import ast\nnums = ast.literal_eval(input())\ntarget = int(input())\n\n# Return the index of target\n",
+            tags: ["Array", "Binary Search"],
             topics: ["Medium"]
         }
     ];
