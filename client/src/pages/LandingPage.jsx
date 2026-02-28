@@ -127,7 +127,7 @@ export default function LandingPage() {
                                 CONTACTS
                             </p>
                             <a href="https://t.me/tezcode" target="_blank" rel="noreferrer" style={{ display: 'block', color: 'inherit', textDecoration: 'none', marginBottom: '12px' }}>Telegram</a>
-                            <a href="https://instagram.com/tezcode" target="_blank" rel="noreferrer" style={{ display: 'block', color: 'inherit', textDecoration: 'none', marginBottom: '12px' }}>Instagram</a>
+                            <a href="https://www.instagram.com/tezyoft/" target="_blank" rel="noreferrer" style={{ display: 'block', color: 'inherit', textDecoration: 'none', marginBottom: '12px' }}>Instagram</a>
                         </div>
 
 
