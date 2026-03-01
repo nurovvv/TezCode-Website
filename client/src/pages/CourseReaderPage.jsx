@@ -314,7 +314,7 @@ Hello, World!</div>
                         {
                             title: 'Example',
                             code: 'x = 4       # x is of type int\nx = "Sally" # x is now of type str\nprint(x)',
-                            preContent: `<h2 style="font-size: 30px; font-weight: 700; margin-top: 40px; margin-bottom: 20px;">Variables do not need to be declared with any particular type, and can even change type after they have been set.</h2>`
+                            preContent: `<p style="font-size: 18px; font-weight: 700; margin-top: 24px; margin-bottom: 12px; color: #1d1d1f;">Variables do not need to be declared with any particular type, and can even change type after they have been set.</p>`
                         },
                         {
                             title: 'Example',
