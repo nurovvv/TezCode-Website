@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import api from '../services/api';
 
 export default function LeaderboardPage() {
@@ -20,10 +21,10 @@ export default function LeaderboardPage() {
 
     useEffect(() => {
         fetchLeaderboard();
-        
+
         // Auto-refresh leaderboard every 10 seconds
         const interval = setInterval(fetchLeaderboard, 10000);
-        
+
         return () => clearInterval(interval);
     }, []);
 
@@ -67,7 +68,8 @@ export default function LeaderboardPage() {
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: index * 0.05 }}
+                            whileHover={{ background: 'rgba(255, 255, 255, 0.03)' }}
+                            transition={{ delay: index * 0.05, background: { duration: 0.1 } }}
                             key={user.id}
                             style={{
                                 display: 'flex', alignItems: 'center', padding: '20px 30px',
@@ -81,13 +83,21 @@ export default function LeaderboardPage() {
                             }}>
                                 #{index + 1}
                             </div>
-                            <div style={{ width: '50px', height: '50px', borderRadius: '50%', background: '#333', overflow: 'hidden', marginRight: '20px' }}>
-                                <img src={user.avatarUrl || `https://api.dicebear.com/7.x/avataaars/svg?seed=${user.name}`} alt={user.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                            </div>
-                            <div style={{ flex: 1 }}>
-                                <h3 style={{ margin: '0 0 5px', fontSize: '1.2rem', fontWeight: 600 }}>{user.name}</h3>
-                                <span style={{ fontSize: '0.85rem', color: '#888', background: '#222', padding: '3px 8px', borderRadius: '12px', textTransform: 'capitalize' }}>{user.level || 'Beginner'}</span>
-                            </div>
+                            <Link to={`/profile/${user.id}`} style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', color: 'inherit', flex: 1 }}>
+                                <div style={{ width: '50px', height: '50px', borderRadius: '50%', background: '#333', overflow: 'hidden', marginRight: '20px', border: '2px solid transparent', transition: 'border-color 0.2s' }}
+                                    onMouseOver={(e) => e.currentTarget.style.borderColor = '#04AA6D'}
+                                    onMouseOut={(e) => e.currentTarget.style.borderColor = 'transparent'}>
+                                    <img src={user.avatarUrl || `https://api.dicebear.com/7.x/avataaars/svg?seed=${user.name}`} alt={user.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                </div>
+                                <div style={{ flex: 1 }}>
+                                    <h3 style={{ margin: '0 0 5px', fontSize: '1.2rem', fontWeight: 600, transition: 'color 0.2s' }}
+                                        onMouseOver={(e) => e.target.style.color = '#04AA6D'}
+                                        onMouseOut={(e) => e.target.style.color = '#fff'}>
+                                        {user.name}
+                                    </h3>
+                                    <span style={{ fontSize: '0.85rem', color: '#888', background: '#222', padding: '3px 8px', borderRadius: '12px', textTransform: 'capitalize' }}>{user.level || 'Beginner'}</span>
+                                </div>
+                            </Link>
                             <div style={{ textAlign: 'right' }}>
                                 <strong style={{ fontSize: '1.5rem', color: '#04AA6D' }}>{user.xp}</strong>
                                 <div style={{ fontSize: '0.8rem', color: '#888' }}>XP</div>

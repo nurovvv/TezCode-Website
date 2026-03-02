@@ -1,11 +1,15 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useAuth } from '../context/AuthContext';
+import { useParams } from 'react-router-dom';
 import api from '../services/api';
+import { useAuth } from '../context/AuthContext';
 
 export default function ProfilePage() {
-    const { user, updateUser } = useAuth();
-    const [loading, setLoading] = useState(false);
+    const { id } = useParams();
+    const { user: currentUser, updateUser } = useAuth();
+    const [profileUser, setProfileUser] = useState(null);
+    const [isOwnProfile, setIsOwnProfile] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [uploading, setUploading] = useState(false);
     const [message, setMessage] = useState({ type: '', text: '' });
     const [showCamera, setShowCamera] = useState(false);
@@ -23,16 +27,37 @@ export default function ProfilePage() {
     const canvasRef = useRef(null);
 
     useEffect(() => {
-        if (user) {
-            setFormData({
-                name: user.name || '',
-                githubUrl: user.githubUrl || '',
-                linkedinUrl: user.linkedinUrl || '',
-                twitterUrl: user.twitterUrl || '',
-                instagramUrl: user.instagramUrl || ''
-            });
-        }
-    }, [user]);
+        const fetchProfile = async () => {
+            setLoading(true);
+            try {
+                // Determine if we are viewing "me" or a specific ID
+                if (!id || (currentUser && id === currentUser.id.toString())) {
+                    setIsOwnProfile(true);
+                    setProfileUser(currentUser);
+                    if (currentUser) {
+                        setFormData({
+                            name: currentUser.name || '',
+                            githubUrl: currentUser.githubUrl || '',
+                            linkedinUrl: currentUser.linkedinUrl || '',
+                            twitterUrl: currentUser.twitterUrl || '',
+                            instagramUrl: currentUser.instagramUrl || ''
+                        });
+                    }
+                } else {
+                    setIsOwnProfile(false);
+                    const res = await api.get(`auth/user/${id}`);
+                    setProfileUser(res.data.user);
+                }
+            } catch (err) {
+                console.error('Error fetching profile:', err);
+                setMessage({ type: 'error', text: 'User not found' });
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchProfile();
+    }, [id, currentUser]);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -150,6 +175,23 @@ export default function ProfilePage() {
         color: '#aaa'
     };
 
+    if (loading && !profileUser) {
+        return (
+            <div style={{ background: '#0a0a0a', minHeight: '100vh', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div className="spinner"></div>
+            </div>
+        );
+    }
+
+    if (!profileUser && !loading) {
+        return (
+            <div style={{ background: '#0a0a0a', minHeight: '100vh', color: '#fff', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '20px' }}>
+                <h2 style={{ fontSize: '2rem' }}>User not found</h2>
+                <button onClick={() => window.history.back()} style={{ background: '#04AA6D', color: '#fff', border: 'none', padding: '10px 24px', borderRadius: '8px', cursor: 'pointer' }}>Go Back</button>
+            </div>
+        );
+    }
+
     return (
         <div style={{ background: '#0a0a0a', minHeight: '100vh', color: '#fff', padding: '100px 20px 40px' }}>
             <div style={{ maxWidth: '800px', margin: '0 auto' }}>
@@ -177,10 +219,10 @@ export default function ProfilePage() {
                                 alignItems: 'center',
                                 justifyContent: 'center'
                             }}>
-                                {user?.avatarUrl ? (
-                                    <img src={user.avatarUrl} alt="Avatar" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                                {profileUser?.avatarUrl ? (
+                                    <img src={profileUser.avatarUrl} alt="Avatar" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                                 ) : (
-                                    <span style={{ fontSize: '3rem', color: '#888' }}>{user?.name?.charAt(0) || '?'}</span>
+                                    <span style={{ fontSize: '3rem', color: '#888' }}>{profileUser?.name?.charAt(0) || '?'}</span>
                                 )}
                                 {uploading && (
                                     <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -191,150 +233,195 @@ export default function ProfilePage() {
                         </div>
 
                         <div style={{ flex: 1, minWidth: '250px' }}>
-                            <h1 style={{ fontSize: '2rem', fontWeight: 800, margin: 0 }}>Profile Settings</h1>
-                            <div style={{ display: 'flex', gap: '10px', marginTop: '15px' }}>
-                                <input
-                                    type="file"
-                                    ref={fileInputRef}
-                                    hidden
-                                    accept="image/*"
-                                    onChange={handleFileUpload}
-                                />
-                                <button
-                                    type="button"
-                                    onClick={() => fileInputRef.current.click()}
-                                    style={{
-                                        background: 'rgba(255,255,255,0.1)',
-                                        color: '#fff',
-                                        border: 'none',
-                                        padding: '8px 16px',
-                                        borderRadius: '8px',
-                                        fontSize: '0.9rem',
-                                        fontWeight: 600,
-                                        cursor: 'pointer'
-                                    }}
-                                >
-                                    Upload Photo
-                                </button>
-                                <button
-                                    type="button"
-                                    onClick={startCamera}
-                                    style={{
-                                        background: 'rgba(255,255,255,0.1)',
-                                        color: '#fff',
-                                        border: 'none',
-                                        padding: '8px 16px',
-                                        borderRadius: '8px',
-                                        fontSize: '0.9rem',
-                                        fontWeight: 600,
-                                        cursor: 'pointer'
-                                    }}
-                                >
-                                    Take Photo
-                                </button>
-                            </div>
+                            <h1 style={{ fontSize: '2rem', fontWeight: 800, margin: 0 }}>
+                                {isOwnProfile ? 'Profile Settings' : `${profileUser.name}'s Profile`}
+                            </h1>
+                            {isOwnProfile && (
+                                <div style={{ display: 'flex', gap: '10px', marginTop: '15px' }}>
+                                    <input
+                                        type="file"
+                                        ref={fileInputRef}
+                                        hidden
+                                        accept="image/*"
+                                        onChange={handleFileUpload}
+                                    />
+                                    <button
+                                        type="button"
+                                        onClick={() => fileInputRef.current.click()}
+                                        style={{
+                                            background: 'rgba(255,255,255,0.1)',
+                                            color: '#fff',
+                                            border: 'none',
+                                            padding: '8px 16px',
+                                            borderRadius: '8px',
+                                            fontSize: '0.9rem',
+                                            fontWeight: 600,
+                                            cursor: 'pointer'
+                                        }}
+                                    >
+                                        Upload Photo
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={startCamera}
+                                        style={{
+                                            background: 'rgba(255,255,255,0.1)',
+                                            color: '#fff',
+                                            border: 'none',
+                                            padding: '8px 16px',
+                                            borderRadius: '8px',
+                                            fontSize: '0.9rem',
+                                            fontWeight: 600,
+                                            cursor: 'pointer'
+                                        }}
+                                    >
+                                        Take Photo
+                                    </button>
+                                </div>
+                            )}
+                            {!isOwnProfile && (
+                                <div style={{ marginTop: '15px', color: '#aaa', fontSize: '1rem', display: 'flex', gap: '20px' }}>
+                                    <div><strong style={{ color: '#04AA6D', fontSize: '1.2rem' }}>{profileUser.xp || 0}</strong> XP</div>
+                                    <div><strong style={{ color: '#04AA6D', fontSize: '1.2rem' }}>{profileUser.level || 'Beginner'}</strong></div>
+                                </div>
+                            )}
                         </div>
                     </div>
 
-                    <form onSubmit={handleSubmit}>
-                        {message.text && (
-                            <div style={{
-                                padding: '15px',
-                                borderRadius: '12px',
-                                background: message.type === 'success' ? 'rgba(4, 170, 109, 0.1)' : 'rgba(244, 67, 54, 0.1)',
-                                border: `1px solid ${message.type === 'success' ? '#04AA6D' : '#f44336'}`,
-                                color: message.type === 'success' ? '#04AA6D' : '#f44336',
-                                marginBottom: '24px'
-                            }}>
-                                {message.text}
-                            </div>
-                        )}
+                    {isOwnProfile ? (
+                        <form onSubmit={handleSubmit}>
+                            {message.text && (
+                                <div style={{
+                                    padding: '15px',
+                                    borderRadius: '12px',
+                                    background: message.type === 'success' ? 'rgba(4, 170, 109, 0.1)' : 'rgba(244, 67, 54, 0.1)',
+                                    border: `1px solid ${message.type === 'success' ? '#04AA6D' : '#f44336'}`,
+                                    color: message.type === 'success' ? '#04AA6D' : '#f44336',
+                                    marginBottom: '24px'
+                                }}>
+                                    {message.text}
+                                </div>
+                            )}
 
-                        <div>
-                            <label style={labelStyle}>Username / Full Name</label>
-                            <input
-                                type="text"
-                                name="name"
-                                value={formData.name}
-                                onChange={handleChange}
-                                style={inputStyle}
-                                placeholder="Enter your name"
-                                required
-                            />
+                            <div>
+                                <label style={labelStyle}>Username / Full Name</label>
+                                <input
+                                    type="text"
+                                    name="name"
+                                    value={formData.name}
+                                    onChange={handleChange}
+                                    style={inputStyle}
+                                    placeholder="Enter your name"
+                                    required
+                                />
+                            </div>
+
+                            <h3 style={{ fontSize: '1.2rem', fontWeight: 600, margin: '20px 0 15px', color: '#04AA6D' }}>Social Accounts</h3>
+
+                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
+                                <div>
+                                    <label style={labelStyle}>GitHub URL</label>
+                                    <input
+                                        type="text"
+                                        name="githubUrl"
+                                        value={formData.githubUrl}
+                                        onChange={handleChange}
+                                        style={inputStyle}
+                                        placeholder="https://github.com/username"
+                                    />
+                                </div>
+                                <div>
+                                    <label style={labelStyle}>LinkedIn URL</label>
+                                    <input
+                                        type="text"
+                                        name="linkedinUrl"
+                                        value={formData.linkedinUrl}
+                                        onChange={handleChange}
+                                        style={inputStyle}
+                                        placeholder="https://linkedin.com/in/username"
+                                    />
+                                </div>
+                            </div>
+
+                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
+                                <div>
+                                    <label style={labelStyle}>Twitter / X URL</label>
+                                    <input
+                                        type="text"
+                                        name="twitterUrl"
+                                        value={formData.twitterUrl}
+                                        onChange={handleChange}
+                                        style={inputStyle}
+                                        placeholder="https://x.com/username"
+                                    />
+                                </div>
+                                <div>
+                                    <label style={labelStyle}>Instagram URL</label>
+                                    <input
+                                        type="text"
+                                        name="instagramUrl"
+                                        value={formData.instagramUrl}
+                                        onChange={handleChange}
+                                        style={inputStyle}
+                                        placeholder="https://instagram.com/username"
+                                    />
+                                </div>
+                            </div>
+
+                            <button
+                                type="submit"
+                                disabled={loading}
+                                style={{
+                                    background: '#04AA6D',
+                                    color: '#fff',
+                                    border: 'none',
+                                    padding: '14px 32px',
+                                    borderRadius: '12px',
+                                    fontWeight: 700,
+                                    fontSize: '1rem',
+                                    cursor: loading ? 'not-allowed' : 'pointer',
+                                    transition: 'all 0.2s',
+                                    marginTop: '10px',
+                                    boxShadow: '0 4px 14px 0 rgba(4, 170, 109, 0.39)'
+                                }}
+                            >
+                                {loading ? 'Saving Changes...' : 'Save Changes'}
+                            </button>
+                        </form>
+                    ) : (
+                        <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '30px' }}>
+                            <h3 style={{ fontSize: '1.2rem', fontWeight: 600, marginBottom: '20px', color: '#04AA6D' }}>Connect with {profileUser.name}</h3>
+                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px' }}>
+                                {profileUser.githubUrl && (
+                                    <a href={profileUser.githubUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: '#fff', background: 'rgba(255,255,255,0.05)', padding: '16px', borderRadius: '12px', display: 'flex', alignItems: 'center', gap: '12px', border: '1px solid rgba(255,255,255,0.1)' }}>
+                                        <i className="fab fa-github" style={{ fontSize: '1.5rem' }}></i>
+                                        <span>GitHub</span>
+                                    </a>
+                                )}
+                                {profileUser.linkedinUrl && (
+                                    <a href={profileUser.linkedinUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: '#fff', background: 'rgba(255,255,255,0.05)', padding: '16px', borderRadius: '12px', display: 'flex', alignItems: 'center', gap: '12px', border: '1px solid rgba(255,255,255,0.1)' }}>
+                                        <i className="fab fa-linkedin" style={{ fontSize: '1.5rem' }}></i>
+                                        <span>LinkedIn</span>
+                                    </a>
+                                )}
+                                {profileUser.twitterUrl && (
+                                    <a href={profileUser.twitterUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: '#fff', background: 'rgba(255,255,255,0.05)', padding: '16px', borderRadius: '12px', display: 'flex', alignItems: 'center', gap: '12px', border: '1px solid rgba(255,255,255,0.1)' }}>
+                                        <i className="fab fa-twitter" style={{ fontSize: '1.5rem' }}></i>
+                                        <span>Twitter / X</span>
+                                    </a>
+                                )}
+                                {profileUser.instagramUrl && (
+                                    <a href={profileUser.instagramUrl} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: '#fff', background: 'rgba(255,255,255,0.05)', padding: '16px', borderRadius: '12px', display: 'flex', alignItems: 'center', gap: '12px', border: '1px solid rgba(255,255,255,0.1)' }}>
+                                        <i className="fab fa-instagram" style={{ fontSize: '1.5rem' }}></i>
+                                        <span>Instagram</span>
+                                    </a>
+                                )}
+                                {!profileUser.githubUrl && !profileUser.linkedinUrl && !profileUser.twitterUrl && !profileUser.instagramUrl && (
+                                    <p style={{ color: '#666', fontStyle: 'italic' }}>No social links shared yet.</p>
+                                )}
+                            </div>
                         </div>
-
-                        <h3 style={{ fontSize: '1.2rem', fontWeight: 600, margin: '20px 0 15px', color: '#04AA6D' }}>Social Accounts</h3>
-
-                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
-                            <div>
-                                <label style={labelStyle}>GitHub URL</label>
-                                <input
-                                    type="text"
-                                    name="githubUrl"
-                                    value={formData.githubUrl}
-                                    onChange={handleChange}
-                                    style={inputStyle}
-                                    placeholder="https://github.com/username"
-                                />
-                            </div>
-                            <div>
-                                <label style={labelStyle}>LinkedIn URL</label>
-                                <input
-                                    type="text"
-                                    name="linkedinUrl"
-                                    value={formData.linkedinUrl}
-                                    onChange={handleChange}
-                                    style={inputStyle}
-                                    placeholder="https://linkedin.com/in/username"
-                                />
-                            </div>
-                        </div>
-
-                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
-                            <div>
-                                <label style={labelStyle}>Twitter / X URL</label>
-                                <input
-                                    type="text"
-                                    name="twitterUrl"
-                                    value={formData.twitterUrl}
-                                    onChange={handleChange}
-                                    style={inputStyle}
-                                    placeholder="https://x.com/username"
-                                />
-                            </div>
-                            <div>
-                                <label style={labelStyle}>Instagram URL</label>
-                                <input
-                                    type="text"
-                                    name="instagramUrl"
-                                    value={formData.instagramUrl}
-                                    onChange={handleChange}
-                                    style={inputStyle}
-                                    placeholder="https://instagram.com/username"
-                                />
-                            </div>
-                        </div>
-
-                        <button
-                            type="submit"
-                            disabled={loading}
-                            style={{
-                                background: '#04AA6D',
-                                color: '#fff',
-                                border: 'none',
-                                padding: '14px 32px',
-                                borderRadius: '12px',
-                                fontWeight: 700,
-                                fontSize: '1rem',
-                                cursor: loading ? 'not-allowed' : 'pointer',
-                                transition: 'all 0.2s',
-                                marginTop: '10px',
-                                boxShadow: '0 4px 14px 0 rgba(4, 170, 109, 0.39)'
-                            }}
-                        >
-                            {loading ? 'Saving Changes...' : 'Save Changes'}
-                        </button>
-                    </form>
+                    )}
                 </motion.div>
             </div>
 

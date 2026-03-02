@@ -303,11 +303,11 @@ router.post('/refresh', async (req, res) => {
     }
 });
 
-// Get current user
-router.get('/me', authenticate, async (req, res) => {
+// Get user profile by ID (public)
+router.get('/user/:id', async (req, res) => {
     try {
-        const user = await User.findByPk(req.user.id, {
-            attributes: ['id', 'name', 'username', 'email', 'role', 'xp', 'level', 'avatarUrl', 'githubUrl', 'linkedinUrl', 'twitterUrl', 'instagramUrl', 'langPreference'],
+        const user = await User.findByPk(req.params.id, {
+            attributes: ['id', 'name', 'username', 'role', 'xp', 'level', 'avatarUrl', 'githubUrl', 'linkedinUrl', 'twitterUrl', 'instagramUrl'],
         });
 
         if (!user) {
@@ -316,10 +316,12 @@ router.get('/me', authenticate, async (req, res) => {
 
         res.json({ user });
     } catch (err) {
-        console.error('Get user error:', err);
+        console.error('Get public user error:', err);
         res.status(500).json({ message: 'Server error' });
     }
 });
+
+// Get current user
 
 // Update profile
 router.put('/profile', authenticate, async (req, res) => {

@@ -36,7 +36,7 @@ function App() {
 
               <Route path="/challenges" element={<ChallengesPage />} />
               <Route path="/leaderboard" element={<LeaderboardPage />} />
-              <Route path="/profile" element={<ProfilePage />} />
+              <Route path="/profile/:id?" element={<ProfilePage />} />
               <Route path="/partners" element={<PartnersPage />} />
             </Route>
 
