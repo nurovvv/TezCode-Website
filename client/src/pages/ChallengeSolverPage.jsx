@@ -124,6 +124,7 @@ export default function ChallengeSolverPage() {
     const handleRun = useCallback(async () => {
         if (!challenge) return;
         setRunning(true);
+        setResults(null);
         setConsoleOpen(true);
         setConsoleTab('result');
 
@@ -572,8 +573,8 @@ export default function ChallengeSolverPage() {
                                     </div>
                                 ) : (
                                     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                                        <div style={{ fontSize: '18px', fontWeight: '700', color: results?.passed ? '#00af9b' : '#ff2d55' }}>
-                                            {results?.passed ? 'Accepted' : 'Wrong Answer'}
+                                        <div style={{ fontSize: '18px', fontWeight: '700', color: running ? '#8a8a8a' : (results?.passed ? '#00af9b' : '#ff2d55') }}>
+                                            {running ? 'Evaluating...' : (results?.passed ? 'Accepted' : 'Wrong Answer')}
                                         </div>
                                         {results?.error && <div style={{ color: '#ff2d55' }}>{results.error}</div>}
                                         {results?.results?.map((res, idx) => (
