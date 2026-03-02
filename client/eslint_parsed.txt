@@ -1,0 +1,142 @@
+C:\Users\nurov\Desktop\TezCode\client\src\App.jsx
+  Line 124: Parsing error: Expected corresponding JSX closing tag for <div>
+C:\Users\nurov\Desktop\TezCode\client\src\components\layout\Navbar.jsx
+  Line 11: 'mobileOpen' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u.
+  Line 11: 'setMobileOpen' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u.
+C:\Users\nurov\Desktop\TezCode\client\src\components\ui\Button.jsx
+  Line 1: 'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u.
+C:\Users\nurov\Desktop\TezCode\client\src\components\ui\Card.jsx
+  Line 1: 'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u.
+C:\Users\nurov\Desktop\TezCode\client\src\components\ui\Toast.jsx
+  Line 2: 'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u.
+C:\Users\nurov\Desktop\TezCode\client\src\context\AuthContext.jsx
+  Line 24: 'err' is defined but never used.
+  Line 96: Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components.
+C:\Users\nurov\Desktop\TezCode\client\src\context\LanguageContext.jsx
+  Line 47: Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components.
+C:\Users\nurov\Desktop\TezCode\client\src\pages\CatalogPage.jsx
+  Line 2: 'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u.
+C:\Users\nurov\Desktop\TezCode\client\src\pages\ChallengeSolverPage.jsx
+  Line 3: 'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u.
+  Line 60: 'err' is defined but never used.
+  Line 95: 'submitted' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u.
+C:\Users\nurov\Desktop\TezCode\client\src\pages\ChallengesPage.jsx
+  Line 3: 'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u.
+C:\Users\nurov\Desktop\TezCode\client\src\pages\CourseReaderPage.jsx
+  Line 3: 'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u.
+  Line 1164: Unnecessary escape character: \'.
+  Line 1185: Unnecessary escape character: \'.
+  Line 4463: Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  4461 |
+  4462 |     useEffect(() => {
+> 4463 |         setPyReady(true); // shared runner handles loading
+       |         ^^^^^^^^^^ Avoid calling setState() directly within an effect
+  4464 |     }, []);
+  4465 |
+  4466 |     const handleRun = useCallback(async () => {
+  Line 4585: Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  4583 |
+  4584 |     useEffect(() => {
+> 4585 |         setChecks(new Array(section.instructions.length).fill(false));
+       |         ^^^^^^^^^ Avoid calling setState() directly within an effect
+  4586 |     }, [section.instructions.length]);
+  4587 |
+  4588 |     const handleRun = useCallback(async () => {
+  Line 4588: Compilation Skipped: Existing memoization could not be preserved
+
+React Compiler has skipped optimizing this component because the existing manual memoization could not be preserved. The inferred dependencies did not match the manually specified dependencies, which could cause the value to change more or less frequently than expected. The inferred dependency was `section`, but the source dependencies were [code, section.instructions]. Inferred less specific property than source.
+
+  4586 |     }, [section.instructions.length]);
+  4587 |
+> 4588 |     const handleRun = useCallback(async () => {
+       |                                   ^^^^^^^^^^^^^
+> 4589 |         console.log('Running code challenge...');
+       | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 4590 |         setRunning(true); setOutput('');
+       …
+       | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 4617 |         setRunning(false);
+       | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 4618 |     }, [code, section.instructions]);
+       | ^^^^^^ Could not preserve existing manual memoization
+  4619 |
+  4620 |     return (
+  4621 |         <div style={{ margin: '24px 0 40px' }}>
+  Line 4588: Compilation Skipped: Existing memoization could not be preserved
+
+React Compiler has skipped optimizing this component because the existing manual memoization could not be preserved. The inferred dependencies did not match the manually specified dependencies, which could cause the value to change more or less frequently than expected. The inferred dependency was `checks`, but the source dependencies were [code, section.instructions]. Inferred different dependency than source.
+
+  4586 |     }, [section.instructions.length]);
+  4587 |
+> 4588 |     const handleRun = useCallback(async () => {
+       |                                   ^^^^^^^^^^^^^
+> 4589 |         console.log('Running code challenge...');
+       | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 4590 |         setRunning(true); setOutput('');
+       …
+       | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 4617 |         setRunning(false);
+       | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 4618 |     }, [code, section.instructions]);
+       | ^^^^^^ Could not preserve existing manual memoization
+  4619 |
+  4620 |     return (
+  4621 |         <div style={{ margin: '24px 0 40px' }}>
+  Line 4588: Compilation Skipped: Existing memoization could not be preserved
+
+React Compiler has skipped optimizing this component because the existing manual memoization could not be preserved. The inferred dependencies did not match the manually specified dependencies, which could cause the value to change more or less frequently than expected. The inferred dependency was `hasRuntimeError`, but the source dependencies were [code, section.instructions]. Inferred different dependency than source.
+
+  4586 |     }, [section.instructions.length]);
+  4587 |
+> 4588 |     const handleRun = useCallback(async () => {
+       |                                   ^^^^^^^^^^^^^
+> 4589 |         console.log('Running code challenge...');
+       | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 4590 |         setRunning(true); setOutput('');
+       …
+       | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 4617 |         setRunning(false);
+       | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 4618 |     }, [code, section.instructions]);
+       | ^^^^^^ Could not preserve existing manual memoization
+  4619 |
+  4620 |     return (
+  4621 |         <div style={{ margin: '24px 0 40px' }}>
+  Line 4737: 'isErrorCheck' is defined but never used.
+C:\Users\nurov\Desktop\TezCode\client\src\pages\LandingPage.jsx
+  Line 2: 'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u.
+C:\Users\nurov\Desktop\TezCode\client\src\pages\LeaderboardPage.jsx
+  Line 2: 'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u.
+C:\Users\nurov\Desktop\TezCode\client\src\pages\LoginPage.jsx
+  Line 9: 't' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u.
+C:\Users\nurov\Desktop\TezCode\client\src\pages\PartnersPage.jsx
+  Line 1: 'useLanguage' is defined but never used. Allowed unused vars must match /^[A-Z_]/u.
+  Line 2: 'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u.
+C:\Users\nurov\Desktop\TezCode\client\src\pages\ProfilePage.jsx
+  Line 2: 'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u.
+  Line 96: 'err' is defined but never used.
+  Line 110: 'err' is defined but never used.
+  Line 144: 'err' is defined but never used.
+  Line 189: 'contributionLabelStyle' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u.
+C:\Users\nurov\Desktop\TezCode\client\src\pages\RegisterPage.jsx
+  Line 9: 't' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u.
+  Line 203: 'loginWithGoogle' is not defined.
+  Line 205: 'err' is defined but never used.
+C:\Users\nurov\Desktop\TezCode\client\src\pages\TeacherDashboard.jsx
+  Line 35: 't' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u.
+C:\Users\nurov\Desktop\TezCode\client\src\services\codeRunner.js
+  Line 96: 'originalLog' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u.

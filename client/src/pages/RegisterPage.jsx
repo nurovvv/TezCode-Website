@@ -7,7 +7,7 @@ import tezcodeLogo from '../assets/tezcode-logo.png';
 
 export default function RegisterPage() {
     const { t } = useLanguage();
-    const { register } = useAuth();
+    const { register, loginWithGoogle } = useAuth();
     const navigate = useNavigate();
     const [name, setName] = useState('');
     const [username, setUsername] = useState('');

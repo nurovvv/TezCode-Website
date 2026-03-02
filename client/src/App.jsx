@@ -93,34 +93,33 @@ function CourseReaderWrapper() {
             </a>
 
             <div className="hidden md:flex" style={{ gap: '20px', fontSize: '15px', fontWeight: '500' }}>
-              <div className="hidden md:flex" style={{ gap: '20px', fontSize: '15px', fontWeight: '500' }}>
-                <Link to="/catalog" style={{ color: 'white', textDecoration: 'none' }}>Catalog</Link>
-                <Link to="/challenges" style={{ color: 'white', textDecoration: 'none' }}>Challenges</Link>
-                <Link to="/leaderboard" style={{ color: 'white', textDecoration: 'none' }}>Leaderboard</Link>
-              </div>
+              <Link to="/catalog" style={{ color: 'white', textDecoration: 'none' }}>Catalog</Link>
+              <Link to="/challenges" style={{ color: 'white', textDecoration: 'none' }}>Challenges</Link>
+              <Link to="/leaderboard" style={{ color: 'white', textDecoration: 'none' }}>Leaderboard</Link>
             </div>
+          </div>
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-              {user ? (
-                <>
-                  <Link to="/dashboard" style={{ color: 'white', textDecoration: 'none', fontSize: '14px', fontWeight: '500' }}>Dashboard</Link>
-                  <Link to="/profile" style={{ color: 'white', textDecoration: 'none', fontSize: '14px', fontWeight: '500' }}>Profile</Link>
-                </>
-              ) : (
-                <>
-                  <Link to="/login" style={{ color: 'white', textDecoration: 'none', fontSize: '14px', fontWeight: '500' }}>Log in</Link>
-                  <Link to="/register" style={{
-                    backgroundColor: '#04AA6D',
-                    color: 'white',
-                    padding: '6px 20px',
-                    borderRadius: '25px',
-                    textDecoration: 'none',
-                    fontSize: '14px',
-                    fontWeight: '600'
-                  }}>Register</Link>
-                </>
-              )}
-            </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+            {user ? (
+              <>
+                <Link to="/dashboard" style={{ color: 'white', textDecoration: 'none', fontSize: '14px', fontWeight: '500' }}>Dashboard</Link>
+                <Link to="/profile" style={{ color: 'white', textDecoration: 'none', fontSize: '14px', fontWeight: '500' }}>Profile</Link>
+              </>
+            ) : (
+              <>
+                <Link to="/login" style={{ color: 'white', textDecoration: 'none', fontSize: '14px', fontWeight: '500' }}>Log in</Link>
+                <Link to="/register" style={{
+                  backgroundColor: '#04AA6D',
+                  color: 'white',
+                  padding: '6px 20px',
+                  borderRadius: '25px',
+                  textDecoration: 'none',
+                  fontSize: '14px',
+                  fontWeight: '600'
+                }}>Register</Link>
+              </>
+            )}
+          </div>
         </header>
       </div>
       <CourseReaderPage />
