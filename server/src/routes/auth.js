@@ -326,12 +326,15 @@ router.get('/user/:id', async (req, res) => {
 
         // Fetch contribution data (successful submissions per day)
         const contributions = await ChallengeSubmission.findAll({
-            where: { user_id: user.id },
+            where: {
+                user_id: user.id,
+                status: 'passed'
+            },
             attributes: [
-                [sequelize.fn('DATE', sequelize.col('created_at')), 'date'],
+                [sequelize.fn('DATE', sequelize.col('completed_at')), 'date'],
                 [sequelize.fn('COUNT', sequelize.col('id')), 'count']
             ],
-            group: [sequelize.fn('DATE', sequelize.col('created_at'))],
+            group: [sequelize.fn('DATE', sequelize.col('completed_at'))],
             raw: true
         });
 

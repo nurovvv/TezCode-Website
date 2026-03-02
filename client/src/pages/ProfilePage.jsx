@@ -185,23 +185,21 @@ export default function ProfilePage() {
     };
 
     const ContributionGraph = ({ data }) => {
-        // Simple logic to generate the last 365 days or 12 months
         const today = new Date();
         const yearAgo = new Date();
         yearAgo.setFullYear(today.getFullYear() - 1);
 
-        // Map data to a fast-lookup object
+        // Map data to a fast-lookup object using YYYY-MM-DD
         const counts = {};
         data.forEach(d => {
-            const dateStr = new Date(d.date).toDateString();
-            counts[dateStr] = (counts[dateStr] || 0) + parseInt(d.count);
+            // Backend DATE() returns YYYY-MM-DD
+            counts[d.date] = (counts[d.date] || 0) + parseInt(d.count);
         });
 
         // Generate days
         const days = [];
         let curr = new Date(yearAgo);
-        // Align to start of week (Sunday)
-        curr.setDate(curr.getDate() - curr.getDay());
+        curr.setDate(curr.getDate() - curr.getDay()); // Align to Sunday
 
         while (curr <= today) {
             days.push(new Date(curr));
@@ -216,37 +214,68 @@ export default function ProfilePage() {
             return '#39d353';
         };
 
+        const formatDate = (date) => {
+            const y = date.getFullYear();
+            const m = String(date.getMonth() + 1).padStart(2, '0');
+            const d = String(date.getDate()).padStart(2, '0');
+            return `${y}-${m}-${d}`;
+        };
+
+        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
         return (
-            <div style={{ background: '#0d1117', border: '1px solid #30363d', borderRadius: '6px', padding: '20px', overflowX: 'auto' }}>
-                <div style={{ fontSize: '1rem', marginBottom: '15px' }}>
-                    <strong>{data.reduce((sum, d) => sum + parseInt(d.count), 0)} contributions</strong> in the last year
+            <div style={{ background: '#0d1117', border: '1px solid #30363d', borderRadius: '6px', padding: '24px', color: '#c9d1d9' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px' }}>
+                    <div style={{ fontSize: '1rem' }}>
+                        <strong>{data.reduce((sum, d) => sum + parseInt(d.count), 0)} contributions</strong> in the last year
+                    </div>
+                    <div style={{ fontSize: '0.8rem', color: '#8b949e', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                        Contribution settings <i className="fas fa-caret-down"></i>
+                    </div>
                 </div>
-                <div style={{ display: 'grid', gridAutoFlow: 'column', gridTemplateRows: 'repeat(7, 10px)', gap: '4px' }}>
-                    {days.map((day, i) => {
-                        const count = counts[day.toDateString()] || 0;
-                        return (
-                            <div
-                                key={i}
-                                title={`${day.toDateString()}: ${count} contributions`}
-                                style={{
-                                    width: '10px',
-                                    height: '10px',
-                                    borderRadius: '2px',
-                                    background: getColor(count)
-                                }}
-                            />
-                        );
-                    })}
+
+                <div style={{ display: 'flex', gap: '10px' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '20px 0 10px', fontSize: '0.75rem', color: '#8b949e' }}>
+                        <span>Mon</span>
+                        <span>Wed</span>
+                        <span>Fri</span>
+                    </div>
+
+                    <div style={{ flex: 1 }}>
+                        <div style={{ display: 'flex', fontSize: '0.75rem', color: '#8b949e', marginBottom: '8px', justifyContent: 'space-between' }}>
+                            {months.map(m => <span key={m}>{m}</span>)}
+                        </div>
+                        <div style={{ display: 'grid', gridAutoFlow: 'column', gridTemplateRows: 'repeat(7, 10px)', gap: '4px', overflowX: 'auto' }}>
+                            {days.map((day, i) => {
+                                const dateKey = formatDate(day);
+                                const count = counts[dateKey] || 0;
+                                return (
+                                    <div
+                                        key={i}
+                                        title={`${day.toDateString()}: ${count} contributions`}
+                                        style={{
+                                            width: '10px',
+                                            height: '10px',
+                                            borderRadius: '2px',
+                                            background: getColor(count),
+                                            border: '1px solid rgba(27,31,35,0.06)'
+                                        }}
+                                    />
+                                );
+                            })}
+                        </div>
+                    </div>
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '10px', fontSize: '0.75rem', color: '#8b949e' }}>
-                    <div>Learn how we count contributions</div>
+
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '15px', fontSize: '0.75rem', color: '#8b949e' }}>
+                    <div style={{ cursor: 'pointer' }}>Learn how we count contributions</div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
                         <span>Less</span>
-                        <div style={{ width: '10px', height: '10px', background: '#161b22', borderRadius: '2px' }}></div>
-                        <div style={{ width: '10px', height: '10px', background: '#0e4429', borderRadius: '2px' }}></div>
-                        <div style={{ width: '10px', height: '10px', background: '#006d32', borderRadius: '2px' }}></div>
-                        <div style={{ width: '10px', height: '10px', background: '#26a641', borderRadius: '2px' }}></div>
-                        <div style={{ width: '10px', height: '10px', background: '#39d353', borderRadius: '2px' }}></div>
+                        <div style={{ width: '10px', height: '10px', background: '#161b22', borderRadius: '2px', border: '1px solid rgba(27,31,35,0.06)' }}></div>
+                        <div style={{ width: '10px', height: '10px', background: '#0e4429', borderRadius: '2px', border: '1px solid rgba(27,31,35,0.06)' }}></div>
+                        <div style={{ width: '10px', height: '10px', background: '#006d32', borderRadius: '2px', border: '1px solid rgba(27,31,35,0.06)' }}></div>
+                        <div style={{ width: '10px', height: '10px', background: '#26a641', borderRadius: '2px', border: '1px solid rgba(27,31,35,0.06)' }}></div>
+                        <div style={{ width: '10px', height: '10px', background: '#39d353', borderRadius: '2px', border: '1px solid rgba(27,31,35,0.06)' }}></div>
                         <span>More</span>
                     </div>
                 </div>
