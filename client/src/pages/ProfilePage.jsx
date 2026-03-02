@@ -19,7 +19,8 @@ export default function ProfilePage() {
         githubUrl: '',
         linkedinUrl: '',
         twitterUrl: '',
-        instagramUrl: ''
+        instagramUrl: '',
+        bio: ''
     });
 
     const fileInputRef = useRef(null);
@@ -48,7 +49,8 @@ export default function ProfilePage() {
                         githubUrl: latestUser.githubUrl || '',
                         linkedinUrl: latestUser.linkedinUrl || '',
                         twitterUrl: latestUser.twitterUrl || '',
-                        instagramUrl: latestUser.instagramUrl || ''
+                        instagramUrl: latestUser.instagramUrl || '',
+                        bio: latestUser.bio || ''
                     });
                 } else {
                     console.log(`[ProfilePage] Viewing public profile for ID: ${id}`);
@@ -469,6 +471,21 @@ export default function ProfilePage() {
                         </div>
                     </div>
 
+                    {profileUser?.bio && !isOwnProfile && (
+                        <div style={{
+                            marginBottom: '30px',
+                            padding: '20px',
+                            background: 'rgba(255,255,255,0.02)',
+                            borderRadius: '16px',
+                            border: '1px solid rgba(255,255,255,0.05)',
+                            lineHeight: '1.6',
+                            color: '#ccc',
+                            fontSize: '1rem'
+                        }}>
+                            {profileUser.bio}
+                        </div>
+                    )}
+
                     {isOwnProfile ? (
                         <form onSubmit={handleSubmit}>
                             {message.text && (
@@ -494,6 +511,17 @@ export default function ProfilePage() {
                                     style={inputStyle}
                                     placeholder="Enter your name"
                                     required
+                                />
+                            </div>
+
+                            <div style={{ marginTop: '20px' }}>
+                                <label style={labelStyle}>Bio</label>
+                                <textarea
+                                    name="bio"
+                                    value={formData.bio}
+                                    onChange={handleChange}
+                                    style={{ ...inputStyle, height: '100px', resize: 'vertical' }}
+                                    placeholder="Tell us about yourself..."
                                 />
                             </div>
 

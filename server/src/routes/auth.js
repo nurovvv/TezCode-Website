@@ -259,6 +259,8 @@ router.post('/login', async (req, res) => {
                 githubUrl: user.githubUrl,
                 linkedinUrl: user.linkedinUrl,
                 twitterUrl: user.twitterUrl,
+                instagramUrl: user.instagramUrl,
+                bio: user.bio,
                 xp: user.xp,
                 level: user.level,
             },
@@ -310,7 +312,7 @@ router.get('/user/:id', async (req, res) => {
         console.log(`[API] Fetching public profile for ID: ${req.params.id}`);
 
         const user = await User.findByPk(req.params.id, {
-            attributes: ['id', 'name', 'username', 'role', 'xp', 'level', 'avatarUrl', 'githubUrl', 'linkedinUrl', 'twitterUrl', 'instagramUrl'],
+            attributes: ['id', 'name', 'username', 'role', 'xp', 'level', 'avatarUrl', 'githubUrl', 'linkedinUrl', 'twitterUrl', 'instagramUrl', 'bio'],
             include: [
                 {
                     model: Enrollment,
@@ -356,7 +358,7 @@ router.get('/me', authenticate, async (req, res) => {
     try {
         const { User, ChallengeSubmission, Enrollment, Course, sequelize } = require('../models');
         const user = await User.findByPk(req.user.id, {
-            attributes: ['id', 'name', 'username', 'email', 'role', 'xp', 'level', 'avatarUrl', 'githubUrl', 'linkedinUrl', 'twitterUrl', 'instagramUrl', 'langPreference'],
+            attributes: ['id', 'name', 'username', 'email', 'role', 'xp', 'level', 'avatarUrl', 'githubUrl', 'linkedinUrl', 'twitterUrl', 'instagramUrl', 'bio', 'langPreference'],
             include: [
                 {
                     model: Enrollment,
@@ -399,7 +401,7 @@ router.get('/me', authenticate, async (req, res) => {
 // Update profile
 router.put('/profile', authenticate, async (req, res) => {
     try {
-        const { name, avatarUrl, githubUrl, linkedinUrl, twitterUrl, instagramUrl } = req.body;
+        const { name, avatarUrl, githubUrl, linkedinUrl, twitterUrl, instagramUrl, bio } = req.body;
         const user = await User.findByPk(req.user.id);
 
         if (!user) {
@@ -412,6 +414,7 @@ router.put('/profile', authenticate, async (req, res) => {
         if (linkedinUrl !== undefined) user.linkedinUrl = linkedinUrl;
         if (twitterUrl !== undefined) user.twitterUrl = twitterUrl;
         if (instagramUrl !== undefined) user.instagramUrl = instagramUrl;
+        if (bio !== undefined) user.bio = bio;
 
         await user.save();
 
@@ -424,7 +427,8 @@ router.put('/profile', authenticate, async (req, res) => {
                 avatarUrl: user.avatarUrl,
                 githubUrl: user.githubUrl,
                 linkedinUrl: user.linkedinUrl,
-                twitterUrl: user.twitterUrl,
+                instagramUrl: user.instagramUrl,
+                bio: user.bio,
                 xp: user.xp,
                 level: user.level,
             }

@@ -57,6 +57,10 @@ const User = sequelize.define('User', {
         type: DataTypes.STRING,
         field: 'instagram_url',
     },
+    bio: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+    },
     xp: {
         type: DataTypes.INTEGER,
         defaultValue: 0,
