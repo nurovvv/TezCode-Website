@@ -204,29 +204,31 @@ export default function ProfilePage() {
             });
         }
 
-        // Generate days
+        // Generate days aligned to UTC Sunday
         const days = [];
-        let curr = new Date(yearAgo);
-        curr.setHours(0, 0, 0, 0);
-        curr.setDate(curr.getDate() - curr.getDay()); // Align to Sunday
+        let curr = new Date(Date.UTC(yearAgo.getUTCFullYear(), yearAgo.getUTCMonth(), yearAgo.getUTCDate()));
+        curr.setUTCDate(curr.getUTCDate() - curr.getUTCDay()); // Align to UTC Sunday
 
-        while (curr <= today) {
+        // Goal: Fill exactly 53 weeks (371 days) or until today
+        const end = new Date(Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate()));
+        while (curr <= end) {
             days.push(new Date(curr));
-            curr.setDate(curr.getDate() + 1);
+            curr.setUTCDate(curr.getUTCDate() + 1);
         }
 
         const getColor = (count) => {
             if (!count || count <= 0) return '#161b22';
-            if (count === 1) return '#0e4429';
-            if (count < 4) return '#006d32';
-            if (count < 8) return '#26a641';
-            return '#39d353';
+            // Per user request: 1 = light green, more = darker
+            if (count === 1) return '#9be9a8'; // Light Green
+            if (count < 4) return '#40c463';
+            if (count < 8) return '#30a14e';
+            return '#216e39'; // Darkest Green
         };
 
         const formatDate = (date) => {
-            const y = date.getFullYear();
-            const m = String(date.getMonth() + 1).padStart(2, '0');
-            const d = String(date.getDate()).padStart(2, '0');
+            const y = date.getUTCFullYear();
+            const m = String(date.getUTCMonth() + 1).padStart(2, '0');
+            const d = String(date.getUTCDate()).padStart(2, '0');
             return `${y}-${m}-${d}`;
         };
 
@@ -237,7 +239,7 @@ export default function ProfilePage() {
         let lastMonth = -1;
         days.forEach((day, i) => {
             if (i % 7 === 0) { // Only check start of weeks
-                const m = day.getMonth();
+                const m = day.getUTCMonth();
                 if (m !== lastMonth) {
                     monthPositions.push({ name: months[m], index: Math.floor(i / 7) });
                     lastMonth = m;
@@ -248,6 +250,8 @@ export default function ProfilePage() {
         const totalContributions = (data && Array.isArray(data))
             ? data.reduce((sum, d) => sum + parseInt(d.count), 0)
             : 0;
+
+        console.log('[ContributionGraph] Rendering with data:', data);
 
         return (
             <div style={{ background: '#0d1117', border: '1px solid #30363d', borderRadius: '6px', padding: '24px', color: '#c9d1d9', width: '100%', boxSizing: 'border-box', overflow: 'hidden' }}>
@@ -300,10 +304,10 @@ export default function ProfilePage() {
                     <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
                         <span>Less</span>
                         <div style={{ width: '10px', height: '10px', background: '#161b22', borderRadius: '2px', border: '1px solid rgba(27,31,35,0.06)' }}></div>
-                        <div style={{ width: '10px', height: '10px', background: '#0e4429', borderRadius: '2px', border: '1px solid rgba(27,31,35,0.06)' }}></div>
-                        <div style={{ width: '10px', height: '10px', background: '#006d32', borderRadius: '2px', border: '1px solid rgba(27,31,35,0.06)' }}></div>
-                        <div style={{ width: '10px', height: '10px', background: '#26a641', borderRadius: '2px', border: '1px solid rgba(27,31,35,0.06)' }}></div>
-                        <div style={{ width: '10px', height: '10px', background: '#39d353', borderRadius: '2px', border: '1px solid rgba(27,31,35,0.06)' }}></div>
+                        <div style={{ width: '10px', height: '10px', background: '#9be9a8', borderRadius: '2px', border: '1px solid rgba(27,31,35,0.06)' }}></div>
+                        <div style={{ width: '10px', height: '10px', background: '#40c463', borderRadius: '2px', border: '1px solid rgba(27,31,35,0.06)' }}></div>
+                        <div style={{ width: '10px', height: '10px', background: '#30a14e', borderRadius: '2px', border: '1px solid rgba(27,31,35,0.06)' }}></div>
+                        <div style={{ width: '10px', height: '10px', background: '#216e39', borderRadius: '2px', border: '1px solid rgba(27,31,35,0.06)' }}></div>
                         <span>More</span>
                     </div>
                 </div>
