@@ -296,12 +296,9 @@ export default function ProfilePage() {
                     </div>
                 )}
 
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px', flexWrap: 'wrap', gap: '10px' }}>
+                <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', marginBottom: '15px' }}>
                     <div style={{ fontSize: '1rem' }}>
                         <strong>{totalContributions} {totalContributions === 1 ? 'challenge solved' : 'challenges solved'}</strong> in the last year
-                    </div>
-                    <div style={{ fontSize: '0.8rem', color: '#8b949e', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                        Contribution settings <i className="fas fa-caret-down"></i>
                     </div>
                 </div>
 
