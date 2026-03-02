@@ -69,7 +69,7 @@ api.interceptors.response.use(
             } catch {
                 localStorage.removeItem('tezcode-token');
                 localStorage.removeItem('tezcode-refresh');
-                window.location.href = '/login';
+                window.location.href = import.meta.env.BASE_URL + 'login';
             }
         }
 
