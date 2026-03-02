@@ -93,53 +93,34 @@ function CourseReaderWrapper() {
             </a>
 
             <div className="hidden md:flex" style={{ gap: '20px', fontSize: '15px', fontWeight: '500' }}>
-              <Link to="/catalog" style={{ color: 'white', textDecoration: 'none' }}>Tutorials</Link>
-              <Link to="/challenges" style={{ color: 'white', textDecoration: 'none' }}>Exercises</Link>
-              <Link to="/leaderboard" style={{ color: 'white', textDecoration: 'none' }}>Leaderboard</Link>
-              <Link to="#" style={{ color: 'white', textDecoration: 'none' }}>Certificates</Link>
+              <div className="hidden md:flex" style={{ gap: '20px', fontSize: '15px', fontWeight: '500' }}>
+                <Link to="/catalog" style={{ color: 'white', textDecoration: 'none' }}>Catalog</Link>
+                <Link to="/challenges" style={{ color: 'white', textDecoration: 'none' }}>Challenges</Link>
+                <Link to="/leaderboard" style={{ color: 'white', textDecoration: 'none' }}>Leaderboard</Link>
+              </div>
             </div>
-          </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-            <button style={{ background: 'none', border: 'none', color: 'white', cursor: 'pointer' }}>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-            </button>
-            <button style={{ background: 'none', border: 'none', color: 'white', cursor: 'pointer' }}>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-            </button>
-            {!user && (
-              <Link to="/login" style={{
-                backgroundColor: '#04AA6D',
-                color: 'white',
-                padding: '6px 20px',
-                borderRadius: '25px',
-                textDecoration: 'none',
-                fontSize: '14px',
-                fontWeight: '600'
-              }}>Log in</Link>
-            )}
-            {user && (
-              <Link to="/profile" style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                width: '32px',
-                height: '32px',
-                borderRadius: '50%',
-                backgroundColor: '#1E1E1E',
-                overflow: 'hidden',
-                textDecoration: 'none'
-              }}>
-                {user.avatarUrl ? (
-                  <img src={user.avatarUrl} alt={user.username} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                ) : (
-                  <span style={{ color: 'white', fontSize: '14px', fontWeight: '600' }}>
-                    {user.name ? user.name.charAt(0).toUpperCase() : 'U'}
-                  </span>
-                )}
-              </Link>
-            )}
-          </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+              {user ? (
+                <>
+                  <Link to="/dashboard" style={{ color: 'white', textDecoration: 'none', fontSize: '14px', fontWeight: '500' }}>Dashboard</Link>
+                  <Link to="/profile" style={{ color: 'white', textDecoration: 'none', fontSize: '14px', fontWeight: '500' }}>Profile</Link>
+                </>
+              ) : (
+                <>
+                  <Link to="/login" style={{ color: 'white', textDecoration: 'none', fontSize: '14px', fontWeight: '500' }}>Log in</Link>
+                  <Link to="/register" style={{
+                    backgroundColor: '#04AA6D',
+                    color: 'white',
+                    padding: '6px 20px',
+                    borderRadius: '25px',
+                    textDecoration: 'none',
+                    fontSize: '14px',
+                    fontWeight: '600'
+                  }}>Register</Link>
+                </>
+              )}
+            </div>
         </header>
       </div>
       <CourseReaderPage />
