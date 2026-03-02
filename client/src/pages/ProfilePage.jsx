@@ -32,23 +32,29 @@ export default function ProfilePage() {
             setLoading(true);
             try {
                 // Determine if we are viewing "me" or a specific ID
-                if (!id || (currentUser && id.toString() === currentUser.id.toString())) {
-                    console.log('[ProfilePage] Viewing own profile');
+                const currentUserId = currentUser?.id?.toString();
+                const requestedId = id?.toString();
+
+                if (!requestedId || (currentUserId && requestedId === currentUserId)) {
+                    console.log('[ProfilePage] Fetching latest "me" profile');
                     setIsOwnProfile(true);
-                    setProfileUser(currentUser);
-                    if (currentUser) {
-                        setFormData({
-                            name: currentUser.name || '',
-                            githubUrl: currentUser.githubUrl || '',
-                            linkedinUrl: currentUser.linkedinUrl || '',
-                            twitterUrl: currentUser.twitterUrl || '',
-                            instagramUrl: currentUser.instagramUrl || ''
-                        });
-                    }
+                    const res = await api.get('auth/me');
+                    const latestUser = res.data.user;
+                    console.log('[ProfilePage] Received me profile with contributions:', latestUser.contributions?.length);
+                    setProfileUser(latestUser);
+
+                    setFormData({
+                        name: latestUser.name || '',
+                        githubUrl: latestUser.githubUrl || '',
+                        linkedinUrl: latestUser.linkedinUrl || '',
+                        twitterUrl: latestUser.twitterUrl || '',
+                        instagramUrl: latestUser.instagramUrl || ''
+                    });
                 } else {
                     console.log(`[ProfilePage] Viewing public profile for ID: ${id}`);
                     setIsOwnProfile(false);
                     const res = await api.get(`auth/user/${id}`);
+                    console.log('[ProfilePage] Received public profile with contributions:', res.data.user.contributions?.length);
                     setProfileUser(res.data.user);
                 }
             } catch (err) {
@@ -60,7 +66,7 @@ export default function ProfilePage() {
         };
 
         fetchProfile();
-    }, [id, currentUser]);
+    }, [id]);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -191,14 +197,17 @@ export default function ProfilePage() {
 
         // Map data to a fast-lookup object using YYYY-MM-DD
         const counts = {};
-        data.forEach(d => {
-            // Backend DATE() returns YYYY-MM-DD
-            counts[d.date] = (counts[d.date] || 0) + parseInt(d.count);
-        });
+        if (data && Array.isArray(data)) {
+            data.forEach(d => {
+                // Backend DATE() returns YYYY-MM-DD
+                counts[d.date] = (counts[d.date] || 0) + parseInt(d.count);
+            });
+        }
 
         // Generate days
         const days = [];
         let curr = new Date(yearAgo);
+        curr.setHours(0, 0, 0, 0);
         curr.setDate(curr.getDate() - curr.getDay()); // Align to Sunday
 
         while (curr <= today) {
@@ -207,10 +216,10 @@ export default function ProfilePage() {
         }
 
         const getColor = (count) => {
-            if (!count) return '#161b22';
-            if (count < 2) return '#0e4429';
-            if (count < 5) return '#006d32';
-            if (count < 10) return '#26a641';
+            if (!count || count <= 0) return '#161b22';
+            if (count === 1) return '#0e4429';
+            if (count < 4) return '#006d32';
+            if (count < 8) return '#26a641';
             return '#39d353';
         };
 
@@ -223,11 +232,28 @@ export default function ProfilePage() {
 
         const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
+        // Calculate month positions
+        const monthPositions = [];
+        let lastMonth = -1;
+        days.forEach((day, i) => {
+            if (i % 7 === 0) { // Only check start of weeks
+                const m = day.getMonth();
+                if (m !== lastMonth) {
+                    monthPositions.push({ name: months[m], index: Math.floor(i / 7) });
+                    lastMonth = m;
+                }
+            }
+        });
+
+        const totalContributions = (data && Array.isArray(data))
+            ? data.reduce((sum, d) => sum + parseInt(d.count), 0)
+            : 0;
+
         return (
             <div style={{ background: '#0d1117', border: '1px solid #30363d', borderRadius: '6px', padding: '24px', color: '#c9d1d9', width: '100%', boxSizing: 'border-box', overflow: 'hidden' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px', flexWrap: 'wrap', gap: '10px' }}>
                     <div style={{ fontSize: '1rem' }}>
-                        <strong>{data.reduce((sum, d) => sum + parseInt(d.count), 0)} contributions</strong> in the last year
+                        <strong>{totalContributions} contributions</strong> in the last year
                     </div>
                     <div style={{ fontSize: '0.8rem', color: '#8b949e', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px' }}>
                         Contribution settings <i className="fas fa-caret-down"></i>
@@ -235,15 +261,17 @@ export default function ProfilePage() {
                 </div>
 
                 <div style={{ display: 'flex', gap: '10px', overflowX: 'auto', paddingBottom: '10px', scrollbarWidth: 'thin', scrollbarColor: '#30363d transparent' }}>
-                    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '28px 0 10px', fontSize: '0.75rem', color: '#8b949e', position: 'sticky', left: 0, background: '#0d1117', zIndex: 1, pr: '10px' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '34px 0 10px', fontSize: '0.75rem', color: '#8b949e', position: 'sticky', left: 0, background: '#0d1117', zIndex: 1, paddingRight: '10px' }}>
                         <span>Mon</span>
                         <span>Wed</span>
                         <span>Fri</span>
                     </div>
 
                     <div style={{ flex: 1, minWidth: 'max-content' }}>
-                        <div style={{ display: 'flex', fontSize: '0.75rem', color: '#8b949e', marginBottom: '8px', justifyContent: 'space-between', paddingLeft: '2px' }}>
-                            {months.map(m => <span key={m} style={{ minWidth: '35px' }}>{m}</span>)}
+                        <div style={{ position: 'relative', height: '20px', fontSize: '0.75rem', color: '#8b949e', marginBottom: '8px' }}>
+                            {monthPositions.map((m, idx) => (
+                                <span key={idx} style={{ position: 'absolute', left: `${m.index * 14}px` }}>{m.name}</span>
+                            ))}
                         </div>
                         <div style={{ display: 'grid', gridAutoFlow: 'column', gridTemplateRows: 'repeat(7, 10px)', gap: '4px' }}>
                             {days.map((day, i) => {

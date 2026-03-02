@@ -354,15 +354,42 @@ router.get('/user/:id', async (req, res) => {
 // Get current user
 router.get('/me', authenticate, async (req, res) => {
     try {
+        const { User, ChallengeSubmission, Enrollment, Course, sequelize } = require('../models');
         const user = await User.findByPk(req.user.id, {
             attributes: ['id', 'name', 'username', 'email', 'role', 'xp', 'level', 'avatarUrl', 'githubUrl', 'linkedinUrl', 'twitterUrl', 'instagramUrl', 'langPreference'],
+            include: [
+                {
+                    model: Enrollment,
+                    include: [{ model: Course, attributes: ['id', 'titleEn', 'titleRu', 'titleTj'] }]
+                }
+            ]
         });
 
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
 
-        res.json({ user });
+        // Fetch contribution data (successful submissions per day)
+        const contributions = await ChallengeSubmission.findAll({
+            where: {
+                user_id: user.id,
+                status: 'passed'
+            },
+            attributes: [
+                [sequelize.fn('DATE', sequelize.col('completed_at')), 'date'],
+                [sequelize.fn('COUNT', sequelize.col('id')), 'count']
+            ],
+            group: [sequelize.fn('DATE', sequelize.col('completed_at'))],
+            raw: true
+        });
+
+        res.json({
+            user: {
+                ...user.toJSON(),
+                contributions,
+                enrolledCourses: user.Enrollments?.map(e => e.Course) || []
+            }
+        });
     } catch (err) {
         console.error('Get user error:', err);
         res.status(500).json({ message: 'Server error' });
