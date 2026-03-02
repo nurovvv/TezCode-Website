@@ -427,6 +427,7 @@ router.put('/profile', authenticate, async (req, res) => {
                 avatarUrl: user.avatarUrl,
                 githubUrl: user.githubUrl,
                 linkedinUrl: user.linkedinUrl,
+                twitterUrl: user.twitterUrl,
                 instagramUrl: user.instagramUrl,
                 bio: user.bio,
                 xp: user.xp,
