@@ -265,11 +265,12 @@ export default function ProfilePage() {
 
         const handleMouseEnter = (e, count, date) => {
             const rect = e.target.closest('.contribution-container').getBoundingClientRect();
+            const text = count === 1 ? 'challenge solved' : 'challenges solved';
             setTooltip({
                 visible: true,
                 x: e.clientX - rect.left,
                 y: e.clientY - rect.top - 40,
-                content: `${count} contributions on ${getFullDateDisplay(date)}.`
+                content: `${count} ${text} on ${getFullDateDisplay(date)}.`
             });
         };
 
@@ -297,7 +298,7 @@ export default function ProfilePage() {
 
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px', flexWrap: 'wrap', gap: '10px' }}>
                     <div style={{ fontSize: '1rem' }}>
-                        <strong>{totalContributions} contributions</strong> in the last year
+                        <strong>{totalContributions} {totalContributions === 1 ? 'challenge solved' : 'challenges solved'}</strong> in the last year
                     </div>
                     <div style={{ fontSize: '0.8rem', color: '#8b949e', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px' }}>
                         Contribution settings <i className="fas fa-caret-down"></i>
@@ -343,7 +344,7 @@ export default function ProfilePage() {
                 </div>
 
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '15px', fontSize: '0.75rem', color: '#8b949e', flexWrap: 'wrap', gap: '10px' }}>
-                    <div style={{ cursor: 'pointer' }}>Learn how we count contributions</div>
+                    <div style={{ cursor: 'pointer' }}>Learn how we count solved challenges</div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
                         <span>Less</span>
                         <div style={{ width: '10px', height: '10px', background: '#161b22', borderRadius: '2px', border: '1px solid rgba(27,31,35,0.06)' }}></div>
