@@ -104,7 +104,9 @@ async function start() {
         // Import models to connect & sync
         const { sequelize, Challenge, Course } = require('./models');
         await sequelize.authenticate();
-        await sequelize.sync(); // Creates tables if they don't exist
+
+        // Auto-migrate schema (adds missing columns like 'bio')
+        await sequelize.sync({ alter: true });
         console.log(`✅ ${sequelize.getDialect().toUpperCase()} database connected & synced`);
 
         // Automated production seeding
