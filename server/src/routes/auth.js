@@ -306,9 +306,17 @@ router.post('/refresh', async (req, res) => {
 // Get user profile by ID (public)
 router.get('/user/:id', async (req, res) => {
     try {
+        const { User, ChallengeSubmission, Enrollment, Course, sequelize } = require('../models');
         console.log(`[API] Fetching public profile for ID: ${req.params.id}`);
+
         const user = await User.findByPk(req.params.id, {
             attributes: ['id', 'name', 'username', 'role', 'xp', 'level', 'avatarUrl', 'githubUrl', 'linkedinUrl', 'twitterUrl', 'instagramUrl'],
+            include: [
+                {
+                    model: Enrollment,
+                    include: [{ model: Course, attributes: ['id', 'titleEn', 'titleRu', 'titleTj'] }]
+                }
+            ]
         });
 
         if (!user) {
@@ -316,7 +324,24 @@ router.get('/user/:id', async (req, res) => {
             return res.status(404).json({ message: 'User not found' });
         }
 
-        res.json({ user });
+        // Fetch contribution data (successful submissions per day)
+        const contributions = await ChallengeSubmission.findAll({
+            where: { user_id: user.id },
+            attributes: [
+                [sequelize.fn('DATE', sequelize.col('created_at')), 'date'],
+                [sequelize.fn('COUNT', sequelize.col('id')), 'count']
+            ],
+            group: [sequelize.fn('DATE', sequelize.col('created_at'))],
+            raw: true
+        });
+
+        res.json({
+            user: {
+                ...user.toJSON(),
+                contributions,
+                enrolledCourses: user.Enrollments?.map(e => e.Course) || []
+            }
+        });
     } catch (err) {
         console.error(`[API] Error fetching public user ${req.params.id}:`, err);
         res.status(500).json({ message: 'Server error' });

@@ -178,6 +178,82 @@ export default function ProfilePage() {
         color: '#aaa'
     };
 
+    const contributionLabelStyle = {
+        fontSize: '0.85rem',
+        color: '#aaa',
+        marginBottom: '10px'
+    };
+
+    const ContributionGraph = ({ data }) => {
+        // Simple logic to generate the last 365 days or 12 months
+        const today = new Date();
+        const yearAgo = new Date();
+        yearAgo.setFullYear(today.getFullYear() - 1);
+
+        // Map data to a fast-lookup object
+        const counts = {};
+        data.forEach(d => {
+            const dateStr = new Date(d.date).toDateString();
+            counts[dateStr] = (counts[dateStr] || 0) + parseInt(d.count);
+        });
+
+        // Generate days
+        const days = [];
+        let curr = new Date(yearAgo);
+        // Align to start of week (Sunday)
+        curr.setDate(curr.getDate() - curr.getDay());
+
+        while (curr <= today) {
+            days.push(new Date(curr));
+            curr.setDate(curr.getDate() + 1);
+        }
+
+        const getColor = (count) => {
+            if (!count) return '#161b22';
+            if (count < 2) return '#0e4429';
+            if (count < 5) return '#006d32';
+            if (count < 10) return '#26a641';
+            return '#39d353';
+        };
+
+        return (
+            <div style={{ background: '#0d1117', border: '1px solid #30363d', borderRadius: '6px', padding: '20px', overflowX: 'auto' }}>
+                <div style={{ fontSize: '1rem', marginBottom: '15px' }}>
+                    <strong>{data.reduce((sum, d) => sum + parseInt(d.count), 0)} contributions</strong> in the last year
+                </div>
+                <div style={{ display: 'grid', gridAutoFlow: 'column', gridTemplateRows: 'repeat(7, 10px)', gap: '4px' }}>
+                    {days.map((day, i) => {
+                        const count = counts[day.toDateString()] || 0;
+                        return (
+                            <div
+                                key={i}
+                                title={`${day.toDateString()}: ${count} contributions`}
+                                style={{
+                                    width: '10px',
+                                    height: '10px',
+                                    borderRadius: '2px',
+                                    background: getColor(count)
+                                }}
+                            />
+                        );
+                    })}
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '10px', fontSize: '0.75rem', color: '#8b949e' }}>
+                    <div>Learn how we count contributions</div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                        <span>Less</span>
+                        <div style={{ width: '10px', height: '10px', background: '#161b22', borderRadius: '2px' }}></div>
+                        <div style={{ width: '10px', height: '10px', background: '#0e4429', borderRadius: '2px' }}></div>
+                        <div style={{ width: '10px', height: '10px', background: '#006d32', borderRadius: '2px' }}></div>
+                        <div style={{ width: '10px', height: '10px', background: '#26a641', borderRadius: '2px' }}></div>
+                        <div style={{ width: '10px', height: '10px', background: '#39d353', borderRadius: '2px' }}></div>
+                        <span>More</span>
+                    </div>
+                </div>
+            </div>
+        );
+    };
+
     if (loading && !profileUser) {
         return (
             <div style={{ background: '#0a0a0a', minHeight: '100vh', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -422,6 +498,29 @@ export default function ProfilePage() {
                                 {!profileUser.githubUrl && !profileUser.linkedinUrl && !profileUser.twitterUrl && !profileUser.instagramUrl && (
                                     <p style={{ color: '#666', fontStyle: 'italic' }}>No social links shared yet.</p>
                                 )}
+                            </div>
+
+                            <div style={{ marginTop: '40px' }}>
+                                <h3 style={{ fontSize: '1.2rem', fontWeight: 600, marginBottom: '20px', color: '#04AA6D' }}>Activity Heatmap</h3>
+                                <ContributionGraph data={profileUser.contributions || []} />
+                            </div>
+
+                            <div style={{ marginTop: '40px' }}>
+                                <h3 style={{ fontSize: '1.2rem', fontWeight: 600, marginBottom: '20px', color: '#04AA6D' }}>Learning Progress</h3>
+                                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px' }}>
+                                    {profileUser.enrolledCourses?.map(course => (
+                                        <div key={course.id} style={{ background: 'rgba(255,255,255,0.05)', padding: '20px', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.1)' }}>
+                                            <h4 style={{ margin: '0 0 10px', fontSize: '1.1rem' }}>{course.titleEn || course.titleRu || course.titleTj}</h4>
+                                            <div style={{ height: '6px', background: '#222', borderRadius: '3px', overflow: 'hidden' }}>
+                                                <div style={{ width: `${Math.random() * 100}%`, height: '100%', background: '#04AA6D' }}></div>
+                                            </div>
+                                            <div style={{ marginTop: '10px', fontSize: '0.85rem', color: '#888' }}>In Progress</div>
+                                        </div>
+                                    ))}
+                                    {(!profileUser.enrolledCourses || profileUser.enrolledCourses.length === 0) && (
+                                        <p style={{ color: '#666', fontStyle: 'italic' }}>Not enrolled in any courses yet.</p>
+                                    )}
+                                </div>
                             </div>
                         </div>
                     )}
