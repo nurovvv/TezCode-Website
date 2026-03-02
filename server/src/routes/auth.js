@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const config = require('../config/env');
-const { User, RefreshToken } = require('../models');
+const { User, RefreshToken, ChallengeSubmission, Enrollment, Course, sequelize } = require('../models');
 const { authenticate } = require('../middleware/auth');
 const { OAuth2Client } = require('google-auth-library');
 const client = new OAuth2Client(config.google.clientId);
@@ -308,7 +308,6 @@ router.post('/refresh', async (req, res) => {
 // Get user profile by ID (public)
 router.get('/user/:id', async (req, res) => {
     try {
-        const { User, ChallengeSubmission, Enrollment, Course, sequelize } = require('../models');
         console.log(`[API] Fetching public profile for ID: ${req.params.id}`);
 
         const user = await User.findByPk(req.params.id, {
@@ -356,7 +355,6 @@ router.get('/user/:id', async (req, res) => {
 // Get current user
 router.get('/me', authenticate, async (req, res) => {
     try {
-        const { User, ChallengeSubmission, Enrollment, Course, sequelize } = require('../models');
         const user = await User.findByPk(req.user.id, {
             attributes: ['id', 'name', 'username', 'email', 'role', 'xp', 'level', 'avatarUrl', 'githubUrl', 'linkedinUrl', 'twitterUrl', 'instagramUrl', 'bio', 'langPreference'],
             include: [
