@@ -306,8 +306,28 @@ router.post('/refresh', async (req, res) => {
 // Get user profile by ID (public)
 router.get('/user/:id', async (req, res) => {
     try {
+        console.log(`[API] Fetching public profile for ID: ${req.params.id}`);
         const user = await User.findByPk(req.params.id, {
             attributes: ['id', 'name', 'username', 'role', 'xp', 'level', 'avatarUrl', 'githubUrl', 'linkedinUrl', 'twitterUrl', 'instagramUrl'],
+        });
+
+        if (!user) {
+            console.warn(`[API] User with ID ${req.params.id} not found`);
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        res.json({ user });
+    } catch (err) {
+        console.error(`[API] Error fetching public user ${req.params.id}:`, err);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
+// Get current user
+router.get('/me', authenticate, async (req, res) => {
+    try {
+        const user = await User.findByPk(req.user.id, {
+            attributes: ['id', 'name', 'username', 'email', 'role', 'xp', 'level', 'avatarUrl', 'githubUrl', 'linkedinUrl', 'twitterUrl', 'instagramUrl', 'langPreference'],
         });
 
         if (!user) {
@@ -316,12 +336,10 @@ router.get('/user/:id', async (req, res) => {
 
         res.json({ user });
     } catch (err) {
-        console.error('Get public user error:', err);
+        console.error('Get user error:', err);
         res.status(500).json({ message: 'Server error' });
     }
 });
-
-// Get current user
 
 // Update profile
 router.put('/profile', authenticate, async (req, res) => {

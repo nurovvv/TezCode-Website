@@ -28,10 +28,12 @@ export default function ProfilePage() {
 
     useEffect(() => {
         const fetchProfile = async () => {
+            console.log(`[ProfilePage] Fetching profile for ID: ${id || 'me'}`);
             setLoading(true);
             try {
                 // Determine if we are viewing "me" or a specific ID
-                if (!id || (currentUser && id === currentUser.id.toString())) {
+                if (!id || (currentUser && id.toString() === currentUser.id.toString())) {
+                    console.log('[ProfilePage] Viewing own profile');
                     setIsOwnProfile(true);
                     setProfileUser(currentUser);
                     if (currentUser) {
@@ -44,12 +46,13 @@ export default function ProfilePage() {
                         });
                     }
                 } else {
+                    console.log(`[ProfilePage] Viewing public profile for ID: ${id}`);
                     setIsOwnProfile(false);
                     const res = await api.get(`auth/user/${id}`);
                     setProfileUser(res.data.user);
                 }
             } catch (err) {
-                console.error('Error fetching profile:', err);
+                console.error('[ProfilePage] Error fetching profile:', err);
                 setMessage({ type: 'error', text: 'User not found' });
             } finally {
                 setLoading(false);
