@@ -224,8 +224,8 @@ export default function ProfilePage() {
         const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
         return (
-            <div style={{ background: '#0d1117', border: '1px solid #30363d', borderRadius: '6px', padding: '24px', color: '#c9d1d9' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px' }}>
+            <div style={{ background: '#0d1117', border: '1px solid #30363d', borderRadius: '6px', padding: '24px', color: '#c9d1d9', width: '100%', boxSizing: 'border-box', overflow: 'hidden' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px', flexWrap: 'wrap', gap: '10px' }}>
                     <div style={{ fontSize: '1rem' }}>
                         <strong>{data.reduce((sum, d) => sum + parseInt(d.count), 0)} contributions</strong> in the last year
                     </div>
@@ -234,18 +234,18 @@ export default function ProfilePage() {
                     </div>
                 </div>
 
-                <div style={{ display: 'flex', gap: '10px' }}>
-                    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '20px 0 10px', fontSize: '0.75rem', color: '#8b949e' }}>
+                <div style={{ display: 'flex', gap: '10px', overflowX: 'auto', paddingBottom: '10px', scrollbarWidth: 'thin', scrollbarColor: '#30363d transparent' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '28px 0 10px', fontSize: '0.75rem', color: '#8b949e', position: 'sticky', left: 0, background: '#0d1117', zIndex: 1, pr: '10px' }}>
                         <span>Mon</span>
                         <span>Wed</span>
                         <span>Fri</span>
                     </div>
 
-                    <div style={{ flex: 1 }}>
-                        <div style={{ display: 'flex', fontSize: '0.75rem', color: '#8b949e', marginBottom: '8px', justifyContent: 'space-between' }}>
-                            {months.map(m => <span key={m}>{m}</span>)}
+                    <div style={{ flex: 1, minWidth: 'max-content' }}>
+                        <div style={{ display: 'flex', fontSize: '0.75rem', color: '#8b949e', marginBottom: '8px', justifyContent: 'space-between', paddingLeft: '2px' }}>
+                            {months.map(m => <span key={m} style={{ minWidth: '35px' }}>{m}</span>)}
                         </div>
-                        <div style={{ display: 'grid', gridAutoFlow: 'column', gridTemplateRows: 'repeat(7, 10px)', gap: '4px', overflowX: 'auto' }}>
+                        <div style={{ display: 'grid', gridAutoFlow: 'column', gridTemplateRows: 'repeat(7, 10px)', gap: '4px' }}>
                             {days.map((day, i) => {
                                 const dateKey = formatDate(day);
                                 const count = counts[dateKey] || 0;
@@ -267,7 +267,7 @@ export default function ProfilePage() {
                     </div>
                 </div>
 
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '15px', fontSize: '0.75rem', color: '#8b949e' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '15px', fontSize: '0.75rem', color: '#8b949e', flexWrap: 'wrap', gap: '10px' }}>
                     <div style={{ cursor: 'pointer' }}>Learn how we count contributions</div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
                         <span>Less</span>
