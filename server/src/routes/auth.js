@@ -212,7 +212,7 @@ router.post('/google-auth', async (req, res) => {
         });
     } catch (err) {
         console.error('[Google Auth] Error:', err);
-        res.status(500).json({ message: 'Server error' });
+        res.status(500).json({ message: `Server error: ${err.message}` });
     }
 });
 
@@ -278,7 +278,7 @@ router.post('/login', async (req, res) => {
         });
     } catch (err) {
         console.error('[Login] Error:', err);
-        res.status(500).json({ message: 'Server error' });
+        res.status(500).json({ message: `Server error: ${err.message}` });
     }
 });
 
