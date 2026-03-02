@@ -136,6 +136,7 @@ router.post('/google-auth', async (req, res) => {
         const { sub, email, name, picture } = payload;
         console.log(`[Google Auth] Attempting login for: ${email} (${name})`);
 
+        console.log(`[Google Auth] Searching for user with googleId: ${sub} or email: ${email}`);
         let user = await User.findOne({
             where: {
                 [Op.or]: [{ googleId: sub }, { email }]
@@ -210,12 +211,8 @@ router.post('/google-auth', async (req, res) => {
             }
         });
     } catch (err) {
-        console.error('Google auth error:', err);
-        res.status(500).json({
-            message: 'Server error',
-            details: process.env.NODE_ENV === 'development' ? err.message : undefined,
-            error: err.toString()
-        });
+        console.error('[Google Auth] Error:', err);
+        res.status(500).json({ message: 'Server error' });
     }
 });
 
@@ -224,11 +221,15 @@ router.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body;
         console.log(`[Auth] Manual login attempt for: ${email}`);
-
         const user = await User.findOne({ where: { email } });
         if (!user) {
             console.log(`[Auth] Login failed: User ${email} not found`);
             return res.status(401).json({ message: 'Invalid credentials' });
+        }
+
+        if (!user.passwordHash) {
+            console.log(`[Auth] Login failed: No password hash for ${email} (Google account)`);
+            return res.status(401).json({ message: 'This account was created with Google. Please use Google Sign-In.' });
         }
 
         const isValid = await bcrypt.compare(password, user.passwordHash);
@@ -276,12 +277,8 @@ router.post('/login', async (req, res) => {
             },
         });
     } catch (err) {
-        console.error('Login error:', err);
-        res.status(500).json({
-            message: 'Server error',
-            details: process.env.NODE_ENV === 'development' ? err.message : undefined,
-            error: err.toString()
-        });
+        console.error('[Login] Error:', err);
+        res.status(500).json({ message: 'Server error' });
     }
 });
 
