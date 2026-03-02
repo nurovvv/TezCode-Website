@@ -4950,10 +4950,8 @@ export default function CourseReaderPage() {
                                         <div
                                             onClick={() => {
                                                 setExpandedChapters(prev => {
-                                                    const next = new Set(prev);
-                                                    if (next.has(ch.id)) next.delete(ch.id);
-                                                    else next.add(ch.id);
-                                                    return next;
+                                                    if (prev.has(ch.id)) return new Set();
+                                                    return new Set([ch.id]);
                                                 });
                                             }}
                                             style={{
