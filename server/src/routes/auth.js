@@ -52,24 +52,35 @@ router.post('/register', async (req, res) => {
             return res.status(400).json({ message: 'Username is required' });
         }
 
-        const existingEmail = await User.findOne({ where: { email } });
-        if (existingEmail) {
-            return res.status(400).json({ message: 'Email already registered' });
-        }
+        let user = await User.findOne({ where: { email } });
+        if (user) {
+            if (user.googleId && !user.passwordHash) {
+                const existingUsername = await User.findOne({ where: { username } });
+                if (existingUsername && existingUsername.id !== user.id) {
+                    return res.status(400).json({ message: 'Username already taken' });
+                }
+                user.passwordHash = await bcrypt.hash(password, 12);
+                if (name) user.name = name;
+                user.username = username;
+                await user.save();
+            } else {
+                return res.status(400).json({ message: 'Email already registered' });
+            }
+        } else {
+            const existingUsername = await User.findOne({ where: { username } });
+            if (existingUsername) {
+                return res.status(400).json({ message: 'Username already taken' });
+            }
 
-        const existingUsername = await User.findOne({ where: { username } });
-        if (existingUsername) {
-            return res.status(400).json({ message: 'Username already taken' });
+            const passwordHash = await bcrypt.hash(password, 12);
+            user = await User.create({
+                name,
+                username,
+                email,
+                passwordHash,
+                role: role || 'student',
+            });
         }
-
-        const passwordHash = await bcrypt.hash(password, 12);
-        const user = await User.create({
-            name,
-            username,
-            email,
-            passwordHash,
-            role: role || 'student',
-        });
 
         const accessToken = jwt.sign(
             { id: user.id, email: user.email, role: user.role },
@@ -228,14 +239,20 @@ router.post('/login', async (req, res) => {
         }
 
         if (!user.passwordHash) {
-            console.log(`[Auth] Login failed: No password hash for ${email} (Google account)`);
-            return res.status(401).json({ message: 'This account was created with Google. Please use Google Sign-In.' });
-        }
-
-        const isValid = await bcrypt.compare(password, user.passwordHash);
-        if (!isValid) {
-            console.log(`[Auth] Login failed: Invalid password for ${email}`);
-            return res.status(401).json({ message: 'Invalid credentials' });
+            if (user.googleId) {
+                console.log(`[Auth] Setting new password for Google account ${email} on manual login`);
+                user.passwordHash = await bcrypt.hash(password, 12);
+                await user.save();
+            } else {
+                console.log(`[Auth] Login failed: No password hash for ${email} and no Google ID`);
+                return res.status(401).json({ message: 'Invalid credentials' });
+            }
+        } else {
+            const isValid = await bcrypt.compare(password, user.passwordHash);
+            if (!isValid) {
+                console.log(`[Auth] Login failed: Invalid password for ${email}`);
+                return res.status(401).json({ message: 'Invalid credentials' });
+            }
         }
 
         console.log(`[Auth] Generating tokens for: ${user.email}`);
