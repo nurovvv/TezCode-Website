@@ -191,18 +191,11 @@ export default function ProfilePage() {
     };
 
     const ContributionGraph = ({ data }) => {
+        const [tooltip, setTooltip] = useState({ visible: false, x: 0, y: 0, content: '' });
         const today = new Date();
         const yearAgo = new Date();
-        yearAgo.setFullYear(today.getFullYear() - 1);
-
-        // Map data to a fast-lookup object using YYYY-MM-DD
-        const counts = {};
-        if (data && Array.isArray(data)) {
-            data.forEach(d => {
-                // Backend DATE() returns YYYY-MM-DD
-                counts[d.date] = (counts[d.date] || 0) + parseInt(d.count);
-            });
-        }
+        yearAgo.setUTCFullYear(today.getUTCFullYear() - 1);
+        yearAgo.setUTCHours(0, 0, 0, 0);
 
         // Generate days aligned to UTC Sunday
         const days = [];
@@ -214,6 +207,15 @@ export default function ProfilePage() {
         while (curr <= end) {
             days.push(new Date(curr));
             curr.setUTCDate(curr.getUTCDate() + 1);
+        }
+
+        // Map data to a fast-lookup object using YYYY-MM-DD
+        const counts = {};
+        if (data && Array.isArray(data)) {
+            data.forEach(d => {
+                // Backend DATE() returns YYYY-MM-DD
+                counts[d.date] = (counts[d.date] || 0) + parseInt(d.count);
+            });
         }
 
         const getColor = (count) => {
@@ -232,7 +234,17 @@ export default function ProfilePage() {
             return `${y}-${m}-${d}`;
         };
 
-        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        const getFullDateDisplay = (date) => {
+            const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            const d = date.getUTCDate();
+            let suffix = 'th';
+            if (d === 1 || d === 21 || d === 31) suffix = 'st';
+            else if (d === 2 || d === 22) suffix = 'nd';
+            else if (d === 3 || d === 23) suffix = 'rd';
+            return `${months[date.getUTCMonth()]} ${d}${suffix}`;
+        };
+
+        const monthsShort = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
         // Calculate month positions
         const monthPositions = [];
@@ -241,7 +253,7 @@ export default function ProfilePage() {
             if (i % 7 === 0) { // Only check start of weeks
                 const m = day.getUTCMonth();
                 if (m !== lastMonth) {
-                    monthPositions.push({ name: months[m], index: Math.floor(i / 7) });
+                    monthPositions.push({ name: monthsShort[m], index: Math.floor(i / 7) });
                     lastMonth = m;
                 }
             }
@@ -251,10 +263,38 @@ export default function ProfilePage() {
             ? data.reduce((sum, d) => sum + parseInt(d.count), 0)
             : 0;
 
-        console.log('[ContributionGraph] Rendering with data:', data);
+        const handleMouseEnter = (e, count, date) => {
+            const rect = e.target.closest('.contribution-container').getBoundingClientRect();
+            setTooltip({
+                visible: true,
+                x: e.clientX - rect.left,
+                y: e.clientY - rect.top - 40,
+                content: `${count} contributions on ${getFullDateDisplay(date)}.`
+            });
+        };
 
         return (
-            <div style={{ background: '#0d1117', border: '1px solid #30363d', borderRadius: '6px', padding: '24px', color: '#c9d1d9', width: '100%', boxSizing: 'border-box', overflow: 'hidden' }}>
+            <div className="contribution-container" style={{ background: '#0d1117', border: '1px solid #30363d', borderRadius: '6px', padding: '24px', color: '#c9d1d9', width: '100%', boxSizing: 'border-box', overflow: 'hidden', position: 'relative' }}>
+                {tooltip.visible && (
+                    <div style={{
+                        position: 'absolute',
+                        left: tooltip.x,
+                        top: tooltip.y,
+                        transform: 'translateX(-50%)',
+                        background: '#30363d',
+                        color: '#fff',
+                        padding: '8px 12px',
+                        borderRadius: '6px',
+                        fontSize: '0.85rem',
+                        whiteSpace: 'nowrap',
+                        boxShadow: '0 8px 24px rgba(0,0,0,0.3)',
+                        zIndex: 10,
+                        pointerEvents: 'none'
+                    }}>
+                        {tooltip.content}
+                    </div>
+                )}
+
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px', flexWrap: 'wrap', gap: '10px' }}>
                     <div style={{ fontSize: '1rem' }}>
                         <strong>{totalContributions} contributions</strong> in the last year
@@ -284,13 +324,16 @@ export default function ProfilePage() {
                                 return (
                                     <div
                                         key={i}
-                                        title={`${day.toDateString()}: ${count} contributions`}
+                                        onMouseEnter={(e) => handleMouseEnter(e, count, day)}
+                                        onMouseMove={(e) => handleMouseEnter(e, count, day)}
+                                        onMouseLeave={() => setTooltip({ ...tooltip, visible: false })}
                                         style={{
                                             width: '10px',
                                             height: '10px',
                                             borderRadius: '2px',
                                             background: getColor(count),
-                                            border: '1px solid rgba(27,31,35,0.06)'
+                                            border: '1px solid rgba(27,31,35,0.06)',
+                                            cursor: 'pointer'
                                         }}
                                     />
                                 );
