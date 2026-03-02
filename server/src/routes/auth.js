@@ -101,6 +101,7 @@ router.post('/register', async (req, res) => {
                 linkedinUrl: user.linkedinUrl,
                 twitterUrl: user.twitterUrl,
                 instagramUrl: user.instagramUrl,
+                bio: user.bio,
                 xp: user.xp,
                 level: user.level,
             },
@@ -199,13 +200,22 @@ router.post('/google-auth', async (req, res) => {
                 email: user.email,
                 role: user.role,
                 avatarUrl: user.avatarUrl,
+                githubUrl: user.githubUrl,
+                linkedinUrl: user.linkedinUrl,
+                twitterUrl: user.twitterUrl,
+                instagramUrl: user.instagramUrl,
+                bio: user.bio,
                 xp: user.xp,
                 level: user.level,
             }
         });
     } catch (err) {
         console.error('Google auth error:', err);
-        res.status(401).json({ message: 'Invalid Google token' });
+        res.status(500).json({
+            message: 'Server error',
+            details: process.env.NODE_ENV === 'development' ? err.message : undefined,
+            error: err.toString()
+        });
     }
 });
 

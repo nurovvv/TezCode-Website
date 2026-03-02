@@ -156,7 +156,10 @@ export default function LoginPage() {
                                         const role = user?.role || 'student';
                                         navigate(role === 'admin' ? '/admin' : role === 'teacher' ? '/teacher' : '/dashboard');
                                     })
-                                    .catch(err => setError('Google sign in failed'));
+                                    .catch(err => {
+                                        console.error('Google sign in error:', err);
+                                        setError(err.response?.data?.message || 'Google sign in failed');
+                                    });
                             }}
                             onError={() => setError('Google sign in failed')}
                             useOneTap
