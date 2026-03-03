@@ -3321,7 +3321,51 @@ else:
             sections: [
                 {
                     id: 'ml-getting-started-basics', title: 'Getting Started',
-                    content: `<p>Machine learning is making the computer learn from studying data and statistics. Machine Learning is a step into the direction of artificial intelligence. In Machine Learning, we build models to understand the data, and predict outcomes.</p>`
+                    content: `<p>Machine Learning is making the computer learn from studying data and statistics.</p>
+<p>Machine Learning is a step into the direction of artificial intelligence (AI).</p>
+<p>Machine Learning is a program that analyses data and learns to predict the outcome.</p>
+
+<h3>Where To Start?</h3>
+<p>In this tutorial we will go back to mathematics and study statistics, and how to calculate important numbers based on data sets.</p>
+<p>We will also learn how to use various Python modules to get the answers we need.</p>
+<p>And we will learn how to make functions that are able to predict the outcome based on what we have learned.</p>
+
+<h3>Data Set</h3>
+<p>In the mind of a computer, a data set is any collection of data. It can be anything from an array to a complete database.</p>
+<p>Example of an array:</p>
+
+<pre>[99,86,87,88,111,86,103,87,94,78,77,85,86]</pre>
+
+<p>By looking at the array, we can guess that the average value is probably around 80 or 90, and we are also able to determine the highest value and the lowest value, but what else can we do?</p>
+
+<p>And by looking at the database we can see that the most popular color is white, and the oldest car is 17 years, but what if we could predict if a car had an AutoPass, just by looking at the other values?</p>
+
+<p>That is what Machine Learning is for! Analyzing data and predicting the outcome!</p>
+
+<p>In Machine Learning it is common to work with very large data sets. In this tutorial we will try to make it as easy as possible to understand the different concepts of machine learning, and we will work with small easy-to-understand data sets.</p>
+
+<h3>Data Types</h3>
+<p>To analyze data, it is important to know what type of data we are dealing with.</p>
+<p>We can split the data types into three main categories:</p>
+<ul>
+  <li><b>Numerical</b></li>
+  <li><b>Categorical</b></li>
+  <li><b>Ordinal</b></li>
+</ul>
+
+<p><b>Numerical</b> data are numbers, and can be split into two numerical categories:</p>
+<ul>
+  <li>Discrete Data<br>- counted data that are limited to integers. Example: The number of cars passing by.</li>
+  <li>Continuous Data<br>- measured data that can be any number. Example: The price of an item, or the size of an item</li>
+</ul>
+
+<p><b>Categorical</b> data are values that cannot be measured up against each other. Example: a color value, or any yes/no values.</p>
+
+<p><b>Ordinal</b> data are like categorical data, but can be measured up against each other. Example: school grades where A is better than B and so on.</p>
+
+<p>By knowing the data type of your data source, you will be able to know what technique to use when analyzing them.</p>
+
+<p>You will learn more about statistics and analyzing data in the next chapters.</p>`
                 }
             ]
         },
