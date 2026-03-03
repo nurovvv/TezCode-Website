@@ -3321,61 +3321,114 @@ else:
             sections: [
                 {
                     id: 'ml-getting-started-basics', title: 'Getting Started',
-                    content: `<h2>🎩 Welcome to the Magic of Machine Learning!</h2>
-<p>Imagine teaching your computer to learn from experience, just like you do. That's <b>Machine Learning</b>!</p>
-<p>Instead of writing exact rules for everything, we feed the computer data and let it uncover the hidden patterns. It's the secret sauce behind artificial intelligence (AI) and the reason your streaming apps know exactly what movie you want to watch next. 🍿</p>
-
-<h3>🗺️ Where Do We Start?</h3>
-<p>To master this magic, we need a solid foundation. We're going to dive into:</p>
-<ul>
-    <li>📊 <b>Statistics:</b> Don't worry, we'll make the math fun! We'll learn how to pull the most important numbers out of any pile of data.</li>
-    <li>🐍 <b>Python Power:</b> We'll equip you with amazing Python tools to do the heavy lifting for us.</li>
-    <li>🔮 <b>Prediction:</b> The grand finale! We'll build functions that act like crystal balls, predicting the future based on the past.</li>
-</ul>
-
-<h3>📦 The Building Blocks: Data Sets</h3>
-<p>For a computer to learn, it needs fuel. In the digital world, that fuel is a <b>data set</b>. It can be anything from a simple list to a massive, sprawling database.</p>
-
-<p>Let's look at a bite-sized data set: an array of numbers.</p>
-<pre>[99, 86, 87, 88, 111, 86, 103, 87, 94, 78, 77, 85, 86]</pre>
-
-<p>Just by glancing at this, you might guess the average is somewhere around 90, and you can easily spot the highest (111) and lowest (77) values.</p>
-
-<p>But what if we had a massive database of cars? We could easily see the most popular color is white, or the oldest car is 17 years old. But here's where it gets interesting... what if we could predict whether a car has an AutoPass simply by looking at its other specs? 🚦</p>
-
-<p><b>That is the superpower of Machine Learning! Analyzing the past to predict the future.</b></p>
-
-<p><i>Note: Real-world machine learning deals with mountains of data. To keep things breezy and fun in this tutorial, we'll stick to small, easy-to-digest data sets while you learn the ropes.</i></p>
-
-<h3>🗂️ Know Your Data Types</h3>
-<p>Before we can analyze anything, we need to know what kind of creature we're dealing with. We can split our data into three main families:</p>
-
-<div style="display: flex; gap: 20px; flex-wrap: wrap; margin-top: 15px;">
-    <div style="flex: 1; min-width: 250px; padding: 15px; border-left: 4px solid #4CAF50; background: #f9f9f9; border-radius: 4px;">
-        <h4 style="margin-top: 0;">🔢 Numerical</h4>
-        <p>Crunchy numbers! These come in two flavors:</p>
-        <ul style="margin-bottom: 0;">
-            <li><b>Discrete:</b> Things you count in whole numbers (like the number of pizzas you ordered 🍕).</li>
-            <li><b>Continuous:</b> Things you measure that can be any value (like the exact price of a fancy coffee ☕).</li>
-        </ul>
-    </div>
-    
-    <div style="flex: 1; min-width: 250px; padding: 15px; border-left: 4px solid #2196F3; background: #f9f9f9; border-radius: 4px;">
-        <h4 style="margin-top: 0;">🏷️ Categorical</h4>
-        <p>Values that are labels or categories. You can't measure one against another.</p>
-        <p style="margin-bottom: 0;"><i>Example:</i> Car colors (Red, Blue, Green) or answers to a Yes/No question.</p>
-    </div>
-    
-    <div style="flex: 1; min-width: 250px; padding: 15px; border-left: 4px solid #FF9800; background: #f9f9f9; border-radius: 4px;">
-        <h4 style="margin-top: 0;">🏅 Ordinal</h4>
-        <p>Like categorical data, but with a built-in ranking system.</p>
-        <p style="margin-bottom: 0;"><i>Example:</i> Movie ratings (⭐⭐⭐⭐⭐ is objectively better than ⭐) or t-shirt sizes (S, M, L).</p>
-    </div>
+                    content: `<div style="background-color: #d9eee1; padding: 25px; margin-bottom: 30px;">
+  <p style="margin-top:0">Machine Learning is making the computer learn from studying data and statistics.</p>
+  <p>Machine Learning is a step into the direction of artificial intelligence (AI).</p>
+  <p style="margin-bottom:0">Machine Learning is a program that analyses data and learns to predict the outcome.</p>
 </div>
 
-<p style="margin-top: 20px;">Knowing your data type is like picking the right tool for the job. Once you know what you have, you'll know exactly how to analyze it.</p>
+<h2>Where To Start?</h2>
+<p>In this tutorial we will go back to mathematics and study statistics, and how to calculate important numbers based on data sets.</p>
+<p>We will also learn how to use various Python modules to get the answers we need.</p>
+<p>And we will learn how to make functions that are able to predict the outcome based on what we have learned.</p>
 
-<p><b>Ready to dive in? Let's go crunch some numbers! 🚀</b></p>`
+<hr style="border: 0; border-top: 1px solid #eee; margin: 30px 0;" />
+
+<h2>Data Set</h2>
+<p>In the mind of a computer, a data set is any collection of data. It can be anything from an array to a complete database.</p>
+<p>Example of an array:</p>
+
+<div style="background-color: #f1f1f1; padding: 15px; border-radius: 4px; margin-bottom: 20px; font-family: Consolas, 'Courier New', monospace; font-size: 15px;">
+  [<span style="color: #a31515;">99</span>,<span style="color: #a31515;">86</span>,<span style="color: #a31515;">87</span>,<span style="color: #a31515;">88</span>,<span style="color: #a31515;">111</span>,<span style="color: #a31515;">86</span>,<span style="color: #a31515;">103</span>,<span style="color: #a31515;">87</span>,<span style="color: #a31515;">94</span>,<span style="color: #a31515;">78</span>,<span style="color: #a31515;">77</span>,<span style="color: #a31515;">85</span>,<span style="color: #a31515;">86</span>]
+</div>
+
+<p>Example of a database:</p>
+
+<div style="overflow-x: auto; margin-bottom: 20px;">
+<table style="width: 100%; border-collapse: collapse; border: 1px solid #ddd;">
+  <thead style="visibility: hidden; font-size: 0px;"><tr><th>Car</th><th>Color</th><th>Age</th><th>Speed</th><th>AutoPass</th></tr></thead>
+  <tbody>
+  <tr style="border-bottom: 1px solid #ddd; text-align: left;">
+    <td style="padding: 10px;">BMW</td><td style="padding: 10px;">red</td><td style="padding: 10px;">5</td><td style="padding: 10px;">99</td><td style="padding: 10px;">Y</td>
+  </tr>
+  <tr style="background-color: #f1f1f1; border-bottom: 1px solid #ddd; text-align: left;">
+    <td style="padding: 10px;">Volvo</td><td style="padding: 10px;">black</td><td style="padding: 10px;">7</td><td style="padding: 10px;">86</td><td style="padding: 10px;">Y</td>
+  </tr>
+  <tr style="border-bottom: 1px solid #ddd; text-align: left;">
+    <td style="padding: 10px;">VW</td><td style="padding: 10px;">gray</td><td style="padding: 10px;">8</td><td style="padding: 10px;">87</td><td style="padding: 10px;">N</td>
+  </tr>
+  <tr style="background-color: #f1f1f1; border-bottom: 1px solid #ddd; text-align: left;">
+    <td style="padding: 10px;">VW</td><td style="padding: 10px;">white</td><td style="padding: 10px;">7</td><td style="padding: 10px;">88</td><td style="padding: 10px;">Y</td>
+  </tr>
+  <tr style="border-bottom: 1px solid #ddd; text-align: left;">
+    <td style="padding: 10px;">Ford</td><td style="padding: 10px;">white</td><td style="padding: 10px;">2</td><td style="padding: 10px;">111</td><td style="padding: 10px;">Y</td>
+  </tr>
+  <tr style="background-color: #f1f1f1; border-bottom: 1px solid #ddd; text-align: left;">
+    <td style="padding: 10px;">VW</td><td style="padding: 10px;">white</td><td style="padding: 10px;">17</td><td style="padding: 10px;">86</td><td style="padding: 10px;">Y</td>
+  </tr>
+  <tr style="border-bottom: 1px solid #ddd; text-align: left;">
+    <td style="padding: 10px;">Tesla</td><td style="padding: 10px;">red</td><td style="padding: 10px;">2</td><td style="padding: 10px;">103</td><td style="padding: 10px;">Y</td>
+  </tr>
+  <tr style="background-color: #f1f1f1; border-bottom: 1px solid #ddd; text-align: left;">
+    <td style="padding: 10px;">BMW</td><td style="padding: 10px;">black</td><td style="padding: 10px;">9</td><td style="padding: 10px;">87</td><td style="padding: 10px;">Y</td>
+  </tr>
+  <tr style="border-bottom: 1px solid #ddd; text-align: left;">
+    <td style="padding: 10px;">Volvo</td><td style="padding: 10px;">gray</td><td style="padding: 10px;">4</td><td style="padding: 10px;">94</td><td style="padding: 10px;">N</td>
+  </tr>
+  <tr style="background-color: #f1f1f1; border-bottom: 1px solid #ddd; text-align: left;">
+    <td style="padding: 10px;">Ford</td><td style="padding: 10px;">white</td><td style="padding: 10px;">11</td><td style="padding: 10px;">78</td><td style="padding: 10px;">N</td>
+  </tr>
+  <tr style="border-bottom: 1px solid #ddd; text-align: left;">
+    <td style="padding: 10px;">Toyota</td><td style="padding: 10px;">gray</td><td style="padding: 10px;">12</td><td style="padding: 10px;">77</td><td style="padding: 10px;">N</td>
+  </tr>
+  <tr style="background-color: #f1f1f1; border-bottom: 1px solid #ddd; text-align: left;">
+    <td style="padding: 10px;">VW</td><td style="padding: 10px;">white</td><td style="padding: 10px;">9</td><td style="padding: 10px;">85</td><td style="padding: 10px;">N</td>
+  </tr>
+  <tr style="border-bottom: 1px solid #ddd; text-align: left;">
+    <td style="padding: 10px;">Toyota</td><td style="padding: 10px;">blue</td><td style="padding: 10px;">6</td><td style="padding: 10px;">86</td><td style="padding: 10px;">Y</td>
+  </tr>
+  </tbody>
+</table>
+</div>
+
+<p>By looking at the array, we can guess that the average value is probably around 80 or 90, and we are also able to determine the highest value and the lowest value, but what else can we do?</p>
+
+<p>And by looking at the database we can see that the most popular color is white, and the oldest car is 17 years, but what if we could predict if a car had an AutoPass, just by looking at the other values?</p>
+
+<p>That is what Machine Learning is for! Analyzing data and predicting the outcome!</p>
+
+<hr style="border: 0; border-top: 1px solid #eee; margin: 30px 0;" />
+
+<p>In Machine Learning it is common to work with very large data sets. In this tutorial we will try to make it as easy as possible to understand the different concepts of machine learning, and we will work with small easy-to-understand data sets.</p>
+
+<hr style="border: 0; border-top: 1px solid #eee; margin: 30px 0;" />
+
+<h2>Data Types</h2>
+<p>To analyze data, it is important to know what type of data we are dealing with.</p>
+<p>We can split the data types into three main categories:</p>
+
+<ul>
+  <li><b>Numerical</b></li>
+  <li><b>Categorical</b></li>
+  <li><b>Ordinal</b></li>
+</ul>
+
+<p><b>Numerical</b> data are numbers, and can be split into two numerical categories:</p>
+
+<ul>
+  <li>Discrete Data<br>- counted data that are limited to integers. Example: The number of cars passing by.</li>
+  <li>Continuous Data<br>- measured data that can be any number. Example: The price of an item, or the size of an item</li>
+</ul>
+
+<p><b>Categorical</b> data are values that cannot be measured up against each other. Example: a color value, or any yes/no values.</p>
+
+<p><b>Ordinal</b> data are like categorical data, but can be measured up against each other. Example: school grades where A is better than B and so on.</p>
+
+<hr style="border: 0; border-top: 1px solid #eee; margin: 30px 0;" />
+
+<p>By knowing the data type of your data source, you will be able to know what technique to use when analyzing them.</p>
+
+<p>You will learn more about statistics and analyzing data in the next chapters.</p>`
                 }
             ]
         },
