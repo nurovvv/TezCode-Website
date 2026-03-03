@@ -3460,7 +3460,7 @@ else:
 <p>The mean value is the average value.</p>
 <p>To calculate the mean, find the sum of all values, and divide the sum by the number of values:</p>
 <div style="background-color: #f1f1f1; padding: 15px; border-radius: 4px; margin-bottom: 20px; font-family: Consolas, 'Courier New', monospace; font-size: 15px;">
-  (99+86+87+88+111+86+103+87+94+78+77+85+86) / 13 = 89.77
+  (<span style="color: #a31515;">99</span>+<span style="color: #a31515;">86</span>+<span style="color: #a31515;">87</span>+<span style="color: #a31515;">88</span>+<span style="color: #a31515;">111</span>+<span style="color: #a31515;">86</span>+<span style="color: #a31515;">103</span>+<span style="color: #a31515;">87</span>+<span style="color: #a31515;">94</span>+<span style="color: #a31515;">78</span>+<span style="color: #a31515;">77</span>+<span style="color: #a31515;">85</span>+<span style="color: #a31515;">86</span>) / <span style="color: #a31515;">13</span> = <span style="color: #a31515;">89.77</span>
 </div>
 <p>The NumPy module has a method for this. Learn about the NumPy module in our <a href="#">NumPy Tutorial</a>.</p>`,
                     examples: [
@@ -3472,9 +3472,9 @@ else:
 
 <h2>Median</h2>
 <p>The median value is the value in the middle, after you have sorted all the values:</p>
-<p style="font-family: Consolas, 'Courier New', monospace; font-size: 15px; letter-spacing: 1px; margin-top: 30px; margin-bottom: 30px;">
-  <span style="color: #a31515;">77, 78, 85, 86, 86, 86, <span style="border-bottom: 3px double #a31515;">87</span>, 87, 88, 94, 99, 103, 111</span>
-</p>
+<div style="background-color: #f1f1f1; padding: 15px; border-radius: 4px; margin-bottom: 20px; font-family: Consolas, 'Courier New', monospace; font-size: 15px; letter-spacing: 1px;">
+  <span style="color: #a31515;">77</span>, <span style="color: #a31515;">78</span>, <span style="color: #a31515;">85</span>, <span style="color: #a31515;">86</span>, <span style="color: #a31515;">86</span>, <span style="color: #a31515;">86</span>, <span style="color: #a31515; border-bottom: 3px double #a31515;">87</span>, <span style="color: #a31515;">87</span>, <span style="color: #a31515;">88</span>, <span style="color: #a31515;">94</span>, <span style="color: #a31515;">99</span>, <span style="color: #a31515;">103</span>, <span style="color: #a31515;">111</span>
+</div>
 <p>It is important that the numbers are sorted before you can find the median.</p>
 <p>The NumPy module has a method for this:</p>`
                         },
@@ -3483,10 +3483,10 @@ else:
                             preContent: ``,
                             code: 'import numpy\n\nspeed = [99,86,87,88,111,86,103,87,94,78,77,85,86]\n\nx = numpy.median(speed)\n\nprint(x)',
                             postContent: `<p style="margin-top: 40px;">If there are two numbers in the middle, divide the sum of those numbers by two.</p>
-<p style="font-family: Consolas, 'Courier New', monospace; font-size: 15px; letter-spacing: 1px; margin-top: 30px; margin-bottom: 30px;">
-  <span style="color: #a31515;">77, 78, 85, 86, 86, <span style="border-bottom: 1px solid #a31515;">86</span>, <span style="border-bottom: 1px solid #a31515;">87</span>, 87, 94, 98, 99, 103</span><br><br>
-  (86 + 87) / 2 = <span style="border-bottom: 3px double #a31515; font-size: 18px;">86.5</span>
-</p>
+<div style="background-color: #f1f1f1; padding: 15px; border-radius: 4px; margin-bottom: 20px; font-family: Consolas, 'Courier New', monospace; font-size: 15px; letter-spacing: 1px;">
+  <span style="color: #a31515;">77</span>, <span style="color: #a31515;">78</span>, <span style="color: #a31515;">85</span>, <span style="color: #a31515;">86</span>, <span style="color: #a31515;">86</span>, <span style="color: #a31515; border-bottom: 1px solid #a31515;">86</span>, <span style="color: #a31515; border-bottom: 1px solid #a31515;">87</span>, <span style="color: #a31515;">87</span>, <span style="color: #a31515;">94</span>, <span style="color: #a31515;">98</span>, <span style="color: #a31515;">99</span>, <span style="color: #a31515;">103</span><br><br>
+  (<span style="color: #a31515;">86</span> + <span style="color: #a31515;">87</span>) / <span style="color: #a31515;">2</span> = <span style="color: #a31515; border-bottom: 3px double #a31515; font-size: 18px;">86.5</span>
+</div>
 
 <h2>Example</h2>
 <p>Using the NumPy module:</p>`
@@ -3499,9 +3499,9 @@ else:
 
 <h2>Mode</h2>
 <p>The Mode value is the value that appears the most number of times:</p>
-<p style="font-family: Consolas, 'Courier New', monospace; font-size: 15px; letter-spacing: 1px; margin-top: 30px; margin-bottom: 30px;">
-  <span style="color: #a31515;">99, <span style="border-bottom: 1px solid #a31515;">86</span>, 87, 88, 111, <span style="border-bottom: 1px solid #a31515;">86</span>, 103, 87, 94, 78, 77, 85, <span style="border-bottom: 1px solid #a31515;">86</span> = 86</span>
-</p>
+<div style="background-color: #f1f1f1; padding: 15px; border-radius: 4px; margin-bottom: 20px; font-family: Consolas, 'Courier New', monospace; font-size: 15px; letter-spacing: 1px;">
+  <span style="color: #a31515;">99</span>, <span style="color: #a31515; border-bottom: 1px solid #a31515;">86</span>, <span style="color: #a31515;">87</span>, <span style="color: #a31515;">88</span>, <span style="color: #a31515;">111</span>, <span style="color: #a31515; border-bottom: 1px solid #a31515;">86</span>, <span style="color: #a31515;">103</span>, <span style="color: #a31515;">87</span>, <span style="color: #a31515;">94</span>, <span style="color: #a31515;">78</span>, <span style="color: #a31515;">77</span>, <span style="color: #a31515;">85</span>, <span style="color: #a31515; border-bottom: 1px solid #a31515;">86</span> = <span style="color: #a31515;">86</span>
+</div>
 <p>The SciPy module has a method for this. Learn about the SciPy module in our <a href="#">SciPy Tutorial</a>.</p>`
                         },
                         {
@@ -3524,7 +3524,7 @@ else:
             sections: [
                 {
                     id: 'ml-standard-deviation-basics', title: 'Standard Deviation',
-                    content: `<p>Standard deviation is a number that describes how spread out the values are. A low standard deviation means that most of the numbers are close to the mean value. A high standard deviation means that the values are spread out over a wider range.</p>`
+                    content: `< p > Standard deviation is a number that describes how spread out the values are.A low standard deviation means that most of the numbers are close to the mean value.A high standard deviation means that the values are spread out over a wider range.</p > `
                 }
             ]
         },
@@ -3535,7 +3535,7 @@ else:
             sections: [
                 {
                     id: 'ml-percentile-basics', title: 'Percentile',
-                    content: `<p>Percentiles are used in statistics to give you a number that describes the value that a given percent of the values are lower than. For example, the 75th percentile is the value at which 75% of the values are lower.</p>`
+                    content: `< p > Percentiles are used in statistics to give you a number that describes the value that a given percent of the values are lower than.For example, the 75th percentile is the value at which 75 % of the values are lower.</p > `
                 }
             ]
         },
@@ -3546,7 +3546,7 @@ else:
             sections: [
                 {
                     id: 'ml-data-distribution-basics', title: 'Data Distribution',
-                    content: `<p>Earlier in this tutorial we have worked with very small amounts of data in our examples, just to understand the different concepts. In the real world, the data sets are much bigger, but it can be difficult to gather real world data.</p>`
+                    content: `< p > Earlier in this tutorial we have worked with very small amounts of data in our examples, just to understand the different concepts.In the real world, the data sets are much bigger, but it can be difficult to gather real world data.</p> `
                 }
             ]
         },
@@ -3557,7 +3557,7 @@ else:
             sections: [
                 {
                     id: 'ml-normal-data-distribution-basics', title: 'Normal Data Distribution',
-                    content: `<p>We learned how to create a completely random array, of a given size, and between two given values. In this chapter we will learn how to create an array where the values are concentrated around a given value.</p>`
+                    content: `< p > We learned how to create a completely random array, of a given size, and between two given values.In this chapter we will learn how to create an array where the values are concentrated around a given value.</p > `
                 }
             ]
         },
@@ -3568,7 +3568,7 @@ else:
             sections: [
                 {
                     id: 'ml-scatter-plot-basics', title: 'Scatter Plot',
-                    content: `<p>A scatter plot is a diagram where each value in the data set is represented by a dot. The Matplotlib module has a method for drawing scatter plots, it needs two arrays of the same length, one for the values of the x-axis, and one for the values of the y-axis.</p>`
+                    content: `< p > A scatter plot is a diagram where each value in the data set is represented by a dot.The Matplotlib module has a method for drawing scatter plots, it needs two arrays of the same length, one for the values of the x- axis, and one for the values of the y- axis.</p> `
                 }
             ]
         },
@@ -3579,7 +3579,7 @@ else:
             sections: [
                 {
                     id: 'ml-linear-regression-basics', title: 'Linear Regression',
-                    content: `<p>The term regression is used when you try to find the relationship between variables. In Machine Learning, and in statistical modeling, that relationship is used to predict the outcome of future events. Linear regression uses the relationship between the data-points to draw a straight line through all them.</p>`
+                    content: `< p > The term regression is used when you try to find the relationship between variables.In Machine Learning, and in statistical modeling, that relationship is used to predict the outcome of future events.Linear regression uses the relationship between the data - points to draw a straight line through all them.</p > `
                 }
             ]
         },
@@ -3590,7 +3590,7 @@ else:
             sections: [
                 {
                     id: 'ml-polynomial-regression-basics', title: 'Polynomial Regression',
-                    content: `<p>If your data points clearly will not fit a linear regression (a straight line through all data points), it might be ideal for polynomial regression. Polynomial regression, like linear regression, uses the relationship between the variables x and y to find the best way to draw a line through the data points.</p>`
+                    content: `< p > If your data points clearly will not fit a linear regression(a straight line through all data points), it might be ideal for polynomial regression.Polynomial regression, like linear regression, uses the relationship between the variables x and y to find the best way to draw a line through the data points.</p > `
                 }
             ]
         },
@@ -3601,7 +3601,7 @@ else:
             sections: [
                 {
                     id: 'ml-multiple-regression-basics', title: 'Multiple Regression',
-                    content: `<p>Multiple regression is like linear regression, but with more than one independent value, meaning that we try to predict a value based on two or more variables.</p>`
+                    content: `< p > Multiple regression is like linear regression, but with more than one independent value, meaning that we try to predict a value based on two or more variables.</p > `
                 }
             ]
         },
@@ -3612,7 +3612,7 @@ else:
             sections: [
                 {
                     id: 'ml-scale-basics', title: 'Scale',
-                    content: `<p>When your data has different values, and even different measurement units, it can be difficult to compare them. What is kilograms compared to meters? Or altitude compared to time? We can scale data into new values that are easier to compare.</p>`
+                    content: `< p > When your data has different values, and even different measurement units, it can be difficult to compare them.What is kilograms compared to meters ? Or altitude compared to time ? We can scale data into new values that are easier to compare.</p > `
                 }
             ]
         },
@@ -3623,7 +3623,7 @@ else:
             sections: [
                 {
                     id: 'ml-train-test-basics', title: 'Train/Test',
-                    content: `<p>In Machine Learning we create models to predict the outcome of certain events. To measure if the model is good enough, we can use a method called Train/Test. Train/Test is a method to measure the accuracy of your model.</p>`
+                    content: `< p > In Machine Learning we create models to predict the outcome of certain events.To measure if the model is good enough, we can use a method called Train / Test.Train / Test is a method to measure the accuracy of your model.</p > `
                 }
             ]
         },
@@ -3634,7 +3634,7 @@ else:
             sections: [
                 {
                     id: 'ml-decision-tree-basics', title: 'Decision Tree',
-                    content: `<p>A Decision Tree is a Flow Chart, and can help you make decisions based on previous experience. In the example, a person will try to decide if he/she should go to a comedy show or not.</p>`
+                    content: `< p > A Decision Tree is a Flow Chart, and can help you make decisions based on previous experience.In the example, a person will try to decide if he / she should go to a comedy show or not.</p > `
                 }
             ]
         },
@@ -3645,7 +3645,7 @@ else:
             sections: [
                 {
                     id: 'ml-confusion-matrix-basics', title: 'Confusion Matrix',
-                    content: `<p>It is a table that is used in classification problems to assess where errors in the model were made. The rows represent the actual classes the outcomes should have been. While the columns represent the predictions we have made.</p>`
+                    content: `< p > It is a table that is used in classification problems to assess where errors in the model were made.The rows represent the actual classes the outcomes should have been.While the columns represent the predictions we have made.</p > `
                 }
             ]
         },
@@ -3656,7 +3656,7 @@ else:
             sections: [
                 {
                     id: 'ml-hierarchical-clustering-basics', title: 'Hierarchical Clustering',
-                    content: `<p>Hierarchical clustering is an unsupervised learning method for clustering data points. The algorithm builds clusters by measuring the dissimilarities between data. Unsupervised learning means that a model does not have to be trained.</p>`
+                    content: `< p > Hierarchical clustering is an unsupervised learning method for clustering data points.The algorithm builds clusters by measuring the dissimilarities between data.Unsupervised learning means that a model does not have to be trained.</p > `
                 }
             ]
         },
@@ -3667,7 +3667,7 @@ else:
             sections: [
                 {
                     id: 'ml-logistic-regression-basics', title: 'Logistic Regression',
-                    content: `<p>Logistic regression aims to solve classification problems. It does this by predicting categorical outcomes, unlike linear regression that predicts a continuous outcome.</p>`
+                    content: `< p > Logistic regression aims to solve classification problems.It does this by predicting categorical outcomes, unlike linear regression that predicts a continuous outcome.</p > `
                 }
             ]
         },
@@ -3678,7 +3678,7 @@ else:
             sections: [
                 {
                     id: 'ml-grid-search-basics', title: 'Grid Search',
-                    content: `<p>The majority of machine learning models contain parameters that can be adjusted to vary how the model learns. Grid search is a method to find the optimal objective values for a set of hyperparameters.</p>`
+                    content: `< p > The majority of machine learning models contain parameters that can be adjusted to vary how the model learns.Grid search is a method to find the optimal objective values for a set of hyperparameters.</p > `
                 }
             ]
         },
@@ -3689,7 +3689,7 @@ else:
             sections: [
                 {
                     id: 'ml-categorical-data-basics', title: 'Categorical Data',
-                    content: `<p>When your data has categories represented by strings, it will be difficult to use them to train machine learning models which often only accept numeric data. We can convert these categories into numbers to make our models work.</p>`
+                    content: `< p > When your data has categories represented by strings, it will be difficult to use them to train machine learning models which often only accept numeric data.We can convert these categories into numbers to make our models work.</p > `
                 }
             ]
         },
@@ -3700,7 +3700,7 @@ else:
             sections: [
                 {
                     id: 'ml-k-means-basics', title: 'K-means',
-                    content: `<p>K-means is an unsupervised learning method for clustering data points. The algorithm iteratively divides data points into K clusters by minimizing the variance in each cluster.</p>`
+                    content: `< p > K - means is an unsupervised learning method for clustering data points.The algorithm iteratively divides data points into K clusters by minimizing the variance in each cluster.</p > `
                 }
             ]
         },
@@ -3711,7 +3711,7 @@ else:
             sections: [
                 {
                     id: 'ml-bootstrap-aggregation-basics', title: 'Bootstrap Aggregation',
-                    content: `<p>Bootstrap Aggregation (Bagging) is an ensemble method where multiple models are trained on different subsets of the data and their predictions are aggregated to improve accuracy and prevent overfitting.</p>`
+                    content: `< p > Bootstrap Aggregation(Bagging) is an ensemble method where multiple models are trained on different subsets of the data and their predictions are aggregated to improve accuracy and prevent overfitting.</p > `
                 }
             ]
         },
@@ -3722,7 +3722,7 @@ else:
             sections: [
                 {
                     id: 'ml-cross-validation-basics', title: 'Cross Validation',
-                    content: `<p>When adjusting models we are aiming to increase overall model performance on unseen data. Cross validation is a method where we hold out subsets of the data for testing and train on the remainder.</p>`
+                    content: `< p > When adjusting models we are aiming to increase overall model performance on unseen data.Cross validation is a method where we hold out subsets of the data for testing and train on the remainder.</p > `
                 }
             ]
         },
@@ -3733,7 +3733,7 @@ else:
             sections: [
                 {
                     id: 'ml-auc-roc-curve-basics', title: 'AUC - ROC Curve',
-                    content: `<p>In classification, there are many different evaluation metrics. The most popular is AUC - ROC curve. The ROC curve shows the trade-off between the true positive rate and false positive rate.</p>`
+                    content: `< p > In classification, there are many different evaluation metrics.The most popular is AUC - ROC curve.The ROC curve shows the trade - off between the true positive rate and false positive rate.</p > `
                 }
             ]
         },
@@ -3744,7 +3744,7 @@ else:
             sections: [
                 {
                     id: 'ml-k-nearest-neighbors-basics', title: 'K-nearest neighbors',
-                    content: `<p>KNN is a simple, supervised machine learning algorithm that can be used to solve both classification and regression problems. It relies on the labeled input data to learn a function that produces an appropriate output when given new unlabeled data.</p>`
+                    content: `< p > KNN is a simple, supervised machine learning algorithm that can be used to solve both classification and regression problems.It relies on the labeled input data to learn a function that produces an appropriate output when given new unlabeled data.</p > `
                 }
             ]
         },
@@ -3761,7 +3761,7 @@ else:
             sections: [
                 {
                     id: 'dsa-python-dsa-basics', title: 'Python DSA',
-                    content: `<p>Learn Data Structures and Algorithms in Python.</p>`
+                    content: `< p > Learn Data Structures and Algorithms in Python.</p > `
                 }
             ]
         },
@@ -3772,7 +3772,7 @@ else:
             sections: [
                 {
                     id: 'dsa-lists-and-arrays-basics', title: 'Lists and Arrays',
-                    content: `<p>Learn about Lists and Arrays in Python DSA.</p>`
+                    content: `< p > Learn about Lists and Arrays in Python DSA.</p > `
                 }
             ]
         },
@@ -3783,7 +3783,7 @@ else:
             sections: [
                 {
                     id: 'dsa-stacks-basics', title: 'Stacks',
-                    content: `<p>Learn about Stacks in Python DSA.</p>`
+                    content: `< p > Learn about Stacks in Python DSA.</p > `
                 }
             ]
         },
@@ -3794,7 +3794,7 @@ else:
             sections: [
                 {
                     id: 'dsa-queues-basics', title: 'Queues',
-                    content: `<p>Learn about Queues in Python DSA.</p>`
+                    content: `< p > Learn about Queues in Python DSA.</p > `
                 }
             ]
         },
@@ -3805,7 +3805,7 @@ else:
             sections: [
                 {
                     id: 'dsa-linked-lists-basics', title: 'Linked Lists',
-                    content: `<p>Learn about Linked Lists in Python DSA.</p>`
+                    content: `< p > Learn about Linked Lists in Python DSA.</p > `
                 }
             ]
         },
@@ -3816,7 +3816,7 @@ else:
             sections: [
                 {
                     id: 'dsa-hash-tables-basics', title: 'Hash Tables',
-                    content: `<p>Learn about Hash Tables in Python DSA.</p>`
+                    content: `< p > Learn about Hash Tables in Python DSA.</p > `
                 }
             ]
         },
@@ -3827,7 +3827,7 @@ else:
             sections: [
                 {
                     id: 'dsa-trees-basics', title: 'Trees',
-                    content: `<p>Learn about Trees in Python DSA.</p>`
+                    content: `< p > Learn about Trees in Python DSA.</p > `
                 }
             ]
         },
@@ -3838,7 +3838,7 @@ else:
             sections: [
                 {
                     id: 'dsa-binary-trees-basics', title: 'Binary Trees',
-                    content: `<p>Learn about Binary Trees in Python DSA.</p>`
+                    content: `< p > Learn about Binary Trees in Python DSA.</p > `
                 }
             ]
         },
@@ -3849,7 +3849,7 @@ else:
             sections: [
                 {
                     id: 'dsa-binary-search-trees-basics', title: 'Binary Search Trees',
-                    content: `<p>Learn about Binary Search Trees in Python DSA.</p>`
+                    content: `< p > Learn about Binary Search Trees in Python DSA.</p > `
                 }
             ]
         },
@@ -3860,7 +3860,7 @@ else:
             sections: [
                 {
                     id: 'dsa-avl-trees-basics', title: 'AVL Trees',
-                    content: `<p>Learn about AVL Trees in Python DSA.</p>`
+                    content: `< p > Learn about AVL Trees in Python DSA.</p > `
                 }
             ]
         },
@@ -3871,7 +3871,7 @@ else:
             sections: [
                 {
                     id: 'dsa-graphs-basics', title: 'Graphs',
-                    content: `<p>Learn about Graphs in Python DSA.</p>`
+                    content: `< p > Learn about Graphs in Python DSA.</p > `
                 }
             ]
         },
@@ -3882,7 +3882,7 @@ else:
             sections: [
                 {
                     id: 'dsa-linear-search-basics', title: 'Linear Search',
-                    content: `<p>Learn about Linear Search algorithms in Python DSA.</p>`
+                    content: `< p > Learn about Linear Search algorithms in Python DSA.</p > `
                 }
             ]
         },
@@ -3893,7 +3893,7 @@ else:
             sections: [
                 {
                     id: 'dsa-binary-search-basics', title: 'Binary Search',
-                    content: `<p>Learn about Binary Search algorithms in Python DSA.</p>`
+                    content: `< p > Learn about Binary Search algorithms in Python DSA.</p > `
                 }
             ]
         },
@@ -3904,7 +3904,7 @@ else:
             sections: [
                 {
                     id: 'dsa-bubble-sort-basics', title: 'Bubble Sort',
-                    content: `<p>Learn about the Bubble Sort algorithm in Python DSA.</p>`
+                    content: `< p > Learn about the Bubble Sort algorithm in Python DSA.</p > `
                 }
             ]
         },
@@ -3915,7 +3915,7 @@ else:
             sections: [
                 {
                     id: 'dsa-selection-sort-basics', title: 'Selection Sort',
-                    content: `<p>Learn about the Selection Sort algorithm in Python DSA.</p>`
+                    content: `< p > Learn about the Selection Sort algorithm in Python DSA.</p > `
                 }
             ]
         },
@@ -3926,7 +3926,7 @@ else:
             sections: [
                 {
                     id: 'dsa-insertion-sort-basics', title: 'Insertion Sort',
-                    content: `<p>Learn about the Insertion Sort algorithm in Python DSA.</p>`
+                    content: `< p > Learn about the Insertion Sort algorithm in Python DSA.</p > `
                 }
             ]
         },
@@ -3937,7 +3937,7 @@ else:
             sections: [
                 {
                     id: 'dsa-quick-sort-basics', title: 'Quick Sort',
-                    content: `<p>Learn about the Quick Sort algorithm in Python DSA.</p>`
+                    content: `< p > Learn about the Quick Sort algorithm in Python DSA.</p > `
                 }
             ]
         },
@@ -3948,7 +3948,7 @@ else:
             sections: [
                 {
                     id: 'dsa-counting-sort-basics', title: 'Counting Sort',
-                    content: `<p>Learn about the Counting Sort algorithm in Python DSA.</p>`
+                    content: `< p > Learn about the Counting Sort algorithm in Python DSA.</p > `
                 }
             ]
         },
@@ -3959,7 +3959,7 @@ else:
             sections: [
                 {
                     id: 'dsa-radix-sort-basics', title: 'Radix Sort',
-                    content: `<p>Learn about the Radix Sort algorithm in Python DSA.</p>`
+                    content: `< p > Learn about the Radix Sort algorithm in Python DSA.</p > `
                 }
             ]
         },
@@ -3970,7 +3970,7 @@ else:
             sections: [
                 {
                     id: 'dsa-merge-sort-basics', title: 'Merge Sort',
-                    content: `<p>Learn about the Merge Sort algorithm in Python DSA.</p>`
+                    content: `< p > Learn about the Merge Sort algorithm in Python DSA.</p > `
                 }
             ]
         },
@@ -3987,7 +3987,7 @@ else:
             sections: [
                 {
                     id: 'mysql-get-started-basics', title: 'MySQL Get Started',
-                    content: `<p>Learn how to connect Python to a MySQL database.</p>`
+                    content: `< p > Learn how to connect Python to a MySQL database.</p > `
                 }
             ]
         },
@@ -3998,7 +3998,7 @@ else:
             sections: [
                 {
                     id: 'mysql-create-database-basics', title: 'MySQL Create Database',
-                    content: `<p>Learn how to create a MySQL database using Python.</p>`
+                    content: `< p > Learn how to create a MySQL database using Python.</p> `
                 }
             ]
         },
@@ -4009,7 +4009,7 @@ else:
             sections: [
                 {
                     id: 'mysql-create-table-basics', title: 'MySQL Create Table',
-                    content: `<p>Learn how to create MySQL tables using Python.</p>`
+                    content: `< p > Learn how to create MySQL tables using Python.</p> `
                 }
             ]
         },
@@ -4020,7 +4020,7 @@ else:
             sections: [
                 {
                     id: 'mysql-insert-basics', title: 'MySQL Insert',
-                    content: `<p>Learn how to insert data into MySQL database using Python.</p>`
+                    content: `< p > Learn how to insert data into MySQL database using Python.</p> `
                 }
             ]
         },
@@ -4031,7 +4031,7 @@ else:
             sections: [
                 {
                     id: 'mysql-select-basics', title: 'MySQL Select',
-                    content: `<p>Learn how to query data from a MySQL database using Python.</p>`
+                    content: `< p > Learn how to query data from a MySQL database using Python.</p> `
                 }
             ]
         },
@@ -4042,7 +4042,7 @@ else:
             sections: [
                 {
                     id: 'mysql-where-basics', title: 'MySQL Where',
-                    content: `<p>Learn how to filter MySQL records using the WHERE clause in Python.</p>`
+                    content: `< p > Learn how to filter MySQL records using the WHERE clause in Python.</p > `
                 }
             ]
         },
@@ -4053,7 +4053,7 @@ else:
             sections: [
                 {
                     id: 'mysql-order-by-basics', title: 'MySQL Order By',
-                    content: `<p>Learn how to sort MySQL results using ORDER BY in Python.</p>`
+                    content: `< p > Learn how to sort MySQL results using ORDER BY in Python.</p > `
                 }
             ]
         },
@@ -4064,7 +4064,7 @@ else:
             sections: [
                 {
                     id: 'mysql-delete-basics', title: 'MySQL Delete',
-                    content: `<p>Learn how to delete records from a MySQL table using Python.</p>`
+                    content: `< p > Learn how to delete records from a MySQL table using Python.</p> `
                 }
             ]
         },
@@ -4075,7 +4075,7 @@ else:
             sections: [
                 {
                     id: 'mysql-drop-table-basics', title: 'MySQL Drop Table',
-                    content: `<p>Learn how to delete a table entirely in MySQL using Python.</p>`
+                    content: `< p > Learn how to delete a table entirely in MySQL using Python.</p> `
                 }
             ]
         },
@@ -4086,7 +4086,7 @@ else:
             sections: [
                 {
                     id: 'mysql-update-basics', title: 'MySQL Update',
-                    content: `<p>Learn how to update existing records in a MySQL table using Python.</p>`
+                    content: `< p > Learn how to update existing records in a MySQL table using Python.</p> `
                 }
             ]
         },
@@ -4097,7 +4097,7 @@ else:
             sections: [
                 {
                     id: 'mysql-limit-basics', title: 'MySQL Limit',
-                    content: `<p>Learn how to limit the number of records returned from MySQL.</p>`
+                    content: `< p > Learn how to limit the number of records returned from MySQL.</p > `
                 }
             ]
         },
@@ -4108,7 +4108,7 @@ else:
             sections: [
                 {
                     id: 'mysql-join-basics', title: 'MySQL Join',
-                    content: `<p>Learn how to combine rows from two or more tables in MySQL.</p>`
+                    content: `< p > Learn how to combine rows from two or more tables in MySQL.</p > `
                 }
             ]
         },
@@ -4125,7 +4125,7 @@ else:
             sections: [
                 {
                     id: 'mongodb-get-started-basics', title: 'MongoDB Get Started',
-                    content: `<p>Learn how to connect Python to a MongoDB database.</p>`
+                    content: `< p > Learn how to connect Python to a MongoDB database.</p > `
                 }
             ]
         },
@@ -4136,7 +4136,7 @@ else:
             sections: [
                 {
                     id: 'mongodb-create-db-basics', title: 'MongoDB Create DB',
-                    content: `<p>Learn how to create a database in MongoDB using Python.</p>`
+                    content: `< p > Learn how to create a database in MongoDB using Python.</p> `
                 }
             ]
         },
@@ -4147,7 +4147,7 @@ else:
             sections: [
                 {
                     id: 'mongodb-collection-basics', title: 'MongoDB Collection',
-                    content: `<p>Learn how to create a collection (table) in MongoDB using Python.</p>`
+                    content: `< p > Learn how to create a collection(table) in MongoDB using Python.</p> `
                 }
             ]
         },
@@ -4158,7 +4158,7 @@ else:
             sections: [
                 {
                     id: 'mongodb-insert-basics', title: 'MongoDB Insert',
-                    content: `<p>Learn how to insert documents into a MongoDB collection using Python.</p>`
+                    content: `< p > Learn how to insert documents into a MongoDB collection using Python.</p> `
                 }
             ]
         },
@@ -4169,7 +4169,7 @@ else:
             sections: [
                 {
                     id: 'mongodb-find-basics', title: 'MongoDB Find',
-                    content: `<p>Learn how to retrieve data from a MongoDB database using Python.</p>`
+                    content: `< p > Learn how to retrieve data from a MongoDB database using Python.</p> `
                 }
             ]
         },
@@ -4180,7 +4180,7 @@ else:
             sections: [
                 {
                     id: 'mongodb-query-basics', title: 'MongoDB Query',
-                    content: `<p>Learn how to filter MongoDB results using queries in Python.</p>`
+                    content: `< p > Learn how to filter MongoDB results using queries in Python.</p > `
                 }
             ]
         },
@@ -4191,7 +4191,7 @@ else:
             sections: [
                 {
                     id: 'mongodb-sort-basics', title: 'MongoDB Sort',
-                    content: `<p>Learn how to sort MongoDB result sets.</p>`
+                    content: `< p > Learn how to sort MongoDB result sets.</p > `
                 }
             ]
         },
@@ -4202,7 +4202,7 @@ else:
             sections: [
                 {
                     id: 'mongodb-delete-basics', title: 'MongoDB Delete',
-                    content: `<p>Learn how to delete documents from a MongoDB collection.</p>`
+                    content: `< p > Learn how to delete documents from a MongoDB collection.</p > `
                 }
             ]
         },
@@ -4213,7 +4213,7 @@ else:
             sections: [
                 {
                     id: 'mongodb-drop-collection-basics', title: 'MongoDB Drop Collection',
-                    content: `<p>Learn how to delete a collection entirely in MongoDB.</p>`
+                    content: `< p > Learn how to delete a collection entirely in MongoDB.</p > `
                 }
             ]
         },
@@ -4224,7 +4224,7 @@ else:
             sections: [
                 {
                     id: 'mongodb-update-basics', title: 'MongoDB Update',
-                    content: `<p>Learn how to update existing documents in MongoDB using Python.</p>`
+                    content: `< p > Learn how to update existing documents in MongoDB using Python.</p> `
                 }
             ]
         },
@@ -4235,7 +4235,7 @@ else:
             sections: [
                 {
                     id: 'mongodb-limit-basics', title: 'MongoDB Limit',
-                    content: `<p>Learn how to limit the number of documents returned from MongoDB.</p>`
+                    content: `< p > Learn how to limit the number of documents returned from MongoDB.</p > `
                 }
             ]
         },
@@ -4252,7 +4252,7 @@ else:
             sections: [
                 {
                     id: 'python-overview-basics', title: 'Python Overview',
-                    content: `<p>Comprehensive overview of the Python reference materials.</p>`
+                    content: `< p > Comprehensive overview of the Python reference materials.</p > `
                 }
             ]
         },
@@ -4263,7 +4263,7 @@ else:
             sections: [
                 {
                     id: 'python-built-in-functions-basics', title: 'Python Built-in Functions',
-                    content: `<p>Reference guide to Python's built-in functions.</p>`
+                    content: `< p > Reference guide to Python's built-in functions.</p>`
                 }
             ]
         },
