@@ -3321,7 +3321,7 @@ else:
             sections: [
                 {
                     id: 'ml-getting-started-basics', title: 'Getting Started',
-                    content: `<p>Learn how to get started with Machine Learning in Python.</p>`
+                    content: `<p>Machine learning is making the computer learn from studying data and statistics. Machine Learning is a step into the direction of artificial intelligence. In Machine Learning, we build models to understand the data, and predict outcomes.</p>`
                 }
             ]
         },
@@ -3332,7 +3332,7 @@ else:
             sections: [
                 {
                     id: 'ml-mean-median-mode-basics', title: 'Mean Median Mode',
-                    content: `<p>Learn about Mean, Median, and Mode in Machine Learning.</p>`
+                    content: `<p>In Machine Learning, we often look at Mean, Median, and Mode. Mean is the average value. Median is the middle value. Mode is the most common value. We can use the NumPy library to easily find these values.</p>`
                 }
             ]
         },
@@ -3343,7 +3343,7 @@ else:
             sections: [
                 {
                     id: 'ml-standard-deviation-basics', title: 'Standard Deviation',
-                    content: `<p>Learn about Standard Deviation in Machine Learning.</p>`
+                    content: `<p>Standard deviation is a number that describes how spread out the values are. A low standard deviation means that most of the numbers are close to the mean value. A high standard deviation means that the values are spread out over a wider range.</p>`
                 }
             ]
         },
@@ -3354,7 +3354,7 @@ else:
             sections: [
                 {
                     id: 'ml-percentile-basics', title: 'Percentile',
-                    content: `<p>Learn about Percentiles in Machine Learning.</p>`
+                    content: `<p>Percentiles are used in statistics to give you a number that describes the value that a given percent of the values are lower than. For example, the 75th percentile is the value at which 75% of the values are lower.</p>`
                 }
             ]
         },
@@ -3365,7 +3365,7 @@ else:
             sections: [
                 {
                     id: 'ml-data-distribution-basics', title: 'Data Distribution',
-                    content: `<p>Learn about Data Distribution in Machine Learning.</p>`
+                    content: `<p>Earlier in this tutorial we have worked with very small amounts of data in our examples, just to understand the different concepts. In the real world, the data sets are much bigger, but it can be difficult to gather real world data.</p>`
                 }
             ]
         },
@@ -3376,7 +3376,7 @@ else:
             sections: [
                 {
                     id: 'ml-normal-data-distribution-basics', title: 'Normal Data Distribution',
-                    content: `<p>Learn about Normal Data Distribution in Machine Learning.</p>`
+                    content: `<p>We learned how to create a completely random array, of a given size, and between two given values. In this chapter we will learn how to create an array where the values are concentrated around a given value.</p>`
                 }
             ]
         },
@@ -3387,7 +3387,7 @@ else:
             sections: [
                 {
                     id: 'ml-scatter-plot-basics', title: 'Scatter Plot',
-                    content: `<p>Learn how to use Scatter Plots in Machine Learning.</p>`
+                    content: `<p>A scatter plot is a diagram where each value in the data set is represented by a dot. The Matplotlib module has a method for drawing scatter plots, it needs two arrays of the same length, one for the values of the x-axis, and one for the values of the y-axis.</p>`
                 }
             ]
         },
@@ -3398,7 +3398,7 @@ else:
             sections: [
                 {
                     id: 'ml-linear-regression-basics', title: 'Linear Regression',
-                    content: `<p>Learn about Linear Regression in Machine Learning.</p>`
+                    content: `<p>The term regression is used when you try to find the relationship between variables. In Machine Learning, and in statistical modeling, that relationship is used to predict the outcome of future events. Linear regression uses the relationship between the data-points to draw a straight line through all them.</p>`
                 }
             ]
         },
@@ -3409,7 +3409,7 @@ else:
             sections: [
                 {
                     id: 'ml-polynomial-regression-basics', title: 'Polynomial Regression',
-                    content: `<p>Learn about Polynomial Regression in Machine Learning.</p>`
+                    content: `<p>If your data points clearly will not fit a linear regression (a straight line through all data points), it might be ideal for polynomial regression. Polynomial regression, like linear regression, uses the relationship between the variables x and y to find the best way to draw a line through the data points.</p>`
                 }
             ]
         },
@@ -3420,7 +3420,7 @@ else:
             sections: [
                 {
                     id: 'ml-multiple-regression-basics', title: 'Multiple Regression',
-                    content: `<p>Learn about Multiple Regression in Machine Learning.</p>`
+                    content: `<p>Multiple regression is like linear regression, but with more than one independent value, meaning that we try to predict a value based on two or more variables.</p>`
                 }
             ]
         },
@@ -3431,7 +3431,7 @@ else:
             sections: [
                 {
                     id: 'ml-scale-basics', title: 'Scale',
-                    content: `<p>Learn about Scaling in Machine Learning.</p>`
+                    content: `<p>When your data has different values, and even different measurement units, it can be difficult to compare them. What is kilograms compared to meters? Or altitude compared to time? We can scale data into new values that are easier to compare.</p>`
                 }
             ]
         },
@@ -3442,7 +3442,7 @@ else:
             sections: [
                 {
                     id: 'ml-train-test-basics', title: 'Train/Test',
-                    content: `<p>Learn about Train/Test evaluations in Machine Learning.</p>`
+                    content: `<p>In Machine Learning we create models to predict the outcome of certain events. To measure if the model is good enough, we can use a method called Train/Test. Train/Test is a method to measure the accuracy of your model.</p>`
                 }
             ]
         },
@@ -3453,7 +3453,7 @@ else:
             sections: [
                 {
                     id: 'ml-decision-tree-basics', title: 'Decision Tree',
-                    content: `<p>Learn about Decision Trees in Machine Learning.</p>`
+                    content: `<p>A Decision Tree is a Flow Chart, and can help you make decisions based on previous experience. In the example, a person will try to decide if he/she should go to a comedy show or not.</p>`
                 }
             ]
         },
@@ -3464,7 +3464,7 @@ else:
             sections: [
                 {
                     id: 'ml-confusion-matrix-basics', title: 'Confusion Matrix',
-                    content: `<p>Learn about Confusion Matrix in Machine Learning.</p>`
+                    content: `<p>It is a table that is used in classification problems to assess where errors in the model were made. The rows represent the actual classes the outcomes should have been. While the columns represent the predictions we have made.</p>`
                 }
             ]
         },
@@ -3475,7 +3475,7 @@ else:
             sections: [
                 {
                     id: 'ml-hierarchical-clustering-basics', title: 'Hierarchical Clustering',
-                    content: `<p>Learn about Hierarchical Clustering in Machine Learning.</p>`
+                    content: `<p>Hierarchical clustering is an unsupervised learning method for clustering data points. The algorithm builds clusters by measuring the dissimilarities between data. Unsupervised learning means that a model does not have to be trained.</p>`
                 }
             ]
         },
@@ -3486,7 +3486,7 @@ else:
             sections: [
                 {
                     id: 'ml-logistic-regression-basics', title: 'Logistic Regression',
-                    content: `<p>Learn about Logistic Regression in Machine Learning.</p>`
+                    content: `<p>Logistic regression aims to solve classification problems. It does this by predicting categorical outcomes, unlike linear regression that predicts a continuous outcome.</p>`
                 }
             ]
         },
@@ -3497,7 +3497,7 @@ else:
             sections: [
                 {
                     id: 'ml-grid-search-basics', title: 'Grid Search',
-                    content: `<p>Learn about Grid Search in Machine Learning.</p>`
+                    content: `<p>The majority of machine learning models contain parameters that can be adjusted to vary how the model learns. Grid search is a method to find the optimal objective values for a set of hyperparameters.</p>`
                 }
             ]
         },
@@ -3508,7 +3508,7 @@ else:
             sections: [
                 {
                     id: 'ml-categorical-data-basics', title: 'Categorical Data',
-                    content: `<p>Learn how to handle Categorical Data in Machine Learning.</p>`
+                    content: `<p>When your data has categories represented by strings, it will be difficult to use them to train machine learning models which often only accept numeric data. We can convert these categories into numbers to make our models work.</p>`
                 }
             ]
         },
@@ -3519,7 +3519,7 @@ else:
             sections: [
                 {
                     id: 'ml-k-means-basics', title: 'K-means',
-                    content: `<p>Learn about K-means clustering in Machine Learning.</p>`
+                    content: `<p>K-means is an unsupervised learning method for clustering data points. The algorithm iteratively divides data points into K clusters by minimizing the variance in each cluster.</p>`
                 }
             ]
         },
@@ -3530,7 +3530,7 @@ else:
             sections: [
                 {
                     id: 'ml-bootstrap-aggregation-basics', title: 'Bootstrap Aggregation',
-                    content: `<p>Learn about Bootstrap Aggregation (Bagging) in Machine Learning.</p>`
+                    content: `<p>Bootstrap Aggregation (Bagging) is an ensemble method where multiple models are trained on different subsets of the data and their predictions are aggregated to improve accuracy and prevent overfitting.</p>`
                 }
             ]
         },
@@ -3541,7 +3541,7 @@ else:
             sections: [
                 {
                     id: 'ml-cross-validation-basics', title: 'Cross Validation',
-                    content: `<p>Learn about Cross Validation in Machine Learning.</p>`
+                    content: `<p>When adjusting models we are aiming to increase overall model performance on unseen data. Cross validation is a method where we hold out subsets of the data for testing and train on the remainder.</p>`
                 }
             ]
         },
@@ -3552,7 +3552,7 @@ else:
             sections: [
                 {
                     id: 'ml-auc-roc-curve-basics', title: 'AUC - ROC Curve',
-                    content: `<p>Learn about AUC - ROC Curve in Machine Learning.</p>`
+                    content: `<p>In classification, there are many different evaluation metrics. The most popular is AUC - ROC curve. The ROC curve shows the trade-off between the true positive rate and false positive rate.</p>`
                 }
             ]
         },
@@ -3563,7 +3563,7 @@ else:
             sections: [
                 {
                     id: 'ml-k-nearest-neighbors-basics', title: 'K-nearest neighbors',
-                    content: `<p>Learn about K-nearest neighbors (KNN) in Machine Learning.</p>`
+                    content: `<p>KNN is a simple, supervised machine learning algorithm that can be used to solve both classification and regression problems. It relies on the labeled input data to learn a function that produces an appropriate output when given new unlabeled data.</p>`
                 }
             ]
         },
