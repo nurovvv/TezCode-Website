@@ -3447,35 +3447,72 @@ else:
     <li><b>Mode</b> - The most common value</li>
 </ul>
 <p>Example: We have registered the speed of 13 cars:</p>
-<pre>speed = [99,86,87,88,111,86,103,87,94,78,77,85,86]</pre>
+
+<div style="background-color: #f1f1f1; padding: 15px; border-radius: 4px; margin-bottom: 20px; font-family: Consolas, 'Courier New', monospace; font-size: 15px;">
+  speed = [<span style="color: #a31515;">99</span>,<span style="color: #a31515;">86</span>,<span style="color: #a31515;">87</span>,<span style="color: #a31515;">88</span>,<span style="color: #a31515;">111</span>,<span style="color: #a31515;">86</span>,<span style="color: #a31515;">103</span>,<span style="color: #a31515;">87</span>,<span style="color: #a31515;">94</span>,<span style="color: #a31515;">78</span>,<span style="color: #a31515;">77</span>,<span style="color: #a31515;">85</span>,<span style="color: #a31515;">86</span>]
+</div>
+
 <p>What is the average, the middle, or the most common speed value?</p>
 
-<hr/>
+<hr style="border: 0; border-top: 1px solid #eee; margin: 30px 0;" />
 
 <h2>Mean</h2>
 <p>The mean value is the average value.</p>
 <p>To calculate the mean, find the sum of all values, and divide the sum by the number of values:</p>
-<pre>(99+86+87+88+111+86+103+87+94+78+77+85+86) / 13 = 89.77</pre>
-<p>The NumPy module has a method for this. Learn about the NumPy module in our <a href="#">NumPy Tutorial</a>.</p>
-
-<hr/>
+<div style="background-color: #f1f1f1; padding: 15px; border-radius: 4px; margin-bottom: 20px; font-family: Consolas, 'Courier New', monospace; font-size: 15px;">
+  (99+86+87+88+111+86+103+87+94+78+77+85+86) / 13 = 89.77
+</div>
+<p>The NumPy module has a method for this. Learn about the NumPy module in our <a href="#">NumPy Tutorial</a>.</p>`,
+                    examples: [
+                        {
+                            title: 'Example',
+                            preContent: `<p>Use the NumPy <code>mean()</code> method to find the average speed:</p>`,
+                            code: 'import numpy\n\nspeed = [99,86,87,88,111,86,103,87,94,78,77,85,86]\n\nx = numpy.mean(speed)\n\nprint(x)',
+                            postContent: `<hr style="border: 0; border-top: 1px solid #eee; margin: 40px 0;" />
 
 <h2>Median</h2>
 <p>The median value is the value in the middle, after you have sorted all the values:</p>
-<pre>77, 78, 85, 86, 86, 86, 87, 87, 88, 94, 99, 103, 111</pre>
+<p style="font-family: Consolas, 'Courier New', monospace; font-size: 15px; letter-spacing: 1px; margin-top: 30px; margin-bottom: 30px;">
+  <span style="color: #a31515;">77, 78, 85, 86, 86, 86, <span style="border-bottom: 3px double #a31515;">87</span>, 87, 88, 94, 99, 103, 111</span>
+</p>
 <p>It is important that the numbers are sorted before you can find the median.</p>
-<p>The NumPy module has a method for this:</p>
+<p>The NumPy module has a method for this:</p>`
+                        },
+                        {
+                            title: 'Example',
+                            preContent: ``,
+                            code: 'import numpy\n\nspeed = [99,86,87,88,111,86,103,87,94,78,77,85,86]\n\nx = numpy.median(speed)\n\nprint(x)',
+                            postContent: `<p style="margin-top: 40px;">If there are two numbers in the middle, divide the sum of those numbers by two.</p>
+<p style="font-family: Consolas, 'Courier New', monospace; font-size: 15px; letter-spacing: 1px; margin-top: 30px; margin-bottom: 30px;">
+  <span style="color: #a31515;">77, 78, 85, 86, 86, <span style="border-bottom: 1px solid #a31515;">86</span>, <span style="border-bottom: 1px solid #a31515;">87</span>, 87, 94, 98, 99, 103</span><br><br>
+  (86 + 87) / 2 = <span style="border-bottom: 3px double #a31515; font-size: 18px;">86.5</span>
+</p>
 
-<hr/>
+<h2>Example</h2>
+<p>Using the NumPy module:</p>`
+                        },
+                        {
+                            title: 'Example',
+                            preContent: ``,
+                            code: 'import numpy\n\nspeed = [99,86,87,88,86,103,87,94,78,77,85,86]\n\nx = numpy.median(speed)\n\nprint(x)',
+                            postContent: `<hr style="border: 0; border-top: 1px solid #eee; margin: 40px 0;" />
 
-<p>If there are two numbers in the middle, divide the sum of those numbers by two.</p>
-<pre>77, 78, 85, 86, 86, 86, 87, 87, 94, 98, 99, 103
+<h2>Mode</h2>
+<p>The Mode value is the value that appears the most number of times:</p>
+<p style="font-family: Consolas, 'Courier New', monospace; font-size: 15px; letter-spacing: 1px; margin-top: 30px; margin-bottom: 30px;">
+  <span style="color: #a31515;">99, <span style="border-bottom: 1px solid #a31515;">86</span>, 87, 88, 111, <span style="border-bottom: 1px solid #a31515;">86</span>, 103, 87, 94, 78, 77, 85, <span style="border-bottom: 1px solid #a31515;">86</span> = 86</span>
+</p>
+<p>The SciPy module has a method for this. Learn about the SciPy module in our <a href="#">SciPy Tutorial</a>.</p>`
+                        },
+                        {
+                            title: 'Example',
+                            preContent: `<p>Use the SciPy <code>mode()</code> method to find the number that appears the most:</p>`,
+                            code: 'from scipy import stats\n\nspeed = [99,86,87,88,111,86,103,87,94,78,77,85,86]\n\nx = stats.mode(speed)\n\nprint(x)',
+                            postContent: `<hr style="border: 0; border-top: 1px solid #eee; margin: 40px 0;" />
 
-(86 + 87) / 2 = 86.5</pre>`,
-                    examples: [
-                        { title: 'Use the NumPy mean() method to find the average speed:', code: 'import numpy\n\nspeed = [99,86,87,88,111,86,103,87,94,78,77,85,86]\n\nx = numpy.mean(speed)\n\nprint(x)' },
-                        { title: 'Use the NumPy median() method to find the middle value:', code: 'import numpy\n\nspeed = [99,86,87,88,111,86,103,87,94,78,77,85,86]\n\nx = numpy.median(speed)\n\nprint(x)' },
-                        { title: 'Using the NumPy module (Even amount of numbers):', code: 'import numpy\n\nspeed = [99,86,87,88,86,103,87,94,78,77,85,86]\n\nx = numpy.median(speed)\n\nprint(x)' }
+<h2>Chapter Summary</h2>
+<p>The Mean, Median, and Mode are techniques that are often used in Machine Learning, so it is important to understand the concept behind them.</p>`
+                        }
                     ]
                 }
             ]
