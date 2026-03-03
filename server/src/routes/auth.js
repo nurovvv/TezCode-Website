@@ -59,7 +59,7 @@ router.post('/register', async (req, res) => {
                 if (existingUsername && existingUsername.id !== user.id) {
                     return res.status(400).json({ message: 'Username already taken' });
                 }
-                user.passwordHash = await bcrypt.hash(password, 12);
+                user.passwordHash = await bcrypt.hash(password, 10);
                 if (name) user.name = name;
                 user.username = username;
                 await user.save();
@@ -72,7 +72,7 @@ router.post('/register', async (req, res) => {
                 return res.status(400).json({ message: 'Username already taken' });
             }
 
-            const passwordHash = await bcrypt.hash(password, 12);
+            const passwordHash = await bcrypt.hash(password, 10);
             user = await User.create({
                 name,
                 username,
@@ -241,7 +241,7 @@ router.post('/login', async (req, res) => {
         if (!user.passwordHash) {
             if (user.googleId) {
                 console.log(`[Auth] Setting new password for Google account ${email} on manual login`);
-                user.passwordHash = await bcrypt.hash(password, 12);
+                user.passwordHash = await bcrypt.hash(password, 10);
                 await user.save();
             } else {
                 console.log(`[Auth] Login failed: No password hash for ${email} and no Google ID`);
