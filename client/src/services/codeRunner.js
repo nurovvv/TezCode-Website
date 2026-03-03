@@ -51,6 +51,17 @@ async function runPython(code, stdin = "") {
     try {
         const py = await getPyodide();
 
+        // 1. Detect required packages and load them dynamically
+        const packagesToLoad = [];
+        if (code.includes('import numpy') || code.includes('from numpy')) packagesToLoad.push('numpy');
+        if (code.includes('import scipy') || code.includes('from scipy')) packagesToLoad.push('scipy');
+        if (code.includes('import pandas') || code.includes('from pandas')) packagesToLoad.push('pandas');
+        if (code.includes('import matplotlib') || code.includes('from matplotlib')) packagesToLoad.push('matplotlib');
+
+        if (packagesToLoad.length > 0) {
+            await py.loadPackage(packagesToLoad);
+        }
+
         // Setup pipes and clear global namespace for isolation
         // We Use a dictionary for global namespace to avoid cluttering pyodide's globals
         py.runPython(`
