@@ -67,6 +67,22 @@ const outputsMatch = (actual, expected) => {
     return false;
 };
 
+const classifyError = (errorMsg) => {
+    if (!errorMsg) return null;
+    const e = errorMsg.toLowerCase();
+    if (e.includes('syntaxerror') || e.includes('syntax error') || e.includes('invalid syntax') || e.includes('unexpected token') || e.includes('parsing error'))
+        return 'Syntax Error';
+    if (e.includes('indentationerror') || e.includes('indentation error'))
+        return 'Syntax Error';
+    if (e.includes('nameerror') || e.includes('referenceerror') || e.includes('is not defined'))
+        return 'Runtime Error';
+    if (e.includes('typeerror') || e.includes('valueerror') || e.includes('indexerror') || e.includes('keyerror') || e.includes('zerodivisionerror') || e.includes('attributeerror') || e.includes('overflowerror') || e.includes('recursionerror'))
+        return 'Runtime Error';
+    if (e.includes('traceback') || e.includes('error') || e.includes('exception'))
+        return 'Runtime Error';
+    return null;
+};
+
 const getTimeAgo = (date) => {
     const seconds = Math.floor((new Date() - date) / 1000);
     if (seconds < 60) return 'just now';
@@ -131,26 +147,55 @@ export default function ChallengeSolverPage() {
         try {
             const evaluationResults = [];
             let passedAll = true;
+            let detectedErrorType = null;
 
-            for (const tc of challenge.testCases || []) {
-                const res = await runCode(code, language, tc.input);
-                const actualOutput = res.output ? res.output.trim() : "";
-                const expected = tc.expectedOutput ? tc.expectedOutput.trim() : "";
-                const hasFatalError = !res.success && !actualOutput;
-                const passed = !hasFatalError && outputsMatch(actualOutput, expected);
+            // Check for empty code
+            if (!code || !code.trim()) {
+                detectedErrorType = 'Empty Code';
+                for (const tc of challenge.testCases || []) {
+                    evaluationResults.push({
+                        input: tc.input,
+                        expectedOutput: tc.expectedOutput ? tc.expectedOutput.trim() : "",
+                        actualOutput: '(no code submitted)',
+                        passed: false,
+                        errorType: 'Empty Code'
+                    });
+                }
+                passedAll = false;
+            } else {
+                for (const tc of challenge.testCases || []) {
+                    const res = await runCode(code, language, tc.input);
+                    const actualOutput = res.output ? res.output.trim() : "";
+                    const expected = tc.expectedOutput ? tc.expectedOutput.trim() : "";
+                    const hasFatalError = !res.success && !actualOutput;
+                    const passed = !hasFatalError && outputsMatch(actualOutput, expected);
 
-                evaluationResults.push({
-                    input: tc.input,
-                    expectedOutput: expected,
-                    actualOutput: actualOutput || (res.error ? `Error: ${res.error}` : '(no output)'),
-                    passed
-                });
+                    // Classify the error type from the error message
+                    let errorType = null;
+                    if (!passed && res.error) {
+                        errorType = classifyError(res.error);
+                    }
+                    if (!passed && !errorType && !res.success) {
+                        errorType = 'Runtime Error';
+                    }
 
-                console.log(`Test Case: Input="${tc.input}", Expected="${expected}", Actual="${actualOutput}", Passed=${passed}`);
-                if (!passed) passedAll = false;
+                    evaluationResults.push({
+                        input: tc.input,
+                        expectedOutput: expected,
+                        actualOutput: actualOutput || (res.error ? `Error: ${res.error}` : '(no output)'),
+                        passed,
+                        errorType
+                    });
+
+                    console.log(`Test Case: Input="${tc.input}", Expected="${expected}", Actual="${actualOutput}", Passed=${passed}, ErrorType=${errorType}`);
+                    if (!passed) {
+                        passedAll = false;
+                        if (!detectedErrorType && errorType) detectedErrorType = errorType;
+                    }
+                }
             }
 
-            const runResults = { passed: passedAll, results: evaluationResults };
+            const runResults = { passed: passedAll, results: evaluationResults, errorType: detectedErrorType };
             setResults(runResults);
             return runResults;
         } catch (err) {
@@ -408,7 +453,7 @@ export default function ChallengeSolverPage() {
                                                                     fontSize: '14px', fontWeight: '700',
                                                                     color: passed ? '#00af9b' : '#ff2d55'
                                                                 }}>
-                                                                    {passed ? 'Accepted' : 'Wrong Answer'}
+                                                                    {passed ? 'Accepted' : (sub.errorType || 'Wrong Answer')}
                                                                 </span>
                                                             </div>
                                                             <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
@@ -573,8 +618,8 @@ export default function ChallengeSolverPage() {
                                     </div>
                                 ) : (
                                     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                                        <div style={{ fontSize: '18px', fontWeight: '700', color: running ? '#8a8a8a' : (results?.passed ? '#00af9b' : '#ff2d55') }}>
-                                            {running ? 'Evaluating...' : (results?.passed ? 'Accepted' : 'Wrong Answer')}
+                                        <div style={{ fontSize: '18px', fontWeight: '700', color: running ? '#8a8a8a' : (results?.passed ? '#00af9b' : (results?.errorType ? '#ff9500' : '#ff2d55')) }}>
+                                            {running ? 'Evaluating...' : (results?.passed ? 'Accepted' : (results?.errorType || 'Wrong Answer'))}
                                         </div>
                                         {results?.error && <div style={{ color: '#ff2d55' }}>{results.error}</div>}
                                         {results?.results?.map((res, idx) => (
