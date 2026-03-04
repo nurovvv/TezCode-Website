@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
+import { useAuth } from '../context/AuthContext';
 
 const fadeUp = {
     hidden: { opacity: 0, y: 20 },
@@ -9,6 +10,7 @@ const fadeUp = {
 
 export default function LandingPage() {
     const { t } = useLanguage();
+    const { user } = useAuth();
 
     return (
         <div style={{ background: '#fff', fontFamily: "'Inter', -apple-system, sans-serif" }}>
@@ -31,7 +33,7 @@ export default function LandingPage() {
                     </p>
 
                     {/* Action Button */}
-                    <Link to="/register" style={{
+                    <Link to={user ? "/catalog" : "/register"} style={{
                         display: 'inline-block',
                         padding: '12px 28px',
                         background: '#1d1d1f',
