@@ -163,12 +163,7 @@ export default function ChallengeSolverPage() {
         }
     };
 
-    // Auto-reveal solution if tab is clicked and not yet viewed
-    useEffect(() => {
-        if (activeTab === 'solution' && !challenge.solutionViewed && !solution && !revealingSolution) {
-            handleUnlockSolution();
-        }
-    }, [activeTab]);
+    // Auto-reveal removed to restore the button as requested
 
     const handleRun = useCallback(async () => {
         if (!challenge) return;
@@ -470,8 +465,32 @@ export default function ChallengeSolverPage() {
                                             dangerouslySetInnerHTML={{ __html: solution || challenge.solution || 'No solution available yet.' }}
                                         />
                                     ) : (
-                                        <div style={{ textAlign: 'center', padding: '40px 20px' }}>
-                                            <p style={{ color: '#8a8a8a' }}>{revealingSolution ? 'Revealing solution...' : 'Loading solution...'}</p>
+                                        <div style={{
+                                            textAlign: 'center',
+                                            padding: '40px 20px',
+                                            background: 'rgba(255,161,22,0.05)',
+                                            borderRadius: '12px',
+                                            border: '1px dashed rgba(255,161,22,0.3)'
+                                        }}>
+                                            <div style={{ fontSize: '32px', marginBottom: '16px' }}>🔑</div>
+                                            <h3 style={{ color: '#ffa116', marginBottom: '8px' }}>Unlock Solution</h3>
+                                            <p style={{ color: '#8a8a8a', fontSize: '14px', marginBottom: '24px', maxWidth: '300px', margin: '0 auto 24px' }}>
+                                                Revealing the solution will prevent you from earning <strong>{challenge.xpReward} XP</strong> for this challenge.
+                                            </p>
+                                            <button
+                                                onClick={handleUnlockSolution}
+                                                disabled={revealingSolution}
+                                                className="solver-btn btn-run"
+                                                style={{
+                                                    background: '#ffa116',
+                                                    color: '#000',
+                                                    border: 'none',
+                                                    padding: '10px 24px',
+                                                    fontWeight: '700'
+                                                }}
+                                            >
+                                                {revealingSolution ? 'Unlocking...' : 'Unlock Solution'}
+                                            </button>
                                         </div>
                                     )}
                                 </motion.div>
