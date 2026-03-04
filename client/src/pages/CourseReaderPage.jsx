@@ -5022,7 +5022,18 @@ export default function CourseReaderPage() {
     const { id } = useParams();
     const navigate = useNavigate();
     const { user } = useAuth();
-    const [currentIdx, setCurrentIdx] = useState(0);
+    const [currentIdx, setCurrentIdx] = useState(() => {
+        try {
+            const saved = localStorage.getItem('tezcode_sections');
+            if (saved) {
+                const completedSet = new Set(JSON.parse(saved));
+                const firstIncomplete = allSections.findIndex(s => !completedSet.has(s.id));
+                // If all completed, go to last section; otherwise go to first incomplete
+                return firstIncomplete === -1 ? allSections.length - 1 : firstIncomplete;
+            }
+        } catch { /* ignore */ }
+        return 0;
+    });
     const [sidebarOpen, setSidebarOpen] = useState(true);
     const [expandedChapters, setExpandedChapters] = useState(new Set());
     const [completed, setCompleted] = useState(() => {
