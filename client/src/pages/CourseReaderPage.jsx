@@ -5065,6 +5065,14 @@ export default function CourseReaderPage() {
         syncLocalProgress();
     }, [id, user]);
 
+    // Auto-expand the chapter containing the current section
+    useEffect(() => {
+        const current = allSections[currentIdx];
+        if (current) {
+            setExpandedChapters(new Set([current.chapterId]));
+        }
+    }, [currentIdx]);
+
     const section = allSections[currentIdx];
     const progress = Math.round((completed.size / allSections.length) * 100);
 
