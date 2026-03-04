@@ -146,9 +146,6 @@ export default function ChallengeSolverPage() {
             return;
         }
 
-        const confirmed = window.confirm("Warning: Unlocking the solution will void XP rewards for this challenge. Do you want to proceed?");
-        if (!confirmed) return;
-
         setRevealingSolution(true);
         try {
             const res = await api.get(`challenges/${id}/solution`);
@@ -156,11 +153,22 @@ export default function ChallengeSolverPage() {
             setChallenge(prev => ({ ...prev, solutionViewed: true }));
         } catch (err) {
             console.error('Failed to fetch solution:', err);
-            alert('Failed to reveal solution. Please try again.');
+            const errorMsg = err.response?.data?.message || err.message;
+            // Only alert if we're actually on the solution tab to avoid spamming
+            if (activeTab === 'solution') {
+                alert(`Failed to reveal solution: ${errorMsg}. Please ensure you are logged in and the server is running.`);
+            }
         } finally {
             setRevealingSolution(false);
         }
     };
+
+    // Auto-reveal solution if tab is clicked and not yet viewed
+    useEffect(() => {
+        if (activeTab === 'solution' && !challenge.solutionViewed && !solution && !revealingSolution) {
+            handleUnlockSolution();
+        }
+    }, [activeTab]);
 
     const handleRun = useCallback(async () => {
         if (!challenge) return;
@@ -462,32 +470,8 @@ export default function ChallengeSolverPage() {
                                             dangerouslySetInnerHTML={{ __html: solution || challenge.solution || 'No solution available yet.' }}
                                         />
                                     ) : (
-                                        <div style={{
-                                            textAlign: 'center',
-                                            padding: '40px 20px',
-                                            background: 'rgba(255,161,22,0.05)',
-                                            borderRadius: '12px',
-                                            border: '1px dashed rgba(255,161,22,0.3)'
-                                        }}>
-                                            <div style={{ fontSize: '32px', marginBottom: '16px' }}>🔑</div>
-                                            <h3 style={{ color: '#ffa116', marginBottom: '8px' }}>Unlock Solution</h3>
-                                            <p style={{ color: '#8a8a8a', fontSize: '14px', marginBottom: '24px', maxWidth: '300px', margin: '0 auto 24px' }}>
-                                                Revealing the solution will prevent you from earning <strong>{challenge.xpReward} XP</strong> for this challenge.
-                                            </p>
-                                            <button
-                                                onClick={handleUnlockSolution}
-                                                disabled={revealingSolution}
-                                                className="solver-btn btn-run"
-                                                style={{
-                                                    background: '#ffa116',
-                                                    color: '#000',
-                                                    border: 'none',
-                                                    padding: '10px 24px',
-                                                    fontWeight: '700'
-                                                }}
-                                            >
-                                                {revealingSolution ? 'Unlocking...' : 'I understand, show solution'}
-                                            </button>
+                                        <div style={{ textAlign: 'center', padding: '40px 20px' }}>
+                                            <p style={{ color: '#8a8a8a' }}>{revealingSolution ? 'Revealing solution...' : 'Loading solution...'}</p>
                                         </div>
                                     )}
                                 </motion.div>
