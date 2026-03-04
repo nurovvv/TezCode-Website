@@ -192,6 +192,16 @@ const ChallengeSolutionView = sequelize.define('ChallengeSolutionView', {
     viewedAt: { type: DataTypes.DATE, defaultValue: DataTypes.NOW, field: 'viewed_at' },
 }, { tableName: 'challenge_solution_views', timestamps: true, underscored: true });
 
+const ChallengeComment = sequelize.define('ChallengeComment', {
+    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+    content: { type: DataTypes.TEXT, allowNull: false },
+}, { tableName: 'challenge_comments', timestamps: true, underscored: true });
+
+const CommentLike = sequelize.define('CommentLike', {
+    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+}, { tableName: 'comment_likes', timestamps: true, underscored: true });
+
+
 // Associations
 User.hasMany(RefreshToken, { foreignKey: 'user_id', onDelete: 'CASCADE' });
 RefreshToken.belongsTo(User, { foreignKey: 'user_id' });
@@ -232,6 +242,22 @@ ChallengeSolutionView.belongsTo(User, { foreignKey: 'user_id' });
 Challenge.hasMany(ChallengeSolutionView, { foreignKey: 'challenge_id', onDelete: 'CASCADE' });
 ChallengeSolutionView.belongsTo(Challenge, { foreignKey: 'challenge_id' });
 
+// Discussion associations
+User.hasMany(ChallengeComment, { foreignKey: 'user_id' });
+ChallengeComment.belongsTo(User, { foreignKey: 'user_id' });
+
+Challenge.hasMany(ChallengeComment, { foreignKey: 'challenge_id', onDelete: 'CASCADE' });
+ChallengeComment.belongsTo(Challenge, { foreignKey: 'challenge_id' });
+
+ChallengeComment.hasMany(ChallengeComment, { as: 'replies', foreignKey: 'parent_id' });
+ChallengeComment.belongsTo(ChallengeComment, { as: 'parent', foreignKey: 'parent_id' });
+
+User.hasMany(CommentLike, { foreignKey: 'user_id' });
+CommentLike.belongsTo(User, { foreignKey: 'user_id' });
+
+ChallengeComment.hasMany(CommentLike, { foreignKey: 'comment_id', onDelete: 'CASCADE' });
+CommentLike.belongsTo(ChallengeComment, { foreignKey: 'comment_id' });
+
 module.exports = {
     User,
     RefreshToken,
@@ -244,5 +270,7 @@ module.exports = {
     Challenge,
     ChallengeSubmission,
     ChallengeSolutionView,
+    ChallengeComment,
+    CommentLike,
     sequelize,
 };

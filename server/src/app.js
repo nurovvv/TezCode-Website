@@ -11,6 +11,7 @@ const authRoutes = require('./routes/auth');
 const courseRoutes = require('./routes/courses');
 const progressRoutes = require('./routes/progress');
 const challengeRoutes = require('./routes/challenges');
+const discussionRoutes = require('./routes/discussions');
 const leaderboardRoutes = require('./routes/leaderboard');
 const runPythonRoutes = require('./routes/runPython');
 const dashboardRoutes = require('./routes/dashboard');
@@ -89,6 +90,7 @@ app.use('/api/courses', courseRoutes);
 app.use('/api/progress', progressRoutes);
 app.use('/api/run-python', runPythonRoutes);
 app.use('/api/challenges', challengeRoutes);
+app.use('/api/challenges', discussionRoutes);
 app.use('/api/leaderboard', leaderboardRoutes);
 app.use('/api/dashboard', dashboardRoutes);
 

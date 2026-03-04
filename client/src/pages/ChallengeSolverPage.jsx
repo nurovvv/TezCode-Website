@@ -116,6 +116,12 @@ export default function ChallengeSolverPage() {
     const [solution, setSolution] = useState(null);
     const [loadingSolution, setLoadingSolution] = useState(false);
     const [revealingSolution, setRevealingSolution] = useState(false);
+    const [comments, setComments] = useState([]);
+    const [loadingComments, setLoadingComments] = useState(false);
+    const [newComment, setNewComment] = useState('');
+    const [postingComment, setPostingComment] = useState(false);
+    const [replyingTo, setReplyingTo] = useState(null);
+    const [replyText, setReplyText] = useState('');
 
     useEffect(() => {
         api.get(`challenges/${id}`)
@@ -139,6 +145,17 @@ export default function ChallengeSolverPage() {
                 .finally(() => setLoadingSubmissions(false));
         }
     }, [activeTab, id, user]);
+
+    // Fetch comments when discussion tab is active
+    useEffect(() => {
+        if (activeTab === 'discussion') {
+            setLoadingComments(true);
+            api.get(`challenges/${id}/discussions`)
+                .then(res => setComments(res.data))
+                .catch(err => console.error('Failed to fetch comments:', err))
+                .finally(() => setLoadingComments(false));
+        }
+    }, [activeTab, id]);
 
     const handleUnlockSolution = async () => {
         if (!user) {
@@ -415,7 +432,7 @@ export default function ChallengeSolverPage() {
                 {/* Left Pane */}
                 <section className="solver-left-pane">
                     <div className="solver-tabs-row">
-                        {['question', 'solution', 'submissions'].map(tab => (
+                        {['question', 'solution', 'submissions', 'discussion'].map(tab => (
                             <button
                                 key={tab}
                                 onClick={() => setActiveTab(tab)}
@@ -491,6 +508,173 @@ export default function ChallengeSolverPage() {
                                             >
                                                 {revealingSolution ? 'Unlocking...' : 'Unlock Solution'}
                                             </button>
+                                        </div>
+                                    )}
+                                </motion.div>
+                            )}
+                            {activeTab === 'discussion' && (
+                                <motion.div key="discussion">
+                                    {/* Post new comment */}
+                                    {user ? (
+                                        <div style={{ marginBottom: '24px', display: 'flex', gap: '12px' }}>
+                                            <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'linear-gradient(135deg, #ffa116, #ff6b00)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '14px', fontWeight: '700', color: '#000', flexShrink: 0 }}>
+                                                {user.username?.[0]?.toUpperCase() || 'U'}
+                                            </div>
+                                            <div style={{ flex: 1 }}>
+                                                <textarea
+                                                    value={newComment}
+                                                    onChange={e => setNewComment(e.target.value)}
+                                                    placeholder="Share your thoughts or ask a question..."
+                                                    maxLength={2000}
+                                                    style={{ width: '100%', minHeight: '80px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '8px', padding: '12px', color: '#e0e0e0', fontSize: '14px', resize: 'vertical', fontFamily: 'inherit' }}
+                                                />
+                                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '8px' }}>
+                                                    <span style={{ fontSize: '12px', color: '#555' }}>{newComment.length}/2000</span>
+                                                    <button
+                                                        onClick={async () => {
+                                                            if (!newComment.trim()) return;
+                                                            setPostingComment(true);
+                                                            try {
+                                                                const res = await api.post(`challenges/${id}/discussions`, { content: newComment });
+                                                                setComments(prev => [res.data, ...prev]);
+                                                                setNewComment('');
+                                                            } catch (err) { console.error('Failed to post:', err); }
+                                                            finally { setPostingComment(false); }
+                                                        }}
+                                                        disabled={postingComment || !newComment.trim()}
+                                                        className="solver-btn btn-run"
+                                                        style={{ padding: '8px 20px', fontSize: '13px' }}
+                                                    >
+                                                        {postingComment ? 'Posting...' : 'Post Comment'}
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        <p style={{ color: '#8a8a8a', marginBottom: '16px' }}>Log in to join the discussion.</p>
+                                    )}
+
+                                    {/* Comments list */}
+                                    {loadingComments ? (
+                                        <p style={{ color: '#8a8a8a' }}>Loading comments...</p>
+                                    ) : comments.length === 0 ? (
+                                        <p style={{ color: '#8a8a8a' }}>No comments yet. Be the first to share your thoughts!</p>
+                                    ) : (
+                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                                            {comments.map(comment => (
+                                                <div key={comment.id} style={{ background: 'rgba(255,255,255,0.03)', borderRadius: '10px', padding: '16px' }}>
+                                                    {/* Comment header */}
+                                                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+                                                        <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'linear-gradient(135deg, #667eea, #764ba2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '13px', fontWeight: '700', color: '#fff', flexShrink: 0 }}>
+                                                            {comment.user?.username?.[0]?.toUpperCase() || '?'}
+                                                        </div>
+                                                        <div>
+                                                            <span style={{ fontWeight: '600', fontSize: '14px', color: '#e0e0e0' }}>{comment.user?.username || 'Unknown'}</span>
+                                                            <span style={{ fontSize: '12px', color: '#666', marginLeft: '8px' }}>{getTimeAgo(new Date(comment.createdAt))}</span>
+                                                        </div>
+                                                        {user && comment.user?.id === user.id && (
+                                                            <button
+                                                                onClick={async () => {
+                                                                    try {
+                                                                        await api.delete(`challenges/${id}/discussions/${comment.id}`);
+                                                                        setComments(prev => prev.filter(c => c.id !== comment.id));
+                                                                    } catch (err) { console.error('Failed to delete:', err); }
+                                                                }}
+                                                                style={{ marginLeft: 'auto', background: 'none', border: 'none', color: '#666', cursor: 'pointer', fontSize: '12px' }}
+                                                            >
+                                                                <i className="fas fa-trash" />
+                                                            </button>
+                                                        )}
+                                                    </div>
+                                                    {/* Content */}
+                                                    <p style={{ fontSize: '14px', color: '#ccc', lineHeight: '1.6', margin: '0 0 10px 42px', whiteSpace: 'pre-wrap' }}>{comment.content}</p>
+                                                    {/* Actions */}
+                                                    <div style={{ display: 'flex', gap: '16px', marginLeft: '42px' }}>
+                                                        <button
+                                                            onClick={async () => {
+                                                                if (!user) return;
+                                                                try {
+                                                                    const res = await api.post(`challenges/${id}/discussions/${comment.id}/like`);
+                                                                    setComments(prev => prev.map(c => c.id === comment.id ? { ...c, liked: res.data.liked, likeCount: c.likeCount + (res.data.liked ? 1 : -1) } : c));
+                                                                } catch (err) { console.error('Failed to like:', err); }
+                                                            }}
+                                                            style={{ background: 'none', border: 'none', color: comment.liked ? '#ffa116' : '#666', cursor: 'pointer', fontSize: '13px', display: 'flex', alignItems: 'center', gap: '4px' }}
+                                                        >
+                                                            <i className={comment.liked ? 'fas fa-heart' : 'far fa-heart'} /> {comment.likeCount || 0}
+                                                        </button>
+                                                        <button
+                                                            onClick={() => setReplyingTo(replyingTo === comment.id ? null : comment.id)}
+                                                            style={{ background: 'none', border: 'none', color: '#666', cursor: 'pointer', fontSize: '13px', display: 'flex', alignItems: 'center', gap: '4px' }}
+                                                        >
+                                                            <i className="fas fa-reply" /> Reply
+                                                        </button>
+                                                    </div>
+                                                    {/* Reply input */}
+                                                    {replyingTo === comment.id && user && (
+                                                        <div style={{ marginLeft: '42px', marginTop: '12px', display: 'flex', gap: '8px' }}>
+                                                            <input
+                                                                value={replyText}
+                                                                onChange={e => setReplyText(e.target.value)}
+                                                                placeholder="Write a reply..."
+                                                                maxLength={2000}
+                                                                style={{ flex: 1, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '6px', padding: '8px 12px', color: '#e0e0e0', fontSize: '13px' }}
+                                                                onKeyDown={async e => {
+                                                                    if (e.key === 'Enter' && replyText.trim()) {
+                                                                        try {
+                                                                            const res = await api.post(`challenges/${id}/discussions`, { content: replyText, parentId: comment.id });
+                                                                            setComments(prev => prev.map(c => c.id === comment.id ? { ...c, replies: [...(c.replies || []), res.data] } : c));
+                                                                            setReplyText(''); setReplyingTo(null);
+                                                                        } catch (err) { console.error('Failed to reply:', err); }
+                                                                    }
+                                                                }}
+                                                            />
+                                                            <button
+                                                                onClick={async () => {
+                                                                    if (!replyText.trim()) return;
+                                                                    try {
+                                                                        const res = await api.post(`challenges/${id}/discussions`, { content: replyText, parentId: comment.id });
+                                                                        setComments(prev => prev.map(c => c.id === comment.id ? { ...c, replies: [...(c.replies || []), res.data] } : c));
+                                                                        setReplyText(''); setReplyingTo(null);
+                                                                    } catch (err) { console.error('Failed to reply:', err); }
+                                                                }}
+                                                                className="solver-btn btn-run"
+                                                                style={{ padding: '8px 14px', fontSize: '12px' }}
+                                                            >Reply</button>
+                                                        </div>
+                                                    )}
+                                                    {/* Replies */}
+                                                    {comment.replies && comment.replies.length > 0 && (
+                                                        <div style={{ marginLeft: '42px', marginTop: '12px', borderLeft: '2px solid rgba(255,255,255,0.06)', paddingLeft: '12px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                                                            {comment.replies.map(reply => (
+                                                                <div key={reply.id}>
+                                                                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
+                                                                        <div style={{ width: '24px', height: '24px', borderRadius: '50%', background: 'linear-gradient(135deg, #43e97b, #38f9d7)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '10px', fontWeight: '700', color: '#000', flexShrink: 0 }}>
+                                                                            {reply.user?.username?.[0]?.toUpperCase() || '?'}
+                                                                        </div>
+                                                                        <span style={{ fontWeight: '600', fontSize: '13px', color: '#e0e0e0' }}>{reply.user?.username || 'Unknown'}</span>
+                                                                        <span style={{ fontSize: '11px', color: '#666' }}>{getTimeAgo(new Date(reply.createdAt))}</span>
+                                                                    </div>
+                                                                    <p style={{ fontSize: '13px', color: '#aaa', lineHeight: '1.5', margin: '0 0 4px 32px', whiteSpace: 'pre-wrap' }}>{reply.content}</p>
+                                                                    <button
+                                                                        onClick={async () => {
+                                                                            if (!user) return;
+                                                                            try {
+                                                                                const res = await api.post(`challenges/${id}/discussions/${reply.id}/like`);
+                                                                                setComments(prev => prev.map(c => c.id === comment.id ? {
+                                                                                    ...c, replies: c.replies.map(r => r.id === reply.id ? { ...r, liked: res.data.liked, likeCount: r.likeCount + (res.data.liked ? 1 : -1) } : r)
+                                                                                } : c));
+                                                                            } catch (err) { console.error('Failed to like reply:', err); }
+                                                                        }}
+                                                                        style={{ marginLeft: '32px', background: 'none', border: 'none', color: reply.liked ? '#ffa116' : '#666', cursor: 'pointer', fontSize: '12px', display: 'flex', alignItems: 'center', gap: '4px' }}
+                                                                    >
+                                                                        <i className={reply.liked ? 'fas fa-heart' : 'far fa-heart'} /> {reply.likeCount || 0}
+                                                                    </button>
+                                                                </div>
+                                                            ))}
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            ))}
                                         </div>
                                     )}
                                 </motion.div>
