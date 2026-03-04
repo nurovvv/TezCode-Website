@@ -40,7 +40,7 @@ async function seedChallenges() {
             tags: ["Array", "Simulation"],
             topics: ["Easy", "Top Interview Questions"]
 ,
-            solution: '<h3>Solution: Concatenation of Array</h3><p>To solve <b>Concatenation of Array</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution</h3><p>Concatenate the array with itself using the + operator.</p><h4>Code</h4><pre><code>import ast\nnums = ast.literal_eval(input())\nprint(nums + nums)</code></pre>"        },
         {
             title: "Two Sum",
             description: `<div class="lc-description">
@@ -79,7 +79,7 @@ async function seedChallenges() {
             tags: ["Array", "Hash Table"],
             topics: ["Easy", "Top Interview Questions"]
 ,
-            solution: '<h3>Solution: Two Sum</h3><p>To solve <b>Two Sum</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution</h3><p>Use a hash map to store each number and its index. For each number, check if (target - num) exists in the map.</p><h4>Code</h4><pre><code>import ast\nnums = ast.literal_eval(input())\ntarget = int(input())\nprev_map = {}\nfor i, n in enumerate(nums):\n    diff = target - n\n    if diff in prev_map:\n        print([prev_map[diff], i])\n        break\n    prev_map[n] = i</code></pre>"        },
         {
             title: "Reverse String",
             description: `<div class="lc-description">
@@ -112,7 +112,7 @@ async function seedChallenges() {
             ],
             starterCode: "import ast\ns = ast.literal_eval(input())\n\n# Reverse the list in place and print it\n# Example: print(s[::-1])\n"
 ,
-            solution: '<h3>Solution: Reverse String</h3><p>To solve <b>Reverse String</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution</h3><p>Use Python slicing [::-1] to reverse the list.</p><h4>Code</h4><pre><code>import ast\ns = ast.literal_eval(input())\nprint(s[::-1])</code></pre>"        },
         {
             title: "Fizz Buzz",
             description: `<div class="lc-description">
@@ -149,7 +149,7 @@ async function seedChallenges() {
             ],
             starterCode: "n = int(input())\n\n# Return the FizzBuzz list\n"
 ,
-            solution: '<h3>Solution: Fizz Buzz</h3><p>To solve <b>Fizz Buzz</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution</h3><p>Iterate from 1 to n. Check divisibility by 15, 3, 5 in that order.</p><h4>Code</h4><pre><code>n = int(input())\nresult = []\nfor i in range(1, n + 1):\n    if i % 15 == 0: result.append('FizzBuzz')\n    elif i % 3 == 0: result.append('Fizz')\n    elif i % 5 == 0: result.append('Buzz')\n    else: result.append(str(i))\nprint(result)</code></pre>"        },
         {
             title: "Longest Substring Without Repeating Characters",
             description: `<div class="lc-description">
@@ -182,7 +182,7 @@ async function seedChallenges() {
             ],
             starterCode: "s = input()\n\n# Write your solution and print the length\n"
 ,
-            solution: '<h3>Solution: Longest Substring Without Repeating Characters</h3><p>To solve <b>Longest Substring Without Repeating Characters</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution</h3><p>Use a sliding window with a set to track unique characters.</p><h4>Code</h4><pre><code>s = input()\nchar_set = set()\nl = 0\nres = 0\nfor r in range(len(s)):\n    while s[r] in char_set:\n        char_set.remove(s[l])\n        l += 1\n    char_set.add(s[r])\n    res = max(res, r - l + 1)\nprint(res)</code></pre>"        },
         {
             title: "Palindrome Number",
             description: `<div class="lc-description">
@@ -214,7 +214,7 @@ async function seedChallenges() {
             ],
             starterCode: "x = int(input())\n\n# Write your solution and print True or False\n"
 ,
-            solution: '<h3>Solution: Palindrome Number</h3><p>To solve <b>Palindrome Number</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution</h3><p>Convert to string and compare with its reverse.</p><h4>Code</h4><pre><code>x = int(input())\nprint(str(x) == str(x)[::-1])</code></pre>"        },
         {
             title: "Valid Parentheses",
             description: `<div class="lc-description">
@@ -253,7 +253,7 @@ async function seedChallenges() {
             ],
             starterCode: "s = input()\n\n# Write your solution and print True or False\n"
 ,
-            solution: '<h3>Solution: Valid Parentheses</h3><p>To solve <b>Valid Parentheses</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution</h3><p>Use a stack. Push opening brackets and pop for matching closing brackets.</p><h4>Code</h4><pre><code>s = input()\nstack = []\nm = {')': '(', '}': '{', ']': '['}\nfor c in s:\n    if c in m:\n        if not stack or stack[-1] != m[c]: print(False); exit()\n        stack.pop()\n    else: stack.append(c)\nprint(len(stack) == 0)</code></pre>"        },
         {
             title: "Merge Intervals",
             description: `<div class="lc-description">
@@ -286,7 +286,7 @@ async function seedChallenges() {
             ],
             starterCode: "import ast\nintervals = ast.literal_eval(input())\n\n# Write your solution and print the merged list\n"
 ,
-            solution: '<h3>Solution: Merge Intervals</h3><p>To solve <b>Merge Intervals</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution</h3><p>Sort by start time, merge overlapping intervals.</p><h4>Code</h4><pre><code>import ast\niv = ast.literal_eval(input())\niv.sort()\nres = [iv[0]]\nfor s, e in iv[1:]:\n    if s &lt;= res[-1][1]: res[-1][1] = max(res[-1][1], e)\n    else: res.append([s, e])\nprint(res)</code></pre>"        },
         {
             title: "Container With Most Water",
             description: `<div class="lc-description">
@@ -316,7 +316,7 @@ async function seedChallenges() {
             ],
             starterCode: "import ast\nheight = ast.literal_eval(input())\n\n# Write your solution and print the max water\n"
 ,
-            solution: '<h3>Solution: Container With Most Water</h3><p>To solve <b>Container With Most Water</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution</h3><p>Two pointers from both ends. Move the shorter line inward.</p><h4>Code</h4><pre><code>import ast\nh = ast.literal_eval(input())\nl, r = 0, len(h)-1\nma = 0\nwhile l &lt; r:\n    ma = max(ma, min(h[l],h[r])*(r-l))\n    if h[l] &lt; h[r]: l+=1\n    else: r-=1\nprint(ma)</code></pre>"        },
         {
             title: "Trapping Rain Water",
             description: `<div class="lc-description">
@@ -350,7 +350,7 @@ async function seedChallenges() {
             ],
             starterCode: "import ast\nheight = ast.literal_eval(input())\n\n# Write your solution and print the total trapped water\n"
 ,
-            solution: '<h3>Solution: Trapping Rain Water</h3><p>To solve <b>Trapping Rain Water</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution</h3><p>Two pointers: track leftMax and rightMax, compute water at each position.</p><h4>Code</h4><pre><code>import ast\nh = ast.literal_eval(input())\nl, r = 0, len(h)-1\nlm = rm = 0; w = 0\nwhile l &lt; r:\n    if h[l] &lt; h[r]: lm = max(lm, h[l]); w += lm - h[l]; l += 1\n    else: rm = max(rm, h[r]); w += rm - h[r]; r -= 1\nprint(w)</code></pre>"        },
         {
             title: "Climbing Stairs",
             description: `<div class="lc-description">
@@ -383,7 +383,7 @@ async function seedChallenges() {
             ],
             starterCode: "n = int(input())\n\n# Write your solution and print the number of ways\n"
 ,
-            solution: '<h3>Solution: Climbing Stairs</h3><p>To solve <b>Climbing Stairs</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution</h3><p>Fibonacci-like DP. Ways to reach step n = ways(n-1) + ways(n-2).</p><h4>Code</h4><pre><code>n = int(input())\nif n &lt;= 2: print(n)\nelse:\n    a, b = 1, 2\n    for _ in range(3, n + 1): a, b = b, a + b\n    print(b)</code></pre>"        },
         {
             title: "Best Time to Buy and Sell Stock",
             description: `<div class="lc-description">
@@ -412,7 +412,7 @@ async function seedChallenges() {
             ],
             starterCode: "import ast\nprices = ast.literal_eval(input())\n\n# Write your solution and print the max profit\n"
 ,
-            solution: '<h3>Solution: Best Time to Buy and Sell Stock</h3><p>To solve <b>Best Time to Buy and Sell Stock</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution</h3><p>Track the minimum price and calculate max profit at each step.</p><h4>Code</h4><pre><code>import ast\nprices = ast.literal_eval(input())\nmin_p = float('inf')\nmax_profit = 0\nfor p in prices:\n    min_p = min(min_p, p)\n    max_profit = max(max_profit, p - min_p)\nprint(max_profit)</code></pre>"        },
         {
             title: "Single Number",
             description: `<div class="lc-description">
@@ -441,7 +441,7 @@ async function seedChallenges() {
             ],
             starterCode: "import ast\nnums = ast.literal_eval(input())\n\n# Write your solution and print the unique number\n"
 ,
-            solution: '<h3>Solution: Single Number</h3><p>To solve <b>Single Number</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution</h3><p>XOR all numbers. Duplicates cancel, leaving the single number.</p><h4>Code</h4><pre><code>import ast\nnums = ast.literal_eval(input())\nresult = 0\nfor n in nums: result ^= n\nprint(result)</code></pre>"        },
         {
             title: "Search Insert Position",
             description: `<div class="lc-description">
@@ -477,7 +477,7 @@ async function seedChallenges() {
             ],
             starterCode: "import ast\nnums = ast.literal_eval(input())\ntarget = int(input())\n\n# Write your solution and print the index\n"
 ,
-            solution: '<h3>Solution: Search Insert Position</h3><p>To solve <b>Search Insert Position</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution: Search Insert Position</h3><p>Analyze the problem constraints and implement step by step.</p>"        },
         {
             title: "Group Anagrams",
             description: `<div class="lc-description">
@@ -506,7 +506,7 @@ async function seedChallenges() {
             ],
             starterCode: "import ast\nstrs = ast.literal_eval(input())\n\n# Write your solution and print the grouped list\n"
 ,
-            solution: '<h3>Solution: Group Anagrams</h3><p>To solve <b>Group Anagrams</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution</h3><p>Sort each string as key, group by sorted key in a dictionary.</p><h4>Code</h4><pre><code>import ast\nfrom collections import defaultdict\nstrs = ast.literal_eval(input())\ngroups = defaultdict(list)\nfor s in strs: groups[tuple(sorted(s))].append(s)\nresult = sorted(groups.values(), key=lambda x: (-len(x), x[0]))\nprint(result)</code></pre>"        },
         {
             title: "Contains Duplicate",
             description: `<div class="lc-description">
@@ -539,7 +539,7 @@ async function seedChallenges() {
             ],
             starterCode: "import ast\nnums = ast.literal_eval(input())\n\n# Write your solution and print True or False\n"
 ,
-            solution: '<h3>Solution: Contains Duplicate</h3><p>To solve <b>Contains Duplicate</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution</h3><p>Use a set. If set size differs from list size, there are duplicates.</p><h4>Code</h4><pre><code>import ast\nnums = ast.literal_eval(input())\nprint(len(nums) != len(set(nums)))</code></pre>"        },
         {
             title: "Missing Number",
             description: `<div class="lc-description">
@@ -574,7 +574,7 @@ async function seedChallenges() {
             ],
             starterCode: "import ast\nnums = ast.literal_eval(input())\n\n# Write your solution and print the missing number\n"
 ,
-            solution: '<h3>Solution: Missing Number</h3><p>To solve <b>Missing Number</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution</h3><p>Expected sum of 0..n minus actual sum = missing number.</p><h4>Code</h4><pre><code>import ast\nnums = ast.literal_eval(input())\nn = len(nums)\nprint(n*(n+1)//2 - sum(nums))</code></pre>"        },
         {
             title: "Move Zeroes",
             description: `<div class="lc-description">
@@ -602,7 +602,7 @@ async function seedChallenges() {
             ],
             starterCode: "import ast\nnums = ast.literal_eval(input())\n\n# Write your solution and print the modified array\n"
 ,
-            solution: '<h3>Solution: Move Zeroes</h3><p>To solve <b>Move Zeroes</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution</h3><p>Move non-zero elements forward using a pointer, fill rest with zeroes.</p><h4>Code</h4><pre><code>import ast\nnums = ast.literal_eval(input())\npos = 0\nfor i in range(len(nums)):\n    if nums[i] != 0: nums[pos], nums[i] = nums[i], nums[pos]; pos += 1\nprint(nums)</code></pre>"        },
         {
             title: "Majority Element",
             description: `<div class="lc-description">
@@ -636,7 +636,7 @@ async function seedChallenges() {
             ],
             starterCode: "import ast\nnums = ast.literal_eval(input())\n\n# Write your solution and print the majority element\n"
 ,
-            solution: '<h3>Solution: Majority Element</h3><p>To solve <b>Majority Element</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution</h3><p>Boyer-Moore Voting: maintain candidate and count.</p><h4>Code</h4><pre><code>import ast\nnums = ast.literal_eval(input())\nc = nums[0]; count = 1\nfor i in range(1, len(nums)):\n    if count == 0: c = nums[i]\n    count += 1 if nums[i] == c else -1\nprint(c)</code></pre>"        },
         {
             title: "Top K Frequent Elements",
             description: `<div class="lc-description">
@@ -663,7 +663,7 @@ async function seedChallenges() {
             ],
             starterCode: "import ast\nnums = ast.literal_eval(input())\nk = int(input())\n\n# Write your solution and print the list of k most frequent elements\n"
 ,
-            solution: '<h3>Solution: Top K Frequent Elements</h3><p>To solve <b>Top K Frequent Elements</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution</h3><p>Use Counter and most_common to get top k elements.</p><h4>Code</h4><pre><code>import ast\nfrom collections import Counter\nnums = ast.literal_eval(input())\nk = int(input())\nprint([x for x,_ in Counter(nums).most_common(k)])</code></pre>"        },
         {
             title: "Unique Paths",
             description: `<div class="lc-description">
@@ -689,7 +689,7 @@ async function seedChallenges() {
             ],
             starterCode: "m = int(input())\nn = int(input())\n\n# Write your solution and print the number of unique paths\n"
 ,
-            solution: '<h3>Solution: Unique Paths</h3><p>To solve <b>Unique Paths</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution</h3><p>DP: dp[i][j] = dp[i-1][j] + dp[i][j-1].</p><h4>Code</h4><pre><code>line = input().split()\nm, n = int(line[0]), int(line[1])\ndp = [[1]*n for _ in range(m)]\nfor i in range(1, m):\n    for j in range(1, n): dp[i][j] = dp[i-1][j] + dp[i][j-1]\nprint(dp[m-1][n-1])</code></pre>"        },
         {
             title: "Valid Anagram",
             description: `<div class="lc-description">
@@ -716,7 +716,7 @@ async function seedChallenges() {
             ],
             starterCode: "s = input()\nt = input()\n\n# Write your solution and print True or False\n"
 ,
-            solution: '<h3>Solution: Valid Anagram</h3><p>To solve <b>Valid Anagram</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution</h3><p>Sort both strings and compare them.</p><h4>Code</h4><pre><code>s = input()\nt = input()\nprint(sorted(s) == sorted(t))</code></pre>"        },
         {
             title: "Valid Palindrome",
             description: `<div class="lc-description">
@@ -744,7 +744,7 @@ async function seedChallenges() {
             ],
             starterCode: "s = input()\n\n# Write your solution and print True or False\n"
 ,
-            solution: '<h3>Solution: Valid Palindrome</h3><p>To solve <b>Valid Palindrome</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution: Valid Palindrome</h3><p>Analyze the problem constraints and implement step by step.</p>"        },
         {
             title: "Merge Sorted Array",
             description: `<div class="lc-description">
@@ -775,7 +775,7 @@ async function seedChallenges() {
             ],
             starterCode: "import ast\nnums1 = ast.literal_eval(input())\nm = int(input())\nnums2 = ast.literal_eval(input())\nn = int(input())\n\n# Write your solution and print the merged array\n"
 ,
-            solution: '<h3>Solution: Merge Sorted Array</h3><p>To solve <b>Merge Sorted Array</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution: Merge Sorted Array</h3><p>Analyze the problem constraints and implement step by step.</p>"        },
         {
             title: "Maximum Subarray",
             description: `<div class="lc-description">
@@ -803,7 +803,7 @@ async function seedChallenges() {
             ],
             starterCode: "import ast\nnums = ast.literal_eval(input())\n\n# Write your solution and print the maximum sum\n"
 ,
-            solution: '<h3>Solution: Maximum Subarray</h3><p>To solve <b>Maximum Subarray</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution</h3><p>Use Kadane's algorithm: track current sum and reset when negative.</p><h4>Code</h4><pre><code>import ast\nnums = ast.literal_eval(input())\nmax_sum = nums[0]\ncur = 0\nfor n in nums:\n    if cur &lt; 0: cur = 0\n    cur += n\n    max_sum = max(max_sum, cur)\nprint(max_sum)</code></pre>"        },
         {
             title: "Longest Common Prefix",
             description: `<div class="lc-description">
@@ -831,7 +831,7 @@ async function seedChallenges() {
             ],
             starterCode: "import ast\nstrs = ast.literal_eval(input())\n\n# Write your solution and print the prefix (quoted)\n"
 ,
-            solution: '<h3>Solution: Longest Common Prefix</h3><p>To solve <b>Longest Common Prefix</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution</h3><p>Compare characters at each position across all strings.</p><h4>Code</h4><pre><code>import ast\nstrs = ast.literal_eval(input())\nif not strs: print('')\nelse:\n    prefix = strs[0]\n    for s in strs[1:]:\n        while not s.startswith(prefix): prefix = prefix[:-1]\n        if not prefix: break\n    print(prefix)</code></pre>"        },
         {
             title: "Squares of a Sorted Array",
             description: `<div class="lc-description">
@@ -858,7 +858,7 @@ async function seedChallenges() {
             ],
             starterCode: "import ast\nnums = ast.literal_eval(input())\n\n# Write your solution and print the sorted squares\n"
 ,
-            solution: '<h3>Solution: Squares of a Sorted Array</h3><p>To solve <b>Squares of a Sorted Array</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution: Squares of a Sorted Array</h3><p>Analyze the problem constraints and implement step by step.</p>"        },
         {
             title: "3Sum",
             description: `<div class="lc-description">
@@ -886,7 +886,7 @@ async function seedChallenges() {
             ],
             starterCode: "import ast\nnums = ast.literal_eval(input())\n\n# Write your solution and print the list of unique triplets\n"
 ,
-            solution: '<h3>Solution: 3Sum</h3><p>To solve <b>3Sum</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution</h3><p>Sort array, fix one element, use two pointers for the other two.</p><h4>Code</h4><pre><code>import ast\nnums = ast.literal_eval(input())\nnums.sort()\nres = []\nfor i in range(len(nums)-2):\n    if i &gt; 0 and nums[i] == nums[i-1]: continue\n    l, r = i+1, len(nums)-1\n    while l &lt; r:\n        s = nums[i]+nums[l]+nums[r]\n        if s == 0:\n            res.append([nums[i],nums[l],nums[r]])\n            while l &lt; r and nums[l]==nums[l+1]: l+=1\n            while l &lt; r and nums[r]==nums[r-1]: r-=1\n            l+=1; r-=1\n        elif s &lt; 0: l+=1\n        else: r-=1\nprint(res)</code></pre>"        },
         {
             title: "Product of Array Except Self",
             description: `<div class="lc-description">
@@ -914,7 +914,7 @@ async function seedChallenges() {
             ],
             starterCode: "import ast\nnums = ast.literal_eval(input())\n\n# Write your solution and print the product array\n"
 ,
-            solution: '<h3>Solution: Product of Array Except Self</h3><p>To solve <b>Product of Array Except Self</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution</h3><p>Use prefix and suffix products for each element.</p><h4>Code</h4><pre><code>import ast\nnums = ast.literal_eval(input())\nn = len(nums)\nres = [1]*n\np = 1\nfor i in range(n): res[i] = p; p *= nums[i]\np = 1\nfor i in range(n-1,-1,-1): res[i] *= p; p *= nums[i]\nprint(res)</code></pre>"        },
         {
             title: "Rotate Array",
             description: `<div class="lc-description">
@@ -941,7 +941,7 @@ async function seedChallenges() {
             ],
             starterCode: "import ast\nnums = ast.literal_eval(input())\nk = int(input())\n\n# Write your solution and print the rotated array\n"
 ,
-            solution: '<h3>Solution: Rotate Array</h3><p>To solve <b>Rotate Array</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution: Rotate Array</h3><p>Analyze the problem constraints and implement step by step.</p>"        },
         {
             title: "Subsets",
             description: `<div class="lc-description">
@@ -969,7 +969,7 @@ async function seedChallenges() {
             ],
             starterCode: "import ast\nnums = ast.literal_eval(input())\n\n# Write your solution and print the list of semua subsets\n"
 ,
-            solution: '<h3>Solution: Subsets</h3><p>To solve <b>Subsets</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution</h3><p>Backtracking: include or exclude each element.</p><h4>Code</h4><pre><code>import ast\nnums = ast.literal_eval(input())\nres = []\ndef bt(start, sub):\n    res.append(sub[:])\n    for i in range(start, len(nums)): sub.append(nums[i]); bt(i+1, sub); sub.pop()\nbt(0, [])\nprint(res)</code></pre>"        },
         {
             title: "Search in Rotated Sorted Array",
             description: `<div class="lc-description">
@@ -999,7 +999,7 @@ async function seedChallenges() {
             ],
             starterCode: "import ast\nnums = ast.literal_eval(input())\ntarget = int(input())\n\n# Write your solution and print the index\n"
 ,
-            solution: '<h3>Solution: Search in Rotated Sorted Array</h3><p>To solve <b>Search in Rotated Sorted Array</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution</h3><p>Modified binary search: determine which half is sorted.</p><h4>Code</h4><pre><code>import ast\nnums = ast.literal_eval(input())\nt = int(input())\nl, r = 0, len(nums)-1\nwhile l &lt;= r:\n    m = (l+r)//2\n    if nums[m] == t: print(m); exit()\n    if nums[l] &lt;= nums[m]:\n        if nums[l] &lt;= t &lt; nums[m]: r = m-1\n        else: l = m+1\n    else:\n        if nums[m] &lt; t &lt;= nums[r]: l = m+1\n        else: r = m-1\nprint(-1)</code></pre>"        },
         {
             title: "Kth Largest Element in an Array",
             description: `<div class="lc-description">
@@ -1026,7 +1026,7 @@ async function seedChallenges() {
             ],
             starterCode: "import ast\nnums = ast.literal_eval(input())\nk = int(input())\n\n# Write your solution and print the kth largest value\n"
 ,
-            solution: '<h3>Solution: Kth Largest Element in an Array</h3><p>To solve <b>Kth Largest Element in an Array</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution</h3><p>Sort descending and return the kth element.</p><h4>Code</h4><pre><code>import ast\nnums = ast.literal_eval(input())\nk = int(input())\nnums.sort(reverse=True)\nprint(nums[k-1])</code></pre>"        },
         {
             title: "Median of Two Sorted Arrays",
             description: `<div class="lc-description">
@@ -1055,7 +1055,7 @@ async function seedChallenges() {
             ],
             starterCode: "import ast\nnums1 = ast.literal_eval(input())\nnums2 = ast.literal_eval(input())\n\n# Write your solution and print the median as a float\n"
 ,
-            solution: '<h3>Solution: Median of Two Sorted Arrays</h3><p>To solve <b>Median of Two Sorted Arrays</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution</h3><p>Merge and find middle element(s).</p><h4>Code</h4><pre><code>import ast\nn1 = ast.literal_eval(input())\nn2 = ast.literal_eval(input())\nm = sorted(n1+n2)\nn = len(m)\nif n%2==1: print(float(m[n//2]))\nelse: print(float((m[n//2-1]+m[n//2])/2))</code></pre>"        },
         {
             title: "Merge k Sorted Lists",
             description: `<div class="lc-description">
@@ -1084,7 +1084,7 @@ async function seedChallenges() {
             ],
             starterCode: "import ast\nlists = ast.literal_eval(input())\n\n# Write your solution and print the merged sorted list\n"
 ,
-            solution: '<h3>Solution: Merge k Sorted Lists</h3><p>To solve <b>Merge k Sorted Lists</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution</h3><p>Use a min-heap to get the smallest element across all lists.</p><h4>Code</h4><pre><code>import ast, heapq\nlists = ast.literal_eval(input())\nresult = []\nheap = []\nfor i, lst in enumerate(lists):\n    if lst: heapq.heappush(heap, (lst[0], i, 0))\nwhile heap:\n    val, li, ei = heapq.heappop(heap)\n    result.append(val)\n    if ei+1 &lt; len(lists[li]): heapq.heappush(heap, (lists[li][ei+1], li, ei+1))\nprint(result)</code></pre>"        },
         {
             title: "First Missing Positive",
             description: `<div class="lc-description">
@@ -1112,7 +1112,7 @@ async function seedChallenges() {
             ],
             starterCode: "import ast\nnums = ast.literal_eval(input())\n\n# Write your solution and print the result\n"
 ,
-            solution: '<h3>Solution: First Missing Positive</h3><p>To solve <b>First Missing Positive</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution: First Missing Positive</h3><p>Analyze the problem constraints and implement step by step.</p>"        },
         {
             title: "Longest Valid Parentheses",
             description: `<div class="lc-description">
@@ -1140,7 +1140,7 @@ substring</em>.</p>
             ],
             starterCode: "s = input()\n\n# Write your solution and print the length\n"
 ,
-            solution: '<h3>Solution: Longest Valid Parentheses</h3><p>To solve <b>Longest Valid Parentheses</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution: Longest Valid Parentheses</h3><p>Analyze the problem constraints and implement step by step.</p>"        },
         {
             title: "N-Queens",
             description: `<div class="lc-description">
@@ -1167,7 +1167,7 @@ substring</em>.</p>
             ],
             starterCode: "n = int(input())\n\n# Write your solution and print the number of solutions\n"
 ,
-            solution: '<h3>Solution: N-Queens</h3><p>To solve <b>N-Queens</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution: N-Queens</h3><p>Analyze the problem constraints and implement step by step.</p>"        },
         {
             title: "Sliding Window Maximum",
             description: `<div class="lc-description">
@@ -1195,7 +1195,7 @@ substring</em>.</p>
             ],
             starterCode: "import ast\nnums = ast.literal_eval(input())\nk = int(input())\n\n# Write your solution and print the result list\n"
 ,
-            solution: '<h3>Solution: Sliding Window Maximum</h3><p>To solve <b>Sliding Window Maximum</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution: Sliding Window Maximum</h3><p>Analyze the problem constraints and implement step by step.</p>"        },
         {
             title: "Defanging an IP Address",
             description: `<div class="lc-description">
@@ -1224,7 +1224,7 @@ substring</em>.</p>
             tags: ["String"],
             topics: ["Easy"]
 ,
-            solution: '<h3>Solution: Defanging an IP Address</h3><p>To solve <b>Defanging an IP Address</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution: Defanging an IP Address</h3><p>Analyze the problem constraints and implement step by step.</p>"        },
         {
             title: "Number of Good Pairs",
             description: `<div class="lc-description">
@@ -1254,7 +1254,7 @@ substring</em>.</p>
             tags: ["Array", "Hash Table", "Math", "Counting"],
             topics: ["Easy"]
 ,
-            solution: '<h3>Solution: Number of Good Pairs</h3><p>To solve <b>Number of Good Pairs</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution: Number of Good Pairs</h3><p>Analyze the problem constraints and implement step by step.</p>"        },
         {
             title: "Contains Duplicate II",
             description: `<div class="lc-description">
@@ -1289,7 +1289,7 @@ substring</em>.</p>
             tags: ["Array", "Hash Table", "Sliding Window"],
             topics: ["Easy"]
 ,
-            solution: '<h3>Solution: Contains Duplicate II</h3><p>To solve <b>Contains Duplicate II</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution: Contains Duplicate II</h3><p>Analyze the problem constraints and implement step by step.</p>"        },
         {
             title: "Two Sum II - Input Array Is Sorted",
             description: `<div class="lc-description">
@@ -1321,7 +1321,7 @@ substring</em>.</p>
             tags: ["Array", "Two Pointers", "Binary Search"],
             topics: ["Medium"]
 ,
-            solution: '<h3>Solution: Two Sum II - Input Array Is Sorted</h3><p>To solve <b>Two Sum II - Input Array Is Sorted</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution: Two Sum II - Input Array Is Sorted</h3><p>Analyze the problem constraints and implement step by step.</p>"        },
         {
             title: "Product of Array Except Self",
             description: `<div class="lc-description">
@@ -1351,7 +1351,7 @@ substring</em>.</p>
             tags: ["Array", "Prefix Sum"],
             topics: ["Medium"]
 ,
-            solution: '<h3>Solution: Product of Array Except Self</h3><p>To solve <b>Product of Array Except Self</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution</h3><p>Use prefix and suffix products for each element.</p><h4>Code</h4><pre><code>import ast\nnums = ast.literal_eval(input())\nn = len(nums)\nres = [1]*n\np = 1\nfor i in range(n): res[i] = p; p *= nums[i]\np = 1\nfor i in range(n-1,-1,-1): res[i] *= p; p *= nums[i]\nprint(res)</code></pre>"        },
         {
             title: "Length of Last Word",
             description: `<div class="lc-description">
@@ -1383,7 +1383,7 @@ substring</em>.</p>
             tags: ["String"],
             topics: ["Easy"]
 ,
-            solution: '<h3>Solution: Length of Last Word</h3><p>To solve <b>Length of Last Word</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution: Length of Last Word</h3><p>Analyze the problem constraints and implement step by step.</p>"        },
         {
             title: "Roman to Integer",
             description: `<div class="lc-description">
@@ -1419,7 +1419,7 @@ substring</em>.</p>
             tags: ["Hash Table", "Math", "String"],
             topics: ["Easy"]
 ,
-            solution: '<h3>Solution: Roman to Integer</h3><p>To solve <b>Roman to Integer</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution</h3><p>Map Roman numerals to values. Subtract when a smaller value precedes a larger one.</p><h4>Code</h4><pre><code>s = input()\nroman = {'I':1,'V':5,'X':10,'L':50,'C':100,'D':500,'M':1000}\nres = 0\nfor i in range(len(s)):\n    if i+1 &lt; len(s) and roman[s[i]] &lt; roman[s[i+1]]: res -= roman[s[i]]\n    else: res += roman[s[i]]\nprint(res)</code></pre>"        },
         {
             title: "Is Subsequence",
             description: `<div class="lc-description">
@@ -1448,7 +1448,7 @@ substring</em>.</p>
             tags: ["Two Pointers", "String", "Dynamic Programming"],
             topics: ["Easy"]
 ,
-            solution: '<h3>Solution: Is Subsequence</h3><p>To solve <b>Is Subsequence</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution: Is Subsequence</h3><p>Analyze the problem constraints and implement step by step.</p>"        },
         {
             title: "Find Minimum in Rotated Sorted Array",
             description: `<div class="lc-description">
@@ -1479,7 +1479,7 @@ substring</em>.</p>
             tags: ["Array", "Binary Search"],
             topics: ["Medium"]
 ,
-            solution: '<h3>Solution: Find Minimum in Rotated Sorted Array</h3><p>To solve <b>Find Minimum in Rotated Sorted Array</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution: Find Minimum in Rotated Sorted Array</h3><p>Analyze the problem constraints and implement step by step.</p>"        },
         {
             title: "Find Peak Element",
             description: `<div class="lc-description">
@@ -1512,7 +1512,7 @@ substring</em>.</p>
             tags: ["Array", "Binary Search"],
             topics: ["Medium"]
 ,
-            solution: '<h3>Solution: Find Peak Element</h3><p>To solve <b>Find Peak Element</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution: Find Peak Element</h3><p>Analyze the problem constraints and implement step by step.</p>"        },
         {
             title: "Valid Perfect Square",
             description: `<div class="lc-description">
@@ -1542,7 +1542,7 @@ substring</em>.</p>
             tags: ["Math", "Binary Search"],
             topics: ["Easy"]
 ,
-            solution: '<h3>Solution: Valid Perfect Square</h3><p>To solve <b>Valid Perfect Square</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution: Valid Perfect Square</h3><p>Analyze the problem constraints and implement step by step.</p>"        },
         {
             title: "Plus One",
             description: `<div class="lc-description">
@@ -1581,7 +1581,7 @@ substring</em>.</p>
             tags: ["Array", "Math"],
             topics: ["Easy"]
 ,
-            solution: '<h3>Solution: Plus One</h3><p>To solve <b>Plus One</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution</h3><p>Add one from the last digit, handle carry propagation.</p><h4>Code</h4><pre><code>import ast\ndigits = ast.literal_eval(input())\nfor i in range(len(digits)-1, -1, -1):\n    if digits[i] &lt; 9: digits[i] += 1; print(digits); exit()\n    digits[i] = 0\nprint([1] + digits)</code></pre>"        },
         {
             title: "Reverse Integer",
             description: `<div class="lc-description">
@@ -1616,7 +1616,7 @@ substring</em>.</p>
             tags: ["Math"],
             topics: ["Medium"]
 ,
-            solution: '<h3>Solution: Reverse Integer</h3><p>To solve <b>Reverse Integer</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution: Reverse Integer</h3><p>Analyze the problem constraints and implement step by step.</p>"        },
         {
             title: "Valid Parenthesis String",
             description: `<div class="lc-description">
@@ -1658,7 +1658,7 @@ substring</em>.</p>
             tags: ["String", "Dynamic Programming", "Stack", "Greedy"],
             topics: ["Medium"]
 ,
-            solution: '<h3>Solution: Valid Parenthesis String</h3><p>To solve <b>Valid Parenthesis String</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution: Valid Parenthesis String</h3><p>Analyze the problem constraints and implement step by step.</p>"        },
         {
             title: "Search in Rotated Sorted Array",
             description: `<div class="lc-description">
@@ -1690,7 +1690,7 @@ substring</em>.</p>
             tags: ["Array", "Binary Search"],
             topics: ["Medium"]
 ,
-            solution: '<h3>Solution: Search in Rotated Sorted Array</h3><p>To solve <b>Search in Rotated Sorted Array</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution</h3><p>Modified binary search: determine which half is sorted.</p><h4>Code</h4><pre><code>import ast\nnums = ast.literal_eval(input())\nt = int(input())\nl, r = 0, len(nums)-1\nwhile l &lt;= r:\n    m = (l+r)//2\n    if nums[m] == t: print(m); exit()\n    if nums[l] &lt;= nums[m]:\n        if nums[l] &lt;= t &lt; nums[m]: r = m-1\n        else: l = m+1\n    else:\n        if nums[m] &lt; t &lt;= nums[r]: l = m+1\n        else: r = m-1\nprint(-1)</code></pre>"        },
         {
             title: "Maximum Subarray",
             description: `<div class="lc-description">
@@ -1726,7 +1726,7 @@ substring</em>.</p>
             tags: ["Array", "Divide and Conquer", "Dynamic Programming"],
             topics: ["Medium"]
 ,
-            solution: '<h3>Solution: Maximum Subarray</h3><p>To solve <b>Maximum Subarray</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution</h3><p>Use Kadane's algorithm: track current sum and reset when negative.</p><h4>Code</h4><pre><code>import ast\nnums = ast.literal_eval(input())\nmax_sum = nums[0]\ncur = 0\nfor n in nums:\n    if cur &lt; 0: cur = 0\n    cur += n\n    max_sum = max(max_sum, cur)\nprint(max_sum)</code></pre>"        },
         {
             title: "Remove Duplicates from Sorted Array",
             description: `<div class="lc-description">
@@ -1761,7 +1761,7 @@ substring</em>.</p>
             tags: ["Array", "Two Pointers"],
             topics: ["Easy"]
 ,
-            solution: '<h3>Solution: Remove Duplicates from Sorted Array</h3><p>To solve <b>Remove Duplicates from Sorted Array</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution</h3><p>Use two pointers: one for unique position, one to scan.</p><h4>Code</h4><pre><code>import ast\nnums = ast.literal_eval(input())\nif not nums: print(0)\nelse:\n    k = 1\n    for i in range(1, len(nums)):\n        if nums[i] != nums[i-1]: nums[k] = nums[i]; k += 1\n    print(k)</code></pre>"        },
         {
             title: "Trapping Rain Water",
             description: `<div class="lc-description">
@@ -1790,7 +1790,7 @@ substring</em>.</p>
             tags: ["Array", "Dynamic Programming", "Two Pointers", "Stack"],
             topics: ["Hard"]
 ,
-            solution: '<h3>Solution: Trapping Rain Water</h3><p>To solve <b>Trapping Rain Water</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution</h3><p>Two pointers: track leftMax and rightMax, compute water at each position.</p><h4>Code</h4><pre><code>import ast\nh = ast.literal_eval(input())\nl, r = 0, len(h)-1\nlm = rm = 0; w = 0\nwhile l &lt; r:\n    if h[l] &lt; h[r]: lm = max(lm, h[l]); w += lm - h[l]; l += 1\n    else: rm = max(rm, h[r]); w += rm - h[r]; r -= 1\nprint(w)</code></pre>"        },
         {
             title: "Median of Two Sorted Arrays",
             description: `<div class="lc-description">
@@ -1827,7 +1827,7 @@ substring</em>.</p>
             tags: ["Array", "Divide and Conquer", "Binary Search"],
             topics: ["Hard"]
 ,
-            solution: '<h3>Solution: Median of Two Sorted Arrays</h3><p>To solve <b>Median of Two Sorted Arrays</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution</h3><p>Merge and find middle element(s).</p><h4>Code</h4><pre><code>import ast\nn1 = ast.literal_eval(input())\nn2 = ast.literal_eval(input())\nm = sorted(n1+n2)\nn = len(m)\nif n%2==1: print(float(m[n//2]))\nelse: print(float((m[n//2-1]+m[n//2])/2))</code></pre>"        },
         {
             title: "Reverse Integer",
             description: `<div class="lc-description">
@@ -1861,7 +1861,7 @@ substring</em>.</p>
             tags: ["Math"],
             topics: ["Easy"]
 ,
-            solution: '<h3>Solution: Reverse Integer</h3><p>To solve <b>Reverse Integer</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution: Reverse Integer</h3><p>Analyze the problem constraints and implement step by step.</p>"        },
         {
             title: "Majority Element",
             description: `<div class="lc-description">
@@ -1896,7 +1896,7 @@ substring</em>.</p>
             tags: ["Array", "Hash Table", "Divide and Conquer", "Sorting", "Counting"],
             topics: ["Easy"]
 ,
-            solution: '<h3>Solution: Majority Element</h3><p>To solve <b>Majority Element</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution</h3><p>Boyer-Moore Voting: maintain candidate and count.</p><h4>Code</h4><pre><code>import ast\nnums = ast.literal_eval(input())\nc = nums[0]; count = 1\nfor i in range(1, len(nums)):\n    if count == 0: c = nums[i]\n    count += 1 if nums[i] == c else -1\nprint(c)</code></pre>"        },
         {
             title: "Search for a Range",
             description: `<div class="lc-description">
@@ -1934,7 +1934,7 @@ substring</em>.</p>
             tags: ["Array", "Binary Search"],
             topics: ["Medium"]
 ,
-            solution: '<h3>Solution: Search for a Range</h3><p>To solve <b>Search for a Range</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution</h3><p>Binary search twice: once for left bound, once for right bound.</p><h4>Code</h4><pre><code>import ast\nnums = ast.literal_eval(input())\nt = int(input())\ndef fl():\n    l,r=0,len(nums)-1; res=-1\n    while l&lt;=r:\n        m=(l+r)//2\n        if nums[m]==t: res=m; r=m-1\n        elif nums[m]&lt;t: l=m+1\n        else: r=m-1\n    return res\ndef fr():\n    l,r=0,len(nums)-1; res=-1\n    while l&lt;=r:\n        m=(l+r)//2\n        if nums[m]==t: res=m; l=m+1\n        elif nums[m]&lt;t: l=m+1\n        else: r=m-1\n    return res\nprint([fl(), fr()])</code></pre>"        },
         {
             title: "First Missing Positive",
             description: `<div class="lc-description">
@@ -1970,7 +1970,7 @@ substring</em>.</p>
             tags: ["Array", "Hash Table"],
             topics: ["Hard"]
 ,
-            solution: '<h3>Solution: First Missing Positive</h3><p>To solve <b>First Missing Positive</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution: First Missing Positive</h3><p>Analyze the problem constraints and implement step by step.</p>"        },
         {
             title: "Contains Duplicate",
             description: `<div class="lc-description">
@@ -2004,7 +2004,7 @@ substring</em>.</p>
             tags: ["Array", "Hash Table"],
             topics: ["Easy"]
 ,
-            solution: '<h3>Solution: Contains Duplicate</h3><p>To solve <b>Contains Duplicate</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution</h3><p>Use a set. If set size differs from list size, there are duplicates.</p><h4>Code</h4><pre><code>import ast\nnums = ast.literal_eval(input())\nprint(len(nums) != len(set(nums)))</code></pre>"        },
         {
             title: "Best Time to Buy and Sell Stock",
             description: `<div class="lc-description">
@@ -2040,7 +2040,7 @@ substring</em>.</p>
             tags: ["Array", "Dynamic Programming"],
             topics: ["Easy"]
 ,
-            solution: '<h3>Solution: Best Time to Buy and Sell Stock</h3><p>To solve <b>Best Time to Buy and Sell Stock</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution</h3><p>Track the minimum price and calculate max profit at each step.</p><h4>Code</h4><pre><code>import ast\nprices = ast.literal_eval(input())\nmin_p = float('inf')\nmax_profit = 0\nfor p in prices:\n    min_p = min(min_p, p)\n    max_profit = max(max_profit, p - min_p)\nprint(max_profit)</code></pre>"        },
         {
             title: "Wildcard Matching",
             description: `<div class="lc-description">
@@ -2080,7 +2080,7 @@ substring</em>.</p>
             tags: ["String", "Dynamic Programming", "Greedy", "Recursion"],
             topics: ["Hard"]
 ,
-            solution: '<h3>Solution: Wildcard Matching</h3><p>To solve <b>Wildcard Matching</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        },
+            solution: "<h3>Solution</h3><p>DP: handle ? (any single char) and * (any sequence).</p><h4>Code</h4><pre><code>s = input()\np = input()\nm,n=len(s),len(p)\ndp=[[False]*(n+1) for _ in range(m+1)]\ndp[0][0]=True\nfor j in range(1,n+1):\n    if p[j-1]=='*': dp[0][j]=dp[0][j-1]\nfor i in range(1,m+1):\n    for j in range(1,n+1):\n        if p[j-1]=='*': dp[i][j]=dp[i-1][j] or dp[i][j-1]\n        elif p[j-1]=='?' or s[i-1]==p[j-1]: dp[i][j]=dp[i-1][j-1]\nprint(dp[m][n])</code></pre>"        },
         {
             title: "Word Search",
             description: `<div class="lc-description">
@@ -2118,7 +2118,7 @@ substring</em>.</p>
             tags: ["Array", "String", "Backtracking", "Matrix"],
             topics: ["Medium"]
 ,
-            solution: '<h3>Solution: Word Search</h3><p>To solve <b>Word Search</b>, analyze the problem constraints and choose the right algorithm and data structure. Consider time and space complexity. Review the starter code and implement your solution step by step.</p><h4>Hint</h4><p>Common patterns: Hash maps for O(1) lookups, two pointers for sorted arrays, sliding window for substrings, BFS/DFS for graphs, and dynamic programming for optimization problems.</p>'        }
+            solution: "<h3>Solution</h3><p>DFS/backtracking: try to match word from each cell.</p><h4>Code</h4><pre><code>import ast\nboard = ast.literal_eval(input())\nword = input()\nR,C=len(board),len(board[0])\ndef dfs(r,c,i):\n    if i==len(word): return True\n    if r&lt;0 or c&lt;0 or r&gt;=R or c&gt;=C or board[r][c]!=word[i]: return False\n    t=board[r][c]; board[r][c]='#'\n    f=dfs(r+1,c,i+1) or dfs(r-1,c,i+1) or dfs(r,c+1,i+1) or dfs(r,c-1,i+1)\n    board[r][c]=t; return f\nfor i in range(R):\n    for j in range(C):\n        if dfs(i,j,0): print(True); exit()\nprint(False)</code></pre>"        }
     ];
 
     try {
