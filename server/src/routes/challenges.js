@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { Challenge, ChallengeSubmission, User, sequelize } = require('../models');
+const { Challenge, ChallengeSubmission, ChallengeSolutionView, User, sequelize } = require('../models');
 const { authenticate, authenticateOptional } = require('../middleware/auth');
 const { validateChallengeSubmission, validateChallenge } = require('../middleware/validation');
 const { challengeSubmitLimiter } = require('../middleware/rateLimit');
@@ -65,9 +65,19 @@ router.get('/:id', validateChallenge, authenticateOptional, async (req, res) => 
             });
         }
 
+        // Check if user already viewed the solution
+        let solutionViewed = false;
+        if (req.user) {
+            const view = await ChallengeSolutionView.findOne({
+                where: { user_id: req.user.id, challenge_id: req.params.id }
+            });
+            solutionViewed = !!view;
+        }
+
         res.json({
             ...challenge.toJSON(),
-            completed: !!completed
+            completed: !!completed,
+            solutionViewed
         });
     } catch (err) {
         console.error('Error fetching challenge:', err);
@@ -78,7 +88,7 @@ router.get('/:id', validateChallenge, authenticateOptional, async (req, res) => 
 // Submit a solution - FIXED VERSION WITH RACE CONDITION PREVENTION
 router.post('/:id/submit', authenticateOptional, challengeSubmitLimiter, validateChallengeSubmission, async (req, res) => {
     let transaction = null;
-    
+
     try {
         const { language, code, localResults } = req.body;
         console.log(`Submitting challenge ${req.params.id} for user ${req.user ? req.user.id : 'GUEST'} in ${language}`);
@@ -188,7 +198,7 @@ router.post('/:id/submit', authenticateOptional, challengeSubmitLimiter, validat
         // CRITICAL FIX: Check and award XP within same transaction with lock
         // This prevents concurrent requests from both awarding XP
         let xpAwarded = false;
-        
+
         if (passedAll && req.user) {
             // Check if user already has a passed submission for this challenge WITH EXCLUSIVE LOCK
             const existingPassed = await ChallengeSubmission.findOne({
@@ -204,21 +214,34 @@ router.post('/:id/submit', authenticateOptional, challengeSubmitLimiter, validat
             });
 
             if (!existingPassed) {
-                // Safe: Only this transaction can reach here
-                // Award XP using atomic increment
-                const updateResult = await User.increment('xp', {
-                    by: challenge.xpReward,
-                    where: { id: req.user.id },
+                // Check if user has viewed the solution
+                const hasViewedSolution = await ChallengeSolutionView.findOne({
+                    where: {
+                        user_id: req.user.id,
+                        challenge_id: challenge.id
+                    },
                     transaction
                 });
 
-                if (updateResult && updateResult[0] && updateResult[0][1] > 0) {
-                    xpAwarded = true;
-                    console.log(`Awarded ${challenge.xpReward} XP to user ${req.user.id}`);
+                if (hasViewedSolution) {
+                    console.log(`User ${req.user.id} viewed solution for challenge ${challenge.id}. No XP awarded.`);
                 } else {
-                    console.error(`Failed to increment XP for user ${req.user.id}`);
-                    await transaction.rollback();
-                    return res.status(500).json({ message: 'Failed to award XP' });
+                    // Safe: Only this transaction can reach here
+                    // Award XP using atomic increment
+                    const updateResult = await User.increment('xp', {
+                        by: challenge.xpReward,
+                        where: { id: req.user.id },
+                        transaction
+                    });
+
+                    if (updateResult && updateResult[0] && updateResult[0][1] > 0) {
+                        xpAwarded = true;
+                        console.log(`Awarded ${challenge.xpReward} XP to user ${req.user.id}`);
+                    } else {
+                        console.error(`Failed to increment XP for user ${req.user.id}`);
+                        await transaction.rollback();
+                        return res.status(500).json({ message: 'Failed to award XP' });
+                    }
                 }
             } else {
                 console.log(`User ${req.user.id} already completed challenge ${challenge.id}, no XP awarded.`);
@@ -256,10 +279,10 @@ router.post('/:id/submit', authenticateOptional, challengeSubmitLimiter, validat
                 console.error('Error rolling back transaction:', rollbackErr);
             }
         }
-        
+
         console.error('Error submitting challenge:', err);
-        res.status(500).json({ 
-            message: 'Failed to evaluate challenge code: ' + err.message 
+        res.status(500).json({
+            message: 'Failed to evaluate challenge code: ' + err.message
         });
     }
 });
@@ -279,6 +302,32 @@ router.get('/:id/submissions', validateChallenge, authenticate, async (req, res)
     } catch (err) {
         console.error('Error fetching submissions:', err);
         res.status(500).json({ message: 'Failed to fetch submissions' });
+    }
+});
+
+// Unlock/Get solution for a challenge
+router.get('/:id/solution', authenticate, async (req, res) => {
+    try {
+        const challenge = await Challenge.findByPk(req.params.id);
+        if (!challenge) {
+            return res.status(404).json({ message: 'Challenge not found' });
+        }
+
+        // Record the view if not already recorded
+        await ChallengeSolutionView.findOrCreate({
+            where: {
+                user_id: req.user.id,
+                challenge_id: challenge.id
+            }
+        });
+
+        res.json({
+            solution: challenge.solution || "No solution available for this problem yet.",
+            xpReward: challenge.xpReward
+        });
+    } catch (err) {
+        console.error('Error fetching solution:', err);
+        res.status(500).json({ message: 'Failed to fetch solution' });
     }
 });
 

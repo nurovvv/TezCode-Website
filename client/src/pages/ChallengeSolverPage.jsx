@@ -113,6 +113,9 @@ export default function ChallengeSolverPage() {
     const [submissions, setSubmissions] = useState([]);
     const [loadingSubmissions, setLoadingSubmissions] = useState(false);
     const [expandedSubmission, setExpandedSubmission] = useState(null);
+    const [solution, setSolution] = useState(null);
+    const [loadingSolution, setLoadingSolution] = useState(false);
+    const [revealingSolution, setRevealingSolution] = useState(false);
 
     useEffect(() => {
         api.get(`challenges/${id}`)
@@ -136,6 +139,28 @@ export default function ChallengeSolverPage() {
                 .finally(() => setLoadingSubmissions(false));
         }
     }, [activeTab, id, user]);
+
+    const handleUnlockSolution = async () => {
+        if (!user) {
+            navigate('/login');
+            return;
+        }
+
+        const confirmed = window.confirm("Warning: Unlocking the solution will void XP rewards for this challenge. Do you want to proceed?");
+        if (!confirmed) return;
+
+        setRevealingSolution(true);
+        try {
+            const res = await api.get(`challenges/${id}/solution`);
+            setSolution(res.data.solution);
+            setChallenge(prev => ({ ...prev, solutionViewed: true }));
+        } catch (err) {
+            console.error('Failed to fetch solution:', err);
+            alert('Failed to reveal solution. Please try again.');
+        } finally {
+            setRevealingSolution(false);
+        }
+    };
 
     const handleRun = useCallback(async () => {
         if (!challenge) return;
@@ -430,7 +455,42 @@ export default function ChallengeSolverPage() {
                                 </motion.div>
                             )}
                             {activeTab === 'solution' && (
-                                <motion.div key="solution" style={{ color: '#8a8a8a' }}>No solution available for this problem yet.</motion.div>
+                                <motion.div key="solution">
+                                    {(challenge.solutionViewed || solution) ? (
+                                        <div
+                                            className="solution-content lc-description"
+                                            dangerouslySetInnerHTML={{ __html: solution || challenge.solution || 'No solution available yet.' }}
+                                        />
+                                    ) : (
+                                        <div style={{
+                                            textAlign: 'center',
+                                            padding: '40px 20px',
+                                            background: 'rgba(255,161,22,0.05)',
+                                            borderRadius: '12px',
+                                            border: '1px dashed rgba(255,161,22,0.3)'
+                                        }}>
+                                            <div style={{ fontSize: '32px', marginBottom: '16px' }}>🔑</div>
+                                            <h3 style={{ color: '#ffa116', marginBottom: '8px' }}>Unlock Solution</h3>
+                                            <p style={{ color: '#8a8a8a', fontSize: '14px', marginBottom: '24px', maxWidth: '300px', margin: '0 auto 24px' }}>
+                                                Revealing the solution will prevent you from earning <strong>{challenge.xpReward} XP</strong> for this challenge.
+                                            </p>
+                                            <button
+                                                onClick={handleUnlockSolution}
+                                                disabled={revealingSolution}
+                                                className="solver-btn btn-run"
+                                                style={{
+                                                    background: '#ffa116',
+                                                    color: '#000',
+                                                    border: 'none',
+                                                    padding: '10px 24px',
+                                                    fontWeight: '700'
+                                                }}
+                                            >
+                                                {revealingSolution ? 'Unlocking...' : 'I understand, show solution'}
+                                            </button>
+                                        </div>
+                                    )}
+                                </motion.div>
                             )}
                             {activeTab === 'submissions' && (
                                 <motion.div key="submissions">

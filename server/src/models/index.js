@@ -176,6 +176,7 @@ const Challenge = sequelize.define('Challenge', {
     starterCode: { type: DataTypes.TEXT, field: 'starter_code' },
     tags: { type: DataTypes.JSON, defaultValue: [] },
     topics: { type: DataTypes.JSON, defaultValue: [] },
+    solution: { type: DataTypes.TEXT, allowNull: true },
 }, { tableName: 'challenges', timestamps: true, underscored: true });
 
 const ChallengeSubmission = sequelize.define('ChallengeSubmission', {
@@ -185,6 +186,11 @@ const ChallengeSubmission = sequelize.define('ChallengeSubmission', {
     status: { type: DataTypes.STRING, defaultValue: 'failed' },
     completedAt: { type: DataTypes.DATE, field: 'completed_at' },
 }, { tableName: 'challenge_submissions', timestamps: true, underscored: true });
+
+const ChallengeSolutionView = sequelize.define('ChallengeSolutionView', {
+    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+    viewedAt: { type: DataTypes.DATE, defaultValue: DataTypes.NOW, field: 'viewed_at' },
+}, { tableName: 'challenge_solution_views', timestamps: true, underscored: true });
 
 // Associations
 User.hasMany(RefreshToken, { foreignKey: 'user_id', onDelete: 'CASCADE' });
@@ -220,6 +226,12 @@ ChallengeSubmission.belongsTo(User, { foreignKey: 'user_id' });
 Challenge.hasMany(ChallengeSubmission, { foreignKey: 'challenge_id', onDelete: 'CASCADE' });
 ChallengeSubmission.belongsTo(Challenge, { foreignKey: 'challenge_id' });
 
+User.hasMany(ChallengeSolutionView, { foreignKey: 'user_id' });
+ChallengeSolutionView.belongsTo(User, { foreignKey: 'user_id' });
+
+Challenge.hasMany(ChallengeSolutionView, { foreignKey: 'challenge_id', onDelete: 'CASCADE' });
+ChallengeSolutionView.belongsTo(Challenge, { foreignKey: 'challenge_id' });
+
 module.exports = {
     User,
     RefreshToken,
@@ -231,5 +243,6 @@ module.exports = {
     Enrollment,
     Challenge,
     ChallengeSubmission,
+    ChallengeSolutionView,
     sequelize,
 };

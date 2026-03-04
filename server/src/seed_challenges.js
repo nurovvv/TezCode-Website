@@ -38,7 +38,13 @@ async function seedChallenges() {
             ],
             starterCode: "import ast\nnums = ast.literal_eval(input())\n\n# Return the concatenation of two nums arrays\n# Example: print(nums + nums)\n",
             tags: ["Array", "Simulation"],
-            topics: ["Easy", "Top Interview Questions"]
+            topics: ["Easy", "Top Interview Questions"],
+            solution: `<h3>Explanation</h3>
+<p>To solve this problem, we need to create a new array twice the size of the input array. The simplest way is to concatenate the array with itself using the <code>+</code> operator in Python.</p>
+<h4>Code Solution</h4>
+<pre><code>import ast
+nums = ast.literal_eval(input())
+print(nums + nums)</code></pre>`
         },
         {
             title: "Two Sum",
@@ -76,7 +82,21 @@ async function seedChallenges() {
             ],
             starterCode: "import ast\nnums = ast.literal_eval(input())\ntarget = int(input())\n\n# Find two indices that sum to target\n# Example: print([0, 1])\n",
             tags: ["Array", "Hash Table"],
-            topics: ["Easy", "Top Interview Questions"]
+            topics: ["Easy", "Top Interview Questions"],
+            solution: `<h3>Explanation</h3>
+<p>The Two Sum problem can be solved efficiently using a hash map (dictionary in Python). We iterate through the array, and for each number, we check if the complement (target - num) exists in our hash map. If it does, we've found our two indices.</p>
+<h4>Code Solution</h4>
+<pre><code>import ast
+nums = ast.literal_eval(input())
+target = int(input())
+
+prev_map = {} # val : index
+for i, n in enumerate(nums):
+    diff = target - n
+    if diff in prev_map:
+        print([prev_map[diff], i])
+        break
+    prev_map[n] = i</code></pre>`
         },
         {
             title: "Reverse String",
@@ -108,7 +128,13 @@ async function seedChallenges() {
                 { input: "['h','e','l','l','o']", expectedOutput: "['o', 'l', 'l', 'e', 'h']" },
                 { input: "['H','a','n','n','a','h']", expectedOutput: "['h', 'a', 'n', 'n', 'a', 'H']" }
             ],
-            starterCode: "import ast\ns = ast.literal_eval(input())\n\n# Reverse the list in place and print it\n# Example: print(s[::-1])\n"
+            starterCode: "import ast\ns = ast.literal_eval(input())\n\n# Reverse the list in place and print it\n# Example: print(s[::-1])\n",
+            solution: `<h3>Explanation</h3>
+<p>To reverse a string (represented as a list of characters) in-place, we can use a two-pointer approach or Python's slicing. Slicing with <code>[::-1]</code> is the most idiomatic Python way to reverse a sequence.</p>
+<h4>Code Solution</h4>
+<pre><code>import ast
+s = ast.literal_eval(input())
+print(s[::-1])</code></pre>`
         },
         {
             title: "Fizz Buzz",
@@ -145,7 +171,8 @@ async function seedChallenges() {
                 { input: "5", expectedOutput: "['1', '2', 'Fizz', '4', 'Buzz']" }
             ],
             starterCode: "n = int(input())\n\n# Return the FizzBuzz list\n"
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Fizz Buzz</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Longest Substring Without Repeating Characters",
             description: `<div class="lc-description">
@@ -177,7 +204,8 @@ async function seedChallenges() {
                 { input: "pwwkew", expectedOutput: "3" }
             ],
             starterCode: "s = input()\n\n# Write your solution and print the length\n"
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Longest Substring Without Repeating Characters</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Palindrome Number",
             description: `<div class="lc-description">
@@ -208,7 +236,8 @@ async function seedChallenges() {
                 { input: "10", expectedOutput: "False" }
             ],
             starterCode: "x = int(input())\n\n# Write your solution and print True or False\n"
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Palindrome Number</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Valid Parentheses",
             description: `<div class="lc-description">
@@ -246,7 +275,8 @@ async function seedChallenges() {
                 { input: "(]", expectedOutput: "False" }
             ],
             starterCode: "s = input()\n\n# Write your solution and print True or False\n"
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Valid Parentheses</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Merge Intervals",
             description: `<div class="lc-description">
@@ -278,7 +308,8 @@ async function seedChallenges() {
                 { input: "[[1,4],[2,3]]", expectedOutput: "[[1, 4]]" }
             ],
             starterCode: "import ast\nintervals = ast.literal_eval(input())\n\n# Write your solution and print the merged list\n"
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Merge Intervals</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Container With Most Water",
             description: `<div class="lc-description">
@@ -307,7 +338,8 @@ async function seedChallenges() {
                 { input: "[4,3,2,1,4]", expectedOutput: "16" }
             ],
             starterCode: "import ast\nheight = ast.literal_eval(input())\n\n# Write your solution and print the max water\n"
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Container With Most Water</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Trapping Rain Water",
             description: `<div class="lc-description">
@@ -340,7 +372,8 @@ async function seedChallenges() {
                 { input: "[2,0,2]", expectedOutput: "2" }
             ],
             starterCode: "import ast\nheight = ast.literal_eval(input())\n\n# Write your solution and print the total trapped water\n"
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Trapping Rain Water</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Climbing Stairs",
             description: `<div class="lc-description">
@@ -372,7 +405,8 @@ async function seedChallenges() {
                 { input: "5", expectedOutput: "8" }
             ],
             starterCode: "n = int(input())\n\n# Write your solution and print the number of ways\n"
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Climbing Stairs</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Best Time to Buy and Sell Stock",
             description: `<div class="lc-description">
@@ -400,7 +434,8 @@ async function seedChallenges() {
                 { input: "[2,4,1]", expectedOutput: "2" }
             ],
             starterCode: "import ast\nprices = ast.literal_eval(input())\n\n# Write your solution and print the max profit\n"
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Best Time to Buy and Sell Stock</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Single Number",
             description: `<div class="lc-description">
@@ -428,7 +463,8 @@ async function seedChallenges() {
                 { input: "[1]", expectedOutput: "1" }
             ],
             starterCode: "import ast\nnums = ast.literal_eval(input())\n\n# Write your solution and print the unique number\n"
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Single Number</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Search Insert Position",
             description: `<div class="lc-description">
@@ -463,7 +499,8 @@ async function seedChallenges() {
                 { input: "[1,3,5,6]\n7", expectedOutput: "4" }
             ],
             starterCode: "import ast\nnums = ast.literal_eval(input())\ntarget = int(input())\n\n# Write your solution and print the index\n"
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Search Insert Position</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Group Anagrams",
             description: `<div class="lc-description">
@@ -491,7 +528,8 @@ async function seedChallenges() {
                 { input: "[\"a\"]", expectedOutput: "[[\"a\"]]" }
             ],
             starterCode: "import ast\nstrs = ast.literal_eval(input())\n\n# Write your solution and print the grouped list\n"
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Group Anagrams</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Contains Duplicate",
             description: `<div class="lc-description">
@@ -523,7 +561,8 @@ async function seedChallenges() {
                 { input: "[1,1,1,3,3,4,3,2,4,2]", expectedOutput: "True" }
             ],
             starterCode: "import ast\nnums = ast.literal_eval(input())\n\n# Write your solution and print True or False\n"
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Contains Duplicate</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Missing Number",
             description: `<div class="lc-description">
@@ -557,7 +596,8 @@ async function seedChallenges() {
                 { input: "[9,6,4,2,3,5,7,0,1]", expectedOutput: "8" }
             ],
             starterCode: "import ast\nnums = ast.literal_eval(input())\n\n# Write your solution and print the missing number\n"
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Missing Number</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Move Zeroes",
             description: `<div class="lc-description">
@@ -584,7 +624,8 @@ async function seedChallenges() {
                 { input: "[1,0]", expectedOutput: "[1, 0]" }
             ],
             starterCode: "import ast\nnums = ast.literal_eval(input())\n\n# Write your solution and print the modified array\n"
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Move Zeroes</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Majority Element",
             description: `<div class="lc-description">
@@ -617,7 +658,8 @@ async function seedChallenges() {
                 { input: "[2,2,1,1,1,2,2]", expectedOutput: "2" }
             ],
             starterCode: "import ast\nnums = ast.literal_eval(input())\n\n# Write your solution and print the majority element\n"
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Majority Element</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Top K Frequent Elements",
             description: `<div class="lc-description">
@@ -643,7 +685,8 @@ async function seedChallenges() {
                 { input: "[1]\n1", expectedOutput: "[1]" }
             ],
             starterCode: "import ast\nnums = ast.literal_eval(input())\nk = int(input())\n\n# Write your solution and print the list of k most frequent elements\n"
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Top K Frequent Elements</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Unique Paths",
             description: `<div class="lc-description">
@@ -668,7 +711,8 @@ async function seedChallenges() {
                 { input: "3\n2", expectedOutput: "3" }
             ],
             starterCode: "m = int(input())\nn = int(input())\n\n# Write your solution and print the number of unique paths\n"
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Unique Paths</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Valid Anagram",
             description: `<div class="lc-description">
@@ -694,7 +738,8 @@ async function seedChallenges() {
                 { input: "rat\ncar", expectedOutput: "False" }
             ],
             starterCode: "s = input()\nt = input()\n\n# Write your solution and print True or False\n"
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Valid Anagram</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Valid Palindrome",
             description: `<div class="lc-description">
@@ -721,7 +766,8 @@ async function seedChallenges() {
                 { input: " ", expectedOutput: "True" }
             ],
             starterCode: "s = input()\n\n# Write your solution and print True or False\n"
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Valid Palindrome</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Merge Sorted Array",
             description: `<div class="lc-description">
@@ -751,7 +797,8 @@ async function seedChallenges() {
                 { input: "[0]\n0\n[1]\n1", expectedOutput: "[1]" }
             ],
             starterCode: "import ast\nnums1 = ast.literal_eval(input())\nm = int(input())\nnums2 = ast.literal_eval(input())\nn = int(input())\n\n# Write your solution and print the merged array\n"
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Merge Sorted Array</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Maximum Subarray",
             description: `<div class="lc-description">
@@ -778,7 +825,8 @@ async function seedChallenges() {
                 { input: "[5,4,-1,7,8]", expectedOutput: "23" }
             ],
             starterCode: "import ast\nnums = ast.literal_eval(input())\n\n# Write your solution and print the maximum sum\n"
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Maximum Subarray</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Longest Common Prefix",
             description: `<div class="lc-description">
@@ -805,7 +853,8 @@ async function seedChallenges() {
                 { input: "[\"dog\",\"racecar\",\"car\"]", expectedOutput: "\"\"" }
             ],
             starterCode: "import ast\nstrs = ast.literal_eval(input())\n\n# Write your solution and print the prefix (quoted)\n"
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Longest Common Prefix</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Squares of a Sorted Array",
             description: `<div class="lc-description">
@@ -831,7 +880,8 @@ async function seedChallenges() {
                 { input: "[-7,-3,2,3,11]", expectedOutput: "[4, 9, 9, 49, 121]" }
             ],
             starterCode: "import ast\nnums = ast.literal_eval(input())\n\n# Write your solution and print the sorted squares\n"
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Squares of a Sorted Array</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "3Sum",
             description: `<div class="lc-description">
@@ -858,7 +908,8 @@ async function seedChallenges() {
                 { input: "[0,0,0]", expectedOutput: "[[0, 0, 0]]" }
             ],
             starterCode: "import ast\nnums = ast.literal_eval(input())\n\n# Write your solution and print the list of unique triplets\n"
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>3Sum</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Product of Array Except Self",
             description: `<div class="lc-description">
@@ -885,7 +936,8 @@ async function seedChallenges() {
                 { input: "[-1,1,0,-3,3]", expectedOutput: "[0, 0, 9, 0, 0]" }
             ],
             starterCode: "import ast\nnums = ast.literal_eval(input())\n\n# Write your solution and print the product array\n"
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Product of Array Except Self</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Rotate Array",
             description: `<div class="lc-description">
@@ -911,7 +963,8 @@ async function seedChallenges() {
                 { input: "[-1,-100,3,99]\n2", expectedOutput: "[3, 99, -1, -100]" }
             ],
             starterCode: "import ast\nnums = ast.literal_eval(input())\nk = int(input())\n\n# Write your solution and print the rotated array\n"
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Rotate Array</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Subsets",
             description: `<div class="lc-description">
@@ -938,7 +991,8 @@ async function seedChallenges() {
                 { input: "[0]", expectedOutput: "[[], [0]]" }
             ],
             starterCode: "import ast\nnums = ast.literal_eval(input())\n\n# Write your solution and print the list of semua subsets\n"
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Subsets</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Search in Rotated Sorted Array",
             description: `<div class="lc-description">
@@ -967,7 +1021,8 @@ async function seedChallenges() {
                 { input: "[1]\n0", expectedOutput: "-1" }
             ],
             starterCode: "import ast\nnums = ast.literal_eval(input())\ntarget = int(input())\n\n# Write your solution and print the index\n"
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Search in Rotated Sorted Array</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Kth Largest Element in an Array",
             description: `<div class="lc-description">
@@ -993,7 +1048,8 @@ async function seedChallenges() {
                 { input: "[3,2,3,1,2,4,5,5,6]\n4", expectedOutput: "4" }
             ],
             starterCode: "import ast\nnums = ast.literal_eval(input())\nk = int(input())\n\n# Write your solution and print the kth largest value\n"
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Kth Largest Element in an Array</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Median of Two Sorted Arrays",
             description: `<div class="lc-description">
@@ -1021,7 +1077,8 @@ async function seedChallenges() {
                 { input: "[1,2]\n[3,4]", expectedOutput: "2.5" }
             ],
             starterCode: "import ast\nnums1 = ast.literal_eval(input())\nnums2 = ast.literal_eval(input())\n\n# Write your solution and print the median as a float\n"
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Median of Two Sorted Arrays</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Merge k Sorted Lists",
             description: `<div class="lc-description">
@@ -1049,7 +1106,8 @@ async function seedChallenges() {
                 { input: "[[]]", expectedOutput: "[]" }
             ],
             starterCode: "import ast\nlists = ast.literal_eval(input())\n\n# Write your solution and print the merged sorted list\n"
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Merge k Sorted Lists</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "First Missing Positive",
             description: `<div class="lc-description">
@@ -1076,7 +1134,8 @@ async function seedChallenges() {
                 { input: "[7,8,9,11,12]", expectedOutput: "1" }
             ],
             starterCode: "import ast\nnums = ast.literal_eval(input())\n\n# Write your solution and print the result\n"
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>First Missing Positive</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Longest Valid Parentheses",
             description: `<div class="lc-description">
@@ -1103,7 +1162,8 @@ substring</em>.</p>
                 { input: "", expectedOutput: "0" }
             ],
             starterCode: "s = input()\n\n# Write your solution and print the length\n"
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Longest Valid Parentheses</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "N-Queens",
             description: `<div class="lc-description">
@@ -1129,7 +1189,8 @@ substring</em>.</p>
                 { input: "8", expectedOutput: "92" }
             ],
             starterCode: "n = int(input())\n\n# Write your solution and print the number of solutions\n"
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>N-Queens</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Sliding Window Maximum",
             description: `<div class="lc-description">
@@ -1156,7 +1217,8 @@ substring</em>.</p>
                 { input: "[1]\n1", expectedOutput: "[1]" }
             ],
             starterCode: "import ast\nnums = ast.literal_eval(input())\nk = int(input())\n\n# Write your solution and print the result list\n"
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Sliding Window Maximum</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Defanging an IP Address",
             description: `<div class="lc-description">
@@ -1184,7 +1246,8 @@ substring</em>.</p>
             starterCode: "address = input()\n\n# Return the defanged IP address\n",
             tags: ["String"],
             topics: ["Easy"]
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Defanging an IP Address</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Number of Good Pairs",
             description: `<div class="lc-description">
@@ -1213,7 +1276,8 @@ substring</em>.</p>
             starterCode: "import ast\nnums = ast.literal_eval(input())\n\n# Return the number of good pairs\n",
             tags: ["Array", "Hash Table", "Math", "Counting"],
             topics: ["Easy"]
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Number of Good Pairs</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Contains Duplicate II",
             description: `<div class="lc-description">
@@ -1247,7 +1311,8 @@ substring</em>.</p>
             starterCode: "import ast\nnums = ast.literal_eval(input())\nk = int(input())\n\n# Return True or False\n",
             tags: ["Array", "Hash Table", "Sliding Window"],
             topics: ["Easy"]
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Contains Duplicate II</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Two Sum II - Input Array Is Sorted",
             description: `<div class="lc-description">
@@ -1278,7 +1343,8 @@ substring</em>.</p>
             starterCode: "import ast\nnumbers = ast.literal_eval(input())\ntarget = int(input())\n\n# Return the 1-indexed positions of the two numbers\n",
             tags: ["Array", "Two Pointers", "Binary Search"],
             topics: ["Medium"]
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Two Sum II - Input Array Is Sorted</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Product of Array Except Self",
             description: `<div class="lc-description">
@@ -1307,7 +1373,8 @@ substring</em>.</p>
             starterCode: "import ast\nnums = ast.literal_eval(input())\n\n# Return the answer array\n",
             tags: ["Array", "Prefix Sum"],
             topics: ["Medium"]
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Product of Array Except Self</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Length of Last Word",
             description: `<div class="lc-description">
@@ -1338,7 +1405,8 @@ substring</em>.</p>
             starterCode: "s = input()\n\n# Return the length of the last word\n",
             tags: ["String"],
             topics: ["Easy"]
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Length of Last Word</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Roman to Integer",
             description: `<div class="lc-description">
@@ -1373,7 +1441,8 @@ substring</em>.</p>
             starterCode: "s = input()\n\n# Return the integer value of the roman numeral\n",
             tags: ["Hash Table", "Math", "String"],
             topics: ["Easy"]
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Roman to Integer</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Is Subsequence",
             description: `<div class="lc-description">
@@ -1401,7 +1470,8 @@ substring</em>.</p>
             starterCode: "s = input()\nt = input()\n\n# Return True if s is a subsequence of t, else False\n",
             tags: ["Two Pointers", "String", "Dynamic Programming"],
             topics: ["Easy"]
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Is Subsequence</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Find Minimum in Rotated Sorted Array",
             description: `<div class="lc-description">
@@ -1431,7 +1501,8 @@ substring</em>.</p>
             starterCode: "import ast\nnums = ast.literal_eval(input())\n\n# Return the minimum element\n",
             tags: ["Array", "Binary Search"],
             topics: ["Medium"]
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Find Minimum in Rotated Sorted Array</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Find Peak Element",
             description: `<div class="lc-description">
@@ -1463,7 +1534,8 @@ substring</em>.</p>
             tags: ["Array", "Binary Search"],
             tags: ["Array", "Binary Search"],
             topics: ["Medium"]
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Find Peak Element</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Valid Perfect Square",
             description: `<div class="lc-description">
@@ -1492,7 +1564,8 @@ substring</em>.</p>
             starterCode: "num = int(input())\n\n# Return True if perfect square else False\n",
             tags: ["Math", "Binary Search"],
             topics: ["Easy"]
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Valid Perfect Square</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Plus One",
             description: `<div class="lc-description">
@@ -1530,7 +1603,8 @@ substring</em>.</p>
             starterCode: "import ast\ndigits = ast.literal_eval(input())\n\n# Return the incremented array\n",
             tags: ["Array", "Math"],
             topics: ["Easy"]
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Plus One</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Reverse Integer",
             description: `<div class="lc-description">
@@ -1564,7 +1638,8 @@ substring</em>.</p>
             starterCode: "x = int(input())\n\n# Return the reversed integer\n",
             tags: ["Math"],
             topics: ["Medium"]
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Reverse Integer</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Valid Parenthesis String",
             description: `<div class="lc-description">
@@ -1605,7 +1680,8 @@ substring</em>.</p>
             starterCode: "s = input()\n\n# Return True if valid else False\n",
             tags: ["String", "Dynamic Programming", "Stack", "Greedy"],
             topics: ["Medium"]
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Valid Parenthesis String</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Search in Rotated Sorted Array",
             description: `<div class="lc-description">
@@ -1636,7 +1712,8 @@ substring</em>.</p>
             starterCode: "import ast\nnums = ast.literal_eval(input())\ntarget = int(input())\n\n# Return the index of target\n",
             tags: ["Array", "Binary Search"],
             topics: ["Medium"]
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Search in Rotated Sorted Array</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Maximum Subarray",
             description: `<div class="lc-description">
@@ -1671,7 +1748,8 @@ substring</em>.</p>
             starterCode: "import ast\nnums = ast.literal_eval(input())\n\n# Return the maximum sum of any subarray\n",
             tags: ["Array", "Divide and Conquer", "Dynamic Programming"],
             topics: ["Medium"]
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Maximum Subarray</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Remove Duplicates from Sorted Array",
             description: `<div class="lc-description">
@@ -1705,7 +1783,8 @@ substring</em>.</p>
             starterCode: "import ast\nnums = ast.literal_eval(input())\n\n# Count and return the number of unique elements\n",
             tags: ["Array", "Two Pointers"],
             topics: ["Easy"]
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Remove Duplicates from Sorted Array</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Trapping Rain Water",
             description: `<div class="lc-description">
@@ -1733,7 +1812,8 @@ substring</em>.</p>
             starterCode: "import ast\nheight = ast.literal_eval(input())\n\n# Calculate the trapped water\n",
             tags: ["Array", "Dynamic Programming", "Two Pointers", "Stack"],
             topics: ["Hard"]
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Trapping Rain Water</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Median of Two Sorted Arrays",
             description: `<div class="lc-description">
@@ -1769,7 +1849,8 @@ substring</em>.</p>
             starterCode: "import ast\nnums1 = ast.literal_eval(input())\nnums2 = ast.literal_eval(input())\n\n# Return the median as a float\n",
             tags: ["Array", "Divide and Conquer", "Binary Search"],
             topics: ["Hard"]
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Median of Two Sorted Arrays</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Reverse Integer",
             description: `<div class="lc-description">
@@ -1802,7 +1883,8 @@ substring</em>.</p>
             starterCode: "x = int(input())\n\n# Return the reversed integer\n",
             tags: ["Math"],
             topics: ["Easy"]
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Reverse Integer</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Majority Element",
             description: `<div class="lc-description">
@@ -1836,7 +1918,8 @@ substring</em>.</p>
             starterCode: "import ast\nnums = ast.literal_eval(input())\n\n# Return the majority element\n",
             tags: ["Array", "Hash Table", "Divide and Conquer", "Sorting", "Counting"],
             topics: ["Easy"]
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Majority Element</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Search for a Range",
             description: `<div class="lc-description">
@@ -1873,7 +1956,8 @@ substring</em>.</p>
             starterCode: "import ast\nnums = ast.literal_eval(input())\ntarget = int(input())\n\n# Return [first_occurrence, last_occurrence] or [-1, -1]\n",
             tags: ["Array", "Binary Search"],
             topics: ["Medium"]
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Search for a Range</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "First Missing Positive",
             description: `<div class="lc-description">
@@ -1908,7 +1992,8 @@ substring</em>.</p>
             starterCode: "import ast\nnums = ast.literal_eval(input())\n\n# Return the smallest missing positive integer\n",
             tags: ["Array", "Hash Table"],
             topics: ["Hard"]
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>First Missing Positive</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Contains Duplicate",
             description: `<div class="lc-description">
@@ -1941,7 +2026,8 @@ substring</em>.</p>
             starterCode: "import ast\nnums = ast.literal_eval(input())\n\n# Use set() to find duplicates\n",
             tags: ["Array", "Hash Table"],
             topics: ["Easy"]
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Contains Duplicate</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Best Time to Buy and Sell Stock",
             description: `<div class="lc-description">
@@ -1976,7 +2062,8 @@ substring</em>.</p>
             starterCode: "import ast\nprices = ast.literal_eval(input())\n\n# Return the maximum profit\n",
             tags: ["Array", "Dynamic Programming"],
             topics: ["Easy"]
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Best Time to Buy and Sell Stock</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Wildcard Matching",
             description: `<div class="lc-description">
@@ -2015,7 +2102,8 @@ substring</em>.</p>
             starterCode: "s = input()\np = input()\n\n# Implement wildcard matching and return True or False\n",
             tags: ["String", "Dynamic Programming", "Greedy", "Recursion"],
             topics: ["Hard"]
-        },
+,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Wildcard Matching</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`        },
         {
             title: "Word Search",
             description: `<div class="lc-description">
@@ -2053,7 +2141,8 @@ substring</em>.</p>
             tags: ["Array", "String", "Backtracking", "Matrix"],
             topics: ["Medium"]
         }
-    ];
+    ,
+            solution: `<h3>Explanation</h3>\n<p>To solve <strong>Word Search</strong>, we should consider the specific requirements and constraints. Use an efficient algorithm (often seeking O(n) or O(log n)) and appropriate data structures like Hash Maps for fast lookups or Two Pointers for array manipulation.</p>\n<h4>Solution Hint</h4>\n<p>Review the starter code and implement the core logic to pass all test cases.</p>`];
 
     try {
         for (const challenge of challenges) {
