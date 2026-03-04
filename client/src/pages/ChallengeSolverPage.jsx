@@ -582,7 +582,7 @@ export default function ChallengeSolverPage() {
                                                                 }}
                                                                 style={{ marginLeft: 'auto', background: 'none', border: 'none', color: '#666', cursor: 'pointer', fontSize: '12px' }}
                                                             >
-                                                                <i className="fas fa-trash" />
+                                                                <span style={{ fontSize: '14px' }}>🗑️</span>
                                                             </button>
                                                         )}
                                                     </div>
@@ -600,13 +600,13 @@ export default function ChallengeSolverPage() {
                                                             }}
                                                             style={{ background: 'none', border: 'none', color: comment.liked ? '#ffa116' : '#666', cursor: 'pointer', fontSize: '13px', display: 'flex', alignItems: 'center', gap: '4px' }}
                                                         >
-                                                            <i className={comment.liked ? 'fas fa-heart' : 'far fa-heart'} /> {comment.likeCount || 0}
+                                                            <span style={{ fontSize: '16px' }}>{comment.liked ? '❤️' : '🤍'}</span> <span>{comment.likeCount || 0}</span>
                                                         </button>
                                                         <button
                                                             onClick={() => setReplyingTo(replyingTo === comment.id ? null : comment.id)}
                                                             style={{ background: 'none', border: 'none', color: '#666', cursor: 'pointer', fontSize: '13px', display: 'flex', alignItems: 'center', gap: '4px' }}
                                                         >
-                                                            <i className="fas fa-reply" /> Reply
+                                                            <span style={{ fontSize: '14px' }}>↩️</span> Reply
                                                         </button>
                                                     </div>
                                                     {/* Reply input */}
@@ -667,7 +667,7 @@ export default function ChallengeSolverPage() {
                                                                         }}
                                                                         style={{ marginLeft: '32px', background: 'none', border: 'none', color: reply.liked ? '#ffa116' : '#666', cursor: 'pointer', fontSize: '12px', display: 'flex', alignItems: 'center', gap: '4px' }}
                                                                     >
-                                                                        <i className={reply.liked ? 'fas fa-heart' : 'far fa-heart'} /> {reply.likeCount || 0}
+                                                                        <span style={{ fontSize: '14px' }}>{reply.liked ? '❤️' : '🤍'}</span> <span>{reply.likeCount || 0}</span>
                                                                     </button>
                                                                 </div>
                                                             ))}
