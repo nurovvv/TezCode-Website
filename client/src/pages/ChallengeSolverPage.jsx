@@ -819,10 +819,10 @@ export default function ChallengeSolverPage() {
                         <select
                             value={language}
                             onChange={e => setLanguage(e.target.value)}
-                            style={{ background: 'transparent', color: '#eff1f6', fontSize: '13px', border: 'none', outline: 'none', cursor: 'pointer', fontWeight: '500' }}
+                            style={{ background: '#1e1e2e', color: '#eff1f6', fontSize: '13px', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '6px', padding: '4px 8px', outline: 'none', cursor: 'pointer', fontWeight: '500' }}
                         >
-                            <option value="python">Python</option>
-                            <option value="javascript">JavaScript</option>
+                            <option value="python" style={{ background: '#1e1e2e', color: '#eff1f6' }}>Python</option>
+                            <option value="javascript" style={{ background: '#1e1e2e', color: '#eff1f6' }}>JavaScript</option>
                         </select>
                     </div>
 
