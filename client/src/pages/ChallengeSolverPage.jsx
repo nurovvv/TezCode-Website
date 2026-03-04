@@ -823,6 +823,12 @@ export default function ChallengeSolverPage() {
                         >
                             <option value="python" style={{ background: '#1e1e2e', color: '#eff1f6' }}>Python</option>
                             <option value="javascript" style={{ background: '#1e1e2e', color: '#eff1f6' }}>JavaScript</option>
+                            <option value="java" style={{ background: '#1e1e2e', color: '#eff1f6' }}>Java</option>
+                            <option value="cpp" style={{ background: '#1e1e2e', color: '#eff1f6' }}>C++</option>
+                            <option value="go" style={{ background: '#1e1e2e', color: '#eff1f6' }}>Go</option>
+                            <option value="csharp" style={{ background: '#1e1e2e', color: '#eff1f6' }}>C#</option>
+                            <option value="kotlin" style={{ background: '#1e1e2e', color: '#eff1f6' }}>Kotlin</option>
+                            <option value="swift" style={{ background: '#1e1e2e', color: '#eff1f6' }}>Swift</option>
                         </select>
                     </div>
 

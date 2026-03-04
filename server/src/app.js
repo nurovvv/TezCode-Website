@@ -89,6 +89,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/courses', courseRoutes);
 app.use('/api/progress', progressRoutes);
 app.use('/api/run-python', runPythonRoutes);
+app.use('/api/run-code', require('./routes/runCode'));
 app.use('/api/challenges', challengeRoutes);
 app.use('/api/challenges', discussionRoutes);
 app.use('/api/leaderboard', leaderboardRoutes);

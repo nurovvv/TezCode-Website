@@ -1,7 +1,10 @@
 /* ═══════════════════════════════════════════════════════
    UNIFIED CODE RUNNER SERVICE
-   Supports Python (via Pyodide) and JavaScript (v8)
+   Supports Python (via Pyodide), JavaScript (in-browser),
+   and server-side: Java, C++, Go, C#, Kotlin, Swift
    ═══════════════════════════════════════════════════════ */
+
+import api from './api';
 
 let pyodideInstance = null;
 let pyodideLoading = false;
@@ -30,12 +33,12 @@ async function getPyodide() {
     }
 }
 
+// Languages that run in the browser
+const BROWSER_LANGUAGES = ['python', 'javascript'];
+
 /**
- * Runs code locally in the browser based on the language.
- * @param {string} code - The code to execute.
- * @param {string} language - 'python' or 'javascript'.
- * @param {string} stdin - Optional input for the execution.
- * @returns {Promise<{success: boolean, output: string, error: string}>}
+ * Runs code based on the language.
+ * Python/JS run in-browser; everything else goes to the server.
  */
 export async function runCode(code, language, stdin = "") {
     if (language === 'python') {
@@ -43,7 +46,20 @@ export async function runCode(code, language, stdin = "") {
     } else if (language === 'javascript') {
         return runJavaScript(code, stdin);
     } else {
-        return { success: false, output: '', error: `Unsupported language: ${language}` };
+        // Server-side execution for compiled languages
+        return runOnServer(code, language, stdin);
+    }
+}
+
+async function runOnServer(code, language, input = "") {
+    try {
+        const res = await api.post('run-code', { code, language, input });
+        return res.data;
+    } catch (err) {
+        if (err.response?.data) {
+            return err.response.data;
+        }
+        return { success: false, output: '', error: err.message || 'Server execution failed' };
     }
 }
 
@@ -63,12 +79,11 @@ async function runPython(code, stdin = "") {
         }
 
         // Setup pipes and clear global namespace for isolation
-        // We Use a dictionary for global namespace to avoid cluttering pyodide's globals
         py.runPython(`
 import sys, io
 sys.stdout = io.StringIO()
 sys.stderr = io.StringIO()
-sys.stdin = io.StringIO("""${(stdin || "").replace(/\\/g, '\\\\').replace(/"""/g, '\\"\\"\\"')}""")
+sys.stdin = io.StringIO("""${(stdin || "").replace(/\\/g, '\\\\').replace(/"""/g, '\\"\\"\\\"')}""")
 custom_globals = {}
         `);
 
@@ -76,7 +91,6 @@ custom_globals = {}
             // Execute code within the custom_globals namespace
             py.runPython(code, { globals: py.globals.get("custom_globals") });
         } catch (e) {
-            // Even if it fails, we want to see what was printed before the crash
             const output = py.runPython('sys.stdout.getvalue()');
             const stderr = py.runPython('sys.stderr.getvalue()');
             const errMessage = e.message || String(e);
