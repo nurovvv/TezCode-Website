@@ -334,13 +334,33 @@ export default function ChallengeSolverPage() {
                                 >
                                     Continue Coding
                                 </button>
-                                <Link
-                                    to="/challenges"
+                                <button
+                                    onClick={async () => {
+                                        try {
+                                            const res = await api.get('challenges');
+                                            const allChallenges = res.data;
+                                            const currentIndex = allChallenges.findIndex(c => String(c.id) === String(id));
+                                            // Look for the next unsolved challenge after the current one
+                                            let next = allChallenges.slice(currentIndex + 1).find(c => !c.completed);
+                                            // If none found after current, wrap around and check from the beginning
+                                            if (!next) {
+                                                next = allChallenges.find(c => !c.completed && String(c.id) !== String(id));
+                                            }
+                                            if (next) {
+                                                navigate(`/challenges/${next.id}`);
+                                                setShowSuccess(false);
+                                            } else {
+                                                navigate('/challenges');
+                                            }
+                                        } catch {
+                                            navigate('/challenges');
+                                        }
+                                    }}
                                     className="solver-btn btn-submit"
-                                    style={{ height: '40px', padding: '0 24px', fontSize: '14px', textDecoration: 'none', display: 'inline-flex', alignItems: 'center' }}
+                                    style={{ height: '40px', padding: '0 24px', fontSize: '14px' }}
                                 >
                                     Next Challenge
-                                </Link>
+                                </button>
                             </div>
                         </motion.div>
                     </motion.div>
