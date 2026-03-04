@@ -830,6 +830,17 @@ export default function ChallengeSolverPage() {
                             <option value="kotlin" style={{ background: '#1e1e2e', color: '#eff1f6' }}>Kotlin</option>
                             <option value="swift" style={{ background: '#1e1e2e', color: '#eff1f6' }}>Swift</option>
                         </select>
+                        <button
+                            onClick={() => {
+                                if (challenge?.starterCode && code !== challenge.starterCode) {
+                                    setCode(challenge.starterCode);
+                                }
+                            }}
+                            title="Reset to starter code"
+                            style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '6px', padding: '4px 10px', color: '#eff1f6', cursor: 'pointer', fontSize: '13px', display: 'flex', alignItems: 'center', gap: '4px' }}
+                        >
+                            🔄 Reset
+                        </button>
                     </div>
 
                     <div className="solver-editor-container">
